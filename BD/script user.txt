@@ -1,0 +1,3 @@
+CREATE USER 'consultando'@'localhost' IDENTIFIED BY 'gimnasio345';
+GRANT SELECT, INSERT, UPDATE, ALTER, DELETE, DROP ON gimnasio.* TO 'consultando'@'localhost';
+FLUSH PRIVILEGES;
