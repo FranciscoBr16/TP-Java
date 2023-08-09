@@ -1,0 +1,63 @@
+body .navbar {
+  background-color: #191617 !important;
+}
+
+body {
+  background-image: url(/GYM/src/main/webapp/img/fondo.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Inter", sans-serif;
+  height: 100vh;
+}
+
+body header{
+  font-weight: bold;
+}
+
+#cartalogin {
+  background-color: white;
+  margin-top: 2%;
+}
+
+#botonsesion {
+  background-color: #d95126 !important;
+  color: white !important;
+}
+
+form input {
+  background-color: #bbbbbb !important;
+}
+
+.botonabajo {
+  margin: 20px;
+}
+
+nav {
+  background-color: #191617;
+}
+
+#links {
+  position: relative;
+  font-size: 24px;
+  padding: 10px;
+}
+#links::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  bottom: 4px;
+  left: 0;
+  background-color: #d75128;
+  height: 2px;
+  border-radius: 5px;
+  visibility: hidden;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 200ms ease-in-out;
+}
+#links:hover::before {
+  visibility: visible;
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
