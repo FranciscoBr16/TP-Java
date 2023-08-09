@@ -59,25 +59,20 @@ nav {
 
 /*CONTENIDO PROPIO*/
 
-.caja a{
+.caja a {
   color: white;
   text-decoration: none;
   font-weight: bold;
   transition: font-size 200ms ease-in-out;
-
 }
 
-p{
-    text-shadow:
-    -1px -1px 0 black,  
-    1px -1px 0 black,   
-    -1px 1px 0 black,   
-    1px 1px 0 black; 
+p {
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
 }
 
 .caja a:hover {
   font-size: 38px;
-  
 }
 
 .caja {
@@ -135,11 +130,10 @@ p{
   overflow: hidden;
 }
 
-.cajalogin{
-    
-    width: 250px;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    align-items: center;
+.cajalogin {
+  width: 250px;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
 }
