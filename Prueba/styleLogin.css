@@ -54,7 +54,7 @@ body header {
 }
 
 /* COMPONENTES */
-#botonsesion {
+.botonsesion {
   background-color: #d95126 !important;
   color: white !important;
 }
