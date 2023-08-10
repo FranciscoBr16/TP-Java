@@ -54,10 +54,7 @@ body header {
 }
 
 /* COMPONENTES */
-.botonsesion {
-  background-color: #d95126 !important;
-  color: white !important;
-}
+
 
 /* CONTENIDO PROPIO */
 #cartalogin {
@@ -81,4 +78,9 @@ form input {
 
 .inputs {
   margin: 15px;
+}
+
+#botonsesion {
+  background-color: #d95126 !important;
+  color: white !important;
 }
