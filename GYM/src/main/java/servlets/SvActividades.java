@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/Actividades")
-public class Actividades extends HttpServlet {
+public class SvActividades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public Actividades() {
+    public SvActividades() {
         super();
     }
 

@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class SvLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public Login() {
+    public SvLogin() {
         super();
        
     }

@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/Tienda")
-public class Tienda extends HttpServlet {
+public class SvTienda extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public Tienda() {
+    public SvTienda() {
         super();
      
     }
