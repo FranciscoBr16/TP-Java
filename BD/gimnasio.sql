@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `gimnasio`;
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: gimnasio
+-- Host: 127.0.0.1    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -36,6 +38,7 @@ CREATE TABLE `abono` (
 
 LOCK TABLES `abono` WRITE;
 /*!40000 ALTER TABLE `abono` DISABLE KEYS */;
+INSERT INTO `abono` VALUES (1,8,4000),(2,12,5500),(3,30,8500);
 /*!40000 ALTER TABLE `abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,6 +57,7 @@ CREATE TABLE `clase` (
   `id_actividad` int DEFAULT NULL,
   `id_empleado` int DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
+  `dia` date DEFAULT NULL,
   PRIMARY KEY (`id_clase`),
   KEY `fk_actividad_idx` (`id_actividad`),
   KEY `fk_empleado_idx` (`id_empleado`),
@@ -203,6 +207,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES (233,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista',NULL),(555,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor',NULL);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-26 19:19:57
+-- Dump completed on 2023-08-25  9:35:47
