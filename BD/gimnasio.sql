@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gimnasio
+-- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -76,32 +76,6 @@ LOCK TABLES `clase` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `clase-cliente`
---
-
-DROP TABLE IF EXISTS `clase-cliente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `clase-cliente` (
-  `id_clase` int NOT NULL,
-  `nom_usuario` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_clase`,`nom_usuario`),
-  KEY `fk_usuario_idx` (`nom_usuario`),
-  CONSTRAINT `fk_clase` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id_clase`),
-  CONSTRAINT `fk_usuario` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`nom_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `clase-cliente`
---
-
-LOCK TABLES `clase-cliente` WRITE;
-/*!40000 ALTER TABLE `clase-cliente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `clase-cliente` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `contrato`
 --
 
@@ -139,10 +113,8 @@ DROP TABLE IF EXISTS `descuento`;
 CREATE TABLE `descuento` (
   `id_descuento` int NOT NULL AUTO_INCREMENT,
   `porc_descuento` float NOT NULL,
-  `fecha_desde` date NOT NULL,
-  `fecha_hasta` date NOT NULL,
   PRIMARY KEY (`id_descuento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,6 +123,7 @@ CREATE TABLE `descuento` (
 
 LOCK TABLES `descuento` WRITE;
 /*!40000 ALTER TABLE `descuento` DISABLE KEYS */;
+INSERT INTO `descuento` VALUES (1,0),(2,0.3),(3,0.2),(4,0.1);
 /*!40000 ALTER TABLE `descuento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,6 +235,33 @@ CREATE TABLE `indumentaria` (
 LOCK TABLES `indumentaria` WRITE;
 /*!40000 ALTER TABLE `indumentaria` DISABLE KEYS */;
 /*!40000 ALTER TABLE `indumentaria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `inscripcion`
+--
+
+DROP TABLE IF EXISTS `inscripcion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `inscripcion` (
+  `nom_usuario` varchar(45) NOT NULL,
+  `id_clase` int NOT NULL,
+  `fecha` date NOT NULL,
+  PRIMARY KEY (`nom_usuario`,`id_clase`,`fecha`),
+  KEY `fk_clase_idx` (`id_clase`),
+  CONSTRAINT `fk_clase3` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id_clase`),
+  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`nom_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `inscripcion`
+--
+
+LOCK TABLES `inscripcion` WRITE;
+/*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -400,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-25  9:35:47
+-- Dump completed on 2023-08-26 18:10:28
