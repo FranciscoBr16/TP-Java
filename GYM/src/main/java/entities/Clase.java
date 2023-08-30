@@ -1,11 +1,28 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class Clase {
 private int idClase;
 private String descripcion;
 private int cupo;
 private String dia;
 private String horario;
+private Empleado empleado;
+private ArrayList<Inscripcion> inscripcion = new ArrayList<>();
+
+public ArrayList<Inscripcion> getInscripcion() {
+	return inscripcion;
+}
+public void setInscripcion(ArrayList<Inscripcion> inscripcion) {
+	this.inscripcion = inscripcion;
+}
+public Empleado getEmpleado() {
+	return empleado;
+}
+public void setEmpleado(Empleado empleado) {
+	this.empleado = empleado;
+}
 public int getIdClase() {
 	return idClase;
 }
