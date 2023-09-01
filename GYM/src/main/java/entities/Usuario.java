@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Usuario {
 	private static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private int id, telefono;
+    private int telefono;
     private String username, password, email, nombre, apellido;
     private boolean beneficio, admin;
     private LocalDate fechaNac;
@@ -19,13 +19,6 @@ public class Usuario {
 		Usuario.formato = formato;
 	}
 	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	public int getTelefono() {
 		return telefono;
@@ -98,6 +91,8 @@ public class Usuario {
 	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
+	
+	
 
 	
 
