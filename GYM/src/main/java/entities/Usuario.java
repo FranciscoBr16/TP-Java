@@ -91,6 +91,18 @@ public class Usuario {
 	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
+
+	public Usuario( String username, String password, String email, String nombre, String apellido, int telefono,  LocalDate fechaNac) {
+		this.telefono = telefono;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNac = fechaNac;
+		this.admin = false;
+	}
+	
 	
 	
 
