@@ -1,0 +1,73 @@
+@charset "ISO-8859-1";
+
+/* BODY */
+body {
+  background-image: url(../img/fondo.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Inter", sans-serif;
+  height: 100vh;
+}
+
+body header {
+  font-weight: bold;
+}
+  
+
+ /*NAVBAR */
+  
+  nav {
+    background-color: #191617;
+    z-index: 5;
+  }
+  
+  #links {
+    position: relative;
+    font-size: 22px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  #links::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: -2px;
+    left: 0;
+    background-color: #d75128;
+    height: 2px;
+    border-radius: 5px;
+    visibility: hidden;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 200ms ease-in-out;
+  }
+  
+  #links:hover::before {
+    visibility: visible;
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+  
+  .navbar-nav .nav-link.active {
+    border-bottom: 2px solid #d95126;
+  }
+  
+  #textoregistro {
+    color: white;
+  }
+  
+  .cajalogin {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+  }
+  
+  /*COMPONENTES*/
+  .nuestroboton {
+    background-color: #d95126 !important;
+    color: white !important;
+  }
+  

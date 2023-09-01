@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,14 +17,14 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
   </script>
-  <link rel="stylesheet" href="styleInicio.css" />
+  <link rel="stylesheet" href="style/styleInicio.css" />
 </head>
 
 <body>
   <header>
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="navbar-brand" href="inicio.html"><img src="/GYM/src/main/webapp/img/logo.png"
+        <a class="navbar-brand" href="index.jsp"><img src="img/logo.png"
             alt="logo del gimnasio" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,16 +33,16 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link text-light active" id="links" aria-current="page" href="inicio.html">Inicio</a>
+              <a class="nav-link text-light active" id="links" aria-current="page" href="index.jsp">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-light" id="links" href="planes.html">Planes</a>
+              <a class="nav-link text-light" id="links" href="#">Planes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-light" id="links" href="tienda.html">Tienda</a>
+              <a class="nav-link text-light" id="links" href="#">Tienda</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-light" id="links" href="reservas.html">Reservas</a>
+              <a class="nav-link text-light" id="links" href="#">Reservas</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-light" id="links" href="#">Sobre Nosotros</a>
@@ -48,15 +50,15 @@
           </ul>
         </div>
         <div class="cajalogin">
-          <a id="textoregistro" href="#">Registrate</a>
-          <a href="Login.html"><button class="btn nuestroboton">Iniciar Sesion</button></a>
+          <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
+          <a href="#"><button class="btn nuestroboton">Iniciar Sesion</button></a>
         </div>
       </div>
     </nav>
   </header>
   <div class="caja">
-    <a class="caja1" href=""> <p>ENTRENA </p> </a>
-    <a class="caja2" href="tienda.html"> <p> COMPRA </p></a>
+    <a class="caja1" href="#"> <p>ENTRENA </p> </a>
+    <a class="caja2" href="#"> <p> COMPRA </p></a>
     <a class="caja3" href="#"> <p>CONOCENOS </p></a>
   </div>
 </body>

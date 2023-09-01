@@ -1,0 +1,144 @@
+@charset "ISO-8859-1";
+
+/* BODY */
+body {
+    background-color: #191617 !important;
+    font-family: "Inter", sans-serif;
+  }
+  
+  body header {
+    font-weight: bold;
+  }
+  
+  /*NAVBAR */
+  
+  nav {
+    background-color: #191617;
+    z-index: 5;
+  }
+  
+  #links {
+    position: relative;
+    font-size: 22px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  #links::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: -2px;
+    left: 0;
+    background-color: #d75128;
+    height: 2px;
+    border-radius: 5px;
+    visibility: hidden;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 200ms ease-in-out;
+  }
+  
+  #links:hover::before {
+    visibility: visible;
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+  
+  .navbar-nav .nav-link.active {
+    border-bottom: 2px solid #d95126;
+  }
+  
+  #textoregistro {
+    color: white;
+  }
+  
+  .cajalogin {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+  }
+  
+  /*COMPONENTES*/
+  .nuestroboton {
+    background-color: #d95126 !important;
+    color: white !important;
+  }
+  
+  /*CONTENIDO PROPIO*/
+  
+  .caja a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: font-size 200ms ease-in-out;
+  }
+  
+  p {
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+      1px 1px 0 black;
+  }
+  
+  .caja a:hover {
+    font-size: 38px;
+  }
+  
+  .caja {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .caja1 {
+    display: flex;
+    background-image: url(../img/fondo1-entrena.jpg);
+    background-size: cover;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+  
+  .caja2 {
+    display: flex;
+    background-image: url(../img/fondo2-compra.jpg);
+    background-size: cover;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+  
+  .caja3 {
+    display: flex;
+    background-image: url(../img/fondo3-nosotros.png);
+    background-size: cover;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+  
+  .caja1:hover,
+  .caja2:hover,
+  .caja3:hover {
+    opacity: 85%;
+    transform: scale(1.05);
+    transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+    overflow: hidden;
+  }
+  
+  
+  
