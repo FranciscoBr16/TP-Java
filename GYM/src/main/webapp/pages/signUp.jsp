@@ -48,7 +48,12 @@
                   <a class="nav-link text-light" id="links" href="#">Sobre Nosotros</a>
                 </li>
               </ul>
+             
             </div>
+             <div class="cajalogin">
+          <a id="textoregistro" href="signUp.jsp">Registrate</a>
+          <a href="logIn.jsp"><button class="btn nuestroboton">Iniciar Sesion</button></a>
+        </div>
           </div>
         </nav>
       </header>

@@ -65,6 +65,14 @@ body header {
     align-items: center;
   }
   
+   .cajalogin {
+    width: 250px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+  }
+  
   /*COMPONENTES*/
   .nuestroboton {
     background-color: #d95126 !important;

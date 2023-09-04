@@ -51,7 +51,7 @@ pageEncoding="ISO-8859-1"%>
         </div>
         <div class="cajalogin">
           <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
-          <a href="#"><button class="btn nuestroboton">Iniciar Sesion</button></a>
+          <a href="pages/logIn.jsp"><button class="btn nuestroboton">Iniciar Sesion</button></a>
         </div>
       </div>
     </nav>
