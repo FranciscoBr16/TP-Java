@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,7 +14,7 @@ pageEncoding="ISO-8859-1"%>
         <div class="formulario">
             <h1>�Unite al club!</h1>
             <form
-                action="../src/main/java/servlets/SvSignUp.java"
+                action="/GYM/SvSignUp"
                 method="POST"
             >
                 <div class="campo">
