@@ -47,7 +47,7 @@ public class DbHandler {
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into usuario (nom_usuario, nombre, apellido, clave, correo, telefono, beneficio, admin) values (?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("Insert into usuario (nom_usuario, nombre, apellido, clave, correo, telefono) values (?,?,?,?,?,?)");
 			pstmt.setString(1, user.getUsername() );
 			pstmt.setString(2, user.getNombre());
 			pstmt.setString(3, user.getApellido());
@@ -71,4 +71,5 @@ public class DbHandler {
 	
 			}
 	}
+	
 }

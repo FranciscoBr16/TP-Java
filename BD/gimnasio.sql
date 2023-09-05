@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -370,16 +370,18 @@ DROP TABLE IF EXISTS `usuario`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
   `nom_usuario` varchar(45) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `apellido` varchar(45) DEFAULT NULL,
-  `clave` varchar(45) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `clave` varchar(45) NOT NULL,
+  `correo` varchar(45) NOT NULL,
+  `telefono` varchar(45) NOT NULL,
   `beneficio` tinyint(1) DEFAULT '0',
   `admin` tinyint(1) DEFAULT '0',
   `imagen` varchar(255) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
-  PRIMARY KEY (`nom_usuario`)
+  PRIMARY KEY (`nom_usuario`),
+  UNIQUE KEY `telefono_UNIQUE` (`telefono`),
+  UNIQUE KEY `correo_UNIQUE` (`correo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -389,7 +391,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('admin','un','admin','abzadmin','abz@gmail.com','123456789',0,1,NULL,NULL),('usuario_de_prueba','prueba','conBeneficio','pruebaconbeneficio','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10');
+INSERT INTO `usuario` VALUES ('admin','un','admin','abzadmin','abz@gmail.com','123456789',0,1,NULL,NULL),('cacotron','caquilla','caquero','mojongigante','mojonnavidenio@gmail.com','15543905',0,0,NULL,NULL),('jeroalvarez1','Jero','Alvarez','123456','jeronatan@hotmail.com','3413524459',0,0,NULL,NULL),('usuario_de_prueba','prueba','conBeneficio','pruebaconbeneficio','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -402,4 +404,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-01 16:23:44
+-- Dump completed on 2023-09-05 20:11:13

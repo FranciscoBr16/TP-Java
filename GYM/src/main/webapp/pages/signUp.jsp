@@ -13,10 +13,7 @@ pageEncoding="ISO-8859-1"%>
     <body>
         <div class="formulario">
             <h1>�Unite al club!</h1>
-            <form
-                action="/GYM/SvSignUp"
-                method="POST"
-            >
+            <form action="/GYM/SvSignUp" method="POST">
                 <div class="campo">
                     <label for="username">Nombre de Usuario</label>
                     <input type="text" name="username" id="username" />

@@ -42,9 +42,12 @@ public class SvSignUp extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 		Usuario usu = new Usuario((String)request.getParameter("username"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"));
-		DbHandler db = new DbHandler();
-		db.newUser(usu);
-		response.sendRedirect("index.jsp");
+		DbHandler db = new DbHandler();		
+		if(db.newUser(usu)){
+			response.sendRedirect("/GYM/src/main/webapp/pages/signUpExitoso.jsp");
+		} else {
+			response.sendRedirect("index.jsp");
+		}
 	}
 
 }
