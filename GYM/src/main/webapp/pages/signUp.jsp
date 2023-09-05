@@ -11,7 +11,7 @@ pageEncoding="ISO-8859-1"%>
     </head>
     <body>
         <div class="formulario">
-            <h1>¡Unite al club!</h1>
+            <h1>ï¿½Unite al club!</h1>
             <form action="" method="post">
                 <div class="campo">
                     <label for="nomusuario">Nombre de Usuario</label>
@@ -26,15 +26,15 @@ pageEncoding="ISO-8859-1"%>
                     <input type="text" name="surname" id="surname" />
                 </div>
                 <div class="campo">
-                    <label for="password">Contraseña:</label>
+                    <label for="password">Contraseï¿½a:</label>
                     <input type="text" name="password" id="password" />
                 </div>
                 <div class="campo">
-                    <label for="correo">Correo Electrónico</label>
+                    <label for="correo">Correo Electrï¿½nico</label>
                     <input type="text" name="correo" id="correa" />
                 </div>
                 <div class="campo">
-                    <label for="telefono">Teléfono:</label>
+                    <label for="telefono">Telï¿½fono:</label>
                     <input type="text" name="telefono" id="telefono" />
                 </div>
                 <div class="campo">
