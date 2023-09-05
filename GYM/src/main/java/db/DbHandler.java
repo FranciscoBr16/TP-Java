@@ -44,7 +44,7 @@ public class DbHandler {
 	
 	public boolean newUser(Usuario user) {
 		PreparedStatement pstmt=null;
-		Connection conn;
+		Connection conn = null;
 		try {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement("Insert into usuario (nom_usuario, nombre, apellido, clave, correo, telefono, beneficio, admin) values (?,?,?,?,?,?)");
@@ -53,7 +53,7 @@ public class DbHandler {
 			pstmt.setString(3, user.getApellido());
 			pstmt.setString(4, user.getPassword());
 			pstmt.setString(5, user.getEmail());
-			pstmt.setInt(6, user.getTelefono());
+			pstmt.setString(6, user.getTelefono());
 			pstmt.executeUpdate();
 			
 			return true;

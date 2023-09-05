@@ -1,11 +1,17 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.time.LocalDate;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import db.DbHandler;
+import entities.Usuario;
 
 /**
  * Servlet implementation class SvSignUp
@@ -34,8 +40,11 @@ public class SvSignUp extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
+		Usuario usu = new Usuario((String)request.getParameter("username"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"));
+		DbHandler db = new DbHandler();
+		db.newUser(usu);
+		response.sendRedirect("index.jsp");
 	}
 
 }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Usuario {
 	private static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private int telefono;
+    private String telefono;
     private String username, password, email, nombre, apellido;
     private boolean beneficio, admin;
     private LocalDate fechaNac;
@@ -20,11 +20,11 @@ public class Usuario {
 	}
 	
 	
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 	
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	
@@ -92,14 +92,13 @@ public class Usuario {
 		this.fechaNac = fechaNac;
 	}
 
-	public Usuario( String username, String password, String email, String nombre, String apellido, int telefono,  LocalDate fechaNac) {
-		this.telefono = telefono;
+	public Usuario( String username, String password, String email, String nombre, String apellido, String telefono) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.fechaNac = fechaNac;
+		this.telefono = telefono;
 		this.admin = false;
 	}
 	

@@ -12,14 +12,17 @@ pageEncoding="ISO-8859-1"%>
     <body>
         <div class="formulario">
             <h1>�Unite al club!</h1>
-            <form action="" method="post">
+            <form
+                action="../src/main/java/servlets/SvSignUp.java"
+                method="POST"
+            >
                 <div class="campo">
-                    <label for="nomusuario">Nombre de Usuario</label>
-                    <input type="text" name="surname" id="nomusuario" />
+                    <label for="username">Nombre de Usuario</label>
+                    <input type="text" name="username" id="username" />
                 </div>
                 <div class="campo">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" name="name" id="nombre" />
+                    <input type="text" name="name" id="name" />
                 </div>
                 <div class="campo">
                     <label for="apellido">Apellido:</label>
@@ -27,20 +30,24 @@ pageEncoding="ISO-8859-1"%>
                 </div>
                 <div class="campo">
                     <label for="password">Contrase�a:</label>
-                    <input type="text" name="password" id="password" />
+                    <input type="password" name="password" id="password" />
                 </div>
                 <div class="campo">
-                    <label for="correo">Correo Electr�nico</label>
-                    <input type="text" name="correo" id="correa" />
+                    <label for="email">Correo Electr�nico</label>
+                    <input type="email" name="email" id="email" />
                 </div>
                 <div class="campo">
-                    <label for="telefono">Tel�fono:</label>
-                    <input type="text" name="telefono" id="telefono" />
+                    <label for="phonenumber">Tel�fono:</label>
+                    <input type="text" name="phonenumber" id="phonenumber" />
                 </div>
-                <div class="campo">
-                    <label for="">Fecha de Nacimiento</label>
-                    <input type="text" name="" />
-                </div>
+                <!-- <div class="campo">
+                    <label for="birthdate">Fecha de Nacimiento</label>
+                    <input
+                        type="datetime-local"
+                        name="birthdate"
+                        id="birthdate"
+                    />
+                </div> -->
                 <button type="submit">Registrarse</button>
             </form>
         </div>
