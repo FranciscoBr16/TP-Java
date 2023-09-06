@@ -44,7 +44,7 @@ public class SvSignUp extends HttpServlet {
 		Usuario usu = new Usuario((String)request.getParameter("username"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"));
 		DbHandler db = new DbHandler();		
 		if(db.newUser(usu)){
-			response.sendRedirect("/GYM/src/main/webapp/pages/signUpExitoso.jsp");
+			response.sendRedirect("/GYM/pages/signUpExitoso.jsp");
 		} else {
 			response.sendRedirect("index.jsp");
 		}
