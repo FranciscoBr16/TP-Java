@@ -38,14 +38,14 @@ pageEncoding="ISO-8859-1"%>
                     <label for="phonenumber">Tel�fono:</label>
                     <input type="text" name="phonenumber" id="phonenumber" />
                 </div>
-                <!-- <div class="campo">
+                <div class="campo">
                     <label for="birthdate">Fecha de Nacimiento</label>
                     <input
-                        type="datetime-local"
-                        name="birthdate"
+                        type="date"
+                        name="fecha"
                         id="birthdate"
                     />
-                </div> -->
+                </div>
                 <button type="submit">Registrarse</button>
             </form>
         </div>

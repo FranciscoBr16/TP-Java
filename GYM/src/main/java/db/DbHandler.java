@@ -47,13 +47,14 @@ public class DbHandler {
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into usuario (nom_usuario, nombre, apellido, clave, correo, telefono) values (?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("Insert into usuario (nom_usuario, nombre, apellido, clave, correo, telefono, fechaNacimiento) values (?,?,?,?,?,?,?)");
 			pstmt.setString(1, user.getUsername() );
 			pstmt.setString(2, user.getNombre());
 			pstmt.setString(3, user.getApellido());
 			pstmt.setString(4, user.getPassword());
 			pstmt.setString(5, user.getEmail());
 			pstmt.setString(6, user.getTelefono());
+			pstmt.setDate(7, java.sql.Date.valueOf(user.getFechaNac()));
 			pstmt.executeUpdate();
 			
 			return true;

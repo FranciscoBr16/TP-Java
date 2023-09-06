@@ -92,13 +92,14 @@ public class Usuario {
 		this.fechaNac = fechaNac;
 	}
 
-	public Usuario( String username,String nombre, String apellido, String password, String email , String telefono) {
+	public Usuario( String username,String nombre, String apellido, String password, String email , String telefono, LocalDate fecha) {
 		this.username = username;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.password = password;
 		this.email = email;
 		this.telefono = telefono;
+		this.fechaNac = fecha;
 		this.admin = false;
 	}
 	
