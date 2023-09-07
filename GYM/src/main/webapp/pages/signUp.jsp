@@ -28,8 +28,8 @@ pageEncoding="ISO-8859-1"%>
                         name="dni"
                         id="dni"
                         required
-                        min="1"
-                        max="150000000"
+                        min="1000000"
+                        max="99999999"
                     />
                     <label for="password">Contrase�a:</label>
                     <input

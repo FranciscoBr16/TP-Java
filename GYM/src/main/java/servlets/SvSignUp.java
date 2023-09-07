@@ -32,7 +32,7 @@ public class SvSignUp extends HttpServlet {
 		doGet(request, response);
 		String fechaStr = request.getParameter("fecha");
 		LocalDate fecha = LocalDate.parse(fechaStr);
-		Usuario usu = new Usuario((String)request.getParameter("username"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"),fecha);
+		Usuario usu = new Usuario((String)request.getParameter("dni"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"),fecha);
 		DbHandler db = new DbHandler();		
 		if(db.newUser(usu)){
 			response.sendRedirect("/GYM/pages/signUpExitoso.jsp");

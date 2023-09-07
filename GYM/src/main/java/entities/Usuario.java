@@ -6,9 +6,10 @@ import java.time.format.DateTimeFormatter;
 public class Usuario {
 	private static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private String telefono;
-    private String username, password, email, nombre, apellido;
+    private String dni, password, email, nombre, apellido;
     private boolean beneficio, admin;
     private LocalDate fechaNac;
+	private String imagen;
     
     
     public static DateTimeFormatter getFormato() {
@@ -28,12 +29,12 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 	
-	public String getUsername() {
-		return username;
+	public String getDni() {
+		return dni;
 	}
 	
-	public void setUsername(String username) {
-		this.username = username;
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 	
 	public String getPassword() {
@@ -92,8 +93,8 @@ public class Usuario {
 		this.fechaNac = fechaNac;
 	}
 
-	public Usuario( String username,String nombre, String apellido, String password, String email , String telefono, LocalDate fecha) {
-		this.username = username;
+	public Usuario(String dni,String nombre, String apellido, String password, String email , String telefono, LocalDate fecha) {
+		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.password = password;
@@ -101,6 +102,16 @@ public class Usuario {
 		this.telefono = telefono;
 		this.fechaNac = fecha;
 		this.admin = false;
+	}
+
+	public Usuario(String dni, String clave) {
+		this.dni = dni;
+		this.password = clave;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+		
 	}
 	
 	

@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -90,7 +90,7 @@ CREATE TABLE `contrato` (
   PRIMARY KEY (`nom_usuario`,`fecha_desde`,`fecha_hasta`),
   KEY `fk_abono_idx` (`id_abono`),
   CONSTRAINT `fk_abono` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`),
-  CONSTRAINT `fk_usuario2` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`nom_usuario`)
+  CONSTRAINT `fk_usuario2` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -200,7 +200,7 @@ CREATE TABLE `factura` (
   `total` float DEFAULT NULL,
   PRIMARY KEY (`nro_factura`),
   KEY `fk_usuario2_idx` (`nom_usuario`),
-  CONSTRAINT `fk_usuario3` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`nom_usuario`)
+  CONSTRAINT `fk_usuario3` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -251,7 +251,7 @@ CREATE TABLE `inscripcion` (
   PRIMARY KEY (`nom_usuario`,`id_clase`,`fecha`),
   KEY `fk_clase_idx` (`id_clase`),
   CONSTRAINT `fk_clase3` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id_clase`),
-  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`nom_usuario`)
+  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -369,7 +369,7 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
-  `nom_usuario` varchar(45) NOT NULL,
+  `dni` varchar(45) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
   `clave` varchar(45) NOT NULL,
@@ -379,7 +379,7 @@ CREATE TABLE `usuario` (
   `admin` tinyint(1) DEFAULT '0',
   `imagen` varchar(255) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
-  PRIMARY KEY (`nom_usuario`),
+  PRIMARY KEY (`dni`),
   UNIQUE KEY `telefono_UNIQUE` (`telefono`),
   UNIQUE KEY `correo_UNIQUE` (`correo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -391,7 +391,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('admin','un','admin','abzadmin','abz@gmail.com','123456789',0,1,NULL,NULL),('cacotron','caquilla','caquero','mojongigante','mojonnavidenio@gmail.com','15543905',0,0,NULL,NULL),('jeroalvarez1','Jero','Alvarez','123456','jeronatan@hotmail.com','3413524459',0,0,NULL,NULL),('usuario_de_prueba','prueba','conBeneficio','pruebaconbeneficio','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10');
+INSERT INTO `usuario` VALUES ('admin','un','admin','abzadmin','abz@gmail.com','123456789',0,1,NULL,NULL),('usuario_de_prueba','prueba','conBeneficio','pruebaconbeneficio','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -404,4 +404,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-05 20:11:13
+-- Dump completed on 2023-09-07 14:36:01
