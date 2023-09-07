@@ -17,9 +17,62 @@ body {
 .formulario {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    width: 500px;
-    height: 300px;
-    background-color: red;
+
+    width: 50%;
+    height: 60vh;
+    background-color: #191617;
+    border-radius: 30px;
+}
+
+.formulario-campos {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    height: 100%;
+}
+
+.botonRegister {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    align-items: flex-end;
+    align-self: flex-end;
+}
+
+.headerForm {
+    background-color: #d75128;
+    margin: 0;
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.headerForm p {
+    margin: 0;
+    font-size: 42px;
+    padding: 30px;
+    color: white;
+    font-weight: bold;
+}
+
+.campo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.campo #username {
+    width: 20%;
+}
+
+.campo #password {
+    width: 30%;
+}
+
+.campo #name {
+    width: 25%;
+}
+
+.campo #surname {
+    width: 25%;
 }

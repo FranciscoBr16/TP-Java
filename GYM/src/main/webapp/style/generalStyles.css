@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+* {
+    font-family: "Ubuntu", sans-serif;
+}
+
+button {
+    background-color: #d75128;
+    padding: 15px;
+    font-weight: bold;
+    color: white;
+    max-width: fit-content;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #722c16;
+    transition: background-color 250ms ease-in-out;
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+input {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+input:focus {
+    outline: #d75128 solid;
+    transition: 100ms all ease-out;
+}
