@@ -6,6 +6,7 @@ pageEncoding="ISO-8859-1"%>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
   <title>Inicio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,6 +19,7 @@ pageEncoding="ISO-8859-1"%>
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
   </script>
   <link rel="stylesheet" href="style/styleInicio.css" />
+  <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
 </head>
 
 <body>
