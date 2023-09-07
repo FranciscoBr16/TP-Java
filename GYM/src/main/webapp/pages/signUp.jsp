@@ -22,32 +22,50 @@ pageEncoding="ISO-8859-1"%>
                 class="formulario-campos"
             >
                 <div class="campo">
-                    <label for="username">Nombre de Usuario:</label>
-                    <input type="text" name="username" id="username" />
-                </div>
-                <div class="campo">
+                    <label for="dni">Numero de Documento (DNI):</label>
+                    <input
+                        type="number"
+                        name="dni"
+                        id="dni"
+                        required
+                        min="1"
+                        max="150000000"
+                    />
                     <label for="password">Contrase�a:</label>
-                    <input type="password" name="password" id="password" />
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        required
+                    />
                 </div>
                 <div class="campo">
                     <label for="nombre">Nombre:</label>
-                    <input type="text" name="name" id="name" />
-                </div>
-                <div class="campo">
+                    <input type="text" name="name" id="name" required />
                     <label for="apellido">Apellido:</label>
-                    <input type="text" name="surname" id="surname" />
+                    <input type="text" name="surname" id="surname" required />
                 </div>
                 <div class="campo">
                     <label for="email">Correo Electr�nico:</label>
-                    <input type="email" name="email" id="email" />
+                    <input type="email" name="email" id="email" required />
                 </div>
                 <div class="campo">
                     <label for="phonenumber">Tel�fono:</label>
-                    <input type="text" name="phonenumber" id="phonenumber" />
+                    <input
+                        type="text"
+                        name="phonenumber"
+                        id="phonenumber"
+                        required
+                    />
                 </div>
                 <div class="campo">
-                    <label for="birthdate">Fecha de Nacimiento</label>
-                    <input type="date" name="fecha" id="birthdate" />
+                    <label for="birthdate">Fecha de Nacimiento:</label>
+                    <input
+                        type="date"
+                        name="birthdate"
+                        id="birthdate"
+                        required
+                    />
                 </div>
                 <div class="botonRegister">
                     <button type="submit">Registrarse</button>

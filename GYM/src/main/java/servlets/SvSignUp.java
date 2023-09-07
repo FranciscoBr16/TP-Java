@@ -20,12 +20,10 @@ public class SvSignUp extends HttpServlet {
   
     public SvSignUp() {
         super();
-  
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
