@@ -61,8 +61,12 @@ body {
     gap: 10px;
 }
 
-.campo #username {
+.campo #dni {
     width: 20%;
+}
+
+.campo #dni::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 .campo #password {
