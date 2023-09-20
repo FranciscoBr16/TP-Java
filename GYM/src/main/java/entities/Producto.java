@@ -7,7 +7,7 @@ public class Producto {
 	public int idProducto;
 	public String descripcion;
 	public int stock;
-	private ArrayList<Precio> precio = new ArrayList<>();
+	private ArrayList<Precio> precio = new ArrayList<>(); // lista de precios
 	
 	public ArrayList<Precio> getPrecio() {
 		return precio;
@@ -34,3 +34,4 @@ public class Producto {
 		this.stock = stock;
 	}
 }
+
