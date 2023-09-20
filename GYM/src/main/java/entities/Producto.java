@@ -7,7 +7,7 @@ public class Producto {
 	public int idProducto;
 	public String descripcion;
 	public int stock;
-	private ArrayList<Precio> precio = new ArrayList<>(); // lista de precios
+	private ArrayList<Precio> precio = new ArrayList<>();
 	
 	public ArrayList<Precio> getPrecio() {
 		return precio;
