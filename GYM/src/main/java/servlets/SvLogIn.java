@@ -31,14 +31,12 @@ public class SvLogIn extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 
-		// Usuario user = new Usuario((String)request.getParameter("dni"), (String)request.getParameter("password"));
+		Usuario user = new Usuario((String)request.getParameter("dni"), (String)request.getParameter("password"));
 		// hay que validar que sea un usuario valido 
-		String dni = (String)request.getParameter("dni") ;
-		String password = (String)request.getParameter("password");
 		DbHandler db = new DbHandler();	
-		if ( db.logIn(dni , password ) != null) {
+		if ( db.logIn(user) != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("usuario", dni );
+			session.setAttribute("usuario", user);
 			
 			response.sendRedirect("index.jsp");
 		} else {

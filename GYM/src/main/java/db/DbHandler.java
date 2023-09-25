@@ -73,17 +73,17 @@ public class DbHandler {
 			}
 	}
 	
-	public Usuario logIn(String dni, String password) {
+	public Usuario logIn(Usuario user) {
 		PreparedStatement pstmt=null;
 		Connection conn = null;
 		ResultSet rs = null;
 		try{
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement("Select * from usuario where dni=? AND clave=?");
-			pstmt.setString(1, dni);
-			pstmt.setString(2, password);
+			pstmt.setString(1, user.getDni());
+			pstmt.setString(2, user.getPassword());
 			rs = pstmt.executeQuery();
-			Usuario user = new Usuario();
+			
 			rs.next();
 			user.setDni(rs.getString("dni"));
 			user.setNombre(rs.getString("nombre"));
