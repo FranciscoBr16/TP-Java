@@ -63,13 +63,13 @@
         </div>
         
         <form>
-          <div class="inputs" method="POST" action="SvLogIn.java">
-            <label for="username"><b>Usuario</b></label>
-            <input type="text" id="username" name="usuario" required class="form-control">
+          <div class="inputs" method="POST" action="/GYM/SvLogIn">
+            <label for="username"><b>DNI</b></label>
+            <input type="text" id="username" name="dni" required class="form-control">
           </div>
           <div class="inputs">
             <label for="password"><b>Contraseña</b></label>
-            <input type="password" id="password" name="clave" required class="form-control">
+            <input type="password" id="password" name="password" required class="form-control">
           </div>
           <div class="text-center botonabajo">
             <button id="botonsesion" type="submit" class="btn">Iniciar Sesion</button>

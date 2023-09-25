@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
+<%@ page import="entities.Usuario" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,6 +22,9 @@ pageEncoding="ISO-8859-1"%>
   <link rel="stylesheet" href="style/styleInicio.css" />
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
 </head>
+<% 
+Usuario usuario = (Usuario) session.getAttribute("usuario");
+%>
 
 <body>
   <header>
@@ -51,10 +55,12 @@ pageEncoding="ISO-8859-1"%>
             </li>
           </ul>
         </div>
+        <% if (usuario == null){ %>
         <div class="cajalogin">
           <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
           <a href="pages/logIn.jsp"><button class="btn nuestroboton">Iniciar Sesion</button></a>
         </div>
+        <% } %>
       </div>
     </nav>
   </header>

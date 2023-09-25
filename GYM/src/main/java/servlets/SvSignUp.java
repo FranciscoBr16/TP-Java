@@ -37,7 +37,7 @@ public class SvSignUp extends HttpServlet {
 		if(db.newUser(usu)){
 			response.sendRedirect("/GYM/pages/signUpExitoso.jsp");
 		} else {
-			response.sendRedirect("index.jsp");
+			// response.sendRedirect("index.jsp");
 		}
 	}
 

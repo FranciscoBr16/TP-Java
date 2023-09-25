@@ -104,9 +104,14 @@ public class Usuario {
 		this.admin = false;
 	}
 
-	public Usuario(String dni, String clave) {
+	public Usuario(String dni, String password) {
 		this.dni = dni;
-		this.password = clave;
+		this.password = password;
+	}
+
+
+
+	public Usuario() {
 	}
 
 	public void setImagen(String imagen) {

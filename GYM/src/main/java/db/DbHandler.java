@@ -73,16 +73,17 @@ public class DbHandler {
 			}
 	}
 	
-	public Usuario logIn(Usuario user) {
+	public Usuario logIn(String dni, String password) {
 		PreparedStatement pstmt=null;
 		Connection conn = null;
 		ResultSet rs = null;
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Select * from usuario where dni = ? AND clave = ?");
-			pstmt.setString(1, user.getDni());
-			pstmt.setString(2, user.getPassword());
+			pstmt = conn.prepareStatement("Select * from usuario where dni=? AND clave=?");
+			pstmt.setString(1, dni);
+			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
+			Usuario user = new Usuario();
 			rs.next();
 			user.setDni(rs.getString("dni"));
 			user.setNombre(rs.getString("nombre"));
@@ -91,7 +92,7 @@ public class DbHandler {
 			user.setTelefono(rs.getString("telefono"));
 			user.setBeneficio(rs.getBoolean("beneficio"));
 			user.setAdmin(rs.getBoolean("admin"));
-			user.setImagen(rs.getString("imagen"));
+			// user.setImagen(rs.getString("imagen"));
 			Date fechaux = rs.getDate("disabledOn");
 			if (fechaux != null) {
 				user.setFechaNac(fechaux.toLocalDate());
