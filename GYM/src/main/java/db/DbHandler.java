@@ -93,7 +93,7 @@ public class DbHandler {
 			user.setBeneficio(rs.getBoolean("beneficio"));
 			user.setAdmin(rs.getBoolean("admin"));
 			// user.setImagen(rs.getString("imagen"));
-			Date fechaux = rs.getDate("disabledOn");
+			Date fechaux = rs.getDate("fechaNacimiento");
 			if (fechaux != null) {
 				user.setFechaNac(fechaux.toLocalDate());
 			} else user.setFechaNac(null);

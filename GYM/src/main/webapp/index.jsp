@@ -21,10 +21,12 @@ pageEncoding="ISO-8859-1"%>
   </script>
   <link rel="stylesheet" href="style/styleInicio.css" />
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
+  
+  <% 
+	Usuario user = (Usuario) session.getAttribute("user");
+	%>
 </head>
-<% 
-Usuario usuario = (Usuario) session.getAttribute("usuario");
-%>
+
 
 <body>
   <header>
@@ -55,12 +57,17 @@ Usuario usuario = (Usuario) session.getAttribute("usuario");
             </li>
           </ul>
         </div>
-        <% if (usuario == null){ %>
+        <% if (user == null){ %>
         <div class="cajalogin">
           <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
           <a href="pages/logIn.jsp"><button class="btn nuestroboton">Iniciar Sesion</button></a>
         </div>
-        <% } %>
+        <% } else {%>
+        <div class="">
+        <p><%= user.getNombre() %><p>
+        
+        </div>
+        <%} %>
       </div>
     </nav>
   </header>

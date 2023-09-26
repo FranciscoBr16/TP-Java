@@ -6,13 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import db.DbHandler;
 import entities.Usuario;
 
 
-@WebServlet("/Login")
+@WebServlet("/SvLogIn")
 public class SvLogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,17 +29,15 @@ public class SvLogIn extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-
-		Usuario user = new Usuario((String)request.getParameter("dni"), (String)request.getParameter("password"));
+		Usuario user = new Usuario(request.getParameter("dni"), request.getParameter("password"));
 		// hay que validar que sea un usuario valido 
 		DbHandler db = new DbHandler();	
 		if ( db.logIn(user) != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("usuario", user);
+			request.getSession().setAttribute("user",user);
 			
 			response.sendRedirect("index.jsp");
 		} else {
-			response.sendRedirect("/GYM/pages/logIn.jsp");
+			response.sendRedirect("/GYM/SvLogIn");
 		}
 			
 	}

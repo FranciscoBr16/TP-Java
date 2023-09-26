@@ -62,8 +62,8 @@
           <p>Iniciar Sesión</p>
         </div>
         
-        <form>
-          <div class="inputs" method="POST" action="/GYM/SvLogIn">
+        <form action="/GYM/SvLogIn" method="POST">
+          <div class="inputs">
             <label for="username"><b>DNI</b></label>
             <input type="text" id="username" name="dni" required class="form-control">
           </div>

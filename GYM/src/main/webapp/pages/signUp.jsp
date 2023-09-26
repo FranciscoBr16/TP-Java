@@ -14,7 +14,7 @@ pageEncoding="ISO-8859-1"%>
     <body>
         <div class="formulario">
             <div class="headerForm">
-                <p>Â¡Unite al Club!</p>
+                <p>¡Unite al Club!</p>
             </div>
             <form
                 action="/GYM/SvSignUp"
