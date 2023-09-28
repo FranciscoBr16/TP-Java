@@ -14,9 +14,10 @@ import entities.Abono;
 
 @WebServlet("/SvAbono")
 public class SvAbono extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
- 
-    public SvAbono() {
+
+	public SvAbono() {
  
     }
 
@@ -24,9 +25,10 @@ public class SvAbono extends HttpServlet {
 		DbHandler manejador = new DbHandler();
 		ArrayList<Abono> abonos = new ArrayList<>();
 		abonos.addAll(manejador.getAbonos());
-		request.getSession().setAttribute("listaAbono", abonos);
-		response.sendRedirect("/GYM/Abono");
+		request.setAttribute("listaAbono", abonos);
+		request.getRequestDispatcher("/pages/abonos.jsp").forward(request,response);
 	
 	}
 
 }
+

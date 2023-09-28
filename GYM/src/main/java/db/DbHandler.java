@@ -121,7 +121,6 @@ public class DbHandler {
 		try{
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement("Select * from abono"); // diseñar consulta
-			
 			rs = pstmt.executeQuery(); // se ejecuta la consulta y se asigna el resultado al resultset
 			
 			while (rs.next() && rs!= null ) { // avanza en las filas de las tablas hasta llegar al final

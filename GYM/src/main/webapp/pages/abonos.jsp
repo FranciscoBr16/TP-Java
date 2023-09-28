@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
-<%@ page import="entities.Abono" %>
-<%@ page import="java.util.ArrayList;" %>
+<%@page import="entities.Abono" %>
+<%@page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -20,13 +20,11 @@ pageEncoding="ISO-8859-1"%>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
   </script>
-  <link rel="stylesheet" href="style/styleInicio.css" />
+  <link rel="stylesheet" href="style/abonoStyles.css" />
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
   
   <% 
-  	ArrayList<Abono> listaAbonos = new ArrayList<>();
-  	listaAbonos.addAll(session.getAttribute("listaAbono"));	
-  	
+  	ArrayList<Abono> listaAbonos = (ArrayList<Abono>)request.getAttribute("listaAbono");	
 	%>
 </head>
 
@@ -70,9 +68,10 @@ pageEncoding="ISO-8859-1"%>
     </nav>
   </header>
 <% for (Abono i : listaAbonos) { %>
- <p><% i.getIdAbono(); %></p>
- <p><% i.getPrecio(); %></p>
- <p><% i.getCantReservas(); %></p>
+ <h2><%=i.getIdAbono()%></h2>
+ <h2><%=i.getPrecio()%></h2>
+ <h2><%=i.getCantReservas()%></h2>
+ 
  <% } %>
  
 </body>

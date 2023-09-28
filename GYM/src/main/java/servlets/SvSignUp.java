@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -17,17 +16,6 @@ import entities.Usuario;
 public class SvSignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-  
-    public SvSignUp() {
-        super();
-    }
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fechaStr = request.getParameter("fecha");
 		LocalDate fecha = LocalDate.parse(fechaStr);

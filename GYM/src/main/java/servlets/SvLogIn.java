@@ -14,18 +14,6 @@ import entities.Usuario;
 public class SvLogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public SvLogIn() {
-        super();
-       
-    }
-
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Usuario user = new Usuario(request.getParameter("dni"), request.getParameter("password"));
