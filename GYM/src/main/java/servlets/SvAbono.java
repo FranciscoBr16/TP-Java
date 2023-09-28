@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import db.DbHandler;
 import entities.Abono;
 
-@WebServlet("/SvAbono")
+@WebServlet("/SvAbono /abonos")
 public class SvAbono extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
