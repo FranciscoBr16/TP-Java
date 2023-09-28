@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import db.DbHandler;
 import entities.Usuario;
 
-
 @WebServlet("/SvLogIn")
 public class SvLogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +27,7 @@ public class SvLogIn extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+
 		Usuario user = new Usuario(request.getParameter("dni"), request.getParameter("password"));
 		// hay que validar que sea un usuario valido 
 		DbHandler db = new DbHandler();	

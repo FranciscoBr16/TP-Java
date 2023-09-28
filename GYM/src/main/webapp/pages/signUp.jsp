@@ -14,13 +14,9 @@ pageEncoding="ISO-8859-1"%>
     <body>
         <div class="formulario">
             <div class="headerForm">
-                <p>¡Unite al Club!</p>
+                <p>Unite al Club!</p>
             </div>
-            <form
-                action="/GYM/SvSignUp"
-                method="POST"
-                class="formulario-campos"
-            >
+            <form action="/GYM/SvSignUp" method="POST" class="formulario-campos">
                 <div class="campo">
                     <label for="dni">Numero de Documento (DNI):</label>
                     <input
@@ -31,7 +27,7 @@ pageEncoding="ISO-8859-1"%>
                         min="1000000"
                         max="99999999"
                     />
-                    <label for="password">Contraseï¿½a:</label>
+                    <label for="password">Contraseña:</label>
                     <input
                         type="password"
                         name="password"
@@ -46,11 +42,11 @@ pageEncoding="ISO-8859-1"%>
                     <input type="text" name="surname" id="surname" required />
                 </div>
                 <div class="campo">
-                    <label for="email">Correo Electrï¿½nico:</label>
+                    <label for="email">Correo Electrónico:</label>
                     <input type="email" name="email" id="email" required />
                 </div>
                 <div class="campo">
-                    <label for="phonenumber">Telï¿½fono:</label>
+                    <label for="phonenumber">Teléfono:</label>
                     <input
                         type="text"
                         name="phonenumber"

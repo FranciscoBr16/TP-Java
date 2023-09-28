@@ -29,7 +29,6 @@ public class SvSignUp extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 		String fechaStr = request.getParameter("fecha");
 		LocalDate fecha = LocalDate.parse(fechaStr);
 		Usuario usu = new Usuario((String)request.getParameter("dni"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"),fecha);
