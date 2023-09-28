@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
-<%@ page import="entities.Usuario" %>
+<%@ page import="entities.Abono" %>
+<%@ page import="java.util.ArrayList;" %>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,7 +9,7 @@ pageEncoding="ISO-8859-1"%>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    
-  <title>Inicio</title>
+  <title>Abonos</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,7 +24,9 @@ pageEncoding="ISO-8859-1"%>
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
   
   <% 
-	Usuario user = (Usuario) session.getAttribute("user");
+  	ArrayList<Abono> listaAbonos = new ArrayList<>();
+  	listaAbonos.addAll(session.getAttribute("listaAbono"));	
+  	
 	%>
 </head>
 
@@ -41,10 +44,10 @@ pageEncoding="ISO-8859-1"%>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link text-light active" id="links" aria-current="page" href="index.jsp">Inicio</a>
+              <a class="nav-link text-light" id="links" aria-current="page" href="index.jsp">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-light" id="links" href="/GYM/SvAbono">Planes</a>
+              <a class="nav-link text-light active" id="links" href="#">Planes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-light" id="links" href="#">Tienda</a>
@@ -57,25 +60,21 @@ pageEncoding="ISO-8859-1"%>
             </li>
           </ul>
         </div>
-        <% if (user == null){ %>
+        
         <div class="cajalogin">
           <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
           <a href="pages/logIn.jsp"><button class="btn nuestroboton">Iniciar Sesion</button></a>
         </div>
-        <% } else {%>
-        <div class="">
-        <p><%= user.getNombre() %><p>
         
-        </div>
-        <%} %>
       </div>
     </nav>
   </header>
-  <div class="caja">
-    <a class="caja1" href="#"> <p>ENTRENA </p> </a>
-    <a class="caja2" href="#"> <p> COMPRA </p></a>
-    <a class="caja3" href="#"> <p>CONOCENOS </p></a>
-  </div>
+<% for (Abono i : listaAbonos) { %>
+ <p><% i.getIdAbono(); %></p>
+ <p><% i.getPrecio(); %></p>
+ <p><% i.getCantReservas(); %></p>
+ <% } %>
+ 
 </body>
 
 </html>
