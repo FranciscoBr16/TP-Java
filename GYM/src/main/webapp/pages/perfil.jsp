@@ -1,3 +1,4 @@
+<%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,11 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Log In</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@347&display=swap"
-	rel="stylesheet">
+	rel="stylesheet" />
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -25,9 +26,17 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet" href="../style/generalStyles.css" />
-<link rel="stylesheet" href="../style/generalStyles2.css" />
-<link rel="stylesheet" href="../style/loginStyle.css" />
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet" type="text/css" href="../style/perfilStyles.css" />
+<link rel="stylesheet" type="text/css" href="../style/generalStyles.css" />
+<link rel="stylesheet" type="text/css"
+	href="../style/generalStyles2.css" />
+
+<% Usuario user = (Usuario) session.getAttribute("user");%>
+
 </head>
 
 <body>
@@ -35,7 +44,7 @@
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="../index.jsp"><img
-					src="../img/logo.png" alt="logo del gimnasio"></a>
+					src="../img/logo.png" alt="logo del gimnasio" /></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false"
@@ -44,7 +53,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link text-light active"
+						<li class="nav-item"><a class="nav-link text-light"
 							id="links" aria-current="page" href="../index.jsp">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
@@ -56,35 +65,61 @@
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
 				</div>
-				<div class="cajalogin">
-					<a id="textoregistro" href="signUp.jsp">Registrate</a> <a
-						href="logIn.jsp"><button class="boton2">Iniciar
-							Sesión</button></a>
-				</div>
 			</div>
 		</nav>
 	</header>
 
 	<div class="contenedor">
-		<div class="tarjetaLogin">
-			<div class="inicia">
-				<p>Iniciar Sesión</p>
+		<div class="cajaPerfil">
+			<div class="img-perfil">
+				<img src="https://picsum.photos/200"></img>
 			</div>
-			<form action="/GYM/SvLogIn" method="POST">
-				<div class="inputs">
-					<label for="username">DNI</label> <input type="text" id="username"
-						name="dni" required class="form-control">
-				</div>
-				<div class="inputs">
-					<label for="password">Contraseña</label> <input type="password"
-						id="password" name="password" required class="form-control">
-				</div>
-				<div class="final">
-					<button type="submit" class="boton">Iniciar Sesión</button>
-				</div>
+			<div class="nombres">
+				<span><%=user.getNombre()%></span> <span><%=user.getApellido()%></span>
+			</div>
+			<hr>
+			<div>
+				<p>
+					Fecha Nacimiento:
+					<%=user.getFechaNac()%>
+				</p>
+			</div>
+			<div>
+				<p>
+					Email:
+					<%=user.getEmail()%>
+				</p>
+			</div>
+			<div>
+				<p>
+					DNI:
+					<%=user.getDni()%>
+				</p>
+			</div>
+			<div>
+				<p>
+					Telefono:
+					<%=user.getTelefono() %>
+				</p>
+			</div>
+			<div>
+				<p>Abono Activo:</p>
+			</div>
+			<div>
+				<a href="#"><button class="boton">Ver reservas</button> </a>
+			</div>
 
-			</form>
+			<div>
+				<a href="#"><button class="boton">Modificar perfil</button> </a>
+			</div>
 
+		</div>
+
+		<div class="botonesAbajo">
+			<a href="#">
+				<button class="boton">Cerrar Sesion</button>
+			</a> <a href="#"><button class="boton eliminar"
+					style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
 		</div>
 	</div>
 

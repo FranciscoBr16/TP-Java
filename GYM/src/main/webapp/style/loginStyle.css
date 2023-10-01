@@ -1,0 +1,36 @@
+@charset "ISO-8859-1";
+
+.contenedor {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.tarjetaLogin {
+	width: 450px;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	align-items: center;
+	margin-top: 50px;
+	padding: 10px;
+	border: solid black 1px;
+}
+
+form input {
+	background-color: #bbbbbb !important;
+}
+
+.inicia {
+	margin: 30px;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.inputs {
+	margin: 8px;
+}
+
+.final .boton {
+	margin: 30px;
+}

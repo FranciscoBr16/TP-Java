@@ -1,0 +1,65 @@
+@charset "ISO-8859-1";
+
+* {
+	font-weight: bold;
+}
+
+#cajaPerfil p {
+	color: rgb(66, 66, 162);
+}
+
+.contenedor {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.cajaPerfil {
+	width: 550px;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	align-items: center;
+	border: 2px solid black;
+	margin-top: 50px;
+	padding: 10px;
+}
+
+.img-perfil {
+	padding: 15px;
+}
+
+.img-perfil img {
+	border-radius: 25%;
+	border: 3px solid black;
+}
+
+.nombres {
+	font-size: 30px;
+	color: rgb(42, 130, 197);
+}
+
+.boton {
+	font-size: 18px;
+	text-align: center;
+	width: 250px;
+	padding: 5px;
+	border-radius: 20px;
+	background-color: #d95126;
+	color: white !important;
+	margin: 10px;
+	border: solid 2px black;
+}
+
+.eliminar {
+	background-color: rgb(187, 5, 5);
+}
+
+.botonesAbajo .boton {
+	border: solid 2px black;
+}
+
+p {
+	font-size: 18px;
+}

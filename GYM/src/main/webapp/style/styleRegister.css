@@ -1,82 +1,83 @@
 @charset "ISO-8859-1";
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
-/* BODY */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(../img/fondo.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: "Ubuntu", sans-serif;
-    height: 100vh;
-    color: white;
+@import
+	url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+input {
+	background-color: gray;
+}
+
+.contenedor {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	
 }
 
 .formulario {
-    display: flex;
-    flex-direction: column;
-
-    width: 50%;
-    height: 60vh;
-    background-color: #191617;
-    border-radius: 30px;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 60vh;
+	background-color: white;
+	border-radius: 30px;
+	margin-top: 20px;
+	border: black 2px solid;
 }
 
 .formulario-campos {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    height: 100%;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	height: 100%;
 }
 
 .botonRegister {
-    display: flex;
-    gap: 20px;
-    height: 100%;
-    align-items: flex-end;
-    align-self: flex-end;
+	display: flex;
+	gap: 20px;
+	height: 100%;
+	align-items: flex-end;
+	align-self: flex-end;
 }
 
 .headerForm {
-    background-color: #d75128;
-    margin: 0;
-    width: 100%;
-    border-radius: 15px 15px 0px 0px;
+	background-color: #d75128;
+	margin: 0;
+	width: 100%;
+	border-radius: 15px 15px 0px 0px;
 }
 
 .headerForm p {
-    margin: 0;
-    font-size: 42px;
-    padding: 30px;
-    color: white;
-    font-weight: bold;
+	margin: 0;
+	font-size: 42px;
+	padding: 30px;
+	color: white;
+	font-weight: bold;
 }
 
 .campo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .campo #dni {
-    width: 20%;
+	width: 20%;
 }
 
 .campo #dni::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
 .campo #password {
-    width: 30%;
+	width: 30%;
 }
 
 .campo #name {
-    width: 25%;
+	width: 25%;
 }
 
 .campo #surname {
-    width: 25%;
+	width: 25%;
 }
