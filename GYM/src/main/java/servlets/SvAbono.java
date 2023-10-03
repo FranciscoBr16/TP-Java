@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DbAbono;
 import db.DbHandler;
 import entities.Abono;
 
@@ -22,7 +23,7 @@ public class SvAbono extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DbHandler manejador = new DbHandler();
+		DbAbono manejador = new DbAbono();
 		ArrayList<Abono> abonos = new ArrayList<>();
 		abonos.addAll(manejador.getAbonos());
 		request.setAttribute("listaAbono", abonos);

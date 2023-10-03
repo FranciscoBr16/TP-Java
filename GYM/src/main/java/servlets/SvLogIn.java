@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.DbHandler;
+import db.DbUsuario;
 import entities.Usuario;
 
 @WebServlet("/SvLogIn")
@@ -18,7 +18,7 @@ public class SvLogIn extends HttpServlet {
 
 		Usuario user = new Usuario(request.getParameter("dni"), request.getParameter("password"));
 		// hay que validar que sea un usuario valido 
-		DbHandler db = new DbHandler();	
+		DbUsuario db = new DbUsuario();	
 		if ( db.logIn(user) != null) {
 			request.getSession().setAttribute("user",user);
 			

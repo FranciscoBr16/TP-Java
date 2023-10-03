@@ -28,6 +28,7 @@ CREATE TABLE `abono` (
   `id_abono` int NOT NULL,
   `cant_reservas` int DEFAULT NULL,
   `precio` float DEFAULT NULL,
+  `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_abono`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -38,7 +39,7 @@ CREATE TABLE `abono` (
 
 LOCK TABLES `abono` WRITE;
 /*!40000 ALTER TABLE `abono` DISABLE KEYS */;
-INSERT INTO `abono` VALUES (1,8,4000),(2,12,5500),(3,30,8500);
+INSERT INTO `abono` VALUES (1,8,4000,'2 reservas por semana'),(2,12,5500,'3 reservas por semana'),(3,30,8500,'Todos los dias');
 /*!40000 ALTER TABLE `abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,14 +84,14 @@ DROP TABLE IF EXISTS `contrato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contrato` (
-  `nom_usuario` varchar(45) NOT NULL,
+  `dni_usuario` varchar(45) NOT NULL,
   `id_abono` int DEFAULT NULL,
   `fecha_desde` date NOT NULL,
   `fecha_hasta` date NOT NULL,
-  PRIMARY KEY (`nom_usuario`,`fecha_desde`,`fecha_hasta`),
+  PRIMARY KEY (`dni_usuario`,`fecha_desde`,`fecha_hasta`),
   KEY `fk_abono_idx` (`id_abono`),
-  CONSTRAINT `fk_abono` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`),
-  CONSTRAINT `fk_usuario2` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`)
+  CONSTRAINT `fk_abono` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_usuario2` FOREIGN KEY (`dni_usuario`) REFERENCES `usuario` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -100,6 +101,7 @@ CREATE TABLE `contrato` (
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
+INSERT INTO `contrato` VALUES ('50000000',1,'2023-10-02','2023-11-11');
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +202,7 @@ CREATE TABLE `factura` (
   `total` float DEFAULT NULL,
   PRIMARY KEY (`nro_factura`),
   KEY `fk_usuario2_idx` (`nom_usuario`),
-  CONSTRAINT `fk_usuario3` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`)
+  CONSTRAINT `fk_usuario3` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -251,7 +253,7 @@ CREATE TABLE `inscripcion` (
   PRIMARY KEY (`nom_usuario`,`id_clase`,`fecha`),
   KEY `fk_clase_idx` (`id_clase`),
   CONSTRAINT `fk_clase3` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id_clase`),
-  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`)
+  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -391,7 +393,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('admin','un','admin','abzadmin','abz@gmail.com','123456789',0,1,NULL,NULL),('usuario_de_prueba','prueba','conBeneficio','pruebaconbeneficio','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10');
+INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','pruebaconbeneficio','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10'),('50000000','a','a','a','a','12',NULL,NULL,NULL,NULL),('69696969','admin','admin','admin123','abz@gmail.com','123456789',0,1,NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -404,4 +406,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-07 14:36:01
+-- Dump completed on 2023-10-02 22:36:03

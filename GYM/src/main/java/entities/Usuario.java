@@ -2,6 +2,7 @@ package entities;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Usuario {
 	private static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -10,7 +11,21 @@ public class Usuario {
     private boolean beneficio, admin;
     private LocalDate fechaNac;
 	private String imagen;
-    
+	private ArrayList<Contrato> contratos= new ArrayList<>(); 
+	
+	
+	public ArrayList<Contrato> getContratos() {
+		return contratos;
+	}
+
+	public void setContratos(ArrayList<Contrato> contratos) {
+		this.contratos = contratos;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
     
     public static DateTimeFormatter getFormato() {
 		return formato;

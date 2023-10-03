@@ -1,3 +1,4 @@
+<%@page import="entities.Contrato"%>
 <%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -30,12 +31,13 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="../style/perfilStyles.css" />
-<link rel="stylesheet" type="text/css" href="../style/generalStyles.css" />
-<link rel="stylesheet" type="text/css"
-	href="../style/generalStyles2.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/perfilStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");%>
+<% Usuario user = (Usuario) session.getAttribute("user");
+ Contrato contrato = (Contrato) request.getAttribute("contrato");
+%>
 
 </head>
 
@@ -44,7 +46,7 @@
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="../index.jsp"><img
-					src="../img/logo.png" alt="logo del gimnasio" /></a>
+					src="/GYM/img/logo.png" alt="logo del gimnasio" /></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false"
@@ -103,7 +105,11 @@
 				</p>
 			</div>
 			<div>
-				<p>Abono Activo:</p>
+			<% if (contrato != null){ %>
+				<p>Abono Activo: <%=contrato.getAbono().getDescripcion()%> </p>
+			<%} else { %>
+				<p>Abono Activo: Ninguno </p>
+				<% } %>
 			</div>
 			<div>
 				<a href="#"><button class="boton">Ver reservas</button> </a>

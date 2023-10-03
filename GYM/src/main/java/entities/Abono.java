@@ -3,7 +3,16 @@ package entities;
 public class Abono {
 	private int idAbono, cantReservas;
 	private double precio;
+	private String descripcion;
 	
+	
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	public int getIdAbono() {
 		return idAbono;
 	}

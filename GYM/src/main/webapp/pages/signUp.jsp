@@ -61,9 +61,7 @@
 			</div>
 
 			<div class="cajalogin">
-				<a id="textoregistro" href="pages/signUp.jsp">Registrate</a> <a
-					href="pages/logIn.jsp"><button class="boton2">Iniciar
-						Sesion</button></a>
+				<a id="textoregistro" href="signUp.jsp">Registrate</a> <a href="logIn.jsp"><button class="boton2">Iniciar Sesion</button></a>
 			</div>
 
 		</div>
@@ -102,8 +100,8 @@
 					<label for="birthdate">Fecha de Nacimiento:</label> <input
 						type="date" name="birthdate" id="birthdate" required />
 				</div>
-				<div>
-					<button class="boton" type="submit">Registrarse</button>
+				<div class="finalform">
+					<button class="boton botonregistro" type="submit">Registrarse</button>
 
 				</div>
 			</form>

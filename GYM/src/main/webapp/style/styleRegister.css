@@ -4,7 +4,7 @@
 	url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
 input {
-	background-color: gray;
+	background-color: rgb(192, 192, 192);
 }
 
 .contenedor {
@@ -17,8 +17,8 @@ input {
 .formulario {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
-	height: 60vh;
+	width: 45%;
+	height: 55vh;
 	background-color: white;
 	border-radius: 30px;
 	margin-top: 20px;
@@ -80,4 +80,10 @@ input {
 
 .campo #surname {
 	width: 25%;
+}
+
+.finalform{
+	display:flex;
+	align-items: center;
+	flex-direction: column;
 }

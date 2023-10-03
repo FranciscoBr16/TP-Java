@@ -74,7 +74,7 @@
 				<% } else {%>
 				<div class="cajaUser">
 					<i class="fas fa-solid fa-user"></i> <a class="nombreUsuario"
-						href="pages/perfil.jsp"><%= user.getNombre() %></a>
+						href="/GYM/SvUsuario"><%= user.getNombre() %></a>
 
 				</div>
 				<%} %>

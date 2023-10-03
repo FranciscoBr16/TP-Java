@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.DbHandler;
+import db.DbUsuario;
 import entities.Usuario;
 
 @WebServlet("/SvSignUp")
@@ -20,7 +20,7 @@ public class SvSignUp extends HttpServlet {
 		String fechaStr = request.getParameter("fecha");
 		LocalDate fecha = LocalDate.parse(fechaStr);
 		Usuario usu = new Usuario((String)request.getParameter("dni"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"),fecha);
-		DbHandler db = new DbHandler();		
+		DbUsuario db = new DbUsuario();		
 		if(db.newUser(usu)){
 			response.sendRedirect("/GYM/pages/signUpExitoso.jsp");
 		} else {

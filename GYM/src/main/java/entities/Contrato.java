@@ -6,9 +6,20 @@ import java.time.format.DateTimeFormatter;
 public class Contrato {
 	private static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
+	private Abono abono;
 	private LocalDate fechaDesde, fechaHasta;
 	private int reservasRestantes;
 	
+
+	
+	public Abono getAbono() {
+		return abono;
+	}
+
+	public void setAbono(Abono abono) {
+		this.abono = abono;
+	}
+
 	public static DateTimeFormatter getFormato() {
 		return formato;
 	}
