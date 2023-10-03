@@ -2,10 +2,9 @@
 
 /* BODY */
 body {
-	background-image: url(../img/fondo.jpg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	font-family: "Ubuntu", sans-serif;
-	height: 100vh;
-	
+    background-image: url(/GYM/img/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Ubuntu", sans-serif;
+    height: 100vh;
 }

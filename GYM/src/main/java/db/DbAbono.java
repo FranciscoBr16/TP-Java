@@ -29,8 +29,9 @@ public class DbAbono extends DbHandler {
 
 	            Abono ab = new Abono();
 	            ab.setIdAbono(rs.getInt("id_abono"));
+	            ab.setNombreAbono(rs.getString("nombreAbono"));
 	            ab.setCantReservas(rs.getInt("cant_reservas"));
-	            ab.setPrecio(rs.getDouble("precio"));
+	            ab.setPrecio(rs.getInt("precio"));
 	            abonos.add(ab);
 	}
 			return abonos;

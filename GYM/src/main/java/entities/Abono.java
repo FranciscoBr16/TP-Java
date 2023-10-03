@@ -1,11 +1,18 @@
 package entities;
 
 public class Abono {
-	private int idAbono, cantReservas;
-	private double precio;
-	private String descripcion;
+	private int idAbono, cantReservas, precio;
+	private String nombreAbono, descripcion;
 	
 	
+	
+	public String getNombreAbono() {
+		return nombreAbono;
+	}
+	
+	public void setNombreAbono(String nombreAbono) {
+		this.nombreAbono = nombreAbono;
+	}
 	
 	public String getDescripcion() {
 		return descripcion;
@@ -25,11 +32,10 @@ public class Abono {
 	public void setCantReservas(int cantReservas) {
 		this.cantReservas = cantReservas;
 	}
-	public double getPrecio() {
-		
+	public int getPrecio() {
 		return precio;
 	}
-	public void setPrecio(double precio) {
+	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
 	

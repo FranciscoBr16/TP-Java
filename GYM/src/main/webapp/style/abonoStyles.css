@@ -1,1 +1,83 @@
 @charset "ISO-8859-1";
+@import url("https://fonts.googleapis.com/css2?family=Niramit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+* {
+    font-family: "Niramit", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.principal-box {
+    background-color: white;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.naranja {
+    color: #d95126;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.contenido-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: lighter;
+}
+
+.planes-box {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.tarjeta-plan img {
+    width: 300px;
+    height: 200px;
+    border-radius: 50px 50px 0 0;
+}
+
+.tarjeta-plan .descripcion-plan {
+    height: 200px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 0 0 50px 50px;
+    border-bottom: 1px solid #d95126;
+    border-left: 1px solid #d95126;
+    border-right: 1px solid #d95126;
+}
+
+.tarjeta-plan .descripcion-plan p {
+    margin: 0;
+}
+
+.boton-linea {
+    text-decoration: none;
+    width: 100px;
+    font-weight: light;
+    background-color: white;
+    color: #d95126;
+    padding: 5px;
+    border: 2px solid #d95126;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+
+.boton-linea:hover {
+    background-color: #d95126;
+    border: 2px solid #d95126;
+    color: white;
+    transition: background-color 250ms ease-in-out;
+}

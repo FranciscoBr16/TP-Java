@@ -2,79 +2,81 @@
 
 /* BODY */
 body {
-	background-color: #191617 !important;
+    background-color: #191617 !important;
 }
 
 body header {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 /*CONTENIDO PROPIO*/
 .caja a {
-	color: white;
-	text-decoration: none;
-	font-weight: bold;
-	transition: font-size 200ms ease-in-out;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: font-size 200ms ease-in-out;
 }
 
 p {
-	text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px
-		1px 0 black;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+        1px 1px 0 black;
 }
 
 .caja a:hover {
-	font-size: 38px;
+    font-size: 38px;
 }
 
 .caja {
-	display: flex;
-	height: 100vh;
+    display: flex;
+    height: 100vh;
 }
 
 .caja1 {
-	display: flex;
-	background-image: url(../img/fondo1-entrena.jpg);
-	background-size: cover;
-	flex: 1;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	align-items: center;
-	justify-content: center;
-	font-size: 30px;
+    display: flex;
+    background-image: url(../img/fondo1-entrena.jpg);
+    background-size: cover;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
 }
 
 .caja2 {
-	display: flex;
-	background-image: url(../img/fondo2-compra.jpg);
-	background-size: cover;
-	flex: 1;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	text-align: center;
-	align-items: center;
-	justify-content: center;
-	font-size: 30px;
+    display: flex;
+    background-image: url(../img/fondo2-compra.jpg);
+    background-size: cover;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
 }
 
 .caja3 {
-	display: flex;
-	background-image: url(../img/fondo3-nosotros.png);
-	background-size: cover;
-	flex: 1;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	text-align: center;
-	align-items: center;
-	justify-content: center;
-	font-size: 30px;
+    display: flex;
+    background-image: url(../img/fondo3-nosotros.png);
+    background-size: cover;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
 }
 
-.caja1:hover, .caja2:hover, .caja3:hover {
-	opacity: 85%;
-	transform: scale(1.05);
-	transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
-	overflow: hidden;
+.caja1:hover,
+.caja2:hover,
+.caja3:hover {
+    opacity: 85%;
+    transform: scale(1.05);
+    transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+    overflow: hidden;
 }
