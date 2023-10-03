@@ -23,12 +23,13 @@ public class SvAbono extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		DbAbono manejador = new DbAbono();
 		ArrayList<Abono> abonos = new ArrayList<>();
 		abonos.addAll(manejador.getAbonos());
 		request.setAttribute("listaAbono", abonos);
 		request.getRequestDispatcher("/pages/abonos.jsp").forward(request,response);
-	
+		
 	}
 
 }

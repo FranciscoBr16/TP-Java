@@ -41,7 +41,7 @@ public class DbContrato extends DbHandler {
 			rs.next();
 			
 			ab.setIdAbono(rs.getInt("id_abono"));
-			ab.setPrecio(rs.getDouble("precio"));
+			ab.setPrecio(rs.getInt("precio"));
 			ab.setCantReservas(rs.getInt("cant_reservas"));
 			ab.setDescripcion(rs.getString("descripcion"));
 			
