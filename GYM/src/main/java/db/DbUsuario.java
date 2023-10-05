@@ -89,13 +89,14 @@ public class DbUsuario extends DbHandler {
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("UPDATE usuario SET nombre = ?, apellido = ?, clave = ? , correo = ?, telefono = ?, fechaNacimiento = ? ");
+			pstmt = conn.prepareStatement("UPDATE usuario SET nombre = ?, apellido = ?, clave = ? , correo = ?, telefono = ?, fechaNacimiento = ? where dni = ?");
 			pstmt.setString(1, user.getNombre());
 			pstmt.setString(2, user.getApellido());
 			pstmt.setString(3, user.getPassword());
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getTelefono());
 			pstmt.setDate(6, java.sql.Date.valueOf(user.getFechaNac()));
+			pstmt.setString(7, user.getDni());
 			
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
