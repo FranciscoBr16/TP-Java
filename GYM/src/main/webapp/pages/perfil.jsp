@@ -120,7 +120,10 @@
 			</div>
 
 		</div>
-
+		<!-- -------------------- -->
+			
+		
+		<!-- -------------------- -->
 		<div class="botonesAbajo">
 			<a href="#">
 				<button class="boton">Cerrar Sesion</button>
@@ -128,6 +131,8 @@
 					style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
 		</div>
 	</div>
+	
+	
 
 </body>
 
