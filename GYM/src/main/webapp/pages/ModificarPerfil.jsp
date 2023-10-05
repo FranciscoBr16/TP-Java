@@ -73,66 +73,37 @@
 
 	<div class="contenedor">
 		<div class="cajaPerfil">
-			<div class="img-perfil">
-				<img src="https://picsum.photos/200"></img>
-			</div>
-			<div class="nombres">
-				<span><%=user.getNombre()%></span> <span><%=user.getApellido()%></span>
-			</div>
-			<hr>
-			<div>
-				<p>
-					Fecha Nacimiento:
-					<%=user.getFechaNac()%>
-				</p>
-			</div>
-			<div>
-				<p>
-					Email:
-					<%=user.getEmail()%>
-				</p>
-			</div>
-			<div>
-				<p>
-					DNI:
-					<%=user.getDni()%>
-				</p>
-			</div>
-			<div>
-				<p>
-					Telefono:
-					<%=user.getTelefono() %>
-				</p>
-			</div>
-			<div>
-			<% if (contrato != null){ %>
-				<p>Abono Activo: <%=contrato.getAbono().getDescripcion()%> </p>
-			<%} else { %>
-				<p>Abono Activo: Ninguno </p>
-				<% } %>
-			</div>
-			<div>
-				<a href="#"><button class="boton">Ver reservas</button> </a>
-			</div>
 
-			<div>
-				<a href="/GYM/pages/ModificarPerfil.jsp"><button class="boton">Modificar perfil</button> </a>
-			</div>
+			<form action="/GYM/SvModificacionUsuario.java" method="POST" class="formulario-campos">
+				<div class="campo">
 
-		</div>
-		<!-- -------------------- -->
+					<label for="birthdate">Fecha de Nacimiento:</label> 
+					<input type="date" name="birthdate" id="birthdate" value=" <%=user.getFechaNac()%>" />
+					
+					<label for="email">Correo Electr�nico:</label> 
+					<input type="email" name="email" id="email" value="<%=user.getEmail()%>"/>
+					
+					<label for="password">Contrase�a:</label>
+					<input type="password" name="password" id="password" value="<%=user.getPassword()%>"/>
+
+					<label for="nombre">Nombre:</label> 
+					<input type="text" name="name" id="name" value="<%=user.getNombre()%>"/> 
+					
+					<label for="apellido">Apellido:</label> 
+					<input type="text" name="surname" id="surname" value="<%=user.getApellido()%>"/>
+					
+					<label for="phonenumber">Tel�fono:</label> 
+					<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
+				</div>
+				
+				
+				<button class="boton" type="submit"> aplicar cambios </button>
+				</form>
 			
-		
-		<!-- -------------------- -->
-		<div class="botonesAbajo">
-			<a href="#">
-				<button class="boton">Cerrar Sesion</button>
-			</a> <a href="#"><button class="boton eliminar"
-					style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
 		</div>
+
+		
 	</div>
-	
-	
 
 </body>
 
