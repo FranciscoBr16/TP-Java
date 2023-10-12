@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gimnasio
+-- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,21 +52,19 @@ DROP TABLE IF EXISTS `clase`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clase` (
-  `id_clase` int NOT NULL,
+  `id_clase` int NOT NULL AUTO_INCREMENT,
   `nombre_clase` varchar(45) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `cupo` int DEFAULT NULL,
-  `horario` time DEFAULT NULL,
-  `id_actividad` int DEFAULT NULL,
+  `horario` int DEFAULT NULL,
   `id_empleado` int DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
-  `dia` date DEFAULT NULL,
+  `dia` varchar(45) DEFAULT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_clase`),
-  KEY `fk_actividad_idx` (`id_actividad`),
   KEY `fk_empleado_idx` (`id_empleado`),
-  CONSTRAINT `fk_actividad` FOREIGN KEY (`id_actividad`) REFERENCES `tipo_actividad` (`id_actividad`),
-  CONSTRAINT `fk_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,6 +73,7 @@ CREATE TABLE `clase` (
 
 LOCK TABLES `clase` WRITE;
 /*!40000 ALTER TABLE `clase` DISABLE KEYS */;
+INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',20,1700,555,NULL,'Lunes','actividad');
 /*!40000 ALTER TABLE `clase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,8 +91,8 @@ CREATE TABLE `contrato` (
   `fecha_hasta` date NOT NULL,
   PRIMARY KEY (`dni_usuario`,`fecha_desde`,`fecha_hasta`),
   KEY `fk_abono_idx` (`id_abono`),
-  CONSTRAINT `fk_abono` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_usuario2` FOREIGN KEY (`dni_usuario`) REFERENCES `usuario` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_abono` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_usuario2` FOREIGN KEY (`dni_usuario`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -145,8 +144,8 @@ CREATE TABLE `detalle-factura` (
   `sub_total` float DEFAULT NULL,
   PRIMARY KEY (`nro_factura`,`id_producto`),
   KEY `fk_producto4_idx` (`id_producto`),
-  CONSTRAINT `fk_factura` FOREIGN KEY (`nro_factura`) REFERENCES `factura` (`nro_factura`),
-  CONSTRAINT `fk_producto4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
+  CONSTRAINT `fk_factura` FOREIGN KEY (`nro_factura`) REFERENCES `factura` (`nro_factura`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_producto4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -204,7 +203,7 @@ CREATE TABLE `factura` (
   `total` float DEFAULT NULL,
   PRIMARY KEY (`nro_factura`),
   KEY `fk_usuario2_idx` (`nom_usuario`),
-  CONSTRAINT `fk_usuario3` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_usuario3` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -228,7 +227,7 @@ CREATE TABLE `indumentaria` (
   `id_producto` int NOT NULL,
   `talle` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
-  CONSTRAINT `fk_pruducto1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
+  CONSTRAINT `fk_pruducto1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -254,8 +253,8 @@ CREATE TABLE `inscripcion` (
   `fecha` date NOT NULL,
   PRIMARY KEY (`nom_usuario`,`id_clase`,`fecha`),
   KEY `fk_clase_idx` (`id_clase`),
-  CONSTRAINT `fk_clase3` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id_clase`),
-  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_clase` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id_clase`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -280,7 +279,7 @@ CREATE TABLE `precio` (
   `fecha_desde` date DEFAULT NULL,
   `precio` float NOT NULL,
   PRIMARY KEY (`id_producto`),
-  CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
+  CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -329,7 +328,7 @@ CREATE TABLE `suplemento` (
   `id_producto` int NOT NULL,
   `kg` float DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
-  CONSTRAINT `fk_producto2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`)
+  CONSTRAINT `fk_producto2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -340,29 +339,6 @@ CREATE TABLE `suplemento` (
 LOCK TABLES `suplemento` WRITE;
 /*!40000 ALTER TABLE `suplemento` DISABLE KEYS */;
 /*!40000 ALTER TABLE `suplemento` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tipo_actividad`
---
-
-DROP TABLE IF EXISTS `tipo_actividad`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tipo_actividad` (
-  `id_actividad` int NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id_actividad`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tipo_actividad`
---
-
-LOCK TABLES `tipo_actividad` WRITE;
-/*!40000 ALTER TABLE `tipo_actividad` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tipo_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -408,4 +384,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-05 17:05:13
+-- Dump completed on 2023-10-12  9:20:36

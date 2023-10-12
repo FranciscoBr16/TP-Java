@@ -6,11 +6,21 @@ public class Clase {
 private int idClase;
 private String descripcion;
 private int cupo;
-private String dia;
-private String horario;
+private String dia, nombre;
+private int horario;
 private Empleado empleado;
+private String tipo;
 private ArrayList<Inscripcion> inscripcion = new ArrayList<>();
+private String imagen;
 
+
+
+public String getTipo() {
+	return tipo;
+}
+public void setTipo(String tipo) {
+	this.tipo = tipo;
+}
 public ArrayList<Inscripcion> getInscripcion() {
 	return inscripcion;
 }
@@ -47,11 +57,27 @@ public String getDia() {
 public void setDia(String dia) {
 	this.dia = dia;
 }
-public String getHorario() {
+public int getHorario() {
 	return horario;
 }
-public void setHorario(String horario) {
+public void setHorario(int horario) {
 	this.horario = horario;
+}
+
+public String getNombre() {
+	return nombre;
+}
+public void setNombre(String nombre) {
+	this.nombre = nombre;
+	
+}
+public String getImagen() {
+	return imagen;
+}
+
+public void setImagen(String img) {
+	this.imagen = img;
+	
 }
 
 }
