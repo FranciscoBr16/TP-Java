@@ -79,7 +79,6 @@
 
 			<form action="/GYM/SvModificacionUsuario.java" method="POST" class="formulario-campos">
 				<div class="campo">
-
 					<label for="birthdate">Fecha de Nacimiento:</label> 
 					<input class="fecha" type="date" name="birthdate" id="birthdate" value="<%=user.getFechaNac().toString()%>" />
 				</div>
@@ -105,8 +104,7 @@
 					<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
 				</div>
 				<div class="final">
-				
-				<button class="boton" type="submit"> Aplicar cambios </button>
+					<button class="boton" type="submit"> Aplicar cambios </button>
 				</div>
 				</form>
 			

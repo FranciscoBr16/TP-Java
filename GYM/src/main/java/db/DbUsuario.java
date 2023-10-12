@@ -111,5 +111,30 @@ public class DbUsuario extends DbHandler {
 			}
 	}
 	}
+	
+	public boolean deleteUsuario(Usuario user) {
+		
+		PreparedStatement pstmt=null;
+		Connection conn;
 
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("DELETE from usuario WHERE idproducto =?");
+			pstmt.setString(1, user.getDni());
+			return pstmt.execute();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+			
+		}finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+
+}
 }
