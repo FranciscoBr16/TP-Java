@@ -40,17 +40,7 @@
 	color: rgb(42, 130, 197);
 }
 
-.boton {
-	font-size: 18px;
-	text-align: center;
-	width: 250px;
-	padding: 5px;
-	border-radius: 20px;
-	background-color: #d95126;
-	color: white !important;
-	margin: 10px;
-	border: solid 2px black;
-}
+
 
 .eliminar {
 	background-color: rgb(187, 5, 5);
@@ -63,3 +53,4 @@
 p {
 	font-size: 18px;
 }
+

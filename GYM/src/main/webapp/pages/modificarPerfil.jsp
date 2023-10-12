@@ -31,7 +31,7 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/perfilStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
@@ -72,32 +72,42 @@
 	</header>
 
 	<div class="contenedor">
-		<div class="cajaPerfil">
+		<div class="cajaModificar">
+		<div class="titulo">
+			<p>Modifica tu perfil </p>
+		</div>
 
 			<form action="/GYM/SvModificacionUsuario.java" method="POST" class="formulario-campos">
 				<div class="campo">
 
 					<label for="birthdate">Fecha de Nacimiento:</label> 
-					<input type="date" name="birthdate" id="birthdate" value=" <%=user.getFechaNac()%>" />
-					
-					<label for="email">Correo Electrï¿½nico:</label> 
+					<input class="fecha" type="date" name="birthdate" id="birthdate" value="<%=user.getFechaNac().toString()%>" />
+				</div>
+				<div class="campo">
+					<label for="email">Correo Electrónico:</label> 
 					<input type="email" name="email" id="email" value="<%=user.getEmail()%>"/>
+				</div>
+				<div class="campo">
 					
-					<label for="password">Contraseï¿½a:</label>
+					<label for="password">Contraseña:</label>
 					<input type="password" name="password" id="password" value="<%=user.getPassword()%>"/>
-
+				</div>
+				<div class="campo">
 					<label for="nombre">Nombre:</label> 
 					<input type="text" name="name" id="name" value="<%=user.getNombre()%>"/> 
-					
+				</div>
+				<div class="campo">
 					<label for="apellido">Apellido:</label> 
 					<input type="text" name="surname" id="surname" value="<%=user.getApellido()%>"/>
-					
-					<label for="phonenumber">Telï¿½fono:</label> 
+				</div>
+				<div class="campo">
+					<label for="phonenumber">Teléfono:</label> 
 					<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
 				</div>
+				<div class="final">
 				
-				
-				<button class="boton" type="submit"> aplicar cambios </button>
+				<button class="boton" type="submit"> Aplicar cambios </button>
+				</div>
 				</form>
 			
 		</div>

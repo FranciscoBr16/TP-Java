@@ -108,8 +108,7 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
                         <a id="textoregistro" href="pages/signUp.jsp"
                             >Registrate</a
                         >
-                        <a href="pages/logIn.jsp"
-                            ><button class="boton2">Iniciar Sesion</button></a
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
                         >
                     </div>
                     <% } else {%>

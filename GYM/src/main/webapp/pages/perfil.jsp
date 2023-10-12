@@ -116,7 +116,7 @@
 			</div>
 
 			<div>
-				<a href="/GYM/pages/ModificarPerfil.jsp"><button class="boton">Modificar perfil</button> </a>
+				<a href="/GYM/pages/modificarPerfil.jsp"><button class="boton">Modificar perfil</button> </a>
 			</div>
 
 		</div>
@@ -127,8 +127,7 @@
 		<div class="botonesAbajo">
 			<a href="#">
 				<button class="boton">Cerrar Sesion</button>
-			</a> <a href="#"><button class="boton eliminar"
-					style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
+			</a> <a href="#"><button class="boton eliminar" style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
 		</div>
 	</div>
 	
