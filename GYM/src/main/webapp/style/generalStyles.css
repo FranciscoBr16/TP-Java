@@ -7,6 +7,18 @@
     font-weight: bold;
 }
 
+.boton {
+	font-size: 18px;
+	text-align: center ;
+	width: 250px ;
+	padding: 5px ;
+	border-radius: 20px;
+	background-color: #d95126 ;
+	color: white ;
+	margin: 10px;
+	border: solid 2px black;
+}
+
 /* NAVBAR */
 nav {
     background-color: #191617;

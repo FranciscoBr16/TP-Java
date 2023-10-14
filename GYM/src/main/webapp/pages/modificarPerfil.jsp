@@ -31,7 +31,7 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/perfilStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
@@ -72,66 +72,46 @@
 	</header>
 
 	<div class="contenedor">
-		<div class="cajaPerfil">
-			<div class="img-perfil">
-				<img src="https://picsum.photos/200"></img>
-			</div>
-			<div class="nombres">
-				<span><%=user.getNombre()%></span> <span><%=user.getApellido()%></span>
-			</div>
-			<hr>
-			<div>
-				<p>
-					Fecha Nacimiento:
-					<%=user.getFechaNac()%>
-				</p>
-			</div>
-			<div>
-				<p>
-					Email:
-					<%=user.getEmail()%>
-				</p>
-			</div>
-			<div>
-				<p>
-					DNI:
-					<%=user.getDni()%>
-				</p>
-			</div>
-			<div>
-				<p>
-					Telefono:
-					<%=user.getTelefono() %>
-				</p>
-			</div>
-			<div>
-			<% if (contrato != null){ %>
-				<p>Abono Activo: <%=contrato.getAbono().getDescripcion()%> </p>
-			<%} else { %>
-				<p>Abono Activo: Ninguno </p>
-				<% } %>
-			</div>
-			<div>
-				<a href="#"><button class="boton">Ver reservas</button> </a>
-			</div>
-
-			<div>
-				<a href="/GYM/pages/modificarPerfil.jsp"><button class="boton">Modificar perfil</button> </a>
-			</div>
-
+		<div class="cajaModificar">
+		<div class="titulo">
+			<p>Modifica tu perfil </p>
 		</div>
-		<!-- -------------------- -->
+
+			<form action="/GYM/SvModificacionUsuario.java" method="POST" class="formulario-campos">
+				<div class="campo">
+					<label for="birthdate">Fecha de Nacimiento:</label> 
+					<input class="fecha" type="date" name="birthdate" id="birthdate" value="<%=user.getFechaNac().toString()%>" />
+				</div>
+				<div class="campo">
+					<label for="email">Correo Electrónico:</label> 
+					<input type="email" name="email" id="email" value="<%=user.getEmail()%>"/>
+				</div>
+				<div class="campo">
+					
+					<label for="password">Contraseña:</label>
+					<input type="password" name="password" id="password" value="<%=user.getPassword()%>"/>
+				</div>
+				<div class="campo">
+					<label for="nombre">Nombre:</label> 
+					<input type="text" name="name" id="name" value="<%=user.getNombre()%>"/> 
+				</div>
+				<div class="campo">
+					<label for="apellido">Apellido:</label> 
+					<input type="text" name="surname" id="surname" value="<%=user.getApellido()%>"/>
+				</div>
+				<div class="campo">
+					<label for="phonenumber">Teléfono:</label> 
+					<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
+				</div>
+				<div class="final">
+					<button class="boton" type="submit"> Aplicar cambios </button>
+				</div>
+				</form>
 			
-		
-		<!-- -------------------- -->
-		<div class="botonesAbajo">
-			<a href="#">
-				<button class="boton">Cerrar Sesion</button>
-			</a> <a href="#"><button class="boton eliminar" style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
 		</div>
+
+		
 	</div>
-	
-	
 
 </body>
 

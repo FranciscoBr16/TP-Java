@@ -25,9 +25,9 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet" href="../style/generalStyles.css" />
-<link rel="stylesheet" href="../style/generalStyles2.css" />
-<link rel="stylesheet" href="../style/loginStyle.css" />
+<link rel="stylesheet" href="/GYM/style/generalStyles.css" />
+<link rel="stylesheet" href="/GYM/style/generalStyles2.css" />
+<link rel="stylesheet" href="/GYM/style/loginStyle.css" />
 </head>
 
 <body>
@@ -35,7 +35,7 @@
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="../index.jsp"><img
-					src="../img/logo.png" alt="logo del gimnasio"></a>
+					src="/GYM/img/logo.png" alt="logo del gimnasio"></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false"
@@ -80,7 +80,7 @@
 						id="password" name="password" required class="form-control">
 				</div>
 				<div class="final">
-					<button type="submit" class="boton">Iniciar Sesión</button>
+					<a><button  type="submit" class="boton">Iniciar Sesión</button> </a>
 				</div>
 
 			</form>
