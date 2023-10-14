@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -16,7 +15,6 @@ pageEncoding="ISO-8859-1"%>
 <link
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@347&display=swap"
 	rel="stylesheet" />
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -27,12 +25,9 @@ pageEncoding="ISO-8859-1"%>
 	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
 	crossorigin="anonymous">
 </script>
-<link rel="stylesheet" href="/GYM/style/abonoStyles.css" />
+<link rel="stylesheet" href="/GYM/style/sobreNosotros.css">
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
-<link rel="stylesheet" type="text/css"
-	href="/GYM/style/generalStylesII.css" />
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
-
 
 <body>
 	 <header>
@@ -73,7 +68,25 @@ pageEncoding="ISO-8859-1"%>
 
 	</header> 
 
+
+    <div class="parallax">
+        <p>¡Conoce al Equipo!</p>
+    </div>
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </body>
