@@ -1,0 +1,17 @@
+.parallax {
+    background-image: url("/GYM/img/sobreNosotros/fondoSobreNosotros.jpg");
+
+    min-height: 60vh;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 60px;
+}
