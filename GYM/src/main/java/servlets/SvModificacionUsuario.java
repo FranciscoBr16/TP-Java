@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DbUsuario;
 import entities.Usuario;
 
 
@@ -38,11 +39,16 @@ public class SvModificacionUsuario extends HttpServlet {
 		
 		Usuario user = new Usuario(dni, name, surname, clave, email, phonenumber, fecha);
 		
-	
+		DbUsuario manejadorDb = new DbUsuario();
 		
-		request.getSession().setAttribute("user",user);
+		if(manejadorDb.actualizarUsuario(user) > 0 ) {
+			request.getSession().setAttribute("user",user);
+			response.sendRedirect("/GYM/SvUsuario");
+		} else {
+			response.sendRedirect("/GYM/index.jsp");
+		}
 		
-		response.sendRedirect("/GYM/SvUsuario");
+		
 	}
 
 }
