@@ -1,6 +1,7 @@
 package entities;
 
 public class Suplemento extends Producto{
+	
 	public double kg;
 
 	public double getKg() {

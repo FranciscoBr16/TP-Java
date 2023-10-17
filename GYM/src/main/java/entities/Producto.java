@@ -1,18 +1,18 @@
 package entities;
 
-import java.util.ArrayList;
 
 public class Producto {
 	
 	public int idProducto;
 	public String descripcion;
 	public int stock;
-	private ArrayList<Precio> precio = new ArrayList<>();
+	public String imagen;
+	private float precio;
 	
-	public ArrayList<Precio> getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
-	public void setPrecio(ArrayList<Precio> precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 	public int getIdProducto() {
@@ -33,5 +33,13 @@ public class Producto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
+	
 }
 

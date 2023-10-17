@@ -119,7 +119,7 @@ public class DbUsuario extends DbHandler {
 
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("DELETE from usuario WHERE idproducto =?");
+			pstmt = conn.prepareStatement("DELETE from usuario WHERE dni =?");
 			pstmt.setString(1, user.getDni());
 			return pstmt.execute();
 			

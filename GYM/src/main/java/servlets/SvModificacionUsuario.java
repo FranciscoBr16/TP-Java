@@ -38,6 +38,8 @@ public class SvModificacionUsuario extends HttpServlet {
 		
 		Usuario user = new Usuario(dni, name, surname, clave, email, phonenumber, fecha);
 		
+	
+		
 		request.getSession().setAttribute("user",user);
 		
 		response.sendRedirect("/GYM/SvUsuario");
