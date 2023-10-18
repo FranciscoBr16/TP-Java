@@ -1,3 +1,4 @@
+<%@page import="entities.Usuario"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="entities.Abono"%>
@@ -34,6 +35,7 @@
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% ArrayList<Abono> listaAbonos = (ArrayList<Abono>)request.getAttribute("listaAbono");	%>
+<% Usuario user = (Usuario) session.getAttribute("user");%>
 </head>
 
 
@@ -64,11 +66,22 @@
 					</ul>
 				</div>
 
-				<div class="cajalogin">
-					<a id="textoregistro" href="pages/signUp.jsp">Registrate</a> <a
-						href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar
-							Sesion</button></a>
-				</div>
+			<% if (user == null){ %>
+                    <div class="cajalogin">
+                        <a id="textoregistro" href="pages/signUp.jsp"
+                            >Registrate</a
+                        >
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        >
+                    </div>
+                    <% } else {%>
+                    <div class="cajaUser">
+                        <i class="fas fa-solid fa-user"></i>
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"
+                            ><%= user.getNombre() %></a
+                        >
+                    </div>
+                    <%} %>
 
 			</div>
 

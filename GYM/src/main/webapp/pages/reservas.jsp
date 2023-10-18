@@ -109,7 +109,7 @@
 			</div>
 			
 			<div class="final">
-				<a href="#"><button class="boton">Reservar</button> </a>
+				<a href="/GYM/SvMusculacion"><button class="boton">Reservar</button> </a>
 			</div>
 
 	
@@ -135,7 +135,7 @@
 			</div>
 			
 			<div class="final">
-				<a href="#"><button class="boton">Reservar</button> </a>
+				<a href="/GYM/SvActividades"><button class="boton">Reservar</button> </a>
 			</div>
 
 			
