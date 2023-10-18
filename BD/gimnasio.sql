@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: gimnasio
+-- Host: 127.0.0.1    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -64,7 +64,7 @@ CREATE TABLE `clase` (
   PRIMARY KEY (`id_clase`),
   KEY `fk_empleado_idx` (`id_empleado`),
   CONSTRAINT `fk_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `clase` (
 
 LOCK TABLES `clase` WRITE;
 /*!40000 ALTER TABLE `clase` DISABLE KEYS */;
-INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',20,1700,555,'/GYM/img/yoga.png','Lunes','actividad'),(2,'Zumba','La clase de Zumba es una experiencia energética que fusiona movimientos de baile con ritmos contagiosos, proporcionando un entrenamiento cardiovascular divertido y lleno de ritmo.',25,1900,555,'/GYM/img/zumba.png','Miercoles','actividad');
+INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',20,1700,555,'/GYM/img/yoga.png','Lunes','actividad'),(2,'Zumba','La clase de Zumba es una experiencia energética que fusiona movimientos de baile con ritmos contagiosos, proporcionando un entrenamiento cardiovascular divertido y lleno de ritmo.',25,1900,555,'/GYM/img/zumba.png','Miercoles','actividad'),(101,'Musculacion',NULL,35,1300,NULL,NULL,'Lunes','musculacion'),(102,'Musculacion',NULL,35,1400,NULL,NULL,'Lunes','musculacion'),(103,'Musculacion',NULL,35,1500,NULL,NULL,'Lunes','musculacion'),(104,'Musculacion',NULL,35,1600,NULL,NULL,'Lunes','musculacion'),(105,'Musculacion',NULL,35,1700,NULL,NULL,'Lunes','musculacion'),(106,'Musculacion',NULL,35,1800,NULL,NULL,'Lunes','musculacion'),(107,'Musculacion',NULL,35,1900,NULL,NULL,'Lunes','musculacion'),(108,'Musculacion',NULL,35,1300,NULL,NULL,'Martes','musculacion'),(109,'Musculacion',NULL,35,1400,NULL,NULL,'Martes','musculacion'),(110,'Musculacion',NULL,35,1500,NULL,NULL,'Martes','musculacion'),(111,'Musculacion',NULL,35,1600,NULL,NULL,'Martes','musculacion'),(112,'Musculacion',NULL,35,1700,NULL,NULL,'Martes','musculacion'),(113,'Musculacion',NULL,35,1800,NULL,NULL,'Martes','musculacion'),(114,'Musculacion',NULL,35,1900,NULL,NULL,'Martes','musculacion'),(115,'Musculacion',NULL,35,1300,NULL,NULL,'Miercoles','musculacion'),(116,'Musculacion',NULL,35,1400,NULL,NULL,'Miercoles','musculacion'),(117,'Musculacion',NULL,35,1500,NULL,NULL,'Miercoles','musculacion'),(118,'Musculacion',NULL,35,1600,NULL,NULL,'Miercoles','musculacion'),(119,'Musculacion',NULL,35,1700,NULL,NULL,'Miercoles','musculacion'),(120,'Musculacion',NULL,35,1800,NULL,NULL,'Miercoles','musculacion'),(121,'Musculacion',NULL,35,1900,NULL,NULL,'Miercoles','musculacion'),(122,'Musculacion','',35,1300,NULL,NULL,'Jueves','musculacion'),(123,'Musculacion',NULL,35,1400,NULL,NULL,'Jueves','musculacion'),(124,'Musculacion',NULL,35,1500,NULL,NULL,'Jueves','musculacion'),(125,'Musculacion',NULL,35,1600,NULL,NULL,'Jueves','musculacion'),(126,'Musculacion',NULL,35,1700,NULL,NULL,'Jueves','musculacion'),(127,'Musculacion',NULL,35,1800,NULL,NULL,'Jueves','musculacion'),(128,'Musculacion',NULL,35,1900,NULL,NULL,'Jueves','musculacion'),(130,'Musculacion',NULL,35,1300,NULL,NULL,'Viernes','musculacion'),(131,'Musculacion',NULL,35,1400,NULL,NULL,'Viernes','musculacion'),(132,'Musculacion',NULL,35,1500,NULL,NULL,'Viernes','musculacion'),(133,'Musculacion',NULL,35,1600,NULL,NULL,'Viernes','musculacion'),(134,'Musculacion',NULL,35,1700,NULL,NULL,'Viernes','musculacion'),(135,'Musculacion',NULL,35,1800,NULL,NULL,'Viernes','musculacion'),(136,'Musculacion',NULL,35,1900,NULL,NULL,'Viernes','musculacion');
 /*!40000 ALTER TABLE `clase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-18 10:21:18
+-- Dump completed on 2023-10-18 13:37:20
