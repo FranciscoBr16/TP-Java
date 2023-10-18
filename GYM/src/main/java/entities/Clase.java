@@ -80,10 +80,6 @@ public void setImagen(String img) {
 	
 }
 
-public int calculaCupo() {
-	
-	
-}
 
 
 }

@@ -102,7 +102,7 @@
 				<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
 			</div>
 			<div>
-				<p><%=act.calculaCupo() %></p>
+				<p></p>
 			</div>
 			
 			<div>
