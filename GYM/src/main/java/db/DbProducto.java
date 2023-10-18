@@ -21,18 +21,20 @@ public class DbProducto extends DbHandler{
 		ArrayList<Producto> productos = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Select id_producto , stock , descripcion, imagen, talle , MAX(p.fecha_desde) AS fecha from producto p "
-					+ "INNER JOIN precio pr ON p.id_producto = pr.id_producto"
-					+ "INNER JOIN indumentaria i ON i.id_producto = p.id_producto"
-					+ "WHEREstock > 0 AND p.fecha_desde < CURRENT_DATE"
-					+ "GROUP BY 1,2,3,4,5"); 
+			pstmt = conn.prepareStatement("SELECT p.id_producto , p.stock , p.descripcion, p.imagen, s.unidad, s.valor, pr.precio, pr.fecha_desde"
+					+ "FROM precio pr"
+					+ "INNER JOIN producto p ON p.id_producto = pr.id_producto"
+					+ "INNER JOIN suplemento s ON s.id_producto = pr.id_producto"
+					+ "WHERE pr.fecha_desde = (select max(p2.fecha_desde)"
+					+ "FROM precio p2 WHERE p2.fecha_desde < CURRENT_DATE");
 			
 			
-			pstmt2 = conn.prepareStatement("Select id_producto , stock , descripcion, imagen, kg , MAX(p.fecha_desde) AS fecha from producto p "
-					+ "INNER JOIN precio pr ON p.id_producto = pr.id_producto"
-					+ "INNER JOIN suplemento s ON s.id_producto = p.id_producto"
-					+ "WHERE stock > 0 AND p.fecha_desde < CURRENT_DATE"
-					+ "GROUP BY 1,2,3,4,5"); 
+			pstmt2 = conn.prepareStatement("SELECT p.id_producto , p.stock , p.descripcion, p.imagen, i.talle, pr.precio, pr.fecha_desde"
+					+ "FROM precio pr"
+					+ "INNER JOIN producto p ON p.id_producto = pr.id_producto"
+					+ "INNER JOIN indumentaria i ON s.id_producto = pr.id_producto"
+					+ "WHERE pr.fecha_desde = (select max(p2.fecha_desde)"
+					+ "FROM precio p2 WHERE p2.fecha_desde < CURRENT_DATE"); 
 			
 											
 			rs = pstmt.executeQuery(); 
