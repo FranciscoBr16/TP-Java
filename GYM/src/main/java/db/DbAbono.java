@@ -51,6 +51,34 @@ public class DbAbono extends DbHandler {
 	}
 	
 	
+	public boolean insertarAbono(Abono abono) {
+        PreparedStatement pstmt = null;
+        Connection conn = null;
+        try {
+            conn = this.getConnection();
+            pstmt = conn.prepareStatement("INSERT INTO abono (id_abono, nombreAbono, cant_reservas, precio, descripcion) VALUES (?, ?, ?, ?, ?)");
+            pstmt.setInt(1, abono.getIdAbono());
+            pstmt.setString(2, abono.getNombreAbono());
+            pstmt.setInt(3, abono.getCantReservas());
+            pstmt.setInt(4, abono.getPrecio());
+            pstmt.setString(5, abono.getDescripcion());
+            return pstmt.execute();
+            // ejecuta la consulta de inserción
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+            // manejo de errores
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                this.cerrarConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+	
 	
 	
 }

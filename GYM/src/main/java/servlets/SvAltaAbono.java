@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DbAbono;
 import entities.Abono;
 
 
@@ -34,6 +35,10 @@ public class SvAltaAbono extends HttpServlet {
 		
 		Abono abono = new Abono(idAbono, cantReservas, precio, nombreAbono, descripcion);
 		
-		/* falta llamado al metodo del manejador */
+		DbAbono dbAbono = new DbAbono();
+		dbAbono.insertarAbono(abono);
+		
+		response.sendRedirect("/GYM/SvAbono");
+		
 }
 }
