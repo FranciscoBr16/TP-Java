@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import entities.Clase;
 import entities.Empleado;
+import entities.Inscripcion;
 
 public class DbActividades extends DbHandler {
 	
@@ -19,10 +20,15 @@ public class DbActividades extends DbHandler {
 		PreparedStatement pstmt=null;
 		Connection conn = null;
 		ResultSet rs = null;
+		
 		ArrayList<Clase> actividades = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Select * from clase where tipo='actividad'"); 
+			pstmt = conn.prepareStatement("SELECT c.id_clase, c.nombre_clase, descripcion, cupo, horario, e.nombre, e.apellido, count(i.dni) FROM clase c"
+					+ "INNER JOIN empleado e ON e.id_empleado = c.id_empleado"
+					+ "INNER JOIN inscripcion i ON c.id_clase = i.id_clase"
+					+ "WHERE tipo='actividad'"
+					+ "group by 1,2,3,4,5,6,7;"); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) { 
@@ -34,8 +40,13 @@ public class DbActividades extends DbHandler {
 	            ac.setCupo(rs.getInt("cupo"));
 	            ac.setHorario(rs.getInt("horario"));
 	            Empleado emp = new Empleado();
-	            emp.setIdEmpleado(rs.getInt("id_empleado"));
+	            emp.setNombre(rs.getString("nombre"));
+	            emp.setApellido(rs.getString("apellido"));
 	            ac.setEmpleado(emp);
+	            ArrayList<Inscripcion> ins = new ArrayList<>();
+	            
+	            
+	            
 	            ac.setImagen(rs.getString("imagen"));
 	            ac.setDia(rs.getString("dia"));
 	            ac.setTipo(rs.getString("tipo"));

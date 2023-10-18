@@ -2,15 +2,27 @@ package entities;
 
 public class Suplemento extends Producto{
 	
-	public double kg;
+	public float valor;
+	public String unidad;
+	
 
-	public double getKg() {
-		return kg;
+	public double getValor() {
+		return valor;
 	}
 
-	public void setKg(double kg) {
-		this.kg = kg;
+	public void setValor(float valor) {
+		this.valor = valor;
 	}
+
+	public String getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(String unidad) {
+		this.unidad = unidad;
+	}
+	
+	
 	
 	
 }
