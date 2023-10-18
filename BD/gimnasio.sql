@@ -64,7 +64,7 @@ CREATE TABLE `clase` (
   PRIMARY KEY (`id_clase`),
   KEY `fk_empleado_idx` (`id_empleado`),
   CONSTRAINT `fk_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `clase` (
 
 LOCK TABLES `clase` WRITE;
 /*!40000 ALTER TABLE `clase` DISABLE KEYS */;
-INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',20,1700,555,NULL,'Lunes','actividad');
+INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',20,1700,555,'/GYM/img/yoga.png','Lunes','actividad'),(2,'Zumba','La clase de Zumba es una experiencia energética que fusiona movimientos de baile con ritmos contagiosos, proporcionando un entrenamiento cardiovascular divertido y lleno de ritmo.',25,1900,555,'/GYM/img/zumba.png','Miercoles','actividad');
 /*!40000 ALTER TABLE `clase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,13 +248,13 @@ DROP TABLE IF EXISTS `inscripcion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inscripcion` (
-  `nom_usuario` varchar(45) NOT NULL,
+  `dni` varchar(45) NOT NULL,
   `id_clase` int NOT NULL,
   `fecha` date NOT NULL,
-  PRIMARY KEY (`nom_usuario`,`id_clase`,`fecha`),
+  PRIMARY KEY (`dni`,`id_clase`,`fecha`),
   KEY `fk_clase_idx` (`id_clase`),
   CONSTRAINT `fk_clase` FOREIGN KEY (`id_clase`) REFERENCES `clase` (`id_clase`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_usuario4` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_usuario4` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -264,6 +264,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
+INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('50000000',1,'2023-10-02'),('00000001',2,'2023-10-18');
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,6 +305,7 @@ CREATE TABLE `producto` (
   `stock` int NOT NULL DEFAULT '0',
   `descripcion` varchar(255) DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -314,6 +316,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES (1,20,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.',NULL,'Powerade x500 ml');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +329,8 @@ DROP TABLE IF EXISTS `suplemento`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `suplemento` (
   `id_producto` int NOT NULL,
-  `kg` float DEFAULT NULL,
+  `unidad` varchar(45) DEFAULT NULL,
+  `valor` float DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
   CONSTRAINT `fk_producto2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -338,6 +342,7 @@ CREATE TABLE `suplemento` (
 
 LOCK TABLES `suplemento` WRITE;
 /*!40000 ALTER TABLE `suplemento` DISABLE KEYS */;
+INSERT INTO `suplemento` VALUES (1,'ml',500);
 /*!40000 ALTER TABLE `suplemento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,7 +376,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','pruebaconbeneficio','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10'),('50000000','a','a','a','a','12',NULL,NULL,NULL,NULL),('69696969','admin','admin','admin123','abz@gmail.com','123456789',0,1,NULL,NULL);
+INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10'),('50000000','a','a','a','a','12',NULL,NULL,NULL,NULL),('69696969','admin','admin','admin123','abz@gmail.com','123456789',0,1,NULL,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -384,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-12  9:20:36
+-- Dump completed on 2023-10-18 10:21:18
