@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Log In</title>
+<title>Reservas</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,7 +31,7 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/reservasStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
@@ -61,57 +61,91 @@
 							id="links" href="/GYM/SvAbono">Planes</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="#">Tienda</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Reservas</a></li>
+						<li class="nav-item"><a class="nav-link text-light active"
+							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
 				</div>
+				<% if (user == null){ %>
+                    <div class="cajalogin">
+                        <a id="textoregistro" href="pages/signUp.jsp"
+                            >Registrate</a
+                        >
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        >
+                    </div>
+                    <% } else {%>
+                    <div class="cajaUser">
+                        <i class="fas fa-solid fa-user"></i>
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"
+                            ><%= user.getNombre() %></a
+                        >
+                    </div>
+                    <%} %>
 			</div>
 		</nav>
 	</header>
 
 	<div class="contenedor">
-		<div class="cajaModificar">
-		<div class="titulo">
-			<p>Modifica tu perfil </p>
-		</div>
-
-			<form action="/GYM/SvModificacionUsuario" method="POST" class="formulario-campos">
-				<div class="campo">
-					<label for="birthdate">Fecha de Nacimiento:</label> 
-					<input class="fecha" type="date" name="birthdate" id="birthdate" value="<%=user.getFechaNac().toString()%>" />
-				</div>
-				<div class="campo">
-					<label for="email">Correo Electrónico:</label> 
-					<input type="email" name="email" id="email" value="<%=user.getEmail()%>"/>
-				</div>
-				<div class="campo">
-					
-					<label for="password">Contraseña:</label>
-					<input type="password" name="password" id="password" value="<%=user.getPassword()%>"/>
-				</div>
-				<div class="campo">
-					<label for="nombre">Nombre:</label> 
-					<input type="text" name="name" id="name" value="<%=user.getNombre()%>"/> 
-				</div>
-				<div class="campo">
-					<label for="apellido">Apellido:</label> 
-					<input type="text" name="surname" id="surname" value="<%=user.getApellido()%>"/>
-				</div>
-				<div class="campo">
-					<label for="phonenumber">Teléfono:</label> 
-					<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
-				</div>
-				<div class="final">
-					<button class="boton" type="submit"> Aplicar cambios </button>
-				</div>
-				</form>
+		<div class="caja">
+			<div class="titulo">
+				<p>Salón de Musculación</p>
+			</div>
+			<div class="imagen">
+				<img src="/GYM/img/salondemusculacion.jpg"></img>
+			</div>
 			
-		</div>
+			<hr>
+			<div>
+			<ul>
+				<li>Máquina de pesas y barras</li>
+				<li>Bancos de entrenamiento ajustables</li>
+				<li>Cintas de correr y elípticas</li>
+				<li>Máquinas de poleas y cables</li>
+				<li>Mancuernas y kettlebells variados</li>
+				<li>y mucho más...</li>
+			</ul>
+			</div>
+			
+			<div class="final">
+				<a href="#"><button class="boton">Reservar</button> </a>
+			</div>
 
+	
+		</div>
+		<div class="caja">
+				<div class="titulo">
+					<p>Actividades</p>
+				</div>
+			<div class="imagen">
+				<img src="/GYM/img/actividades.png"></img>
+			</div>
+			
+			<hr>
+			<div>
+			<ul>
+				<li>Clases de Yoga y meditación</li>
+				<li>Crossfit</li>
+				<li>Clases de Zumba y baile</li>
+				<li>Clases de artes marciales</li>
+				<li>Entrenamiento de alta intensidad en grupo</li>
+				<li>y mucho más...</li>
+			</ul>
+			</div>
+			
+			<div class="final">
+				<a href="#"><button class="boton">Reservar</button> </a>
+			</div>
+
+			
+
+		</div>
 		
 	</div>
+
+	
+	
 
 </body>
 
