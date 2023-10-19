@@ -25,13 +25,13 @@ DROP TABLE IF EXISTS `abono`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `abono` (
-  `id_abono` int NOT NULL,
+  `id_abono` int NOT NULL AUTO_INCREMENT,
   `nombreAbono` varchar(45) NOT NULL,
   `cant_reservas` int DEFAULT NULL,
   `precio` int DEFAULT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_abono`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `abono` (
 
 LOCK TABLES `abono` WRITE;
 /*!40000 ALTER TABLE `abono` DISABLE KEYS */;
-INSERT INTO `abono` VALUES (1,'Simple',8,4000,'2 reservas por semana'),(2,'Estandar',12,5500,'3 reservas por semana'),(3,'Premium',30,8500,'Todos los dias');
+INSERT INTO `abono` VALUES (1,'Simple',8,4000,'2 reservas por semana'),(2,'Estandar',12,5500,'3 reservas por semana'),(3,'Premium',30,8500,'Todos los dias'),(6,'Plan Estudiantil',12,4500,'Requisitos: Certificado alumno Regular');
 /*!40000 ALTER TABLE `abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,14 +86,14 @@ DROP TABLE IF EXISTS `contrato`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contrato` (
   `dni_usuario` varchar(45) NOT NULL,
-  `id_abono` int DEFAULT NULL,
+  `id_abono` int NOT NULL AUTO_INCREMENT,
   `fecha_desde` date NOT NULL,
   `fecha_hasta` date NOT NULL,
   PRIMARY KEY (`dni_usuario`,`fecha_desde`,`fecha_hasta`),
   KEY `fk_abono_idx` (`id_abono`),
   CONSTRAINT `fk_abono` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_usuario2` FOREIGN KEY (`dni_usuario`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +376,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10'),('50000000','a','a','a','a','12',NULL,NULL,NULL,NULL),('69696969','admin','admin','admin123','abz@gmail.com','123456789',0,1,NULL,NULL);
+INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10'),('50000000','a','a','a','a','12',NULL,NULL,NULL,NULL),('69696969','admin','admin','admin123','abz@gmail.com','123456789',0,1,NULL,'2000-12-11');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -389,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-18 13:37:20
+-- Dump completed on 2023-10-19 10:27:32
