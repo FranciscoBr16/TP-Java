@@ -33,13 +33,13 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/perfilStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/actividades.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
  Contrato contrato = (Contrato) request.getAttribute("contrato");
-	ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");	
+ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");	
 %>
 
 </head>
@@ -85,7 +85,7 @@
 		<!-- <%for(Clase act : actividades){ %> -->
 		<div class="cajaAlargada">
 			<div class="caja1">
-				<img src="<%=act.getImagen()%>"></img>
+				<img class="imagenact" src="<%=act.getImagen()%>"></img>
 			</div>
 		
 			<div class="caja2">
@@ -96,18 +96,17 @@
 					<p><%=act.getDescripcion()%></p>
 				</div>
 				<div> <p>Profesor: <%=act.getEmpleado().getNombre()%> <%=act.getEmpleado().getApellido() %> </p> </div>
-		</div>
-		<div class="caja3">
-			<div>
-				<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
 			</div>
-			<div>
-				<p></p>
-			</div>
-			
-			<div>
-				<a href="#"><button class="boton">Reservar</button> </a>
-			</div>
+			<div class="caja3">
+				<div>
+					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
+				</div>
+				<div>
+					<p>Cupo: <%=act.getCupo()%> </p>
+				</div>
+				<div>
+					<a href="#"><button class="boton">Reservar</button> </a>
+				</div>
 
 			<!--  En caso de que queramos modificar. Solo para admin
 			<div>
@@ -115,10 +114,11 @@
 			</div>
 			-->
 
-		</div>
+			</div>
 		 <!--  <%} %> -->
 		
 		
+		</div>
 	</div>
 	
 	

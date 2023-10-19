@@ -21,9 +21,7 @@ public class SvActividades extends HttpServlet {
 
     public SvActividades() {
         super();
- 
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DbActividades manejador = new DbActividades();

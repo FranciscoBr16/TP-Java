@@ -10,6 +10,7 @@ import entities.Empleado;
 import entities.Indumentaria;
 import entities.Precio;
 import entities.Producto;
+import entities.Suplemento;
 
 public class DbProducto extends DbHandler{
 	
@@ -18,6 +19,7 @@ public class DbProducto extends DbHandler{
 		PreparedStatement pstmt2=null;
 		Connection conn = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		ArrayList<Producto> productos = new ArrayList<>();
 		try{
 			conn = this.getConnection();
@@ -36,22 +38,32 @@ public class DbProducto extends DbHandler{
 					+ "WHERE pr.fecha_desde = (select max(p2.fecha_desde)"
 					+ "FROM precio p2 WHERE p2.fecha_desde < CURRENT_DATE"); 
 			
-											
-			rs = pstmt.executeQuery(); 
-			
+			rs = pstmt.executeQuery();
 			while (rs.next() && rs!= null ) { 
+				Suplemento sup = new Suplemento();
+			
+	            sup.setIdProducto(rs.getInt("p.id_producto"));
+	            sup.setStock(rs.getInt("p.stock"));
+	            sup.setDescripcion(rs.getString("p.descripcion"));
+	            sup.setImagen(rs.getString("imagen"));
+	            sup.setUnidad(rs.getString("s.unidad"));
+	            sup.setValor(rs.getFloat("s.valor"));
+	            sup.setPrecio(rs.getFloat("pr.precio"));
+	            productos.add(sup);
+	}
+			
+			
+			rs2 = pstmt2.executeQuery(); 
+			
+			while (rs2.next() && rs2!= null ) { 
 				Indumentaria ind = new Indumentaria();
 			
-	            
-	            ind.setIdProducto(rs.getInt("id_producto"));
-	            ind.setStock(rs.getInt("stock"));
-	            ind.setDescripcion(rs.getString("descripcion"));
-	            ind.setImagen(rs.getString("imagen"));
-	            ind.setTalle(rs.getString("talle"));
-	            
-	            Precio p = new Precio();
-	  
-	           
+	            ind.setIdProducto(rs2.getInt("p.id_producto"));
+	            ind.setStock(rs2.getInt("p.stock"));
+	            ind.setDescripcion(rs2.getString("p.descripcion"));
+	            ind.setImagen(rs2.getString("imagen"));
+	            ind.setTalle(rs2.getString("i.talle"));
+	            ind.setPrecio(rs2.getFloat("pr.precio"));
 	            productos.add(ind);
 	}
 			return productos;
