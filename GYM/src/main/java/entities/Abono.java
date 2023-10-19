@@ -38,9 +38,9 @@ public class Abono {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-	public Abono(int idAbono, int cantReservas, int precio, String nombreAbono, String descripcion) {
+	public Abono(int cantReservas, int precio, String nombreAbono, String descripcion) {
 		super();
-		this.idAbono = idAbono;
+		
 		this.cantReservas = cantReservas;
 		this.precio = precio;
 		this.nombreAbono = nombreAbono;

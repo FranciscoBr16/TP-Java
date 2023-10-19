@@ -8,15 +8,16 @@
 }
 
 .boton {
-	font-size: 18px;
+	font-size: 18px ;
 	text-align: center ;
 	width: 250px ;
 	padding: 5px ;
-	border-radius: 20px;
+	border-radius: 20px ;
 	background-color: #d95126 ;
 	color: white ;
-	margin: 10px;
-	border: solid 2px black;
+	margin: 10px ;
+	border: solid 2px black ;
+	
 }
 
 /* NAVBAR */

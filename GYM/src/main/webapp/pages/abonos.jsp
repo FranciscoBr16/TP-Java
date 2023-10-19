@@ -139,7 +139,7 @@
 			<% 
 			}  %>
 		</div>
-
+			<a href="/GYM/pages/altaAbono.jsp"><button class="boton-linea">Agregar nuevo plan</button></a>
 	</div>
 		
 

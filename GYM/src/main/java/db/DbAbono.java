@@ -56,12 +56,12 @@ public class DbAbono extends DbHandler {
         Connection conn = null;
         try {
             conn = this.getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO abono (id_abono, nombreAbono, cant_reservas, precio, descripcion) VALUES (?, ?, ?, ?, ?)");
-            pstmt.setInt(1, abono.getIdAbono());
-            pstmt.setString(2, abono.getNombreAbono());
-            pstmt.setInt(3, abono.getCantReservas());
-            pstmt.setInt(4, abono.getPrecio());
-            pstmt.setString(5, abono.getDescripcion());
+            pstmt = conn.prepareStatement("INSERT INTO abono (nombreAbono, cant_reservas, precio, descripcion) VALUES (?, ?, ?, ?)");
+      
+            pstmt.setString(1, abono.getNombreAbono());
+            pstmt.setInt(2, abono.getCantReservas());
+            pstmt.setInt(3, abono.getPrecio());
+            pstmt.setString(4, abono.getDescripcion());
             return pstmt.execute();
             // ejecuta la consulta de inserción
 

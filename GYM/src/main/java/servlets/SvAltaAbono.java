@@ -27,18 +27,22 @@ public class SvAltaAbono extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer idAbono = (Integer.parseInt(request.getParameter("idAbono")));
+		
 		Integer cantReservas = (Integer.parseInt(request.getParameter("cantReservas")));
 		Integer precio = (Integer.parseInt(request.getParameter("precio")));
 		String nombreAbono = request.getParameter("nombreAbono");
 		String descripcion = request.getParameter("descripcion");
 		
-		Abono abono = new Abono(idAbono, cantReservas, precio, nombreAbono, descripcion);
+		Abono abono = new Abono( cantReservas, precio, nombreAbono, descripcion);
 		
 		DbAbono dbAbono = new DbAbono();
+		
 		dbAbono.insertarAbono(abono);
 		
 		response.sendRedirect("/GYM/SvAbono");
+		
+		
+		
 		
 }
 }
