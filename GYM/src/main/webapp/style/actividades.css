@@ -1,40 +1,41 @@
 @charset "ISO-8859-1";
 
 .contenedor {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .cajaAlargada {
-	width: 80%;
-	border-radius: 15px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	background-color: white;
-	border: 2px solid black;
-	margin-top: 50px;
+  width: 80%;
+  height: 70px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  border: 2px solid black;
+  margin-top: 50px;
 }
 
 .imagenact {
-	border-radius: 15px 0 0 15px;
+  border-radius: 15px 0 0 15px;
 }
 
-.caja1{
-	width : 15%;
-	display: flex;
-	flex-direction: column;
+.caja1 {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
 }
 
-.caja2{
-	width:60%;
-	display: flex;
-	flex-direction: column;
+.caja2 {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
 }
 
-.caja3{
-	width:25%;
-	display: flex;
-	flex-direction: column;
+.caja3 {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
 }

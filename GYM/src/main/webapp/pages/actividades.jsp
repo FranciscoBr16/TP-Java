@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Log In</title>
+<title>Actividades</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,10 +37,9 @@
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");
- Contrato contrato = (Contrato) request.getAttribute("contrato");
-ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");	
-%>
+<% Usuario user = (Usuario) session.getAttribute("user");%>
+<%  ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");%>	
+
 
 </head>
 
@@ -48,7 +47,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 	<header>
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="../index.jsp"><img
+				<a class="navbar-brand" href="/GYM/index.jsp"><img
 					src="/GYM/img/logo.png" alt="logo del gimnasio" /></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -59,7 +58,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" aria-current="page" href="../index.jsp">Inicio</a></li>
+							id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
@@ -82,8 +81,9 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 
 	<div class="contenedor">
 	
-		<!-- <%for(Clase act : actividades){ %> -->
+		<%for(Clase act : actividades){ %>
 		<div class="cajaAlargada">
+		
 			<div class="caja1">
 				<img class="imagenact" src="<%=act.getImagen()%>"></img>
 			</div>
@@ -97,6 +97,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				</div>
 				<div> <p>Profesor: <%=act.getEmpleado().getNombre()%> <%=act.getEmpleado().getApellido() %> </p> </div>
 			</div>
+			
 			<div class="caja3">
 				<div>
 					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
@@ -106,7 +107,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				</div>
 				<div>
 					<a href="#"><button class="boton">Reservar</button> </a>
-				</div>
+			</div>
 
 			<!--  En caso de que queramos modificar. Solo para admin
 			<div>
@@ -115,10 +116,11 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 			-->
 
 			</div>
-		 <!--  <%} %> -->
-		
-		
 		</div>
+		  <%} %>
+		
+		
+		
 	</div>
 	
 	

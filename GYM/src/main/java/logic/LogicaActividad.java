@@ -13,58 +13,58 @@ public class LogicaActividad {
 		LocalDate hoy = LocalDate.now();
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("EEEE");
 		String nombreDelDia = hoy.format(formato);
+		System.out.println(nombreDelDia);
 		
 		switch(fechastr) {
 		
-		case "lunes": 
+		case "Lunes": 
 			b = 1;
 			break;
-		case "martes":
+		case "Martes":
 			b = 2;
 			break;
-		case "miercoles":
+		case "Miercoles":
 			b = 3;
 			break;
-		case "jueves":
+		case "Jueves":
 			b = 4;
 			break;
-		case "viernes":
+		case "Viernes":
 			b = 5;
 			break;
 		default:
-			b=0;
+			break;
 
 		}
 		
 		switch(nombreDelDia) {
 		
-		case "Lunes": 
+		case "lunes": 
 			a = 1;
 			break;
-		case "Martes":
+		case "martes":
 			a = 2;
 			break;
-		case "Miércoles":
+		case "miércoles":
 			a = 3;
 			break;
-		case "Jueves":
+		case "jueves":
 			a = 4;
 			break;
-		case "Viernes":
+		case "viernes":
 			a = 5;
 			break;
-		case "Sábado":
+		case "sábado":
 			a = 6;
 			break;
-		case "Domingo":
+		case "domingo":
 			a = 7;
 			break;
 		default:
-			a = 0;
-
+			break;
 		}
 		
-		int c = a - b;
+		int c = b - a;
 		
 		if ( c > 0 ) {
 			LocalDate fechaEnElFuturo = hoy.plusDays(c);

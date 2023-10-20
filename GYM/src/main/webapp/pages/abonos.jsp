@@ -30,11 +30,10 @@
 </script>
 <link rel="stylesheet" href="/GYM/style/abonoStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
-<link rel="stylesheet" type="text/css"
-	href="/GYM/style/generalStylesII.css" />
+
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
-<% ArrayList<Abono> listaAbonos = (ArrayList<Abono>)request.getAttribute("listaAbono");	%>
+<% ArrayList<Abono> listaAbonos = (ArrayList<Abono>)request.getAttribute("listaAbonos");%>
 <% Usuario user = (Usuario) session.getAttribute("user");%>
 </head>
 

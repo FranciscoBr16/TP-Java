@@ -12,6 +12,7 @@ import java.util.Collection;
 import entities.Clase;
 import entities.Empleado;
 import entities.Inscripcion;
+import entities.Usuario;
 import logic.LogicaActividad;
 
 public class DbActividades extends DbHandler {
@@ -31,33 +32,40 @@ public class DbActividades extends DbHandler {
 		ArrayList<Clase> actividades = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM clase c INNER JOIN empleado e ON e.id_empleado = c.id_empleado WHERE c.tipo='"+"actividad"+"'"); 
+			pstmt = conn.prepareStatement("SELECT * FROM clase c INNER JOIN empleado e ON e.id_empleado = c.id_empleado WHERE c.tipo='actividad'"); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) { 
 
 	            Clase ac = new Clase();
 	            ac.setIdClase(rs.getInt("id_clase"));
+	            
 	            ac.setNombre(rs.getString("nombre_clase"));
 	            ac.setDescripcion(rs.getString("descripcion"));
 	            ac.setHorario(rs.getInt("horario"));
 	            ac.setTipo(rs.getString("tipo"));
+	            int cupo = rs.getInt("cupo");
 	            Empleado emp = new Empleado();
 	            emp.setNombre(rs.getString("nombre"));
 	            emp.setApellido(rs.getString("apellido"));
 	            ac.setEmpleado(emp);
 	            ac.setImagen(rs.getString("imagen"));
-	            LocalDate fecha = la.fechaIncripcion(rs.getString("dia"));
+	            String d = rs.getString("dia");
+	            ac.setDia(d);
+	            LocalDate fecha = la.fechaIncripcion(d);
 	            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
 	            Date f2 = java.sql.Date.valueOf(fecha);
 	            pstmt2 = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND fecha BETWEEN ? AND ? GROUP BY 1");
+	            System.out.println(f1+"   "+f2);
 	            pstmt2.setInt(1, ac.getIdClase());
 	            pstmt2.setDate(2, f1);
 	            pstmt2.setDate(3, f2);
 	            rs2 = pstmt2.executeQuery();
-	            rs2.next();
+	            
+	            if (rs2.next()){
 	            int cantidad = rs2.getInt("cantidad");
-	            ac.setCupo(rs.getInt("cupo") - cantidad);
+	            ac.setCupo(cupo - cantidad);}
+	            else {ac.setCupo(cupo);}
 
 	            actividades.add(ac);
 	}
@@ -86,10 +94,7 @@ public class DbActividades extends DbHandler {
 		ArrayList<Clase> actividades = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT c.id_clase, c.nombre_clase, cupo, horario, count(i.dni) FROM clase c"
-					+ "INNER JOIN inscripcion i ON c.id_clase = i.id_clase"
-					+ "WHERE tipo='musculacion'"
-					+ "group by 1,2,3,4,5,6,7;"); 
+			pstmt = conn.prepareStatement("SELECT * FROM clase c INNER JOIN empleado e ON e.id_empleado = c.id_empleado WHERE c.tipo='musculacion'"); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) { 
@@ -112,6 +117,36 @@ public class DbActividades extends DbHandler {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+	}
+	
+	public boolean nuevaClase(Clase cl) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("Insert into clase (nombre_clase, descripcion, cupo, horario, id_empleado, imagen) values (?,?,?,?,?,?)");
+			pstmt.setString(1, cl.getNombre() );
+			pstmt.setString(2, cl.getDescripcion());
+			pstmt.setInt(3, cl.getCupo());
+			pstmt.setInt(4, cl.getHorario());
+			pstmt.setInt(5, cl.getEmpleado().getIdEmpleado());
+			pstmt.setString(6, cl.getImagen());
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		} finally {
 			try {
 				if(pstmt!=null)pstmt.close();
