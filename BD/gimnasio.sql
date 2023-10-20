@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gimnasio
+-- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +31,7 @@ CREATE TABLE `abono` (
   `precio` int DEFAULT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_abono`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `abono` (
 
 LOCK TABLES `abono` WRITE;
 /*!40000 ALTER TABLE `abono` DISABLE KEYS */;
-INSERT INTO `abono` VALUES (1,'Simple',8,4000,'2 reservas por semana'),(2,'Estandar',12,5500,'3 reservas por semana'),(3,'Premium',30,8500,'Todos los dias'),(6,'Plan Estudiantil',12,4500,'Requisitos: Certificado alumno Regular');
+INSERT INTO `abono` VALUES (1,'Simple',8,4000,'2 reservas por semana'),(2,'Estandar',12,5500,'3 reservas por semana'),(3,'Premium',30,8500,'Todos los dias');
 /*!40000 ALTER TABLE `abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-19 10:27:32
+-- Dump completed on 2023-10-20 10:30:29
