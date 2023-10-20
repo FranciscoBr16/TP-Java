@@ -98,49 +98,24 @@
 
 		<div class="planes-box">
 			<% for (Abono i : listaAbonos) { %>
-				<% if(i.getIdAbono() == 1) { %>
-					<div class="tarjeta-plan">
-						<img src="/GYM/img/plan-simple.png" alt="">
-						<div class="descripcion-plan">
-							<h2><span class="naranja">Plan</span><%=i.getNombreAbono()%></h2>
-							<p>Desde $<%=i.getPrecio()%>/mes</p>
-							<p><%=i.getCantReservas()%> clases mensuales</p>
-							<button class="boton-linea">Incribirse</button>
-						</div>
-					</div>
-				<% } %>
-
-				<% if(i.getIdAbono() == 2) { %>
-					<div class="tarjeta-plan">
-						<img src="/GYM/img/plan-estandar.jpg" alt="">
-						<div class="descripcion-plan">
-							<h2><span class="naranja">Plan</span><%=i.getNombreAbono()%></h2>
-							<p>Desde $<%=i.getPrecio()%>/mes</p>
-							<p><%=i.getCantReservas()%> clases mensuales</p>
-							<button class="boton-linea">Incribirse</button>
-						</div>
-					</div>
-				<% } %>
-
-				<% if(i.getIdAbono() == 3) { %>
-					<div class="tarjeta-plan">
-						<img src="/GYM/img/plan-premium.jpg" alt="">
-						<div class="descripcion-plan">
-							<h2><span class="naranja">Plan</span><%=i.getNombreAbono()%></h2>
-							<p>Desde $<%=i.getPrecio()%>/mes</p>
-							<p><%=i.getCantReservas()%> clases mensuales</p>
-							<button class="boton-linea">Incribirse</button>
-						</div>
-					</div>
-				<% } %>
 				
-				
+					<div class="tarjeta-plan">
+						<img src="/GYM/img/plan<%=i.getIdAbono()%>.jpg" alt="">
+						<div class="descripcion-plan">
+							<h2><span class="naranja">Plan</span><%=i.getNombreAbono()%></h2>
+							<p>Desde $<%=i.getPrecio()%>/mes</p>
+							<p><%=i.getCantReservas()%> clases mensuales</p>
+							<button class="boton-linea">Incribirse</button>
+						</div>
+					</div>	
 			<% 
 			}  %>
+			<% if(user != null){  %>
+			<% if(user.isAdmin()){ %>
 		</div>
-			<a href="/GYM/pages/altaAbono.jsp"><button class="boton-linea">Agregar nuevo plan</button></a>
-	</div>
-		
+			<a href="/GYM/pages/altaAbono.jsp"><button class="boton">Agregar nuevo plan</button></a>
+		</div>
+		<% } }%>
 
 
 </body>

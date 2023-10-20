@@ -125,9 +125,8 @@
 		
 		<!-- -------------------- -->
 		<div class="botonesAbajo">
-			<a href="#">
-				<button class="boton">Cerrar Sesion</button>
-			</a> <a href="/GYM/SvDeleteUser"><button class="boton eliminar" style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
+			<a href="/GYM/SvCerrarSesion"> <button class="boton">Cerrar Sesion</button></a> 
+			<a href="/GYM/SvDeleteUser"><button class="boton eliminar" style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
 		</div>
 	</div>
 	
