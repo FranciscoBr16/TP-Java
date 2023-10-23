@@ -133,6 +133,7 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
                 <p>CONOCENOS</p>
             </a>
         </div>
-        <div class="papu"><p class="papu">Hola soy un footer</p></div>
+        
+        <!--   <div class="papu"><p class="papu">Hola soy un footer</p></div> -->
     </body>
 </html>

@@ -8,7 +8,7 @@
 
 .cajaAlargada {
   width: 80%;
-  height: 70px;
+  height: 140px;
   border-radius: 15px;
   display: flex;
   flex-direction: row;
@@ -20,22 +20,66 @@
 
 .imagenact {
   border-radius: 15px 0 0 15px;
+  width: 100%;
+  height: 140px;
 }
 
 .caja1 {
   width: 15%;
   display: flex;
   flex-direction: column;
+  background-position:top-left;
+  border-radius: 12px 0 0 12px;
+  background-size: 100%
 }
 
 .caja2 {
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
+  padding: 6px;
 }
 
 .caja3 {
-  width: 25%;
+  width: 20%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.titulo {
+  color: #d95126;
+  font-size: 18px;
+}
+
+.diayhorario {
+  display: flex;
+  justify-content: center;
+}
+
+.diayhorario span{
+  padding: 3px;
+} 
+
+.pie {
+  display: flex;
+  justify-content: center;
+}
+
+.cupo{
+  display: flex;
+  justify-content: center;
+}
+
+.boton3 {
+	font-size: 18px ;
+	text-align: center ;
+	width: 150px ;
+	padding: 5px ;
+	border-radius: 20px ;
+	background-color: #d95126 ;
+	color: white ;
+	margin: 10px ;
+	border: solid 2px black ;
+	
 }

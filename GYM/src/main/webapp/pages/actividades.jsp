@@ -84,12 +84,12 @@
 		<%for(Clase act : actividades){ %>
 		<div class="cajaAlargada">
 		
-			<div class="caja1">
-				<img class="imagenact" src="<%=act.getImagen()%>"></img>
+			<div style="background-image: url(<%=act.getImagen()%>)" class="caja1">
+				<!-- <img class="imagenact" src="../img/actividades.png"></img> -->
 			</div>
 		
 			<div class="caja2">
-				<div class="">
+				<div class="titulo">
 					<span><%=act.getNombre()%></span>
 				</div>
 				<div>
@@ -99,14 +99,14 @@
 			</div>
 			
 			<div class="caja3">
-				<div>
+				<div class="diayhorario">
 					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
 				</div>
 				<div>
-					<p>Cupo: <%=act.getCupo()%> </p>
+					<p class="cupo">Cupo: <%=act.getCupo()%> </p>
 				</div>
-				<div>
-					<a href="#"><button class="boton">Reservar</button> </a>
+				<div class="pie">
+					<a href="#"><button class="boton3">Reservar</button> </a>
 			</div>
 
 			<!--  En caso de que queramos modificar. Solo para admin
