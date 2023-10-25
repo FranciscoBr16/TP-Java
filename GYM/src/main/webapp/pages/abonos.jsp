@@ -106,6 +106,12 @@
 							<p>Desde $<%=i.getPrecio()%>/mes</p>
 							<p><%=i.getCantReservas()%> clases mensuales</p>
 							<button class="boton-linea">Incribirse</button>
+							<br>
+							<form action="/GYM/SvBajaAbono" method="POST">
+								<button type="submit" class="boton-borrar">Eliminar Abono</button>
+								<input type="hidden" name="id" value="<%=i.getIdAbono()%>">
+							</form>
+							
 						</div>
 					</div>	
 			<% 

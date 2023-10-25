@@ -80,5 +80,29 @@ public class DbAbono extends DbHandler {
     }
 	
 	
+public boolean deleteAbono(Abono abono) {
 	
+	PreparedStatement pstmt=null;
+	Connection conn;
+
+	try {
+		conn = this.getConnection();
+		pstmt = conn.prepareStatement("DELETE from abono WHERE id_abono =?");
+		pstmt.setInt(1, abono.getIdAbono());
+		return pstmt.execute();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return false;
+		
+	}finally {
+		try {
+			if(pstmt!=null)pstmt.close();
+			this.cerrarConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+}
+
+}	
 }

@@ -49,4 +49,8 @@ public class Abono {
 
 	public Abono() {
 	}
+
+	public Abono(int id) {
+		this.idAbono = id;
+	}
 }

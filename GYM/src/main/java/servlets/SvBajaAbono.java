@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DbUsuario;
+import entities.Usuario;
+
 
 public class SvBajaAbono extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,12 +20,16 @@ public class SvBajaAbono extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		Usuario user = (Usuario)request.getSession().getAttribute("user");
+		DbUsuario dbusu = new DbUsuario();
+		if (dbusu.deleteUsuario(user)) {
+			response.sendRedirect("/GYM/SvAbono");
+			
+		} else {
+			response.sendRedirect("index.jsp");
+		}
+		
 	}
 
 }

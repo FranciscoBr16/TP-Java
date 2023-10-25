@@ -75,6 +75,24 @@
     margin-top: 10px;
 }
 
+.boton-borrar{
+	 text-decoration: none;
+    width: 100px;
+    font-weight: light;
+    background-color: rgb(192, 192, 192);
+    color: rgb(255, 0, 0);
+    padding: 5px;
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 30px;
+    margin-top: 10px;
+}
+
+.boton-borrar:hover {
+    background-color: rgb(255, 0, 0);
+    border: 2px solid rgb(255, 0, 0);
+    color: white;
+    transition: background-color 250ms ease-in-out;
+}
 .boton-linea:hover {
     background-color: #d95126;
     border: 2px solid #d95126;
