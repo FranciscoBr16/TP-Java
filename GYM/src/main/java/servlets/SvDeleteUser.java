@@ -32,10 +32,9 @@ public class SvDeleteUser extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Abono abono = new Abono(Integer.parseInt((String)request.getAttribute("id")));
-		
-		DbAbono dbabono = new DbAbono();
-		if (dbabono.deleteAbono(abono)) {
+		Usuario user = (Usuario)request.getSession().getAttribute("user");
+		DbUsuario dbusu = new DbUsuario();
+		if (dbusu.deleteUsuario(user)) {
 			request.getSession().setAttribute("user", null);
 			response.sendRedirect("index.jsp");
 		} else {

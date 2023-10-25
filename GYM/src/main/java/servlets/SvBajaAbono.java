@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DbAbono;
 import db.DbUsuario;
+import entities.Abono;
 import entities.Usuario;
 
 
@@ -21,11 +23,11 @@ public class SvBajaAbono extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario user = (Usuario)request.getSession().getAttribute("user");
-		DbUsuario dbusu = new DbUsuario();
-		if (dbusu.deleteUsuario(user)) {
+		Abono abono = new Abono(Integer.parseInt((String)request.getAttribute("id")));
+		
+		DbAbono dbabono = new DbAbono();
+		if (dbabono.deleteAbono(abono)) {
 			response.sendRedirect("/GYM/SvAbono");
-			
 		} else {
 			response.sendRedirect("index.jsp");
 		}
