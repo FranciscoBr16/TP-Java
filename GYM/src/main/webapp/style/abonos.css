@@ -76,10 +76,10 @@
 }
 
 .boton-borrar{
-	 text-decoration: none;
-    width: 100px;
+	text-decoration: none;
+    width: 150px;
     font-weight: light;
-    background-color: rgb(192, 192, 192);
+    background-color: white;
     color: rgb(255, 0, 0);
     padding: 5px;
     border: 2px solid rgb(255, 0, 0);

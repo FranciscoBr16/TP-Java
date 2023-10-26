@@ -28,7 +28,7 @@
 	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
 	crossorigin="anonymous">
 </script>
-<link rel="stylesheet" href="/GYM/style/abonoStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/abonos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
@@ -106,12 +106,13 @@
 							<p>Desde $<%=i.getPrecio()%>/mes</p>
 							<p><%=i.getCantReservas()%> clases mensuales</p>
 							<button class="boton-linea">Incribirse</button>
-							<br>
+							<% if(user != null){  %>
+							<% if(user.isAdmin()){ %>
 							<form action="/GYM/SvBajaAbono" method="POST">
-								<button type="submit" class="boton-borrar">Eliminar Abono</button>
 								<input type="hidden" name="id" value="<%=i.getIdAbono()%>">
+								<button type="submit" class="boton-borrar">Eliminar Abono</button>
 							</form>
-							
+							<% } }%>
 						</div>
 					</div>	
 			<% 
