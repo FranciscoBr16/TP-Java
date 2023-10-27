@@ -39,7 +39,7 @@ public class Abono {
 		this.precio = precio;
 	}
 	public Abono(int cantReservas, int precio, String nombreAbono, String descripcion) {
-		super();
+		
 		
 		this.cantReservas = cantReservas;
 		this.precio = precio;
@@ -53,4 +53,15 @@ public class Abono {
 	public Abono(int id) {
 		this.idAbono = id;
 	}
+
+	public Abono(Integer idAbono, String nombreAbono, Integer cantReservas, Integer precio, String descripcion) {
+
+		this.idAbono = idAbono;
+		this.cantReservas = cantReservas;
+		this.precio = precio;
+		this.nombreAbono = nombreAbono;
+		this.descripcion = descripcion;
+	}
+
+
 }

@@ -112,6 +112,10 @@
 								<input type="hidden" name="id" value="<%=i.getIdAbono()%>">
 								<button type="submit" class="boton-borrar">Eliminar Abono</button>
 							</form>
+							<form action="/GYM/SvModificarAbono" method="GET">
+								<input type="hidden" name="id" value="<%=i.getIdAbono()%>">
+								<button type="submit" class="boton-modificar">Modificar Abono</button>
+							</form>
 							<% } }%>
 						</div>
 					</div>	
