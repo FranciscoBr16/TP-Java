@@ -69,6 +69,22 @@
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
 				</div>
+				<% if (user == null){ %>
+                    <div class="cajalogin">
+                        <a id="textoregistro" href="pages/signUp.jsp"
+                            >Registrate</a
+                        >
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        >
+                    </div>
+                    <% } else {%>
+                    <div class="cajaUser">
+                        <i class="fas fa-solid fa-user"></i>
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"
+                            ><%= user.getNombre() %></a
+                        >
+                    </div>
+                    <%} %>
 			</div>
 		</nav>
 	</header>
