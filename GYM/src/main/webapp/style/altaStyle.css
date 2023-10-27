@@ -55,7 +55,7 @@ input.horario{
 
 select {
 	background-color: rgb(192, 192, 192);
-	border-radius: 3px;
+	border-radius: 5px;
     padding: 3px;
 }
 

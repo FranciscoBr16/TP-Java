@@ -23,7 +23,7 @@ public class SvActividadesEmpleado extends HttpServlet {
     	ArrayList<Empleado> empleados = new ArrayList<>();
     	empleados.addAll(dbemp.getEmpleados());
     	/* request.getSession().setAttribute("empleados", empleados);
-    	response.sendRedirect("/GYM/pages/nuevaClase.jsp"); PREGUNTAR POR QUE NO PUEDO HACERLO ASI*/ 
+    	response.sendRedirect("/GYM/pages/nuevaClase.jsp"); Otra forma de hacerlo, guardando en la sesion*/ 
     
     	request.setAttribute("empleados", empleados);
     	request.getRequestDispatcher("/pages/nuevaClase.jsp").forward(request,response);

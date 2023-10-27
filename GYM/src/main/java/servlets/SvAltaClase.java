@@ -34,11 +34,11 @@ public class SvAltaClase extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try {
 		
 		Clase c = new Clase(request.getParameter("nombre"), request.getParameter("descripcion"), Integer.parseInt(request.getParameter("cupo")),request.getParameter("dia"), Integer.parseInt(request.getParameter("horario")),request.getParameter("tipo"),Integer.parseInt(request.getParameter("idEmp")));
 		
 		Part filePart = request.getPart("imagen");
+		String fileName = filePart.getSubmittedFileName();
 		
 		DbActividades manejador = new DbActividades();
 		
@@ -46,33 +46,34 @@ public class SvAltaClase extends HttpServlet {
 		
 		if ( c2 != null) {
 			Integer id = c2.getIdClase();
+			//extraer extension 
+			// int dotIndex = fileName.lastIndexOf('.');
 			
-			 // gets absolute path of the web application
+			 //applicationPath gets absolute path of the web application
 	        String applicationPath = request.getServletContext().getRealPath("");
+	        System.out.println(applicationPath);
 	      
 	        // constructs path of the directory to save uploaded file
 	        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR ;
 	       
-	        String fileName = id.toString();
+	        String newfileName = id.toString();
 	       
 	        
-	        filePart.write(uploadFilePath  + fileName);
+	        filePart.write(uploadFilePath+ File.separator  + newfileName +".png");
 	       
 	      
-	        System.out.println("Upload File Directory=" + uploadFilePath  + fileName);
+	        System.out.println("Upload File Directory=" + uploadFilePath  + newfileName);
 	        
-			request.setAttribute("message", fileName + " File uploaded successfully!");
+			request.setAttribute("message", newfileName + " File uploaded successfully!");
 			
-			c.setImagen(uploadFilePath  + fileName);
+			c.setImagen(uploadFilePath  + File.separator + "imgClase"+ newfileName + ".png");
 			
 			int b = manejador.actualizarImgClase(c);
 			
-			response.sendRedirect("/GYM/pages/actividades.jsp");
+			response.sendRedirect("/GYM/pages/reservas.jsp");
 		} else {response.sendRedirect("/GYM/pages/index.jsp");}
 	
-	} catch (Exception e) {
-        response.getWriter().println("Error al cargar la imagen: " + e.getMessage());
-    }
+
 }
 	
 }

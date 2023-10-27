@@ -134,13 +134,15 @@ public class DbActividades extends DbHandler {
 		ResultSet rs = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into clase (nombre_clase, descripcion, cupo, horario, id_empleado, imagen) values (?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt = conn.prepareStatement("Insert into clase (nombre_clase, descripcion, cupo, horario, id_empleado, imagen, dia, tipo ) values (?,?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, cl.getNombre() );
 			pstmt.setString(2, cl.getDescripcion());
 			pstmt.setInt(3, cl.getCupo());
 			pstmt.setInt(4, cl.getHorario());
 			pstmt.setInt(5, cl.getEmpleado().getIdEmpleado());
 			pstmt.setString(6, cl.getImagen());
+			pstmt.setString(7, cl.getDia());
+			pstmt.setString(8, cl.getTipo());
 			pstmt.executeUpdate();
 			rs=pstmt.getGeneratedKeys();
 			if(rs!=null && rs.next()) {

@@ -110,22 +110,17 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 				<div class="campo">
 					<label for="opciones">Día:</label>
 					<select name="dia" id="opciones">
-        				<option value="musculacion">lunes</option>
-        				<option value="actividad">martes</option>
-        				<option value="musculacion">miercoles</option>
-        				<option value="actividad">jueves</option>
-        				<option value="musculacion">viernes</option>
+        				<option value="lunes">lunes</option>
+        				<option value="martes">martes</option>
+        				<option value="miercoles">miercoles</option>
+        				<option value="jueves">jueves</option>
+        				<option value="viernes">viernes</option>
     				</select>
 					<label>Horario:</label>
 					<input class="horario" type="number" name="horario"  max="2400"/>
 					
 				</div>
-				 <!--  
-				<div class="imageninput">
-					<label>Imagen</label>
-					<input />
-				</div>
-				-->
+				
 				<div class="campo">
 				<label for="opciones">Tipo:</label>
    					<select name="tipo" id="opciones">
@@ -136,9 +131,9 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 				
 				<div class="campo">
 				<label for="profesor">Profesor:</label>
-   					<select name="profesor" id="profesores">
+   					<select name="idEmp" id="profesores">
    					<% for (Empleado emp : empleados){ %>
-        				<option name="idEmp"value="<%=emp.getIdEmpleado()%>"><%=emp.getNombre()%> <%=emp.getApellido()%></option>
+        				<option value="<%=emp.getIdEmpleado()%>"><%=emp.getNombre()%> <%=emp.getApellido()%></option>
         				<%}%>
         			
     				</select>
