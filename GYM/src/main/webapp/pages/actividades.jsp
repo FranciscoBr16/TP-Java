@@ -118,8 +118,11 @@
 			</div>
 		</div>
 		  <%} %>
+		<% if(user != null){  %>
+		<% if(user.isAdmin()){ %>
+		<div> <a href="/GYM/SvActividadesEmpleado"><button class="boton">Nueva Actividad</button></a> </div>
 		
-		
+		<% } }%>
 		
 	</div>
 	

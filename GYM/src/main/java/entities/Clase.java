@@ -15,6 +15,20 @@ private String imagen;
 
 
 
+public Clase(String nombre, String desc, int cupo, String dia, int horario, String tipo, int idEmp) {
+	this.empleado = new Empleado(idEmp);
+	this.nombre = nombre;
+	this.descripcion=desc;
+	this.cupo=cupo;
+	this.dia=dia;
+	this.horario=horario;
+	this.tipo=tipo;
+}
+
+public Clase() {
+
+}
+
 public String getTipo() {
 	return tipo;
 }

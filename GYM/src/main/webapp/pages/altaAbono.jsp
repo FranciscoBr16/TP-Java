@@ -1,3 +1,4 @@
+<%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -32,6 +33,7 @@
 
 
 <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon" />
+<% Usuario user = (Usuario) session.getAttribute("user");%>
 </head>
 
 <header>

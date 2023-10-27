@@ -22,18 +22,20 @@
 
 
 label{
-	padding: 3px 3px 0 0; 
+	padding: 3px 3px 0 3px; 
 }
-
 
 
 input {
 	background-color: rgb(192, 192, 192);
-	flex:2;
+	flex:2; 
 	width: 100%;
 }
 
-
+input.horario{
+	flex: 0 1 auto ;
+	width: 100px;
+}
 
 .campo {
 	align-items:left;
@@ -41,6 +43,27 @@ input {
 	padding: 8px;
 	
 }
+
+.titulo{
+	font-size : 24px;
+	padding:8px;
+}
+
+.anaranjado{
+	color: #d95126;
+}
+
+select {
+	background-color: rgb(192, 192, 192);
+	border-radius: 3px;
+    padding: 3px;
+}
+
+#imagenU{
+	background-color: white;
+}
+
+
 
 .final {
 display: flex;

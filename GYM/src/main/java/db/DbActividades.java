@@ -128,12 +128,13 @@ public class DbActividades extends DbHandler {
 			}
 	}
 	
-	public boolean nuevaClase(Clase cl) {
+	public Clase nuevaClase(Clase cl) {
 		PreparedStatement pstmt=null;
 		Connection conn = null;
+		ResultSet rs = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into clase (nombre_clase, descripcion, cupo, horario, id_empleado, imagen) values (?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("Insert into clase (nombre_clase, descripcion, cupo, horario, id_empleado, imagen) values (?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, cl.getNombre() );
 			pstmt.setString(2, cl.getDescripcion());
 			pstmt.setInt(3, cl.getCupo());
@@ -141,12 +142,17 @@ public class DbActividades extends DbHandler {
 			pstmt.setInt(5, cl.getEmpleado().getIdEmpleado());
 			pstmt.setString(6, cl.getImagen());
 			pstmt.executeUpdate();
+			rs=pstmt.getGeneratedKeys();
+			if(rs!=null && rs.next()) {
+				int id = rs.getInt(1);
+				cl.setIdClase(id);
+			}
 			
-			return true;
+			return cl;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		} finally {
 			try {
 				if(pstmt!=null)pstmt.close();
@@ -156,5 +162,29 @@ public class DbActividades extends DbHandler {
 			}
 	
 			}
+	}
+
+	public int actualizarImgClase(Clase c) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE clase SET imagen = ? where id_clase = ?");
+			pstmt.setString(1, c.getImagen());
+			pstmt.setInt(2, c.getIdClase());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+		
 	}
 }

@@ -9,6 +9,13 @@ private String correo;
 private String apellido;
 private String rol;
 private LocalDate fechaDesde;
+private String imagen;
+public Empleado(int idEmp) {
+	this.idEmpleado = idEmp;
+}
+public Empleado() {
+
+}
 public int getIdEmpleado() {
 	return idEmpleado;
 }
@@ -45,5 +52,14 @@ public LocalDate getFechaDesde() {
 public void setFechaDesde(LocalDate fechaDesde) {
 	this.fechaDesde = fechaDesde;
 }
+
+public void setImagen(String img) {
+	this.imagen = img;
+	
+}
+public String getImagen() {
+	return imagen;
+}
+
 
 }
