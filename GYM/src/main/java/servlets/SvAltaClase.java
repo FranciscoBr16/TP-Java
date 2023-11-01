@@ -46,27 +46,25 @@ public class SvAltaClase extends HttpServlet {
 		
 		if ( c2 != null) {
 			Integer id = c2.getIdClase();
-			//extraer extension 
-			// int dotIndex = fileName.lastIndexOf('.');
 			
-			 //applicationPath gets absolute path of the web application
+			
 	        String applicationPath = request.getServletContext().getRealPath("");
 	        System.out.println(applicationPath);
 	      
-	        // constructs path of the directory to save uploaded file
+	   
 	        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR ;
 	       
 	        String newfileName = id.toString();
 	       
 	        
-	        filePart.write(uploadFilePath+ File.separator  + newfileName +".png");
+	        filePart.write(uploadFilePath+ File.separator  + newfileName + this.getFileExtension(fileName));
 	       
 	      
-	        System.out.println("Upload File Directory=" + uploadFilePath  + newfileName);
+	        /* System.out.println("Upload File Directory=" + uploadFilePath  + newfileName);
 	        
-			request.setAttribute("message", newfileName + " File uploaded successfully!");
-			
-			c.setImagen(uploadFilePath  + File.separator + "imgClase"+ newfileName + ".png");
+			request.setAttribute("message", newfileName + " File uploaded successfully!"); */
+
+			c.setImagen("/GYM/" + UPLOAD_DIR  + "/" + newfileName + this.getFileExtension(fileName));
 			
 			int b = manejador.actualizarImgClase(c);
 			
@@ -75,6 +73,14 @@ public class SvAltaClase extends HttpServlet {
 	
 
 }
+	
+	private String getFileExtension(String name) {
+	    int lastIndexOf = name.lastIndexOf(".");
+	    if (lastIndexOf == -1) {
+	        return ""; // empty extension
+	    }
+	    return name.substring(lastIndexOf);
+	}
 	
 }
 
