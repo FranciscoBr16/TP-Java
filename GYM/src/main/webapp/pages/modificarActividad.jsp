@@ -1,5 +1,7 @@
-<%@page import="entities.Clase"%>
+<%@page import="entities.Empleado"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="entities.Clase"%>
+<%@page import="entities.Abono"%>
 <%@page import="entities.Contrato"%>
 <%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -10,7 +12,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Actividades</title>
+<title>Log In</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -33,13 +35,14 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/actividades.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");%>
-<%  ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");%>	
-
+<% Usuario user = (Usuario) session.getAttribute("user");
+ Clase clase = (Clase) request.getAttribute("clase");
+ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empleados");
+%>
 
 </head>
 
@@ -47,7 +50,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="/GYM/index.jsp"><img
+				<a class="navbar-brand" href="../index.jsp"><img
 					src="/GYM/img/logo.png" alt="logo del gimnasio" /></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -58,13 +61,13 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a></li>
+							id="links" aria-current="page" href="../index.jsp">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="#">Tienda</a></li>
-						<li class="nav-item"><a class="nav-link text-light active"
-							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
+						<li class="nav-item"><a class="nav-link text-light"
+							id="links" href="#">Reservas</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
@@ -88,65 +91,69 @@
 			</div>
 		</nav>
 	</header>
-	
-	<!--  Usar para la barra de busqueda y filtrado 
-	<div>
-	
-	</div>
-	-->
 
 	<div class="contenedor">
-	
-		<%for(Clase act : actividades){ %>
-		<div class="cajaAlargada">
-		
-			<div style="background-image: url(<%=act.getImagen()%>)" class="caja1">
-				<!-- <img class="imagenact" src="../img/actividades.png"></img> -->
-			</div>
-		
-			<div class="caja2">
-				<div class="titulo">
-					<span><%=act.getNombre()%></span>
-				</div>
-				<div>
-					<p><%=act.getDescripcion()%></p>
-				</div>
-				<div> <p>Profesor: <%=act.getEmpleado().getNombre()%> <%=act.getEmpleado().getApellido() %> </p> </div>
-			</div>
-			
-			<div class="caja3">
-				<div class="diayhorario">
-					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
-				</div>
-				<div>
-					<p class="cupo">Cupo: <%=act.getCupo()%> </p>
-				</div>
-				<div class="pie">
-					<a href="#"><button class="boton3">Reservar</button> </a>
-					<br>
-					
-					<% if(user != null){  %>
-					<% if(user.isAdmin()){ %>
-					<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Abono</button>
-							</form>
-							<% } }%>
-			</div>
+		<div class="cajaModificar">
+		<div class="titulo">
+			<p>Modifica la Actividad </p>
+		</div>
 
-			</div>
+			<form action="/GYM/SvModificarActividad" method="POST" class="formulario-campos">
+				<div class="campo">
+					<label for="idClase">Id Clase:</label> 
+					<input class="idClase" type="number" name="idClase" id="idAbono" value="<%=clase.getIdClase()%>" readonly/>
+				</div>
+				
+				<div class="campo">
+					<label for="nombreClase">Nombre Actividad:</label> 
+					<input class="nombreClase" type="text" name="nombreClase" id="nombreClase" value="<%=clase.getNombre()%>" />
+				</div>
+				<div class="campo">
+					<label for="descripcion">Descripcion:</label> 
+					<input type="text" name="descripcion" id="descripcion" value="<%=clase.getDescripcion()%>"/>
+				</div>
+				<div class="campo">
+					<label for="cupo">Cupo:</label>
+					<input type="number" name="cupo" id="cupo" value="<%=clase.getCupo()%>"/>
+				</div>
+				<div class="campo">
+					<label for="horario">Horario:</label> 
+					<input type="number" name="horario" id="horario" value="<%=clase.getHorario()%>"/> 
+				</div>
+				
+				<div class="campo">
+				<label for="profesor">Profesor:</label>
+   					<select name="idEmpleado" id="idEmpleado">
+   					<% for (Empleado emp : empleados){ %>
+        				<option value="<%=emp.getIdEmpleado()%>"<%if(emp.getIdEmpleado() == clase.getEmpleado().getIdEmpleado()){%> selected <%} %>> <%=emp.getNombre()%> <%=emp.getApellido()%></option>
+        				<%}%>
+        			
+    				</select>
+				</div>
+				
+				<div class="campo">
+					<label for="dia">Dia:</label>
+					<input type="text" name="dia" id="dia" value="<%=clase.getDia()%>"/>
+				</div>
+
+				<div class="campo">
+					<label for="opciones">Tipo:</label>
+   					<select name="tipo" id="opciones">
+        				<option value="musculacion" <%if(clase.getTipo().equals("musculacion")){%> selected <%} %>>musculacion</option>
+        				
+        				<option value="actividad"<%if(clase.getTipo().equals("actividad")){%> selected <%} %>>actividad</option>
+    				</select>
+				</div>
+				
+				<div class="final">
+					<button class="boton" type="submit"> Aplicar cambios </button>
+				</div>
+				</form>
 			
 		</div>
-		  <%} %>
-		<% if(user != null){  %>
-		<% if(user.isAdmin()){ %>
-		<div> <a href="/GYM/SvActividadesEmpleado"><button class="boton">Nueva Actividad</button></a> </div>
-		
-		<% } }%>
+
 		
 	</div>
-	
-	
 
 </body>
 

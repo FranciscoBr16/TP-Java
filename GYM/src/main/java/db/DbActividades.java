@@ -189,4 +189,71 @@ public class DbActividades extends DbHandler {
 	}
 		
 	}
+
+	public Clase getClase(Clase c) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		ResultSet rs = null;
+		try{
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("Select * from clase where id_clase = ?");
+			pstmt.setInt(1, c.getIdClase());
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			c.setNombre(rs.getString("nombre_clase"));
+			c.setDescripcion(rs.getString("descripcion"));
+			c.setCupo(rs.getInt("cupo"));
+			c.setHorario(rs.getInt("horario"));
+			Empleado e = new Empleado(rs.getInt("id_empleado"));
+			c.setEmpleado(e);
+			c.setImagen(rs.getString("imagen"));
+			c.setDia(rs.getString("dia"));
+			c.setTipo(rs.getString("tipo"));
+			
+			return c;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+		
 }
+
+	public int actualizarActividad(Clase clase) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE clase SET nombre_clase = ?, descripcion = ?, cupo = ? , horario = ?, id_empleado = ?, dia = ?, tipo = ? where id_clase = ?");
+			pstmt.setString(1, clase.getNombre());
+			pstmt.setString(2, clase.getDescripcion());
+			pstmt.setInt(3, clase.getCupo());
+			pstmt.setInt(4, clase.getHorario());
+			pstmt.setInt(5, clase.getEmpleado().getIdEmpleado());
+			pstmt.setString(6, clase.getDia());
+			pstmt.setString(7, clase.getTipo());
+			pstmt.setInt(8, clase.getIdClase());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	}
+	}

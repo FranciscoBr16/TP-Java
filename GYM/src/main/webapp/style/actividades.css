@@ -81,5 +81,23 @@
 	color: white ;
 	margin: 10px ;
 	border: solid 2px black ;
-	
+}
+
+.boton4{
+	font-size: 18px ;
+	text-align: center ;
+	width: 150px ;
+	padding: 5px ;
+	border-radius: 20px ;
+	background-color: rgb(128, 128, 128) ;
+	color: white ;
+	margin: 10px ;
+	border: solid 2px black ;
+}
+
+.boton4:hover{
+	background-color: rgb(192, 192, 192);
+    border: 2px solid rgb(192, 192, 192);
+    color: white;
+    transition: background-color 250ms ease-in-out;
 }

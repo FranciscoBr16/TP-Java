@@ -16,6 +16,17 @@ private String imagen;
 
 
 public Clase(String nombre, String desc, int cupo, String dia, int horario, String tipo, int idEmp) {
+	
+	this.empleado = new Empleado(idEmp);
+	this.nombre = nombre;
+	this.descripcion=desc;
+	this.cupo=cupo;
+	this.dia=dia;
+	this.horario=horario;
+	this.tipo=tipo;
+}
+public Clase(int idClase, String nombre, String desc, int cupo, String dia, int horario, String tipo, int idEmp) {
+	this.idClase = idClase;
 	this.empleado = new Empleado(idEmp);
 	this.nombre = nombre;
 	this.descripcion=desc;
@@ -28,6 +39,15 @@ public Clase(String nombre, String desc, int cupo, String dia, int horario, Stri
 public Clase() {
 
 }
+
+public Clase(int c) {
+	this.idClase = c;
+}
+
+
+
+
+
 
 public String getTipo() {
 	return tipo;

@@ -62,7 +62,7 @@
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="#">Tienda</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Reservas</a></li>
+							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
