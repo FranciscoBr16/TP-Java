@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4
 USE `gimnasio`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
--- Host: localhost    Database: gimnasio
+-- Host: 127.0.0.1    Database: gimnasio
 -- ------------------------------------------------------
 -- Server version	8.0.28
 
@@ -64,7 +64,7 @@ CREATE TABLE `clase` (
   PRIMARY KEY (`id_clase`),
   KEY `fk_empleado_idx` (`id_empleado`),
   CONSTRAINT `fk_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,6 +173,7 @@ CREATE TABLE `empleado` (
   `fecha_desde` date DEFAULT NULL,
   `rol` varchar(45) DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
+  `estado` tinyint DEFAULT '1',
   PRIMARY KEY (`id_empleado`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -183,7 +184,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (69,'Benjamín','Fares','benjalol@gmail.com','2023-08-23','Dios Nordico',NULL),(233,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista',NULL),(555,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor',NULL),(777,'Jerónimo','Álvarez','jeditogamerpro@gmail.com','2023-08-23','Maestro',NULL);
+INSERT INTO `empleado` VALUES (69,'Benjamín','Fares','benjalol@gmail.com','2023-08-23','Dios Nordico',NULL,1),(233,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista',NULL,1),(555,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor',NULL,1),(777,'Jerónimo','Álvarez','jeditogamerpro@gmail.com','2023-08-23','Maestro',NULL,1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,4 +390,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-23 18:52:29
+-- Dump completed on 2023-11-15 10:55:58
