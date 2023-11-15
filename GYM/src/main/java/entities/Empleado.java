@@ -16,6 +16,8 @@ public Empleado(int idEmp) {
 public Empleado() {
 
 }
+
+
 public int getIdEmpleado() {
 	return idEmpleado;
 }
