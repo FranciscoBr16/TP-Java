@@ -182,4 +182,32 @@ public class DbEmpleado extends DbHandler {
 	}
 
 
+	public int actualizarEmpleado(Empleado emp) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE empleado SET nombre = ?, apellido = ?, email = ?, rol= ?, fechaDesde = ? where id = ?");
+			pstmt.setString(1, emp.getNombre());
+			pstmt.setString(2, emp.getApellido());
+			pstmt.setString(3, emp.getCorreo());
+			pstmt.setString(3, emp.getRol());
+			pstmt.setDate(4, java.sql.Date.valueOf(emp.getFechaDesde()));
+			pstmt.setInt(5, emp.getIdEmpleado());
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	}
+
 }
