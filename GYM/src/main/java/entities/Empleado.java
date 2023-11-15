@@ -16,6 +16,22 @@ public Empleado(int idEmp) {
 public Empleado() {
 
 }
+public Empleado(Integer id_empleado, String nombre2, String apellido2, String correo2, String rol2,
+		LocalDate fecha_desde) {
+	this.idEmpleado = id_empleado;
+	this.nombre = nombre2;
+	this.apellido = apellido2;
+	this.correo = correo2;
+	this.rol = rol2;
+	this.fechaDesde = fecha_desde;
+}
+public Empleado(String nombre, String apellido, String email, LocalDate fecha, String rol) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.correo = email;
+    this.fechaDesde = fecha;
+    this.rol = rol;
+}
 public int getIdEmpleado() {
 	return idEmpleado;
 }
