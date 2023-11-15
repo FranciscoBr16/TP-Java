@@ -95,5 +95,93 @@ public class DbEmpleado extends DbHandler {
 	
 			}
 	}
+	
+	public int deleteEmpleado(Empleado emp) {
+        PreparedStatement pstmt=null;
+        Connection conn;
+
+        try {
+
+            conn = this.getConnection();
+            pstmt = conn.prepareStatement("UPDATE empleado SET estado= ? WHERE id_empleado =?");
+            pstmt.setBoolean(1, false);
+            pstmt.setInt(2, emp.getIdEmpleado());
+            return pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+
+        }finally {
+            try {
+                if(pstmt!=null)pstmt.close();
+                this.cerrarConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+    }
+}
+	
+	public boolean nuevoEmpleado(Empleado emp) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("Insert into empleado(id_empleado, nombre, apellido, mail, fecha_desde, rol) values (?,?,?,?,?,?)");
+			pstmt.setInt(1, emp.getIdEmpleado() );
+			pstmt.setString(2, emp.getNombre() );
+			pstmt.setString(3, emp.getApellido() );
+			pstmt.setString(4, emp.getCorreo() );
+			pstmt.setDate(5, java.sql.Date.valueOf(emp.getFechaDesde()));
+			pstmt.setString(6, emp.getRol());
+			pstmt.executeUpdate();
+			return true;
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+		
+	}
+	
+	public int actualizarEmpleado(Empleado emp) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE empleado SET nombre = ?, apellido = ?, email = ?, rol= ?, fechaDesde = ? where id = ?");
+			pstmt.setString(1, emp.getNombre());
+			pstmt.setString(2, emp.getApellido());
+			pstmt.setString(3, emp.getCorreo());
+			pstmt.setString(3, emp.getRol());
+			pstmt.setDate(4, java.sql.Date.valueOf(emp.getFechaDesde()));
+			pstmt.setInt(5, emp.getIdEmpleado());
+			
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	}
+
+
+	
 
 }
