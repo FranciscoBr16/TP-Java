@@ -143,9 +143,9 @@ CREATE TABLE `detalle-factura` (
   `cantidad` int DEFAULT NULL,
   `sub_total` float DEFAULT NULL,
   PRIMARY KEY (`nro_factura`,`id_producto`),
-  KEY `fk_producto4_idx` (`id_producto`),
+  KEY `fk_producto_idx` (`id_producto`),
   CONSTRAINT `fk_factura` FOREIGN KEY (`nro_factura`) REFERENCES `factura` (`nro_factura`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_producto4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON UPDATE CASCADE
+  CONSTRAINT `fk_producto4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -228,7 +228,7 @@ CREATE TABLE `indumentaria` (
   `id_producto` int NOT NULL,
   `talle` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
-  CONSTRAINT `fk_pruducto1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON UPDATE CASCADE
+  CONSTRAINT `fk_producto1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -279,9 +279,9 @@ DROP TABLE IF EXISTS `precio`;
 CREATE TABLE `precio` (
   `id_producto` int NOT NULL,
   `fecha_desde` date DEFAULT NULL,
-  `precio` float NOT NULL,
+  `precio` int NOT NULL,
   PRIMARY KEY (`id_producto`),
-  CONSTRAINT `fk_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON UPDATE CASCADE
+  CONSTRAINT `fk_producto3` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -302,13 +302,13 @@ DROP TABLE IF EXISTS `producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `producto` (
-  `id_producto` int NOT NULL,
+  `id_producto` int NOT NULL AUTO_INCREMENT,
   `stock` int NOT NULL DEFAULT '0',
   `descripcion` varchar(255) DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -333,7 +333,7 @@ CREATE TABLE `suplemento` (
   `unidad` varchar(45) DEFAULT NULL,
   `valor` float DEFAULT NULL,
   PRIMARY KEY (`id_producto`),
-  CONSTRAINT `fk_producto2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE
+  CONSTRAINT `fk_producto2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -390,4 +390,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-15 10:55:58
+-- Dump completed on 2023-11-17 11:28:10
