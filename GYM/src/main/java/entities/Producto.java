@@ -3,16 +3,38 @@ package entities;
 
 public class Producto {
 	
-	public int idProducto;
-	public String descripcion;
-	public int stock;
-	public String imagen;
-	private float precio;
+	private int idProducto;
+	private String nombre;
+	private String descripcion;
+	private int stock;
+	private String imagen;
+	private Precio precio;
 	
-	public float getPrecio() {
-		return precio;
+	
+	
+	
+	public Producto(String desc, String nombre, int stock, int precio) {
+		this.descripcion = desc;
+		this.nombre = nombre;
+		this.stock = stock;
+		Precio p = new Precio(precio);
+		this.precio = p;
 	}
-	public void setPrecio(float precio) {
+	public Producto() {
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public int getValorPrecio() {
+		return precio.getPrecio();
+	}
+	public Precio getPrecio() {
+		return this.precio;
+	}
+	public void setPrecio(Precio precio) {
 		this.precio = precio;
 	}
 	public int getIdProducto() {

@@ -10,13 +10,13 @@ private String apellido;
 private String rol;
 private LocalDate fechaDesde;
 private String imagen;
+
 public Empleado(int idEmp) {
 	this.idEmpleado = idEmp;
 }
 public Empleado() {
 
 }
-
 
 public Empleado(Integer id_empleado, String nombre2, String apellido2, String correo2, String rol2,
 		LocalDate fecha_desde) {

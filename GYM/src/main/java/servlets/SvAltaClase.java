@@ -64,9 +64,9 @@ public class SvAltaClase extends HttpServlet {
 	        
 			request.setAttribute("message", newfileName + " File uploaded successfully!"); */
 
-			c.setImagen("/GYM/" + UPLOAD_DIR  + "/" + newfileName + this.getFileExtension(fileName));
+			c2.setImagen("/GYM/" + UPLOAD_DIR  + "/" + newfileName + this.getFileExtension(fileName));
 			
-			int b = manejador.actualizarImgClase(c);
+			int b = manejador.actualizarImgClase(c2);
 			
 			response.sendRedirect("/GYM/pages/reservas.jsp");
 		} else {response.sendRedirect("/GYM/pages/index.jsp");}

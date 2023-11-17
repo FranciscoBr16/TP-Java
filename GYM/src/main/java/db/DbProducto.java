@@ -1,9 +1,11 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entities.Empleado;
@@ -11,6 +13,7 @@ import entities.Indumentaria;
 import entities.Precio;
 import entities.Producto;
 import entities.Suplemento;
+
 
 public class DbProducto extends DbHandler{
 	
@@ -48,7 +51,8 @@ public class DbProducto extends DbHandler{
 	            sup.setImagen(rs.getString("imagen"));
 	            sup.setUnidad(rs.getString("s.unidad"));
 	            sup.setValor(rs.getFloat("s.valor"));
-	            sup.setPrecio(rs.getFloat("pr.precio"));
+	            Precio pre = new Precio(rs.getInt("pr.precio"));
+	            sup.setPrecio(pre);
 	            productos.add(sup);
 	}
 			
@@ -63,7 +67,8 @@ public class DbProducto extends DbHandler{
 	            ind.setDescripcion(rs2.getString("p.descripcion"));
 	            ind.setImagen(rs2.getString("imagen"));
 	            ind.setTalle(rs2.getString("i.talle"));
-	            ind.setPrecio(rs2.getFloat("pr.precio"));
+	            Precio pre = new Precio(rs2.getInt("pr.precio"));
+	            ind.setPrecio(pre);
 	            productos.add(ind);
 	}
 			return productos;
@@ -82,5 +87,122 @@ public class DbProducto extends DbHandler{
 			}
 		
 	}
+
+	public Suplemento nuevoSuplemento(Suplemento sup) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		PreparedStatement pstmt3=null;
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("Insert into producto (id_producto, stock, descripcion, nombre) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setInt(1, sup.getIdProducto() );
+			pstmt.setInt(2, sup.getStock());
+			pstmt.setString(3, sup.getDescripcion());
+			pstmt.setString(4, sup.getNombre());
+			pstmt.executeUpdate();
+			rs=pstmt.getGeneratedKeys();
+			if(rs!=null && rs.next()) {
+				int id = rs.getInt(1);
+				sup.setIdProducto(id);
+				pstmt2 = conn.prepareStatement("INSERT INTO suplemento (id_producto, unidad, valor) VALUES (?,?,?)");
+				pstmt2.setInt(1, id);
+				pstmt2.setString(2, sup.getUnidad());
+				pstmt2.setFloat(3, sup.getValor());
+				pstmt2.executeUpdate();
+				pstmt3 = conn.prepareStatement("INSERT INTO precio (id_producto, fecha_desde, precio) VALUES (?,?,?)");
+				pstmt3.setInt(1, id);
+				pstmt3.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+				pstmt3.setInt(3, sup.getValorPrecio());
+				pstmt3.executeUpdate();
+			}
+			
+			return sup;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+	}
+
+	public int actualizarImg(Producto pro) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE producto SET imagen = ? where id_producto = ?");
+			pstmt.setString(1, pro.getImagen());
+			pstmt.setInt(2, pro.getIdProducto());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+		
+	}
+
+	public Indumentaria nuevaIndumentaria(Indumentaria ind) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		PreparedStatement pstmt3=null;
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("Insert into producto (id_producto, stock, descripcion, nombre) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setInt(1, ind.getIdProducto() );
+			pstmt.setInt(2, ind.getStock());
+			pstmt.setString(3, ind.getDescripcion());
+			pstmt.setString(4, ind.getNombre());
+			pstmt.executeUpdate();
+			rs=pstmt.getGeneratedKeys();
+			if(rs!=null && rs.next()) {
+				int id = rs.getInt(1);
+				ind.setIdProducto(id);
+				pstmt2 = conn.prepareStatement("INSERT INTO indumentaria (id_producto, talle) VALUES (?,?)");
+				pstmt2.setInt(1, id);
+				pstmt2.setString(2, ind.getTalle());
+				pstmt2.executeUpdate();
+				pstmt3 = conn.prepareStatement("INSERT INTO precio (id_producto, fecha_desde, precio) VALUES (?,?,?)");
+				pstmt3.setInt(1, id);
+				pstmt3.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+				pstmt3.setInt(3, ind.getValorPrecio());
+				pstmt3.executeUpdate();
+			}
+			
+			return ind;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+	}
+
+
 
 }
