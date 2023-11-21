@@ -10,6 +10,11 @@ public class Precio {
 		this.precio = precio;
 	}
 	
+	public Precio(LocalDate fecha_desde, Integer precio2) {
+		this.fechaDesde = fecha_desde;
+		this.precio = precio2;
+	}
+
 	public LocalDate getFechaDesde() {
 		return fechaDesde;
 	}

@@ -1,5 +1,6 @@
 package entities;
 
+import java.time.LocalDate;
 
 public class Producto {
 	
@@ -21,6 +22,18 @@ public class Producto {
 		this.precio = p;
 	}
 	public Producto() {
+	}
+	public Producto(int id) {
+		this.idProducto = id;
+	}
+	public Producto(Integer id_producto, Integer stock, String descripcion, String nombre, LocalDate fecha_desde, Integer precio) {
+		this.idProducto = id_producto;
+		this.stock = stock;
+		this.descripcion = descripcion;
+		this.nombre = nombre;
+		Precio p = new Precio(fecha_desde, precio);
+		this.precio = p;
+		
 	}
 	public String getNombre() {
 		return nombre;
