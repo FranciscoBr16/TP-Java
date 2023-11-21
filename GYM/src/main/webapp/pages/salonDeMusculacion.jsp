@@ -33,12 +33,12 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/actividades.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosSalonDeMusculacion.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");%>
-<%  ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");%>	
+<%  ArrayList<Clase> clases = (ArrayList<Clase>)request.getAttribute("clases");%>	
 
 
 </head>
@@ -94,55 +94,164 @@
 	
 	</div>
 	-->
+	<% ArrayList<Clase> actividadesLunes = new ArrayList<>();
+	ArrayList<Clase> actividadesMartes = new ArrayList<>();
+	ArrayList<Clase> actividadesMiercoles = new ArrayList<>();
+	ArrayList<Clase> actividadesJueves = new ArrayList<>();
+	ArrayList<Clase> actividadesViernes = new ArrayList<>();
+	for(Clase act : clases){ 
+	switch(act.getDia()) {
+		case "Lunes": 
+			actividadesLunes.add(act);
+			break;
+		case "Martes":
+			actividadesMartes.add(act);
+			break;
+		case "Miercoles":
+			actividadesMiercoles.add(act);
+			break;
+		case "Jueves":
+			actividadesJueves.add(act);
+			break;
+		case "Viernes":
+			actividadesViernes.add(act);
+			break;
+		default:
+			break;
 
-	<div class="contenedor">
+		}
+	}%>
+
+	<div class="contenedor"> 
 	
-		<%for(Clase act : actividades){ %>
-		<div class="cajaAlargada">
-		
-			<div style="background-image: url(<%=act.getImagen()%>)" class="caja1">
-				<!-- <img class="imagenact" src="../img/actividades.png"></img> -->
-			</div>
-		
-			<div class="caja2">
-				<div class="titulo">
-					<span><%=act.getNombre()%></span>
-				</div>
-				<div>
-					<p><%=act.getDescripcion()%></p>
-				</div>
-				<div> <p>Profesor: <%=act.getEmpleado().getNombre()%> <%=act.getEmpleado().getApellido() %> </p> </div>
-			</div>
+	<div class="Caja">
+	<p>Lunes</p>
+	
+		<%for (Clase lun : actividadesLunes){ %>
 			
-			<div class="caja3">
-				<div class="diayhorario">
-					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
+			<div class="cajaClase">
+				<div class="cajaIzquierda">
+					<span><%=lun.getHorario()%></span>
 				</div>
-				<div>
-					<p class="cupo">Cupo: <%=act.getCupo()%> </p>
+				<div class="cajaDerecha">
+				<div class="cajaCupo">
+					<p class="cupo">Cupo: <%=lun.getCupo()%> </p>
 				</div>
-				<div class="pie">
+				<div class="cajaBotones">
 					<a href="#"><button class="boton3">Reservar</button> </a>
-					<br>
-					
 					<% if(user != null){  %>
-					<% if(user.isAdmin()){ %>
-					<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Abono</button>
-							</form>
-							<% } }%>
+						<% if(user.isAdmin()){ %>
+						<form action="/GYM/SvModificarActividad" method="GET">
+								<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
+								<button type="submit" class="boton4">Modificar Clase</button>
+						</form>
+						<% } }%>
+				</div>	
+				</div>
 			</div>
-
-			</div>
+			<%} %>
+	</div>
+	
+	<div class="Caja">
+	<p>Martes</p>
+	
+		<%for (Clase mar : actividadesMartes){ %>
 			
-		</div>
-		  <%} %>
-		<% if(user != null){  %>
+			<div class="cajaClase">
+				<div class="cajaIzquierda">
+					<span><%=mar.getHorario()%></span>
+				</div>
+				<div class="cajaDerecha">
+					<p class="cupo">Cupo: <%=mar.getCupo()%> </p>
+					<a href="#"><button class="boton3">Reservar</button> </a>
+					<% if(user != null){  %>
+						<% if(user.isAdmin()){ %>
+						<form action="/GYM/SvModificarActividad" method="GET">
+								<input type="hidden" name="id" value="<%=mar.getIdClase()%>">
+								<button type="submit" class="boton4">Modificar Clase</button>
+						</form>
+						<% } }%>
+				</div>
+			</div>
+			<%} %>
+	</div>
+		
+	<div class="Caja">
+	<p>Miercoles</p>
+		<%for (Clase mier : actividadesMiercoles){ %>
+			
+			<div class="cajaClase">
+				<div class="cajaIzquierda">
+					<span><%=mier.getHorario()%></span>
+				</div>
+				<div class="cajaDerecha">
+					<p class="cupo">Cupo: <%=mier.getCupo()%> </p>
+					<a href="#"><button class="boton3">Reservar</button> </a>
+					<% if(user != null){  %>
+						<% if(user.isAdmin()){ %>
+						<form action="/GYM/SvModificarActividad" method="GET">
+								<input type="hidden" name="id" value="<%=mier.getIdClase()%>">
+								<button type="submit" class="boton4">Modificar Clase</button>
+						</form>
+						<% } }%>
+				</div>
+			</div>
+			<%} %>
+	</div>
+	<div class="Caja">
+	<p>Jueves</p>
+	
+		<%for (Clase jue : actividadesJueves){ %>
+			
+			<div class="cajaClase">
+				<div class="cajaIzquierda">
+					<span><%=jue.getHorario()%></span>
+				</div>
+				<div class="cajaDerecha">
+					<p class="cupo">Cupo: <%=jue.getCupo()%> </p>
+					<a href="#"><button class="boton3">Reservar</button> </a>
+					<% if(user != null){  %>
+						<% if(user.isAdmin()){ %>
+						<form action="/GYM/SvModificarActividad" method="GET">
+								<input type="hidden" name="id" value="<%=jue.getIdClase()%>">
+								<button type="submit" class="boton4">Modificar Clase</button>
+						</form>
+						<% } }%>
+				</div>
+			</div>
+			<%} %>
+	</div>
+	
+	<div class="Caja">
+	<p>Viernes</p>
+	
+		<%for (Clase vie : actividadesViernes){ %>
+			
+			<div class="cajaClase">
+				<div class="cajaIzquierda">
+					<span><%=vie.getHorario()%></span>
+				</div>
+				<div class="cajaDerecha">
+					<p class="cupo">Cupo: <%=vie.getCupo()%> </p>
+					<a href="#"><button class="boton3">Reservar</button> </a>
+					<% if(user != null){  %>
+						<% if(user.isAdmin()){ %>
+						<form action="/GYM/SvModificarActividad" method="GET">
+								<input type="hidden" name="id" value="<%=vie.getIdClase()%>">
+								<button type="submit" class="boton4">Modificar Clase</button>
+						</form>
+						<% } }%>
+				</div>
+			</div>
+			<%} %>
+	</div>
+		
+	
+		<% if(user != null){%>
 		<% if(user.isAdmin()){ %>
 		<div> <a href="/GYM/SvActividadesEmpleado"><button class="boton">Nueva Actividad</button></a> </div>
+		<%}}%>
 		
-		<% } }%>
 		
 	</div>
 	

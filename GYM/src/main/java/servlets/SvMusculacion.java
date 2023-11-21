@@ -28,7 +28,7 @@ public class SvMusculacion extends HttpServlet {
 		ArrayList<Clase> clases = new ArrayList<>();
 		clases.addAll(manejador.getClases());
 		request.setAttribute("clases", clases);
-		request.getRequestDispatcher("/pages/salonMusculacion.jsp").forward(request,response);
+		request.getRequestDispatcher("/pages/salonDeMusculacion.jsp").forward(request,response);
 		
 	}
 

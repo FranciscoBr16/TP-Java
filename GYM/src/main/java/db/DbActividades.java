@@ -88,13 +88,16 @@ public class DbActividades extends DbHandler {
 
 	public ArrayList<Clase> getClases() {
 		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
 		Connection conn = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
+		LogicaActividad la = new LogicaActividad();
 		
 		ArrayList<Clase> actividades = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM clase c INNER JOIN empleado e ON e.id_empleado = c.id_empleado WHERE c.tipo='musculacion'"); 
+			pstmt = conn.prepareStatement("SELECT * FROM clase c WHERE c.tipo='musculacion'"); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) { 
@@ -102,16 +105,27 @@ public class DbActividades extends DbHandler {
 	            Clase ac = new Clase();
 	            ac.setIdClase(rs.getInt("id_clase"));
 	            ac.setNombre(rs.getString("nombre_clase"));
-	            ac.setCupo(rs.getInt("cupo"));
-	            ac.setHorario(rs.getInt("horario"));
-	            
-	            ArrayList<Inscripcion> ins = new ArrayList<>(); // PENSAR PREGUNTAR EN CONSULTA
-	            
-	            ac.setDia(rs.getString("dia"));
 	            ac.setTipo(rs.getString("tipo"));
-	           
+	            int cupo = rs.getInt("cupo");
+	            ac.setHorario(rs.getInt("horario"));
+	            String dia = rs.getString("dia");
+	            ac.setDia(dia);
+
+	            LocalDate fecha = la.fechaIncripcion(dia);
+	            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
+	            Date f2 = java.sql.Date.valueOf(fecha);
+	            
+	            pstmt2 = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND fecha BETWEEN ? AND ? GROUP BY 1");
+	            pstmt2.setInt(1, ac.getIdClase());
+	            pstmt2.setDate(2, f1);
+	            pstmt2.setDate(3, f2);
+	            rs2 = pstmt2.executeQuery();
+	            if (rs2.next()){
+		            int cantidad = rs2.getInt("cantidad");
+		            ac.setCupo(cupo - cantidad);}
+		            else {ac.setCupo(cupo);}
 	            actividades.add(ac);
-	}
+			}
 			return actividades;
 			
 		} catch (SQLException e) {
