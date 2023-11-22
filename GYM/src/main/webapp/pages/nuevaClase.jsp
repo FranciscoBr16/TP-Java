@@ -94,12 +94,12 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 			<form action="/GYM/SvAltaClase" method="POST" class="formulario-campos" enctype="multipart/form-data">
 				<div class="campo">
 					<label>Nombre de la Clase:</label> 
-					<input type="text" name="nombre" required/> 
+					<input type="text" name="nombre" /> 
 				</div>
 					
 				<div class="campo">
 					<label>Descripcion:</label>
-					<input type="text" name="descripcion" required />
+					<input type="text" name="descripcion" />
 				</div>
 				
 				<div class="campo">
@@ -110,11 +110,11 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 				<div class="campo">
 					<label for="opciones">Día:</label>
 					<select name="dia" id="opciones">
-        				<option value="lunes">lunes</option>
-        				<option value="martes">martes</option>
-        				<option value="miercoles">miercoles</option>
-        				<option value="jueves">jueves</option>
-        				<option value="viernes">viernes</option>
+        				<option value="Lunes">Lunes</option>
+        				<option value="Martes">Martes</option>
+        				<option value="Miercoles">Miercoles</option>
+        				<option value="Jueves">Jueves</option>
+        				<option value="Viernes">Viernes</option>
     				</select>
 					<label>Horario:</label>
 					<input class="horario" type="number" name="horario"  max="2400"/>
@@ -135,6 +135,7 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
    					<% for (Empleado emp : empleados){ %>
         				<option value="<%=emp.getIdEmpleado()%>"><%=emp.getNombre()%> <%=emp.getApellido()%></option>
         				<%}%>
+        				<option value="0">Sin Profesor</option>
         			
     				</select>
 				</div>

@@ -153,7 +153,9 @@ public class DbActividades extends DbHandler {
 			pstmt.setString(2, cl.getDescripcion());
 			pstmt.setInt(3, cl.getCupo());
 			pstmt.setInt(4, cl.getHorario());
-			pstmt.setInt(5, cl.getEmpleado().getIdEmpleado());
+			int idempleado = cl.getEmpleado().getIdEmpleado() ;
+			if (idempleado != 0) {
+			pstmt.setInt(5, idempleado);} else {pstmt.setNull(5, idempleado);}
 			pstmt.setString(6, cl.getImagen());
 			pstmt.setString(7, cl.getDia());
 			pstmt.setString(8, cl.getTipo());

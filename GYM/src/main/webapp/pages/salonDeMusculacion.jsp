@@ -1,6 +1,5 @@
 <%@page import="entities.Clase"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="entities.Contrato"%>
 <%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -99,6 +98,7 @@
 	ArrayList<Clase> actividadesMiercoles = new ArrayList<>();
 	ArrayList<Clase> actividadesJueves = new ArrayList<>();
 	ArrayList<Clase> actividadesViernes = new ArrayList<>();
+
 	for(Clase act : clases){ 
 	switch(act.getDia()) {
 		case "Lunes": 
@@ -125,131 +125,169 @@
 	<div class="contenedor"> 
 	
 	<div class="Caja">
-	<p>Lunes</p>
-	
-		<%for (Clase lun : actividadesLunes){ %>
-			
+		<div class="titulo"> 
+			<p>Lunes</p>
+		</div>
+		<div class="contenidoCaja"> 
+			<%for (Clase lun : actividadesLunes){ %>
 			<div class="cajaClase">
 				<div class="cajaIzquierda">
-					<span><%=lun.getHorario()%></span>
+					<%String horario = String.valueOf(lun.getHorario());  
+						if (horario.length() == 4){%>
+						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
+						<%} else { %>
+						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
+						<%} %>
 				</div>
 				<div class="cajaDerecha">
-				<div class="cajaCupo">
-					<p class="cupo">Cupo: <%=lun.getCupo()%> </p>
-				</div>
-				<div class="cajaBotones">
-					<a href="#"><button class="boton3">Reservar</button> </a>
-					<% if(user != null){  %>
-						<% if(user.isAdmin()){ %>
-						<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Clase</button>
-						</form>
-						<% } }%>
+					<div class="cajaCupo">
+						<p class="cupo">Cupo: <%=lun.getCupo()%> </p>
+					</div>
+					<div class="cajaBotones">
+						<a href="#"><button class="boton2">Reservar</button> </a>
+							<% if(user != null){  %>
+								<% if(user.isAdmin()){ %>
+									<form action="/GYM/SvModificarActividad" method="GET">
+										<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
+										<button type="submit" class="boton2">Modificar Clase</button>
+									</form>
+							<% } }%>
+					</div>
 				</div>	
-				</div>
 			</div>
+		
 			<%} %>
+		</div>
 	</div>
 	
 	<div class="Caja">
-	<p>Martes</p>
-	
-		<%for (Clase mar : actividadesMartes){ %>
-			
+		<div class="titulo">
+			<p>Martes</p>
+		</div>
+		<div class="contenidoCaja">
+			<%for (Clase mar : actividadesMartes){ %>
 			<div class="cajaClase">
 				<div class="cajaIzquierda">
-					<span><%=mar.getHorario()%></span>
+					<%String horario = String.valueOf(mar.getHorario()); 
+						if (horario.length() == 4){%>
+						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
+						<%} else { %> 
+						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
+						<%} %>
 				</div>
 				<div class="cajaDerecha">
 					<p class="cupo">Cupo: <%=mar.getCupo()%> </p>
-					<a href="#"><button class="boton3">Reservar</button> </a>
+					<a href="#"><button class="boton2">Reservar</button> </a>
 					<% if(user != null){  %>
 						<% if(user.isAdmin()){ %>
 						<form action="/GYM/SvModificarActividad" method="GET">
 								<input type="hidden" name="id" value="<%=mar.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Clase</button>
+								<button type="submit" class="boton2">Modificar Clase</button>
 						</form>
 						<% } }%>
 				</div>
 			</div>
 			<%} %>
+		</div>
 	</div>
 		
 	<div class="Caja">
-	<p>Miercoles</p>
-		<%for (Clase mier : actividadesMiercoles){ %>
-			
-			<div class="cajaClase">
-				<div class="cajaIzquierda">
-					<span><%=mier.getHorario()%></span>
+		<div class="titulo">
+			<p>Miercoles</p>
+		</div>
+		<div class="contenidoCaja">
+			<%for (Clase mier : actividadesMiercoles){ %>
+				<div class="cajaClase">
+					<div class="cajaIzquierda">
+						<%String horario = String.valueOf(mier.getHorario()); 
+						if (horario.length() == 4){%>
+						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
+						<%} else { %>
+						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
+						<%} %>
+					</div>
+					<div class="cajaDerecha">
+						<p class="cupo">Cupo: <%=mier.getCupo()%> </p>
+						<a href="#"><button class="boton2">Reservar</button> </a>
+						<% if(user != null){  %>
+							<% if(user.isAdmin()){ %>
+								<form action="/GYM/SvModificarActividad" method="GET">
+									<input type="hidden" name="id" value="<%=mier.getIdClase()%>">
+									<button type="submit" class="boton2">Modificar Clase</button>
+								</form>
+							<% } }%>
+					</div>
 				</div>
-				<div class="cajaDerecha">
-					<p class="cupo">Cupo: <%=mier.getCupo()%> </p>
-					<a href="#"><button class="boton3">Reservar</button> </a>
-					<% if(user != null){  %>
-						<% if(user.isAdmin()){ %>
-						<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=mier.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Clase</button>
-						</form>
-						<% } }%>
-				</div>
-			</div>
 			<%} %>
-	</div>
-	<div class="Caja">
-	<p>Jueves</p>
-	
-		<%for (Clase jue : actividadesJueves){ %>
-			
-			<div class="cajaClase">
-				<div class="cajaIzquierda">
-					<span><%=jue.getHorario()%></span>
-				</div>
-				<div class="cajaDerecha">
-					<p class="cupo">Cupo: <%=jue.getCupo()%> </p>
-					<a href="#"><button class="boton3">Reservar</button> </a>
-					<% if(user != null){  %>
-						<% if(user.isAdmin()){ %>
-						<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=jue.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Clase</button>
-						</form>
-						<% } }%>
-				</div>
-			</div>
-			<%} %>
+		</div>
 	</div>
 	
 	<div class="Caja">
-	<p>Viernes</p>
-	
-		<%for (Clase vie : actividadesViernes){ %>
-			
-			<div class="cajaClase">
-				<div class="cajaIzquierda">
-					<span><%=vie.getHorario()%></span>
-				</div>
-				<div class="cajaDerecha">
-					<p class="cupo">Cupo: <%=vie.getCupo()%> </p>
-					<a href="#"><button class="boton3">Reservar</button> </a>
-					<% if(user != null){  %>
-						<% if(user.isAdmin()){ %>
-						<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=vie.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Clase</button>
-						</form>
+		<div class="titulo">
+			<p>Jueves</p>
+		</div>
+		<div class="contenidoCaja">
+			<%for (Clase jue : actividadesJueves){ %>
+				<div class="cajaClase">
+					<div class="cajaIzquierda">
+						<%String horario = String.valueOf(jue.getHorario());  
+						if (horario.length() == 4){%>
+						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
+						<%} else { %>
+						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
+						<%} %>
+					</div>
+					<div class="cajaDerecha">
+						<p class="cupo">Cupo: <%=jue.getCupo()%> </p>
+						<a href="#"><button class="boton2">Reservar</button> </a>
+						<% if(user != null){  %>
+							<% if(user.isAdmin()){ %>
+								<form action="/GYM/SvModificarActividad" method="GET">
+									<input type="hidden" name="id" value="<%=jue.getIdClase()%>">
+									<button type="submit" class="boton2">Modificar Clase</button>
+								</form>
 						<% } }%>
+					</div>
 				</div>
-			</div>
 			<%} %>
+		</div>
+	</div>
+	
+	<div class="Caja">
+		<div class="titulo">
+			<p>Viernes</p>
+		</div>
+		<div class="contenidoCaja">
+			<%for (Clase vie : actividadesViernes){ %>
+				<div class="cajaClase">
+					<div class="cajaIzquierda">
+					<%String horario = String.valueOf(vie.getHorario());  
+						if (horario.length() == 4){%>
+						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
+						<%} else { %>
+						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
+						<%} %> 
+					</div>
+					<div class="cajaDerecha">
+						<p class="cupo">Cupo: <%=vie.getCupo()%> </p>
+						<a href="#"><button class="boton2">Reservar</button> </a>
+						<% if(user != null){  %>
+							<% if(user.isAdmin()){ %>
+								<form action="/GYM/SvModificarActividad" method="GET">
+									<input type="hidden" name="id" value="<%=vie.getIdClase()%>">
+									<button type="submit" class="boton2">Modificar Clase</button>
+								</form>
+							<% } }%>
+					</div>
+				</div>
+			<%} %>
+		</div>
 	</div>
 		
 	
 		<% if(user != null){%>
 		<% if(user.isAdmin()){ %>
-		<div> <a href="/GYM/SvActividadesEmpleado"><button class="boton">Nueva Actividad</button></a> </div>
+		<div> <a href="/GYM/SvActividadesEmpleado"><button class="boton">Nueva Clase</button></a> </div>
 		<%}}%>
 		
 		

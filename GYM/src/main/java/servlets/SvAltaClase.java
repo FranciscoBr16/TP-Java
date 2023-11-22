@@ -45,6 +45,7 @@ public class SvAltaClase extends HttpServlet {
 		Clase c2 = manejador.nuevaClase(c);
 		
 		if ( c2 != null) {
+			if (filePart != null ){
 			Integer id = c2.getIdClase();
 			
 			
@@ -67,9 +68,10 @@ public class SvAltaClase extends HttpServlet {
 			c2.setImagen("/GYM/" + UPLOAD_DIR  + "/" + newfileName + this.getFileExtension(fileName));
 			
 			int b = manejador.actualizarImgClase(c2);
+			}
 			
 			response.sendRedirect("/GYM/pages/reservas.jsp");
-		} else {response.sendRedirect("/GYM/pages/index.jsp");}
+		} else {response.sendRedirect("/GYM/index.jsp");}
 	
 
 }
