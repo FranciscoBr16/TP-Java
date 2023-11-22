@@ -203,6 +203,76 @@ public class DbProducto extends DbHandler{
 			}
 	}
 
+	public Producto getProducto(Producto p) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		ResultSet rs = null;
+		try{
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("Select * from producto pro INNER JOIN precio pre ON pro.id_producto = pre.id_producto where id_producto=? ");
+			pstmt.setInt(1, p.getIdProducto());
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			 p.setIdProducto(rs.getInt("id_producto"));
+			 p.setStock(rs.getInt("stock"));
+	         p.setDescripcion(rs.getString("descripcion"));
+	            /*p.setImagen(rs.getString("imagen")); */
+	         p.setNombre(rs.getString("Nombre"));
+	         
+	         Date fechaux = rs.getDate("fecha_desde");
+	         Precio pre = new Precio(fechaux.toLocalDate(), rs.getInt("precio"));
+				p.setPrecio(pre);	
+					
+				return p;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+	}
+
+	public int actualizarProducto(Producto p) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE producto SET stock = ?, descripcion = ?, nombre = ? where id_producto = ?");
+			pstmt2 = conn.prepareStatement("INSERT INTO precio (id_producto,fecha_desde,precio) VALUES (?,?,?)"); // validar que se quiera cambiar el precio
+			pstmt.setInt(1, p.getStock());
+			pstmt.setString(2, p.getDescripcion());
+			pstmt.setString(3, p.getNombre());
+			pstmt.setInt(4, p.getIdProducto());
+			pstmt2.setInt(1, p.getIdProducto());
+			pstmt2.setDate(2, java.sql.Date.valueOf(p.getPrecio().getFechaDesde()));
+			pstmt2.setInt(3, p.getPrecio().getPrecio());
+		
+			pstmt2.execute();
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null || pstmt2!=null)
+					pstmt.close();
+					pstmt2.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	}
+
 
 
 }
