@@ -102,7 +102,6 @@ CREATE TABLE `contrato` (
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
-INSERT INTO `contrato` VALUES ('50000000',1,'2023-10-02','2023-11-11');
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +264,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('50000000',1,'2023-10-02'),('00000001',2,'2023-10-18');
+INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('00000001',2,'2023-10-18');
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,6 +364,7 @@ CREATE TABLE `usuario` (
   `admin` tinyint(1) DEFAULT '0',
   `imagen` varchar(255) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
+  `estado` tinyint DEFAULT '1',
   PRIMARY KEY (`dni`),
   UNIQUE KEY `telefono_UNIQUE` (`telefono`),
   UNIQUE KEY `correo_UNIQUE` (`correo`)
@@ -377,7 +377,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,NULL,'2000-10-10'),('50000000','a','a','a','a','12',NULL,NULL,NULL,NULL),('69696969','admin','admin','admin123','abz@gmail.com','123456789',0,1,NULL,'2000-12-11');
+INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,'/GYM/img/perfil/imgperfil1.jpg','2000-10-10',1),('42424242','Santi','Aua','santi','soyaua@gmail.com','3464440838',0,0,'/GYM/img/perfil/imgperfil5.jpg','2000-12-11',1),('69696969','admin','admin','admin123','abz@gmail.com','123456789',0,1,'/GYM/img/perfil/imgperfil1.jpg','2000-12-11',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -390,4 +390,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-17 11:28:10
+-- Dump completed on 2023-11-23 12:50:31
