@@ -31,13 +31,11 @@
 	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/usuModificarPerfilEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");
- Contrato contrato = (Contrato) request.getAttribute("contrato");
-%>
+<% Usuario user = (Usuario) session.getAttribute("user");%>
 
 </head>
 
@@ -45,7 +43,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="../index.jsp"><img
+				<a class="navbar-brand" href="/GYM/index.jsp"><img
 					src="/GYM/img/logo.png" alt="logo del gimnasio" /></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -56,7 +54,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" aria-current="page" href="../index.jsp">Inicio</a></li>
+							id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
@@ -103,6 +101,38 @@
 					<label for="phonenumber">Teléfono:</label> 
 					<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
 				</div>
+				<div class="campo">
+				<label>Imágen de perfil:</label>
+        			<div class="opcionesimg">
+        				<div class="opcion">
+        					<label for="imagen1"><img class="opcionimg" src="/GYM/img/perfil/imgperfil1.jpg" alt="Imagen Fitness"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil1.jpg" <% if (user.getImagen().equals("/GYM/img/perfil/imgperfil1.jpg")){%>checked <%} %> required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen2"><img class="opcionimg" src="/GYM/img/perfil/imgperfil2.jpg" alt="Imagen Mujer"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil2.jpg" <% if (user.getImagen().equals("/GYM/img/perfil/imgperfil2.jpg")){%>checked <%} %> required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen3"><img class="opcionimg" src="/GYM/img/perfil/imgperfil3.jpg" alt="Imagen Bebida"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil3.jpg" <% if (user.getImagen().equals("/GYM/img/perfil/imgperfil3.jpg")){%>checked <%} %> required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen4"><img class="opcionimg" src="/GYM/img/perfil/imgperfil4.jpg" alt="Imagen Hombre"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil4.jpg" <% if (user.getImagen().equals("/GYM/img/perfil/imgperfil4.jpg")){%>checked <%} %> required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen5"><img class="opcionimg" src="/GYM/img/perfil/imgperfil5.jpg" alt="Imagen Puño"></label>
+				            <input type="radio"  name="imagenesPerfil" value="imgperfil5.jpg" <% if (user.getImagen().equals("/GYM/img/perfil/imgperfil5.jpg")){%>checked <%} %> required>
+				            
+				        </div>
+						
+				     </div>
+				  </div>
+				
 				<div class="final">
 					<button class="boton" type="submit"> Aplicar cambios </button>
 				</div>

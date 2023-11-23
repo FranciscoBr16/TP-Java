@@ -108,7 +108,7 @@ public class Usuario {
 		this.fechaNac = fechaNac;
 	}
 
-	public Usuario(String dni,String nombre, String apellido, String password, String email , String telefono, LocalDate fecha) {
+	public Usuario(String dni, String nombre, String apellido, String password, String email , String telefono, LocalDate fecha, String img) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -117,6 +117,7 @@ public class Usuario {
 		this.telefono = telefono;
 		this.fechaNac = fecha;
 		this.admin = false;
+		this.imagen = img;
 	}
 
 	public Usuario(String dni, String password) {

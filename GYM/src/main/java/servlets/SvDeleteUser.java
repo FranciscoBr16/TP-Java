@@ -34,7 +34,7 @@ public class SvDeleteUser extends HttpServlet {
 		
 		Usuario user = (Usuario)request.getSession().getAttribute("user");
 		DbUsuario dbusu = new DbUsuario();
-		if (dbusu.deleteUsuario(user)) {
+		if (dbusu.deleteUsuario(user) > 0) {
 			request.getSession().setAttribute("user", null);
 			response.sendRedirect("index.jsp");
 		} else {

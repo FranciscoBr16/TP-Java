@@ -34,8 +34,8 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
             crossorigin="anonymous"
         />
 
-        <link rel="stylesheet" href="/GYM/style/styleInicio.css" />
-        <link rel="stylesheet" href="/GYM/style/generalStyles.css" />
+        <link rel="stylesheet" href="/GYM/style/indexEstilos.css" />
+        <link rel="stylesheet" href="/GYM/style/estilosGenerales.css" />
 
         <% Usuario user = (Usuario) session.getAttribute("user");%>
     </head>
@@ -113,10 +113,8 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
                     </div>
                     <% } else {%>
                     <div class="cajaUser">
-                        <i class="fas fa-solid fa-user"></i>
-                        <a class="nombreUsuario" href="/GYM/SvUsuario"
-                            ><%= user.getNombre() %></a
-                        >
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %> <%= user.getApellido()%></a>
+                        <img class ="imglogo" src="<%=user.getImagen()%>"></img>
                     </div>
                     <%} %>
                 </div>

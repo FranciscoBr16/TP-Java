@@ -59,3 +59,24 @@ display: flex;
 .titulo p {
 	font-size: 28px;
 }
+
+.opcionimg{
+	width:100px;
+	height:100px;
+	border: 2px solid black;
+	margin: 5px;
+}
+
+.opcionesimg{
+	display:flex;
+	flex-direction:row;
+	background-color: rgb(192, 192, 192);
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.opcion{
+	display:flex;
+	align-items:center;
+	flex-direction: column;
+}

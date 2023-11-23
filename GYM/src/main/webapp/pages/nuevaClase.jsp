@@ -29,8 +29,8 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles2.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/altaStyle.css" />
 
 
@@ -74,8 +74,8 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
                     </div>
                     <% } else {%>
                     <div class="cajaUser">
-                        <i class="fas fa-solid fa-user"></i>
-                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %></a>
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %> <%= user.getApellido()%></a>
+                        <img class ="imglogo" src="<%=user.getImagen()%>"></img>
                     </div>
                     <%} %>
                     

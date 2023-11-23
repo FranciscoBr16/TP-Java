@@ -19,7 +19,7 @@ public class DbUsuario extends DbHandler {
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into usuario (nom_usuario, nombre, apellido, clave, correo, telefono, fechaNacimiento) values (?,?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("INSERT INTO usuario (dni, nombre, apellido, clave, correo, telefono, fechaNacimiento, imagen) VALUES (?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, user.getDni() );
 			pstmt.setString(2, user.getNombre());
 			pstmt.setString(3, user.getApellido());
@@ -27,6 +27,7 @@ public class DbUsuario extends DbHandler {
 			pstmt.setString(5, user.getEmail());
 			pstmt.setString(6, user.getTelefono());
 			pstmt.setDate(7, java.sql.Date.valueOf(user.getFechaNac()));
+			pstmt.setString(8, "/GYM/img/perfil/"+user.getImagen());
 			pstmt.executeUpdate();
 			
 			return true;
@@ -51,7 +52,7 @@ public class DbUsuario extends DbHandler {
 		ResultSet rs = null;
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Select * from usuario where dni=? AND clave=?");
+			pstmt = conn.prepareStatement("Select * from usuario where dni=? AND clave=? AND estado = 1");
 			pstmt.setString(1, user.getDni());
 			pstmt.setString(2, user.getPassword());
 			rs = pstmt.executeQuery();
@@ -64,7 +65,7 @@ public class DbUsuario extends DbHandler {
 			user.setTelefono(rs.getString("telefono"));
 			user.setBeneficio(rs.getBoolean("beneficio"));
 			user.setAdmin(rs.getBoolean("admin"));
-			// user.setImagen(rs.getString("imagen"));
+			user.setImagen(rs.getString("imagen"));
 			Date fechaux = rs.getDate("fechaNacimiento");
 			if (fechaux != null) {
 				user.setFechaNac(fechaux.toLocalDate());
@@ -89,14 +90,15 @@ public class DbUsuario extends DbHandler {
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("UPDATE usuario SET nombre = ?, apellido = ?, clave = ? , correo = ?, telefono = ?, fechaNacimiento = ? where dni = ?");
+			pstmt = conn.prepareStatement("UPDATE usuario SET nombre = ?, apellido = ?, clave = ? , correo = ?, telefono = ?, fechaNacimiento = ?, imagen= ? where dni = ?");
 			pstmt.setString(1, user.getNombre());
 			pstmt.setString(2, user.getApellido());
 			pstmt.setString(3, user.getPassword());
 			pstmt.setString(4, user.getEmail());
 			pstmt.setString(5, user.getTelefono());
 			pstmt.setDate(6, java.sql.Date.valueOf(user.getFechaNac()));
-			pstmt.setString(7, user.getDni());
+			pstmt.setString(7, user.getImagen());
+			pstmt.setString(8, user.getDni());
 			
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -112,20 +114,20 @@ public class DbUsuario extends DbHandler {
 	}
 	}
 	
-	public boolean deleteUsuario(Usuario user) {
+	public int deleteUsuario(Usuario user) {
 		
 		PreparedStatement pstmt=null;
 		Connection conn;
 
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("DELETE from usuario WHERE dni =?");
+			pstmt = conn.prepareStatement("UPDATE usuario SET estado = 0 WHERE dni =?");
 			pstmt.setString(1, user.getDni());
-			return pstmt.execute();
+			return pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return 0;
 			
 		}finally {
 			try {

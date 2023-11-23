@@ -1,3 +1,4 @@
+<%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 
@@ -26,8 +27,10 @@ pageEncoding="ISO-8859-1"%>
 	crossorigin="anonymous">
 </script>
 <link rel="stylesheet" href="/GYM/style/sobreNosotros.css">
-<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
+<% Usuario user = (Usuario) session.getAttribute("user");%>
+</head>
 
 <body>
 	 <header>
@@ -56,11 +59,21 @@ pageEncoding="ISO-8859-1"%>
 					</ul>
 				</div>
 
-				<div class="cajalogin">
-					<a id="textoregistro" href="pages/signUp.jsp">Registrate</a> <a
-						href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar
-							Sesion</button></a>
-				</div>
+				<% if (user == null){ %>
+                    <div class="cajalogin">
+                        <a id="textoregistro" href="pages/signUp.jsp"
+                            >Registrate</a
+                        >
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        >
+                    </div>
+                    <% } else {%>
+                    <div class="cajaUser">
+                        
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %> <%= user.getApellido()%></a>
+                        <img class ="imglogo" src="<%=user.getImagen()%>"></img>
+                    </div>
+                    <%} %>
 
 			</div>
 

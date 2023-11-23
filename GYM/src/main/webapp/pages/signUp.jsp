@@ -26,9 +26,9 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="../style/generalStyles.css" />
-<link rel="stylesheet" type="text/css" href="../style/generalStyles2.css" />
-<link rel="stylesheet" type="text/css" href="../style/styleRegister.css" />
+<link rel="stylesheet" type="text/css" href="../style/usuRegistroEstilos.css" />
+<link rel="stylesheet" type="text/css" href="../style/estilosGenerales.css" />
+<link rel="stylesheet" type="text/css" href="../style/estilosGenerales2.css" />
 
 
 <link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon" />
@@ -98,8 +98,42 @@
 				</div>
 				<div class="campo">
 					<label for="birthdate">Fecha de Nacimiento:</label> <input
-						type="date" name="birthdate" id="birthdate" required />
+						type="date" name="fecha" id="birthdate" required />
 				</div>
+				
+				<div class="campo">
+				<label>Imágen de perfil:</label>
+        			<div class="opcionesimg">
+        				<div class="opcion">
+        					<label for="imagen1"><img class="opcionimg" src="/GYM/img/perfil/imgperfil1.jpg" alt="Imagen Fitness"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil1.jpg" checked required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen2"><img class="opcionimg" src="/GYM/img/perfil/imgperfil2.jpg" alt="Imagen Mujer"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil2.jpg" required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen3"><img class="opcionimg" src="/GYM/img/perfil/imgperfil3.jpg" alt="Imagen Bebida"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil3.jpg" required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen4"><img class="opcionimg" src="/GYM/img/perfil/imgperfil4.jpg" alt="Imagen Hombre"></label>
+				            <input type="radio" name="imagenesPerfil" value="imgperfil4.jpg" required>
+				            
+						</div>
+						<div class="opcion">
+							<label for="imagen5"><img class="opcionimg" src="/GYM/img/perfil/imgperfil5.jpg" alt="Imagen Puño"></label>
+				            <input type="radio"  name="imagenesPerfil" value="imgperfil5.jpg" required>
+				            
+				        </div>
+						
+				     </div>
+				  </div>
+				
+				
 				<div class="finalform">
 					<button class="boton botonregistro" type="submit">Registrarse</button>
 

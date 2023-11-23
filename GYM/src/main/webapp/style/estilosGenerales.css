@@ -68,10 +68,11 @@ nav {
     justify-content: space-around;
     text-align: center;
     align-items: center;
+   	margin-right: 5px;
 }
 
 .boton2 {
-    width: 180px;
+    width: 160px;
     font-size: 18px;
     text-align: center;
     padding: 5px;
@@ -86,6 +87,7 @@ nav {
 .nombreUsuario {
     color: white;
     text-decoration: none;
+    margin: 5px;
 }
 
 /* */
@@ -128,4 +130,25 @@ input:focus {
 .footer {
     background-color: #d95126;
     width: 100%;
+}
+
+.imglogo{
+	width: 45px;
+	height: 45px;
+	margin: 3px;
+	border: solid #d95126 2px;
+	border-radius: 50%;
+}
+
+.cajaUser a {
+	font-size: 20px;
+}
+
+.cajaUser {
+	display: flex;
+	justify-content: center;
+	align-items:center;
+	flex-direction:row;
+	margin-right: 10px;
+	
 }

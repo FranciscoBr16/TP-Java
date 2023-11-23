@@ -35,13 +35,14 @@ public class SvModificacionUsuario extends HttpServlet {
 		String phonenumber = request.getParameter("phonenumber"); 
 		String fechaStr = request.getParameter("birthdate");
 		LocalDate fecha = LocalDate.parse(fechaStr);
+		String img = "/GYM/img/perfil/" + request.getParameter("imagenesPerfil");
 		String dni = ((Usuario)request.getSession().getAttribute("user")).getDni();
 		
-		Usuario user = new Usuario(dni, name, surname, clave, email, phonenumber, fecha);
+		Usuario user = new Usuario(dni, name, surname, clave, email, phonenumber, fecha, img);
 		
-		DbUsuario manejadorDb = new DbUsuario();
+		DbUsuario manejador = new DbUsuario();
 		
-		if(manejadorDb.actualizarUsuario(user) > 0 ) {
+		if(manejador.actualizarUsuario(user) > 0 ) {
 			request.getSession().setAttribute("user",user);
 			response.sendRedirect("/GYM/SvUsuario");
 		} else {

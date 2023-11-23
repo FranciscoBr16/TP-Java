@@ -17,9 +17,9 @@ public class SvSignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String fechaStr = request.getParameter("fecha");
+		String fechaStr = (String)request.getParameter("fecha");
 		LocalDate fecha = LocalDate.parse(fechaStr);
-		Usuario usu = new Usuario((String)request.getParameter("dni"),(String)request.getParameter("name"),(String)request.getParameter("surname"),(String)request.getParameter("password"),(String)request.getParameter("email"),(String) request.getParameter("phonenumber"),fecha);
+		Usuario usu = new Usuario(request.getParameter("dni"),request.getParameter("name"),request.getParameter("surname"),request.getParameter("password"),request.getParameter("email"),request.getParameter("phonenumber"),fecha,request.getParameter("imagenesPerfil"));
 		DbUsuario db = new DbUsuario();		
 		if(db.newUser(usu)){
 			response.sendRedirect("/GYM/pages/signUpExitoso.jsp");

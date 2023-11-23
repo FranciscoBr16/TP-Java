@@ -25,8 +25,8 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet" href="/GYM/style/generalStyles.css" />
-<link rel="stylesheet" href="/GYM/style/generalStyles2.css" />
+<link rel="stylesheet" href="/GYM/style/estilosGenerales.css" />
+<link rel="stylesheet" href="/GYM/style/estilosGenerales2.css" />
 <link rel="stylesheet" href="/GYM/style/loginStyle.css" />
 </head>
 

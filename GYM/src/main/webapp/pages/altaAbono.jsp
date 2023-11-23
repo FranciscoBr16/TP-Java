@@ -27,12 +27,12 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="../style/generalStyles.css" />
-<link rel="stylesheet" type="text/css" href="../style/generalStyles2.css" />
-<link rel="stylesheet" type="text/css" href="../style/styleAltaAbono.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/styleAltaAbono.css" />
 
 
-<link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 <% Usuario user = (Usuario) session.getAttribute("user");%>
 </head>
 
@@ -50,7 +50,7 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link text-light"
-						id="links" aria-current="page" href="index.jsp">Inicio</a></li>
+						id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a></li>
 					<li class="nav-item"><a class="nav-link text-light active" id="links"
 						href="/GYM/SvAbono">Planes</a></li>
 					<li class="nav-item"><a class="nav-link text-light" id="links"
@@ -62,9 +62,17 @@
 				</ul>
 			</div>
 
-			<div class="cajalogin">
-				<a id="textoregistro" href="signUp.jsp">Registrate</a> <a href="logIn.jsp"><button class="boton2">Iniciar Sesion</button></a>
-			</div>
+			 <% if (user == null){ %>
+                    <div class="cajalogin">
+                        <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a>
+                    </div>
+                    <% } else {%>
+                    <div class="cajaUser">
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %> <%= user.getApellido()%></a>
+                        <img class ="imglogo" src="<%=user.getImagen()%>"></img>
+                    </div>
+                    <%} %>
 
 		</div>
 	</nav>

@@ -29,7 +29,7 @@
 	crossorigin="anonymous">
 </script>
 <link rel="stylesheet" type="text/css" href="/GYM/style/abonos.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/generalStyles.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
@@ -75,10 +75,8 @@
                     </div>
                     <% } else {%>
                     <div class="cajaUser">
-                        <i class="fas fa-solid fa-user"></i>
-                        <a class="nombreUsuario" href="/GYM/SvUsuario"
-                            ><%= user.getNombre() %></a
-                        >
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %> <%= user.getApellido()%></a>
+                        <img class ="imglogo" src="<%=user.getImagen()%>"></img>
                     </div>
                     <%} %>
 
