@@ -29,13 +29,12 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilsoGenerales2.css" />
+
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
  Empleado emp = (Empleado) request.getAttribute("emp");
@@ -90,35 +89,36 @@
 
 	<div class="contenedor">
 		<div class="cajaModificar">
-		<div class="titulo">
-			<p>Modifica los datos del Empleado </p>
+		<div class="headerForm">
+			<p class="titulo">Modifica al <span class="anaranjado"> Empleado </span></p>
 		</div>
+		<hr>
 
 			<form action="/GYM/SvModificarEmpleado" method="POST" class="formulario-campos">
 				<div class="campo">
 					<label for="idAbono">Id Empleado:</label> 
-					<input class="idEmpleado" type="number" name="idEmpleado" id="idEmpleado" value="<%=emp.getIdEmpleado()%>" readonly/>
+					<input class="inputMediano" type="number" name="idEmpleado" id="idEmpleado" value="<%=emp.getIdEmpleado()%>" readonly/>
 				</div>
 				
 				<div class="campo">
 					<label for="nombreEmpleado">Nombre Empleado:</label> 
-					<input class="nombreEmpleado" type="text" name="nombreEmpleado" id="nombreEmpleado" value="<%=emp.getNombre()%>" />
+					<input class="inputMediano" type="text" name="nombreEmpleado" id="nombreEmpleado" value="<%=emp.getNombre()%>" />
 				</div>
 				<div class="campo">
 					<label for="apellidoEmpleado">Apellido Empleado:</label> 
-					<input class="apellidoEmpleado" type="text" name="apellidoEmpleado" id="apellidoEmpleado" value="<%=emp.getApellido()%>" />
+					<input class="inputMediano" type="text" name="apellidoEmpleado" id="apellidoEmpleado" value="<%=emp.getApellido()%>" />
 				</div>
 				<div class="campo">
 					<label for="mailEmpleado">Mail Empleado:</label> 
-					<input class="mailEmpleado" type="text" name="mailEmpleado" id="mailEmpleado" value="<%=emp.getCorreo()%>" />
+					<input class="inputLargo" type="text" name="mailEmpleado" id="mailEmpleado" value="<%=emp.getCorreo()%>" />
 				</div>
 				
 				<div class="campo">
 					<label for="rol">Rol:</label> 
-					<input type="text" name="rol" id="rol" value="<%=emp.getRol()%>"/> 
+					<input class="inputMediano" type="text" name="rol" id="rol" value="<%=emp.getRol()%>"/> 
 				</div>
 				
-				<div class="final">
+				<div class="bottomForm">
 					<button class="boton" type="submit"> Aplicar cambios </button>
 				</div>
 				</form>

@@ -7,6 +7,7 @@
     font-weight: bold;
 }
 
+/* BOTONES */ 
 .boton {
 	font-size: 18px ;
 	text-align: center ;
@@ -17,7 +18,70 @@
 	color: white ;
 	margin: 10px ;
 	border: solid 2px black ;
-	
+}
+.boton:hover {
+  background-color: rgb(245, 148, 118);
+  border: 2px solid rgb(245, 148, 118);
+  color: white;
+  transition: background-color 250ms ease-in-out;
+}
+
+.boton2 {
+    width: 160px;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #d95126;
+    color: white;
+    margin: 10px;
+    border: solid 2px black;
+    cursor: pointer;
+}
+
+.boton2:hover{
+	background-color: rgb(245, 148, 118);
+ 	border: 2px solid rgb(245, 148, 118);
+  	color: white;
+  	transition: background-color 250ms ease-in-out;
+}
+
+.boton3 {
+  font-size: 18px;
+  text-align: center;
+  width: 120px;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: #d95126;
+  color: white;
+  margin: 5px;
+  border: solid 2px black;
+}
+
+.boton3:hover {
+  background-color: rgb(245, 148, 118);
+  border: 2px solid rgb(245, 148, 118);
+  color: white;
+  transition: background-color 250ms ease-in-out;
+}
+
+.boton4 {
+  font-size: 18px;
+  text-align: center;
+  width: 150px;
+  padding: 3px;
+  border-radius: 20px;
+  background-color: rgb(128, 128, 128);
+  color: white;
+  margin: 5px;
+  border: solid 2px black;
+}
+
+.boton4:hover {
+  background-color: rgb(192, 192, 192);
+  border: 2px solid rgb(192, 192, 192);
+  color: white;
+  transition: background-color 250ms ease-in-out;
 }
 
 /* NAVBAR */
@@ -71,18 +135,7 @@ nav {
    	margin-right: 5px;
 }
 
-.boton2 {
-    width: 160px;
-    font-size: 18px;
-    text-align: center;
-    padding: 5px;
-    border-radius: 20px;
-    background-color: #d95126;
-    color: white;
-    margin: 10px;
-    border: solid 2px black;
-    cursor: pointer;
-}
+
 
 .nombreUsuario {
     color: white;
@@ -152,3 +205,5 @@ input:focus {
 	margin-right: 10px;
 	
 }
+
+

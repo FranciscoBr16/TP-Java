@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Log In</title>
+<title>Modificar Actividad</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,17 +31,17 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
+
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
  Clase clase = (Clase) request.getAttribute("clase");
  ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empleados");
+ session.setAttribute("idclase", clase.getIdClase());
 %>
 
 </head>
@@ -91,32 +91,47 @@
 	</header>
 
 	<div class="contenedor">
+	
 		<div class="cajaModificar">
-		<div class="titulo">
-			<p>Modifica la Actividad </p>
+		<div class="headerForm">
+			<p class="titulo">Modifica la <span class="anaranjado">Actividad</span></p>
 		</div>
+		<hr>
+		
+				<div class="campoCentrado">
+					<img class="imgMuestra" src="<%=clase.getImagen()%>">
+					<a href="/GYM/pages/modificarImagenActividad.jsp"><button class="boton4">Cambiar Imágen</button></a>		
+				</div>
 
 			<form action="/GYM/SvModificarActividad" method="POST" class="formulario-campos">
 				<div class="campo">
 					<label for="idClase">Id Clase:</label> 
-					<input class="idClase" type="number" name="idClase" id="idAbono" value="<%=clase.getIdClase()%>" readonly/>
+					<input class="inputCorto" type="number" name="idClase" id="idAbono" value="<%=clase.getIdClase()%>" readonly/>
 				</div>
 				
 				<div class="campo">
 					<label for="nombreClase">Nombre Actividad:</label> 
-					<input class="nombreClase" type="text" name="nombreClase" id="nombreClase" value="<%=clase.getNombre()%>" />
+					<input class="inputMediano" type="text" name="nombreClase" id="nombreClase" value="<%=clase.getNombre()%>" required/>
 				</div>
 				<div class="campo">
 					<label for="descripcion">Descripcion:</label> 
-					<input type="text" name="descripcion" id="descripcion" value="<%=clase.getDescripcion()%>"/>
+					<input class ="inputLargo" type="text" name="descripcion" id="descripcion" value="<%=clase.getDescripcion()%>" required/>
 				</div>
 				<div class="campo">
 					<label for="cupo">Cupo:</label>
-					<input type="number" name="cupo" id="cupo" value="<%=clase.getCupo()%>"/>
+					<input class="inputCorto" type="number" name="cupo" id="cupo" value="<%=clase.getCupo()%>" required/>
 				</div>
 				<div class="campo">
+				<label for="opciones">Día:</label>
+					<select name="dia" id="opciones">
+        				<option value="Lunes" <%if(clase.getDia().equals("Lunes")){ %> selected <%} %>>Lunes</option>
+        				<option value="Martes" <%if(clase.getDia().equals("Martes")){ %> selected <%} %>>Martes</option>
+        				<option value="Miercoles" <%if(clase.getDia().equals("Miercoles")){ %> selected <%} %>>Miercoles</option>
+        				<option value="Jueves" <%if(clase.getDia().equals("Jueves")){ %> selected <%} %>>Jueves</option>
+        				<option value="Viernes" <%if(clase.getDia().equals("Viernes")){ %> selected <%} %>>Viernes</option>
+    				</select>
 					<label for="horario">Horario:</label> 
-					<input type="number" name="horario" id="horario" value="<%=clase.getHorario()%>"/> 
+					<input class="inputMediano" type="number" name="horario" id="horario" value="<%=clase.getHorario()%>" required/> 
 				</div>
 				
 				<div class="campo">
@@ -129,24 +144,22 @@
     				</select>
 				</div>
 				
-				<div class="campo">
-					<label for="dia">Dia:</label>
-					<input type="text" name="dia" id="dia" value="<%=clase.getDia()%>"/>
-				</div>
+				
 
 				<div class="campo">
-					<label for="opciones">Tipo:</label>
-   					<select name="tipo" id="opciones">
-        				<option value="musculacion" <%if(clase.getTipo().equals("musculacion")){%> selected <%} %>>musculacion</option>
-        				
-        				<option value="actividad"<%if(clase.getTipo().equals("actividad")){%> selected <%} %>>actividad</option>
-    				</select>
+				<label for="opciones">Tipo:</label>
+					<input type="text" class="inputMediano" name="tipo" value="actividad" readonly/>
 				</div>
 				
-				<div class="final">
+				
+				<div class="bottomForm">
 					<button class="boton" type="submit"> Aplicar cambios </button>
 				</div>
 				</form>
+				
+				
+					
+			
 			
 		</div>
 

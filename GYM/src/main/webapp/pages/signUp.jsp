@@ -31,7 +31,7 @@
 <link rel="stylesheet" type="text/css" href="../style/estilosGenerales2.css" />
 
 
-<link rel="shortcut icon" href="../img/logo.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 </head>
 
 <header>

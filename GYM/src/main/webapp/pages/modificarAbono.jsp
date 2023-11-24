@@ -28,13 +28,12 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificarPerfilStyle.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/estiloGenerales2.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
+
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
  Abono abono = (Abono) request.getAttribute("abono");
@@ -89,36 +88,37 @@
 
 	<div class="contenedor">
 		<div class="cajaModificar">
-		<div class="titulo">
-			<p>Modifica el Abono </p>
+		<div class="headerForm">
+			<p class="titulo">Modifica el <span class="anaranjado"> Abono </span></p>
 		</div>
+		<hr>
 
 			<form action="/GYM/SvModificarAbono" method="POST" class="formulario-campos">
 				<div class="campo">
 					<label for="idAbono">Id Abono:</label> 
-					<input class="nombreAbono" type="number" name="idAbono" id="idAbono" value="<%=abono.getIdAbono()%>" readonly/>
+					<input class="inputCorto" type="number" name="idAbono" id="idAbono" value="<%=abono.getIdAbono()%>" readonly/>
 				</div>
 				
 				<div class="campo">
 					<label for="nombreAbono">Nombre Abono:</label> 
-					<input class="nombreAbono" type="text" name="nombreAbono" id="nombreAbono" value="<%=abono.getNombreAbono()%>" />
+					<input class="inputMediano" type="text" name="nombreAbono" id="nombreAbono" value="<%=abono.getNombreAbono()%>" />
 				</div>
 				<div class="campo">
 					<label for="cantReservas">Cantidad Reservas:</label> 
-					<input type="number" name="cantReservas" id="cantReservas" value="<%=abono.getCantReservas()%>"/>
+					<input class="inputCorto" type="number" name="cantReservas" id="cantReservas" value="<%=abono.getCantReservas()%>"/>
 				</div>
 				<div class="campo">
 					
 					<label for="precio">Precio:</label>
-					<input type="number" name="precio" id="precio" value="<%=abono.getPrecio()%>"/>
+					<input class="inputMediano" type="number" name="precio" id="precio" value="<%=abono.getPrecio()%>"/>
 				</div>
 				<div class="campo">
 					<label for="descripcion">Descripcion:</label> 
-					<input type="text" name="descripcion" id="descripcion" value="<%=abono.getDescripcion()%>"/> 
+					<input class="inputLargo" type="text" name="descripcion" id="descripcion" value="<%=abono.getDescripcion()%>"/> 
 				</div>
 				
-				<div class="final">
-					<button class="boton" type="submit"> Aplicar cambios </button>
+				<div class="bottomForm">
+					<button class="boton" type="submit"> Aplicar cambios</button>
 				</div>
 				</form>
 			

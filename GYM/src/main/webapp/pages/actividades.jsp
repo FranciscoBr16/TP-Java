@@ -29,21 +29,38 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	crossorigin="anonymous" />
+	
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/actividades.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");%>
-<% ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");%>	
+<link rel="stylesheet" type="text/css" href="/GYM/style/actListadoEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
+
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
+
+<% Usuario user = (Usuario) session.getAttribute("user");
+ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");
+String mensaje = (String) request.getAttribute("mensaje");%>	
 
 
 </head>
-
+<!-- Modal con el msj, no lo puedo hacer andar :(
+<% if(mensaje != null){%>
 <body>
+<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p><%=mensaje%></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<%} %>
+--->
 	<header>
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
@@ -98,8 +115,8 @@
 		<%for(Clase act : actividades){ %>
 		<div class="cajaAlargada">
 		
-			<div style="background-image: url(<%=act.getImagen()%>)" class="caja1">
-				<!-- <img class="imagenact" src="../img/actividades.png"></img> -->
+			<div class="caja1">
+				<img class="imagenact" src="<%=act.getImagen()%>"></img> 
 			</div>
 		
 			<div class="caja2">
@@ -121,16 +138,22 @@
 				</div>
 				<div class="pie">
 					<a href="#"><button class="boton3">Reservar</button> </a>
-					<br>
+				</div>
+				
+				<div class="pie">
 					
 					<% if(user != null){  %>
 					<% if(user.isAdmin()){ %>
 					<form action="/GYM/SvModificarActividad" method="GET">
 								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Abono</button>
+								<button type="submit" class="boton4">Modificar Clase</button>
+							</form>
+							<form action="/GYM/SvBajaClase" method ="POST">
+								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
+								<button type="submit" class="boton3">Eliminar <%=act.getIdClase()%></button>
 							</form>
 							<% } }%>
-			</div>
+				</div>
 
 			</div>
 			

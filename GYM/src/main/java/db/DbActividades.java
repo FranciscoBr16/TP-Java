@@ -32,7 +32,7 @@ public class DbActividades extends DbHandler {
 		ArrayList<Clase> actividades = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM clase c INNER JOIN empleado e ON e.id_empleado = c.id_empleado WHERE c.tipo='actividad'"); 
+			pstmt = conn.prepareStatement("SELECT * FROM clase c INNER JOIN empleado e ON e.id_empleado = c.id_empleado WHERE c.tipo='actividad' AND c.estado=1 "); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) { 
@@ -97,7 +97,7 @@ public class DbActividades extends DbHandler {
 		ArrayList<Clase> actividades = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM clase c WHERE c.tipo='musculacion'"); 
+			pstmt = conn.prepareStatement("SELECT * FROM clase c WHERE c.tipo='musculacion'AND estado=1"); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) { 
@@ -115,7 +115,7 @@ public class DbActividades extends DbHandler {
 	            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
 	            Date f2 = java.sql.Date.valueOf(fecha);
 	            
-	            pstmt2 = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND fecha BETWEEN ? AND ? GROUP BY 1");
+	            pstmt2 = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND estado=1 AND fecha BETWEEN ? AND ?  GROUP BY 1");
 	            pstmt2.setInt(1, ac.getIdClase());
 	            pstmt2.setDate(2, f1);
 	            pstmt2.setDate(3, f2);
@@ -264,6 +264,30 @@ public class DbActividades extends DbHandler {
 			e.printStackTrace();
 			return 0;
 		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	}
+
+	public int deleteActividad(Clase c) {
+		PreparedStatement pstmt=null;
+		Connection conn;
+
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE clase SET estado = 0 WHERE id_clase =?");
+			pstmt.setInt(1, c.getIdClase());
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+			
+		}finally {
 			try {
 				if(pstmt!=null)pstmt.close();
 				this.cerrarConnection();

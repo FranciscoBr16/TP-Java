@@ -14,20 +14,15 @@ import entities.Usuario;
 
 
 @WebServlet("/SvDeleteUser")
-public class SvDeleteUser extends HttpServlet {
+public class SvBajaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public SvDeleteUser() {
+    public SvBajaUsuario() {
         super();
  
     }
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		
-	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -14,18 +14,18 @@ import db.DbActividades;
 import db.DbEmpleado;
 import entities.Clase;
 
-@WebServlet("/SvAltaClase")
+@WebServlet("/SvAltaActividad")
 @MultipartConfig(
 	    fileSizeThreshold = 1024 * 1024*10, // 10 MB
 	    maxFileSize = 1024 * 1024 * 50,  // 50 MB
 	    maxRequestSize = 1024 * 1024 * 100 // 100 MB
 	)
-public class SvAltaClase extends HttpServlet {
+public class SvAltaActividad extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private static final String UPLOAD_DIR = "img";
+	private static final String UPLOAD_DIR = "img/inputs";
 
-    public SvAltaClase() {
+    public SvAltaActividad() {
         super();
 
     }
@@ -55,7 +55,7 @@ public class SvAltaClase extends HttpServlet {
 	   
 	        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR ;
 	       
-	        String newfileName = id.toString();
+	        String newfileName = "act"+ id.toString();
 	       
 	        
 	        filePart.write(uploadFilePath+ File.separator  + newfileName + this.getFileExtension(fileName));

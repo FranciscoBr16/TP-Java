@@ -27,13 +27,12 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	crossorigin="anonymous" />
 
 <link rel="stylesheet" type="text/css" href="/GYM/style/usuPerfilEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
+
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
  Contrato contrato = (Contrato) request.getAttribute("contrato");
@@ -67,6 +66,20 @@
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
 				</div>
+				<% if (user == null){ %>
+                    <div class="cajalogin">
+                        <a id="textoregistro" href="pages/signUp.jsp"
+                            >Registrate</a
+                        >
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        >
+                    </div>
+                    <% } else {%>
+                    <div class="cajaUser">
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %> <%= user.getApellido()%></a>
+                        <img class ="imglogo" src="<%=user.getImagen()%>"></img>
+                    </div>
+                    <%} %>
 			</div>
 		</nav>
 	</header>
@@ -120,13 +133,10 @@
 			</div>
 
 		</div>
-		<!-- -------------------- -->
-			
-		
-		<!-- -------------------- -->
+	
 		<div class="botonesAbajo">
 			<a href="/GYM/SvCerrarSesion"> <button class="boton">Cerrar Sesion</button></a> 
-			<a href="/GYM/SvDeleteUser"><button class="boton eliminar" style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
+			<a href="/GYM/SvBajaUsuario"><button class="boton eliminar" style="background-color: rgb(187, 5, 5);">Eliminar Cuenta</button></a>
 		</div>
 	</div>
 	

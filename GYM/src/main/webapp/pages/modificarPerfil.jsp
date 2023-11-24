@@ -27,13 +27,12 @@
 	crossorigin="anonymous">
   </script>
 
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/usuModificarPerfilEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
+
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");%>
 
@@ -65,41 +64,57 @@
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
 				</div>
+				<% if (user == null){ %>
+                    <div class="cajalogin">
+                        <a id="textoregistro" href="pages/signUp.jsp"
+                            >Registrate</a
+                        >
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        >
+                    </div>
+                    <% } else {%>
+                    <div class="cajaUser">
+                        <a class="nombreUsuario" href="/GYM/SvUsuario"><%= user.getNombre() %> <%= user.getApellido()%></a>
+                        <img class ="imglogo" src="<%=user.getImagen()%>"></img>
+                    </div>
+                    <%} %>
 			</div>
 		</nav>
 	</header>
 
 	<div class="contenedor">
 		<div class="cajaModificar">
-		<div class="titulo">
-			<p>Modifica tu perfil </p>
+		<div class="headerForm">
+			<p class="titulo" >Modifica tu <span class="anaranjado"> perfil </span> </p>
 		</div>
+		
+		<hr>
 
 			<form action="/GYM/SvModificacionUsuario" method="POST" class="formulario-campos">
 				<div class="campo">
 					<label for="birthdate">Fecha de Nacimiento:</label> 
-					<input class="fecha" type="date" name="birthdate" id="birthdate" value="<%=user.getFechaNac().toString()%>" />
+					<input class="inputFecha" type="date" name="birthdate" id="birthdate" value="<%=user.getFechaNac().toString()%>" />
 				</div>
 				<div class="campo">
 					<label for="email">Correo Electrónico:</label> 
-					<input type="email" name="email" id="email" value="<%=user.getEmail()%>"/>
+					<input class="inputLargo" type="email" name="email" id="email" value="<%=user.getEmail()%>"/>
 				</div>
 				<div class="campo">
 					
 					<label for="password">Contraseña:</label>
-					<input type="password" name="password" id="password" value="<%=user.getPassword()%>"/>
+					<input class="inputMediano" type="password" name="password" id="password" value="<%=user.getPassword()%>"/>
 				</div>
 				<div class="campo">
 					<label for="nombre">Nombre:</label> 
-					<input type="text" name="name" id="name" value="<%=user.getNombre()%>"/> 
+					<input class="inputMediano" type="text" name="name" id="name" value="<%=user.getNombre()%>"/> 
 				</div>
 				<div class="campo">
 					<label for="apellido">Apellido:</label> 
-					<input type="text" name="surname" id="surname" value="<%=user.getApellido()%>"/>
+					<input class="inputMediano" type="text" name="surname" id="surname" value="<%=user.getApellido()%>"/>
 				</div>
 				<div class="campo">
 					<label for="phonenumber">Teléfono:</label> 
-					<input type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
+					<input class="inputMediano" type="text" name="phonenumber" id="phonenumber" value="<%=user.getTelefono()%>"/>
 				</div>
 				<div class="campo">
 				<label>Imágen de perfil:</label>
@@ -133,7 +148,7 @@
 				     </div>
 				  </div>
 				
-				<div class="final">
+				<div class="bottomForm">
 					<button class="boton" type="submit"> Aplicar cambios </button>
 				</div>
 				</form>

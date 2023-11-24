@@ -27,7 +27,9 @@
 
 <link rel="stylesheet" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" href="/GYM/style/loginStyle.css" />
+<link rel="stylesheet" href="/GYM/style/usuLogInEstilos.css" />
+
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 </head>
 
 <body>

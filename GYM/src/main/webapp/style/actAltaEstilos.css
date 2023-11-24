@@ -32,9 +32,17 @@ input {
 	width: 100%;
 }
 
+input.tipoACT{
+	width : 120px;
+}
+
 input.horario{
 	flex: 0 1 auto ;
 	width: 100px;
+}
+
+input.cupo{
+	width: 25px;
 }
 
 .campo {
@@ -62,8 +70,6 @@ select {
 #imagenU{
 	background-color: white;
 }
-
-
 
 .final {
 display: flex;

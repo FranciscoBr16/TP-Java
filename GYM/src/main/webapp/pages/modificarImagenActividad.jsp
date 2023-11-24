@@ -1,6 +1,5 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="entities.Empleado"%>
 <%@page import="entities.Usuario"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -31,13 +30,12 @@
 
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/actAltaEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
 
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");
-ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empleados");%>
+<% Usuario user = (Usuario) session.getAttribute("user");%>
 
 </head>
 
@@ -85,67 +83,24 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 
 <body>
 
-
 	<div class="contenedor">
-		<div class="formulario">
-			<div class="headerForm">
-				<p class= "titulo">Crear una nueva <span class="anaranjado">Clase </span></p>
-			</div>
-			<form action="/GYM/SvAltaActividad" method="POST" class="formulario-campos" enctype="multipart/form-data">
-				<div class="campo">
-					<label>Nombre de la Clase:</label> 
-					<input type="text" name="nombre" required/> 
-				</div>
-					
-				<div class="campo">
-					<label>Descripcion:</label>
-					<input type="text" name="descripcion" required />
-				</div>
-				
-				<div class="campo">
-					<label>Cupo:</label>
-					<input class="cupo" type="number" name="cupo" required />
-				</div>
-				
-				<div class="campo">
-					<label for="opciones">Día:</label>
-					<select name="dia" id="opciones">
-        				<option value="Lunes">Lunes</option>
-        				<option value="Martes">Martes</option>
-        				<option value="Miercoles">Miercoles</option>
-        				<option value="Jueves">Jueves</option>
-        				<option value="Viernes">Viernes</option>
-    				</select>
-					<label>Horario:</label>
-					<input class="horario" type="number" name="horario"  max="2399" required/>
-					
-				</div>
-				
-				<div class="campo">
-				<label for="opciones">Tipo:</label>
-					<input type="text" class="tipoACT" name="tipo" value="actividad" readonly/>
-				</div>
-				
-				<div class="campo">
-				<label for="profesor">Profesor:</label>
-   					<select name="idEmp" id="profesores">
-   					<% for (Empleado emp : empleados){ %>
-        				<option value="<%=emp.getIdEmpleado()%>"><%=emp.getNombre()%> <%=emp.getApellido()%></option>
-        				<%}%>
-        			
-    				</select>
-				</div>
-				
-				<div class="campo">
-				<label for="imagen">Selecciona una imagen:</label>
-  				 <input type="file" name="imagen" id="imagenU">
+		<div class="cajaModificar">
+		<div class="headerForm">
+			<p class="titulo">Modifica la <span class="anaranjado">Actividad</span></p>
+		</div>
+		<hr>
+			<form action="/GYM/SvCambiarImagenActividad" method="POST" enctype="multipart/form-data">
+				<div class="campoCentrado">
+					<label for="imagen">Selecciona una imagen:</label>
+  				 	<input type="file" name="imagen">
     			</div>
-				<div class="final">
-					<button class="boton" type="submit">Crear</button>
-
+				<div class="bottomForm">
+					<button class="boton" type="submit">Cambiar Imágen</button>
 				</div>
+
 			</form>
 		</div>
+
 	</div>
+
 </body>
-</html>

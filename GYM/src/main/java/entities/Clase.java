@@ -44,11 +44,6 @@ public Clase(int c) {
 	this.idClase = c;
 }
 
-
-
-
-
-
 public String getTipo() {
 	return tipo;
 }
