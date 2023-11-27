@@ -91,7 +91,29 @@ body{
   	color: white;
   	transition: background-color 250ms ease-in-out;
 }
+.boton6 {
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    margin: 3px;
+    border: solid 2px black;
+    cursor: pointer;
+}
+
+.boton6:hover{
+	background-color: rgb(170, 85, 85);
+ 	border: 2px solid rgb(170, 85, 85);
+  	color: white;
+  	transition: background-color 250ms ease-in-out;
+}
 
 .horario{
 	font-size: 26px;
 } 
+.botonesFinales{
+	display: flex;
+	flex-direction: row;
+}

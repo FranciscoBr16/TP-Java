@@ -52,6 +52,14 @@ public Clase(String nombre, int cupo, String dia, String horario, String tipo) {
 	this.tipo=tipo;
 
 }
+public Clase(Integer id, String nombre, Integer cupo, String dia, String horario, String tipo) {
+	this.nombre = nombre;
+	this.cupo=cupo;
+	this.dia=dia;
+	this.horario=horario;
+	this.tipo=tipo;
+	this.idClase=id;
+}
 public String getTipo() {
 	return tipo;
 }

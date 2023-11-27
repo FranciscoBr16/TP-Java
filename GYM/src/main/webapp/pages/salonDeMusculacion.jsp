@@ -28,7 +28,7 @@
 	crossorigin="anonymous">
   </script>
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <link rel="stylesheet" type="text/css" href="/GYM/style/salonDeMusculacionEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
@@ -139,10 +139,16 @@
 						<a href="#"><button class="boton5">Reservar</button> </a>
 							<% if(user != null){  %>
 								<% if(user.isAdmin()){ %>
+									<div class="botonesFinales">
 									<form action="/GYM/SvModificarSalon" method="GET">
 										<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
 										<button type="submit" class="boton5">Modificar Clase</button>
 									</form>
+									<form action="/GYM/SvBajaClase" method="POST">
+									<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
+									<button type="submit" class="boton6"><i class="fas fa-solid fa-trash"></i></button>
+								</form>
+								</div>
 							<% } }%>
 					</div>
 				</div>	
@@ -167,10 +173,16 @@
 					<a href="#"><button class="boton5">Reservar</button> </a>
 					<% if(user != null){  %>
 						<% if(user.isAdmin()){ %>
+						<div class="botonesFinales">
 						<form action="/GYM/SvModificarSalon" method="GET">
 								<input type="hidden" name="id" value="<%=mar.getIdClase()%>">
 								<button type="submit" class="boton5">Modificar Clase</button>
 						</form>
+						<form action="/GYM/SvBajaClase" method="POST">
+									<input type="hidden" name="id" value="<%=mar.getIdClase()%>">
+									<button type="submit" class="boton6"><i class="fas fa-solid fa-trash"></i></button>
+								</form>
+								</div>
 						<% } }%>
 				</div>
 			</div>
@@ -193,10 +205,16 @@
 						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
 							<% if(user.isAdmin()){ %>
+								<div class="botonesFinales">
 								<form action="/GYM/SvModificarSalon" method="GET">
 									<input type="hidden" name="id" value="<%=mier.getIdClase()%>">
 									<button type="submit" class="boton5">Modificar Clase</button>
 								</form>
+								<form action="/GYM/SvBajaClase" method="POST">
+									<input type="hidden" name="id" value="<%=mier.getIdClase()%>">
+									<button type="submit" class="boton6"><i class="fas fa-solid fa-trash"></i></button>
+								</form>
+								</div>
 							<% } }%>
 					</div>
 				</div>
@@ -219,10 +237,16 @@
 						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
 							<% if(user.isAdmin()){ %>
+								<div class="botonesFinales">
 								<form action="/GYM/SvModificarSalon" method="GET">
 									<input type="hidden" name="id" value="<%=jue.getIdClase()%>">
 									<button type="submit" class="boton5">Modificar Clase</button>
 								</form>
+								<form action="/GYM/SvBajaClase" method="POST">
+									<input type="hidden" name="id" value="<%=jue.getIdClase()%>">
+									<button type="submit" class="boton6"><i class="fas fa-solid fa-trash"></i></button>
+								</form>
+								</div>
 						<% } }%>
 					</div>
 				</div>
@@ -245,10 +269,17 @@
 						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
 							<% if(user.isAdmin()){ %>
+								<div class="botonesFinales">
 								<form action="/GYM/SvModificarSalon" method="GET">
 									<input type="hidden" name="id" value="<%=vie.getIdClase()%>">
 									<button type="submit" class="boton5">Modificar Clase</button>
 								</form>
+								<form action="/GYM/SvBajaClase" method="POST">
+									<input type="hidden" name="id" value="<%=vie.getIdClase()%>">
+									<button type="submit" class="boton6"><i class="fas fa-solid fa-trash"></i></button>
+								</form>
+								</div>
+								
 							<% } }%>
 					</div>
 				</div>

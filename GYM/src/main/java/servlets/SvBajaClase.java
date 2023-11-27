@@ -28,7 +28,7 @@ public class SvBajaClase extends HttpServlet {
 		DbActividades mnj = new DbActividades();
 		if (mnj.deleteActividad(c) > 0) {
 			 request.setAttribute("mensaje", "Baja Realizada con Éxito!");
-			response.sendRedirect("/GYM/SvActividades");
+			response.sendRedirect("/GYM/pages/reservas.jsp");
 			
 		} else {
 			 request.setAttribute("mensaje", "Ups! Algo salió mal");

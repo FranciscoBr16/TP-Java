@@ -324,4 +324,31 @@ public class DbActividades extends DbHandler {
 			}
 		
 	}
+
+	public int actualizarSalon(Clase clase) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE clase SET nombre_clase = ?, cupo = ? , horario = ?, dia = ?, tipo = ? where id_clase = ?");
+			pstmt.setString(1, clase.getNombre());
+			pstmt.setInt(2, clase.getCupo());
+			pstmt.setString(3, clase.getHorario());
+			pstmt.setString(4, clase.getDia());
+			pstmt.setString(5, clase.getTipo());
+			pstmt.setInt(6, clase.getIdClase());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	}
 	}
