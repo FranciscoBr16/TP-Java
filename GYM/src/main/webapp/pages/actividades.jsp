@@ -161,7 +161,7 @@ String mensaje = (String) request.getAttribute("mensaje");%>
 		  <%} %>
 		<% if(user != null){  %>
 		<% if(user.isAdmin()){ %>
-		<div> <a href="/GYM/SvActividadesEmpleado"><button class="boton">Nueva Actividad</button></a> </div>
+		<div> <a href="/GYM/SvPreAltaActividad"><button class="boton">Nueva Actividad</button></a> </div>
 		
 		<% } }%>
 		

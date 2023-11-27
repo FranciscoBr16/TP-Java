@@ -36,8 +36,7 @@
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");
-ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empleados");%>
+<% Usuario user = (Usuario) session.getAttribute("user");%>
 
 </head>
 
@@ -91,17 +90,12 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 			<div class="headerForm">
 				<p class= "titulo">Crear una nueva <span class="anaranjado">Clase </span></p>
 			</div>
-			<form action="/GYM/SvAltaActividad" method="POST" class="formulario-campos" enctype="multipart/form-data">
+			<form action="/GYM/SvAltaSalon" method="POST" class="formulario-campos" >
 				<div class="campo">
 					<label>Nombre de la Clase:</label> 
 					<input type="text" name="nombre" required/> 
 				</div>
 					
-				<div class="campo">
-					<label>Descripcion:</label>
-					<input type="text" name="descripcion" required />
-				</div>
-				
 				<div class="campo">
 					<label>Cupo:</label>
 					<input class="cupo" type="number" name="cupo" required />
@@ -133,26 +127,10 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
     				</select>
 					
 				</div>
-				
 				<div class="campo">
 				<label for="opciones">Tipo:</label>
-					<input type="text" class="tipoACT" name="tipo" value="actividad" readonly/>
+					<input type="text" class="tipoACT" name="tipo" value="musculacion" readonly/>
 				</div>
-				
-				<div class="campo">
-				<label for="profesor">Profesor:</label>
-   					<select name="idEmp" id="profesores">
-   					<% for (Empleado emp : empleados){ %>
-        				<option value="<%=emp.getIdEmpleado()%>"><%=emp.getNombre()%> <%=emp.getApellido()%></option>
-        				<%}%>
-        			
-    				</select>
-				</div>
-				
-				<div class="campo">
-				<label for="imagen">Selecciona una imagen:</label>
-  				 <input type="file" name="imagen" id="imagenU">
-    			</div>
 				<div class="final">
 					<button class="boton" type="submit">Crear</button>
 

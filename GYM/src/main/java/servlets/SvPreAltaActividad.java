@@ -13,8 +13,8 @@ import db.DbEmpleado;
 import entities.Empleado;
 
 
-@WebServlet("/SvActividadesEmpleado")
-public class SvActividadesEmpleado extends HttpServlet {
+@WebServlet("/SvPreAltaActividad")
+public class SvPreAltaActividad extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
@@ -23,7 +23,7 @@ public class SvActividadesEmpleado extends HttpServlet {
     	ArrayList<Empleado> empleados = new ArrayList<>();
     	empleados.addAll(dbemp.getEmpleados());
     	request.setAttribute("empleados", empleados);
-    	request.getRequestDispatcher("/pages/nuevaActividad.jsp").forward(request,response);
+    	request.getRequestDispatcher("/pages/altaActividad.jsp").forward(request,response);
     	
 	}
 

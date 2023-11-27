@@ -29,7 +29,7 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilosSalonDeMusculacion.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/salonDeMusculacionEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
@@ -129,24 +129,19 @@
 			<%for (Clase lun : actividadesLunes){ %>
 			<div class="cajaClase">
 				<div class="cajaIzquierda">
-					<%String horario = String.valueOf(lun.getHorario());  
-						if (horario.length() == 4){%>
-						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
-						<%} else { %>
-						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
-						<%} %>
+					<span class="horario"><%=lun.getHorario()%></span>
 				</div>
 				<div class="cajaDerecha">
 					<div class="cajaCupo">
 						<p class="cupo">Cupo: <%=lun.getCupo()%> </p>
 					</div>
 					<div class="cajaBotones">
-						<a href="#"><button class="boton2">Reservar</button> </a>
+						<a href="#"><button class="boton5">Reservar</button> </a>
 							<% if(user != null){  %>
 								<% if(user.isAdmin()){ %>
-									<form action="/GYM/SvModificarActividad" method="GET">
+									<form action="/GYM/SvModificarSalon" method="GET">
 										<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
-										<button type="submit" class="boton2">Modificar Clase</button>
+										<button type="submit" class="boton5">Modificar Clase</button>
 									</form>
 							<% } }%>
 					</div>
@@ -165,21 +160,16 @@
 			<%for (Clase mar : actividadesMartes){ %>
 			<div class="cajaClase">
 				<div class="cajaIzquierda">
-					<%String horario = String.valueOf(mar.getHorario()); 
-						if (horario.length() == 4){%>
-						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
-						<%} else { %> 
-						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
-						<%} %>
+					<span class="horario"><%=mar.getHorario()%></span>
 				</div>
 				<div class="cajaDerecha">
 					<p class="cupo">Cupo: <%=mar.getCupo()%> </p>
-					<a href="#"><button class="boton2">Reservar</button> </a>
+					<a href="#"><button class="boton5">Reservar</button> </a>
 					<% if(user != null){  %>
 						<% if(user.isAdmin()){ %>
-						<form action="/GYM/SvModificarActividad" method="GET">
+						<form action="/GYM/SvModificarSalon" method="GET">
 								<input type="hidden" name="id" value="<%=mar.getIdClase()%>">
-								<button type="submit" class="boton2">Modificar Clase</button>
+								<button type="submit" class="boton5">Modificar Clase</button>
 						</form>
 						<% } }%>
 				</div>
@@ -196,21 +186,16 @@
 			<%for (Clase mier : actividadesMiercoles){ %>
 				<div class="cajaClase">
 					<div class="cajaIzquierda">
-						<%String horario = String.valueOf(mier.getHorario()); 
-						if (horario.length() == 4){%>
-						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
-						<%} else { %>
-						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
-						<%} %>
+						<span class="horario"><%=mier.getHorario()%></span>
 					</div>
 					<div class="cajaDerecha">
 						<p class="cupo">Cupo: <%=mier.getCupo()%> </p>
-						<a href="#"><button class="boton2">Reservar</button> </a>
+						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
 							<% if(user.isAdmin()){ %>
-								<form action="/GYM/SvModificarActividad" method="GET">
+								<form action="/GYM/SvModificarSalon" method="GET">
 									<input type="hidden" name="id" value="<%=mier.getIdClase()%>">
-									<button type="submit" class="boton2">Modificar Clase</button>
+									<button type="submit" class="boton5">Modificar Clase</button>
 								</form>
 							<% } }%>
 					</div>
@@ -227,21 +212,16 @@
 			<%for (Clase jue : actividadesJueves){ %>
 				<div class="cajaClase">
 					<div class="cajaIzquierda">
-						<%String horario = String.valueOf(jue.getHorario());  
-						if (horario.length() == 4){%>
-						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
-						<%} else { %>
-						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
-						<%} %>
+						<span class="horario"><%=jue.getHorario()%></span>
 					</div>
 					<div class="cajaDerecha">
 						<p class="cupo">Cupo: <%=jue.getCupo()%> </p>
-						<a href="#"><button class="boton2">Reservar</button> </a>
+						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
 							<% if(user.isAdmin()){ %>
-								<form action="/GYM/SvModificarActividad" method="GET">
+								<form action="/GYM/SvModificarSalon" method="GET">
 									<input type="hidden" name="id" value="<%=jue.getIdClase()%>">
-									<button type="submit" class="boton2">Modificar Clase</button>
+									<button type="submit" class="boton5">Modificar Clase</button>
 								</form>
 						<% } }%>
 					</div>
@@ -258,21 +238,16 @@
 			<%for (Clase vie : actividadesViernes){ %>
 				<div class="cajaClase">
 					<div class="cajaIzquierda">
-					<%String horario = String.valueOf(vie.getHorario());  
-						if (horario.length() == 4){%>
-						<span><%=horario.substring(0, 2)%>:<%=horario.substring(2)%></span>
-						<%} else { %>
-						<span><%=horario.substring(0, 1)%>:<%=horario.substring(1)%></span>
-						<%} %> 
+					<span class="horario"><%=vie.getHorario()%></span>
 					</div>
 					<div class="cajaDerecha">
 						<p class="cupo">Cupo: <%=vie.getCupo()%> </p>
-						<a href="#"><button class="boton2">Reservar</button> </a>
+						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
 							<% if(user.isAdmin()){ %>
-								<form action="/GYM/SvModificarActividad" method="GET">
+								<form action="/GYM/SvModificarSalon" method="GET">
 									<input type="hidden" name="id" value="<%=vie.getIdClase()%>">
-									<button type="submit" class="boton2">Modificar Clase</button>
+									<button type="submit" class="boton5">Modificar Clase</button>
 								</form>
 							<% } }%>
 					</div>
@@ -284,7 +259,7 @@
 	
 		<% if(user != null){%>
 		<% if(user.isAdmin()){ %>
-		<div> <a href="/GYM/SvActividadesEmpleado"><button class="boton">Nueva Clase</button></a> </div>
+		<div> <a href="/GYM/pages/altaSalon.jsp"><button class="boton">Nueva Clase</button></a> </div>
 		<%}}%>
 		
 		

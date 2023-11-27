@@ -7,7 +7,7 @@ private int idClase;
 private String descripcion;
 private int cupo;
 private String dia, nombre;
-private int horario;
+private String horario;
 private Empleado empleado;
 private String tipo;
 private ArrayList<Inscripcion> inscripcion = new ArrayList<>();
@@ -15,7 +15,7 @@ private String imagen;
 
 
 
-public Clase(String nombre, String desc, int cupo, String dia, int horario, String tipo, int idEmp) {
+public Clase(String nombre, String desc, int cupo, String dia, String horario, String tipo, int idEmp) {
 	
 	this.empleado = new Empleado(idEmp);
 	this.nombre = nombre;
@@ -25,7 +25,7 @@ public Clase(String nombre, String desc, int cupo, String dia, int horario, Stri
 	this.horario=horario;
 	this.tipo=tipo;
 }
-public Clase(int idClase, String nombre, String desc, int cupo, String dia, int horario, String tipo, int idEmp) {
+public Clase(int idClase, String nombre, String desc, int cupo, String dia, String horario, String tipo, int idEmp) {
 	this.idClase = idClase;
 	this.empleado = new Empleado(idEmp);
 	this.nombre = nombre;
@@ -44,6 +44,14 @@ public Clase(int c) {
 	this.idClase = c;
 }
 
+public Clase(String nombre, int cupo, String dia, String horario, String tipo) {
+	this.nombre = nombre;
+	this.cupo=cupo;
+	this.dia=dia;
+	this.horario=horario;
+	this.tipo=tipo;
+
+}
 public String getTipo() {
 	return tipo;
 }
@@ -86,10 +94,10 @@ public String getDia() {
 public void setDia(String dia) {
 	this.dia = dia;
 }
-public int getHorario() {
+public String getHorario() {
 	return horario;
 }
-public void setHorario(int horario) {
+public void setHorario(String horario) {
 	this.horario = horario;
 }
 

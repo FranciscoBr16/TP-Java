@@ -35,7 +35,7 @@ public class SvAltaActividad extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		Clase c = new Clase(request.getParameter("nombre"), request.getParameter("descripcion"), Integer.parseInt(request.getParameter("cupo")),request.getParameter("dia"), Integer.parseInt(request.getParameter("horario")),request.getParameter("tipo"),Integer.parseInt(request.getParameter("idEmp")));
+		Clase c = new Clase(request.getParameter("nombre"), request.getParameter("descripcion"), Integer.parseInt(request.getParameter("cupo")),request.getParameter("dia"), request.getParameter("horario"),request.getParameter("tipo"),Integer.parseInt(request.getParameter("idEmp")));
 		
 		Part filePart = request.getPart("imagen");
 		String fileName = filePart.getSubmittedFileName();

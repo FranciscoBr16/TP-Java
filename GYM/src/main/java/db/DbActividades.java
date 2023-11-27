@@ -42,7 +42,7 @@ public class DbActividades extends DbHandler {
 	            
 	            ac.setNombre(rs.getString("nombre_clase"));
 	            ac.setDescripcion(rs.getString("descripcion"));
-	            ac.setHorario(rs.getInt("horario"));
+	            ac.setHorario(rs.getString("horario"));
 	            ac.setTipo(rs.getString("tipo"));
 	            int cupo = rs.getInt("cupo");
 	            Empleado emp = new Empleado();
@@ -97,7 +97,7 @@ public class DbActividades extends DbHandler {
 		ArrayList<Clase> actividades = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM clase c WHERE c.tipo='musculacion'AND estado=1"); 
+			pstmt = conn.prepareStatement("SELECT * FROM clase c WHERE c.tipo='musculacion' AND estado=1"); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) { 
@@ -107,7 +107,7 @@ public class DbActividades extends DbHandler {
 	            ac.setNombre(rs.getString("nombre_clase"));
 	            ac.setTipo(rs.getString("tipo"));
 	            int cupo = rs.getInt("cupo");
-	            ac.setHorario(rs.getInt("horario"));
+	            ac.setHorario(rs.getString("horario"));
 	            String dia = rs.getString("dia");
 	            ac.setDia(dia);
 
@@ -115,7 +115,7 @@ public class DbActividades extends DbHandler {
 	            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
 	            Date f2 = java.sql.Date.valueOf(fecha);
 	            
-	            pstmt2 = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND estado=1 AND fecha BETWEEN ? AND ?  GROUP BY 1");
+	            pstmt2 = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND fecha BETWEEN ? AND ? GROUP BY 1");
 	            pstmt2.setInt(1, ac.getIdClase());
 	            pstmt2.setDate(2, f1);
 	            pstmt2.setDate(3, f2);
@@ -152,7 +152,7 @@ public class DbActividades extends DbHandler {
 			pstmt.setString(1, cl.getNombre() );
 			pstmt.setString(2, cl.getDescripcion());
 			pstmt.setInt(3, cl.getCupo());
-			pstmt.setInt(4, cl.getHorario());
+			pstmt.setString(4, cl.getHorario());
 			int idempleado = cl.getEmpleado().getIdEmpleado() ;
 			if (idempleado != 0) {
 			pstmt.setInt(5, idempleado);} else {pstmt.setNull(5, idempleado);}
@@ -221,7 +221,7 @@ public class DbActividades extends DbHandler {
 			c.setNombre(rs.getString("nombre_clase"));
 			c.setDescripcion(rs.getString("descripcion"));
 			c.setCupo(rs.getInt("cupo"));
-			c.setHorario(rs.getInt("horario"));
+			c.setHorario(rs.getString("horario"));
 			Empleado e = new Empleado(rs.getInt("id_empleado"));
 			c.setEmpleado(e);
 			c.setImagen(rs.getString("imagen"));
@@ -253,7 +253,7 @@ public class DbActividades extends DbHandler {
 			pstmt.setString(1, clase.getNombre());
 			pstmt.setString(2, clase.getDescripcion());
 			pstmt.setInt(3, clase.getCupo());
-			pstmt.setInt(4, clase.getHorario());
+			pstmt.setString(4, clase.getHorario());
 			pstmt.setInt(5, clase.getEmpleado().getIdEmpleado());
 			pstmt.setString(6, clase.getDia());
 			pstmt.setString(7, clase.getTipo());
@@ -295,5 +295,33 @@ public class DbActividades extends DbHandler {
 				e.printStackTrace();
 			}
 	}
+	}
+
+	public int nuevoSalon(Clase c) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("Insert into clase (nombre_clase, cupo, horario, dia, tipo ) values (?,?,?,?,?)");
+			pstmt.setString(1, c.getNombre() );
+			pstmt.setInt(2, c.getCupo());
+			pstmt.setString(3, c.getHorario());
+			pstmt.setString(4, c.getDia());
+			pstmt.setString(5, c.getTipo());
+			return pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+		
 	}
 	}

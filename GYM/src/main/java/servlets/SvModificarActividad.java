@@ -42,10 +42,9 @@ public class SvModificarActividad extends HttpServlet {
 		String nombreClase = request.getParameter("nombreClase"); 
 		String descripcion = request.getParameter("descripcion"); 
 		Integer cupo = Integer.parseInt(request.getParameter("cupo")); 
-		Integer horario = Integer.parseInt(request.getParameter("horario")); 
+		String horario = request.getParameter("horario"); 
 		
 		Integer idEmpleado = Integer.parseInt(request.getParameter("idEmpleado")); 
-		// String imagen = request.getParameter("imagen"); 
 		String dia = request.getParameter("dia"); 
 		String tipo = request.getParameter("tipo"); 
 
