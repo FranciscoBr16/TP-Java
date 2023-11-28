@@ -18,9 +18,8 @@ public Empleado() {
 
 }
 
-public Empleado(Integer id_empleado, String nombre2, String apellido2, String correo2, String rol2,
+public Empleado(String nombre2, String apellido2, String correo2, String rol2,
 		LocalDate fecha_desde) {
-	this.idEmpleado = id_empleado;
 	this.nombre = nombre2;
 	this.apellido = apellido2;
 	this.correo = correo2;
