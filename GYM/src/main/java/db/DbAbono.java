@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entities.Abono;
+import entities.Clase;
 import entities.Usuario;
 
 public class DbAbono extends DbHandler {
@@ -34,6 +35,7 @@ public class DbAbono extends DbHandler {
 	            ab.setNombreAbono(rs.getString("nombreAbono"));
 	            ab.setCantReservas(rs.getInt("cant_reservas"));
 	            ab.setPrecio(rs.getInt("precio"));
+	            ab.setImagen(rs.getString("imagen"));
 	            abonos.add(ab);
 	}
 			return abonos;
@@ -53,27 +55,34 @@ public class DbAbono extends DbHandler {
 	}
 	
 	
-	public boolean insertarAbono(Abono abono) {
+	public Abono nuevoAbono(Abono abono) {
         PreparedStatement pstmt = null;
         Connection conn = null;
+        ResultSet rs = null;
         try {
             conn = this.getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO abono (nombreAbono, cant_reservas, precio, descripcion) VALUES (?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO abono (nombreAbono, cant_reservas, precio, descripcion) VALUES (?, ?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS);
       
             pstmt.setString(1, abono.getNombreAbono());
             pstmt.setInt(2, abono.getCantReservas());
             pstmt.setInt(3, abono.getPrecio());
             pstmt.setString(4, abono.getDescripcion());
-            return pstmt.execute();
+            pstmt.executeUpdate();
             // ejecuta la consulta de inserción
-
+            rs=pstmt.getGeneratedKeys();
+			if(rs!=null && rs.next()) {
+				int id = rs.getInt(1);
+				abono.setIdAbono(id);
+			}
+			return abono;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return null;
             // manejo de errores
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
+                if(rs!=null) rs.close();
                 this.cerrarConnection();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -123,6 +132,7 @@ public Abono getAbono(Abono abono) {
 		abono.setCantReservas(rs.getInt("cant_reservas"));
 		abono.setPrecio(rs.getInt("precio"));
 		abono.setDescripcion(rs.getString("descripcion"));
+		abono.setImagen(rs.getString("imagen"));
 		
 		return abono;
 		
@@ -166,4 +176,30 @@ public int actualizarAbono(Abono abono) {
 		}
 }
 }
+
+public int actualizarImgAbono(Abono a) {
+	PreparedStatement pstmt=null;
+	Connection conn = null;
+	try {
+		conn = this.getConnection();
+		pstmt = conn.prepareStatement("UPDATE abono SET imagen = ? where id_abono = ?");
+		pstmt.setString(1, a.getImagen());
+		pstmt.setInt(2, a.getIdAbono());
+		
+		return pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		return 0;
+	} finally {
+		try {
+			if(pstmt!=null)pstmt.close();
+			this.cerrarConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 }
+	
+}
+}
+
+

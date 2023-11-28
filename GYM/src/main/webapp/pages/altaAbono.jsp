@@ -86,7 +86,11 @@
 			<div class="headerForm">
 				<p>Crear un nuevo abono</p>
 			</div>
-			<form action="/GYM/SvAltaAbono" method="POST" class="formulario-campos">
+			<form action="/GYM/SvAltaAbono" method="POST" class="formulario-campos" enctype="multipart/form-data">
+			<div class="campo">
+				<label for="imagen">Selecciona una imagen:</label>
+  				 <input type="file" name="imagen" id="imagenU">
+    			</div>
 				<div class="campo">
 					<label for="nombreAbono">Nombre de Abono:</label> 
 					<input type="text" name="nombreAbono" required/> 

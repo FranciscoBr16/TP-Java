@@ -98,7 +98,7 @@
 			<% for (Abono i : listaAbonos) { %>
 				
 					<div class="tarjeta-plan">
-						<img src="/GYM/img/plan<%=i.getIdAbono()%>.jpg" alt="">
+						<img src="<%=i.getImagen()%>" alt="">
 						<div class="descripcion-plan">
 							<h2><span class="naranja">Plan</span><%=i.getNombreAbono()%></h2>
 							<p>Desde $<%=i.getPrecio()%>/mes</p>

@@ -2,7 +2,7 @@ package entities;
 
 public class Abono {
 	private int idAbono, cantReservas, precio;
-	private String nombreAbono, descripcion;
+	private String nombreAbono, descripcion, imagen;
 	
 	
 	
@@ -10,6 +10,14 @@ public class Abono {
 		return nombreAbono;
 	}
 	
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
 	public void setNombreAbono(String nombreAbono) {
 		this.nombreAbono = nombreAbono;
 	}

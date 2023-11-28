@@ -175,6 +175,7 @@ public class DbActividades extends DbHandler {
 			try {
 				if(pstmt!=null)pstmt.close();
 				this.cerrarConnection();
+				if(rs!=null) rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
