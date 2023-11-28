@@ -24,7 +24,7 @@ public class DbAbono extends DbHandler {
 		ArrayList<Abono> abonos = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Select * from abono"); // diseñar consulta
+			pstmt = conn.prepareStatement("Select * from abono WHERE estado = 1"); // diseñar consulta
 			rs = pstmt.executeQuery(); // se ejecuta la consulta y se asigna el resultado al resultset
 			
 			while (rs.next() && rs!= null ) { // avanza en las filas de las tablas hasta llegar al final
@@ -82,20 +82,20 @@ public class DbAbono extends DbHandler {
     }
 	
 	
-public boolean deleteAbono(Abono abono) {
+public int deleteAbono(Abono abono) {
 	
 	PreparedStatement pstmt=null;
 	Connection conn;
 
 	try {
 		conn = this.getConnection();
-		pstmt = conn.prepareStatement("DELETE from abono WHERE id_abono =?");
+		pstmt = conn.prepareStatement("UPDATE abono SET estado = 0 WHERE id_abono =?");
 		pstmt.setInt(1, abono.getIdAbono());
-		return pstmt.execute();
+		return pstmt.executeUpdate();
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
-		return false;
+		return 0;
 		
 	}finally {
 		try {

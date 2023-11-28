@@ -24,7 +24,7 @@ public class SvBajaAbono extends HttpServlet {
 		Abono abono = new Abono(Integer.parseInt(request.getParameter("id")));
 		DbAbono dbabono = new DbAbono();
 		
-		if (dbabono.deleteAbono(abono)) {
+		if (dbabono.deleteAbono(abono) > 0) {
 			response.sendRedirect("/GYM/SvAbono");
 		} else {
 			response.sendRedirect("/GYM/index.jsp");
