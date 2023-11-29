@@ -89,7 +89,7 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
                                 <a
                                     class="nav-link text-light"
                                     id="links"
-                                    href="/GYM/pages/sobreNosotros.jsp"
+                                    href="/GYM/SvEmpleados"
                                     >Sobre Nosotros</a
                                 >
                             </li>
