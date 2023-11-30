@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="entities.Empleado"%>
 <%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
@@ -26,10 +28,13 @@ pageEncoding="ISO-8859-1"%>
 	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
 	crossorigin="anonymous">
 </script>
-<link rel="stylesheet" href="/GYM/style/sobreNosotros.css">
+<link rel="stylesheet" href="/GYM/style/empleadosEstilos.css">
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
-<% Usuario user = (Usuario) session.getAttribute("user");%>
+<% Usuario user = (Usuario) session.getAttribute("user");
+ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("empleados");
+%>
 </head>
 
 <body>
@@ -51,9 +56,9 @@ pageEncoding="ISO-8859-1"%>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Tienda</a></li>
+							id="links" href="/GYM/SvProductos">Tienda</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Reservas</a></li>
+							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
 						<li class="nav-item"><a class="nav-link text-light active"
 							id="links" href="#">Sobre Nosotros</a></li>
 					</ul>
@@ -82,25 +87,65 @@ pageEncoding="ISO-8859-1"%>
 	</header> 
 
 
-    <div class="parallax">
-        <p>¡Conoce al Equipo!</p>
+    <div class="contenedor">
+        
+        <div class="caja">
+        
+        	<div class="titulo"><span>¿Quiénes Somos?</span></div>
+        	<div class="descripcion"><span>Valhalla es un club de entrenamiento donde el concepto de lo social adquiere valor a través de lo deportivo.</span> 
+        							<br>
+        							<span>Para nosotros es muy importante que te diviertas mientras entrenas, para ello conformamos un equipo humano entusiasta y profesional acorde a cada necesidad.</span>
+        	</div>
+        	
+        </div>
+        
+        <div class="caja">
+        	<div class="titulo"><p>Nuestro Equipo</p></div>
+        	<div class="descripcion">
+        		<p>Conocé un poco más al equipo de Valhalla, ellos te ayudarán a llegar a donde te lo propongas.</p>
+        	</div>
+        		<div class="tarjetasEmpelado">
+       		 <% for (Empleado emp : listaEmpleado){ %>
+        		<div class="cajaEmpleado">
+        			<div class="contenedorImg">
+        				<img class="imagen" src="<%=emp.getImagen()%>">
+        			</div>
+        			<div class="nombre">
+        				<p><%=emp.getNombre()%> <%=emp.getApellido()%></p>
+        			</div>
+        			<div class="correo">
+        				<p><%=emp.getCorreo()%></p>
+        			</div>
+        			<div class="rol">
+        				<p><%=emp.getRol()%> </p>
+        			</div>
+        			
+        			<% if (user != null){ if(user.isAdmin()){ %>
+                   		<div class="botones">
+							<form action="/GYM/SvModificarEmpleado" method="GET">
+								<input type="hidden" name="id" value="<%=emp.getIdEmpleado()%>">
+								<button type="submit" class="boton3">Modificar</button>
+							</form>
+							<form action="/GYM/SvBajaEmpleado" method="POST">
+								<input type="hidden" name="id" value="<%=emp.getIdEmpleado()%>">
+								<button type="submit" class="boton4">Dar de Baja</button>
+							</form>
+                   		</div>
+                  
+                    <%} }%>
+        	
+        		</div>
+        
+        		<%} %>
+        		</div>
+        		
+        		<div>
+        		<a href="/GYM/pages/altaEmpleado.jsp"> <button class="boton">Nuevo Empleado</button> </a>
+        		</div>
+        
+        </div>
+        
     </div>
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 

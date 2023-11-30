@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -66,7 +66,7 @@ CREATE TABLE `clase` (
   `estado` tinyint DEFAULT '1',
   PRIMARY KEY (`id_clase`),
   KEY `fk_empleado_idx` (`id_empleado`),
-  CONSTRAINT `fk_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`) ON UPDATE CASCADE
+  CONSTRAINT `fk_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`)
 ) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -76,7 +76,7 @@ CREATE TABLE `clase` (
 
 LOCK TABLES `clase` WRITE;
 /*!40000 ALTER TABLE `clase` DISABLE KEYS */;
-INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',18,'17:00',233,'/GYM/img/inputs/act1.png','Martes','actividad',1),(2,'Zumba','La clase de Zumba es una experiencia energética que fusiona movimientos de baile con ritmos contagiosos, proporcionando un entrenamiento cardiovascular divertido y lleno de ritmo.',25,'19:00',555,'/GYM/img/zumba.png','Miercoles','actividad',1),(3,'Boxeo','Una clase de boxeo implica un entrenamiento intenso que combina golpes en sacos y entrenamiento cardiovascular, proporcionando una forma efectiva de mejorar la fuerza, la resistencia y la coordinación, además de liberar estrés.',15,'18:00',777,'/GYM/img/boxeo.png','Jueves','actividad',1),(101,'Musculacion',NULL,35,'13:00',NULL,NULL,'Lunes','musculacion',1),(102,'Musculacion',NULL,35,'14:00',NULL,NULL,'Lunes','musculacion',1),(103,'Musculacion',NULL,35,'15:00',NULL,NULL,'Lunes','musculacion',1),(104,'Musculacion',NULL,35,'16:00',NULL,NULL,'Lunes','musculacion',1),(105,'Musculacion',NULL,35,'17:00',NULL,NULL,'Lunes','musculacion',1),(106,'Musculacion',NULL,35,'18:00',NULL,NULL,'Lunes','musculacion',1),(107,'Musculacion',NULL,35,'19:00',NULL,NULL,'Lunes','musculacion',1),(108,'Musculacion',NULL,35,'13:00',NULL,NULL,'Martes','musculacion',1),(109,'Musculacion',NULL,35,'14:00',NULL,NULL,'Martes','musculacion',1),(110,'Musculacion',NULL,35,'15:00',NULL,NULL,'Martes','musculacion',1),(111,'Musculacion',NULL,35,'16:00',NULL,NULL,'Martes','musculacion',1),(112,'Musculacion',NULL,35,'17:00',NULL,NULL,'Martes','musculacion',1),(113,'Musculacion',NULL,35,'18:00',NULL,NULL,'Martes','musculacion',1),(114,'Musculacion',NULL,35,'19:00',NULL,NULL,'Martes','musculacion',1),(115,'Musculacion',NULL,35,'13:00',NULL,NULL,'Miercoles','musculacion',1),(116,'Musculacion',NULL,35,'14:00',NULL,NULL,'Miercoles','musculacion',1),(117,'Musculacion',NULL,35,'15:00',NULL,NULL,'Miercoles','musculacion',1),(118,'Musculacion',NULL,35,'16:00',NULL,NULL,'Miercoles','musculacion',1),(119,'Musculacion',NULL,35,'17:00',NULL,NULL,'Miercoles','musculacion',1),(120,'Musculacion',NULL,35,'18:00',NULL,NULL,'Miercoles','musculacion',1),(121,'Musculacion',NULL,35,'19:00',NULL,NULL,'Miercoles','musculacion',1),(122,'Musculacion','',35,'13:00',NULL,NULL,'Jueves','musculacion',1),(123,'Musculacion',NULL,35,'14:00',NULL,NULL,'Jueves','musculacion',1),(124,'Musculacion',NULL,35,'15:00',NULL,NULL,'Jueves','musculacion',1),(125,'Musculacion',NULL,35,'16:00',NULL,NULL,'Jueves','musculacion',1),(126,'Musculacion',NULL,35,'17:00',NULL,NULL,'Jueves','musculacion',1),(127,'Musculacion',NULL,35,'18:00',NULL,NULL,'Jueves','musculacion',1),(128,'Musculacion',NULL,35,'19:00',NULL,NULL,'Jueves','musculacion',1),(130,'Musculacion',NULL,35,'13:00',NULL,NULL,'Viernes','musculacion',1),(131,'Musculacion',NULL,35,'14:00',NULL,NULL,'Viernes','musculacion',1),(132,'Musculacion',NULL,35,'15:00',NULL,NULL,'Viernes','musculacion',1),(133,'Musculacion',NULL,35,'16:00',NULL,NULL,'Viernes','musculacion',1),(134,'Musculacion',NULL,35,'17:00',NULL,NULL,'Viernes','musculacion',1),(135,'Musculacion',NULL,35,'18:00',NULL,NULL,'Viernes','musculacion',1),(136,'Musculacion',NULL,35,'19:00',NULL,NULL,'Viernes','musculacion',1);
+INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',18,'17:00',1,'/GYM/img/inputs/act1.png','Martes','actividad',1),(2,'Zumba','La clase de Zumba es una experiencia energética que fusiona movimientos de baile con ritmos contagiosos, proporcionando un entrenamiento cardiovascular divertido y lleno de ritmo.',25,'19:00',2,'/GYM/img/zumba.png','Miercoles','actividad',1),(3,'Boxeo','Una clase de boxeo implica un entrenamiento intenso que combina golpes en sacos y entrenamiento cardiovascular, proporcionando una forma efectiva de mejorar la fuerza, la resistencia y la coordinación, además de liberar estrés.',15,'18:00',4,'/GYM/img/boxeo.png','Jueves','actividad',1),(101,'Musculacion',NULL,35,'13:00',NULL,NULL,'Lunes','musculacion',1),(102,'Musculacion',NULL,35,'14:00',NULL,NULL,'Lunes','musculacion',1),(103,'Musculacion',NULL,35,'15:00',NULL,NULL,'Lunes','musculacion',1),(104,'Musculacion',NULL,35,'16:00',NULL,NULL,'Lunes','musculacion',1),(105,'Musculacion',NULL,35,'17:00',NULL,NULL,'Lunes','musculacion',1),(106,'Musculacion',NULL,35,'18:00',NULL,NULL,'Lunes','musculacion',1),(107,'Musculacion',NULL,35,'19:00',NULL,NULL,'Lunes','musculacion',1),(108,'Musculacion',NULL,35,'13:00',NULL,NULL,'Martes','musculacion',1),(109,'Musculacion',NULL,35,'14:00',NULL,NULL,'Martes','musculacion',1),(110,'Musculacion',NULL,35,'15:00',NULL,NULL,'Martes','musculacion',1),(111,'Musculacion',NULL,35,'16:00',NULL,NULL,'Martes','musculacion',1),(112,'Musculacion',NULL,35,'17:00',NULL,NULL,'Martes','musculacion',1),(113,'Musculacion',NULL,35,'18:00',NULL,NULL,'Martes','musculacion',1),(114,'Musculacion',NULL,35,'19:00',NULL,NULL,'Martes','musculacion',1),(115,'Musculacion',NULL,35,'13:00',NULL,NULL,'Miercoles','musculacion',1),(116,'Musculacion',NULL,35,'14:00',NULL,NULL,'Miercoles','musculacion',1),(117,'Musculacion',NULL,35,'15:00',NULL,NULL,'Miercoles','musculacion',1),(118,'Musculacion',NULL,35,'16:00',NULL,NULL,'Miercoles','musculacion',1),(119,'Musculacion',NULL,35,'17:00',NULL,NULL,'Miercoles','musculacion',1),(120,'Musculacion',NULL,35,'18:00',NULL,NULL,'Miercoles','musculacion',1),(121,'Musculacion',NULL,35,'19:00',NULL,NULL,'Miercoles','musculacion',1),(122,'Musculacion','',35,'13:00',NULL,NULL,'Jueves','musculacion',1),(123,'Musculacion',NULL,35,'14:00',NULL,NULL,'Jueves','musculacion',1),(124,'Musculacion',NULL,35,'15:00',NULL,NULL,'Jueves','musculacion',1),(125,'Musculacion',NULL,35,'16:00',NULL,NULL,'Jueves','musculacion',1),(126,'Musculacion',NULL,35,'17:00',NULL,NULL,'Jueves','musculacion',1),(127,'Musculacion',NULL,35,'18:00',NULL,NULL,'Jueves','musculacion',1),(128,'Musculacion',NULL,35,'19:00',NULL,NULL,'Jueves','musculacion',1),(130,'Musculacion',NULL,35,'13:00',NULL,NULL,'Viernes','musculacion',1),(131,'Musculacion',NULL,35,'14:00',NULL,NULL,'Viernes','musculacion',1),(132,'Musculacion',NULL,35,'15:00',NULL,NULL,'Viernes','musculacion',1),(133,'Musculacion',NULL,35,'16:00',NULL,NULL,'Viernes','musculacion',1),(134,'Musculacion',NULL,35,'17:00',NULL,NULL,'Viernes','musculacion',1),(135,'Musculacion',NULL,35,'18:00',NULL,NULL,'Viernes','musculacion',1),(136,'Musculacion',NULL,35,'19:00',NULL,NULL,'Viernes','musculacion',1);
 /*!40000 ALTER TABLE `clase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +168,7 @@ DROP TABLE IF EXISTS `empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `empleado` (
-  `id_empleado` int NOT NULL,
+  `id_empleado` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `apellido` varchar(45) DEFAULT NULL,
   `mail` varchar(45) DEFAULT NULL,
@@ -177,7 +177,7 @@ CREATE TABLE `empleado` (
   `imagen` varchar(255) DEFAULT NULL,
   `estado` tinyint DEFAULT '1',
   PRIMARY KEY (`id_empleado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=778 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (69,'Benjamín','Fares','benjalol@gmail.com','2023-08-23','Dios Nordico',NULL,1),(233,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista',NULL,1),(555,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor',NULL,1),(777,'Jerónimo','Álvarez','jeditogamerpro@gmail.com','2023-08-23','Maestro',NULL,1);
+INSERT INTO `empleado` VALUES (1,'Benjamín','Fares','benjalol@gmail.com','2023-08-23','Dios Nordico','/GYM/img/empleados/emp_69.png',1),(2,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista','/GYM/img/empleados/FB233.jpg',1),(3,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor',NULL,1),(4,'Jerónimo','Álvarez','jeditogamerpro@gmail.com','2023-08-23','Maestro',NULL,1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,4 +393,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-28 11:28:01
+-- Dump completed on 2023-11-30 11:32:35

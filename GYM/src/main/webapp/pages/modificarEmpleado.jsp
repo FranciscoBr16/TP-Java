@@ -37,7 +37,8 @@
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
- Empleado emp = (Empleado) request.getAttribute("emp");
+ Empleado emp = (Empleado) request.getAttribute("empleado");
+ session.setAttribute("idempleado", emp.getIdEmpleado());
  
 %>
 
@@ -93,10 +94,15 @@
 			<p class="titulo">Modifica al <span class="anaranjado"> Empleado </span></p>
 		</div>
 		<hr>
+		
+				<div class="campoCentrado">
+					<img class="imgMuestra" src="<%=emp.getImagen()%>">
+					<a href="/GYM/pages/modificarImagenEmpleado.jsp"><button class="boton4">Cambiar Imágen</button></a>		
+				</div>
 
 			<form action="/GYM/SvModificarEmpleado" method="POST" class="formulario-campos">
 				<div class="campo">
-					<label for="idAbono">Id Empleado:</label> 
+					<label for="id">Id Empleado:</label> 
 					<input class="inputMediano" type="number" name="idEmpleado" id="idEmpleado" value="<%=emp.getIdEmpleado()%>" readonly/>
 				</div>
 				

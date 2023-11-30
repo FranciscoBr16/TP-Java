@@ -27,10 +27,10 @@ public class SvBajaEmpleado extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Empleado emp = new Empleado(Integer.parseInt(request.getParameter("id_empleado")));
+		Empleado emp = new Empleado(Integer.parseInt(request.getParameter("id")));
 		DbEmpleado dbemp = new DbEmpleado();
-		if (dbemp.deleteEmpleado(emp) == 1) {
-			response.sendRedirect("/GYM/index.jsp");
+		if (dbemp.deleteEmpleado(emp) > 0) {
+			response.sendRedirect("/GYM/SvEmpleados");
 			
 		} else {
 			

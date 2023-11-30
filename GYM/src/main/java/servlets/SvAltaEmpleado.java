@@ -1,10 +1,12 @@
 package servlets;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +18,15 @@ import entities.Empleado;
 
 
 
-@WebServlet("/SvEmpleado")
+@WebServlet("/SvAltaEmpleado")
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024*10, // 10 MB
+	    maxFileSize = 1024 * 1024 * 50,  // 50 MB
+	    maxRequestSize = 1024 * 1024 * 100 // 100 MB
+	)
 public class SvAltaEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "img/inputs";
+	private static final String UPLOAD_DIR = "img/empleado";
        
 
     public SvAltaEmpleado() {
@@ -40,7 +47,6 @@ public class SvAltaEmpleado extends HttpServlet {
 		
 		DbEmpleado dbEmpleado = new DbEmpleado();
 		
-		response.sendRedirect("/GYM/SvConsultaEmpleado");
 		
 		Part filePart = request.getPart("imagen");
 		String fileName = filePart.getSubmittedFileName();
@@ -51,7 +57,7 @@ public class SvAltaEmpleado extends HttpServlet {
 			Integer id = emp2.getIdEmpleado();
 	        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR ;
 	       
-	        String newfileName = "Empleado_" + id.toString();
+	        String newfileName = "emp_" + id.toString();
 	       
 	        
 	        filePart.write(uploadFilePath+ File.separator  + newfileName + this.getFileExtension(fileName));

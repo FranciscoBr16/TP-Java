@@ -24,7 +24,7 @@ public class DbEmpleado extends DbHandler {
 		ArrayList<Empleado> empleados = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT * FROM empleado WHERE estado = 1"); 
+			pstmt = conn.prepareStatement("SELECT * FROM empleado WHERE estado =1"); 
 			rs = pstmt.executeQuery(); 
 			
 			while (rs.next() && rs!= null ) {
@@ -51,6 +51,7 @@ public class DbEmpleado extends DbHandler {
 		} finally {
 			try {
 				if(pstmt!=null)pstmt.close();
+				if (rs!= null) rs.close();
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -74,7 +75,7 @@ public class DbEmpleado extends DbHandler {
 	            emp.setNombre(rs.getString("nombre"));
 	            emp.setApellido(rs.getString("apellido"));
 	            emp.setCorreo(rs.getString("mail"));
-	            /*emp.setImagen(rs.getString("imagen")); */
+	            emp.setImagen(rs.getString("imagen"));
 	            emp.setRol(rs.getString("rol"));
 	            
 	            Date fechaux = rs.getDate("fecha_desde");
@@ -134,7 +135,7 @@ public class DbEmpleado extends DbHandler {
 			pstmt.setString(1, emp.getNombre() );
 			pstmt.setString(2, emp.getApellido() );
 			pstmt.setString(3, emp.getCorreo() );
-			pstmt.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
+			pstmt.setDate(4, java.sql.Date.valueOf(emp.getFechaDesde()));
 			pstmt.setString(5, emp.getRol());
 			pstmt.executeUpdate();
 			rs=pstmt.getGeneratedKeys();
