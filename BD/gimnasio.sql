@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4
 USE `gimnasio`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gimnasio
+-- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
 -- Server version	8.0.28
 
@@ -177,7 +177,7 @@ CREATE TABLE `empleado` (
   `imagen` varchar(255) DEFAULT NULL,
   `estado` tinyint DEFAULT '1',
   PRIMARY KEY (`id_empleado`)
-) ENGINE=InnoDB AUTO_INCREMENT=778 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,6 +240,7 @@ CREATE TABLE `indumentaria` (
 
 LOCK TABLES `indumentaria` WRITE;
 /*!40000 ALTER TABLE `indumentaria` DISABLE KEYS */;
+INSERT INTO `indumentaria` VALUES (2,'L'),(3,NULL),(4,'39');
 /*!40000 ALTER TABLE `indumentaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,6 +294,7 @@ CREATE TABLE `precio` (
 
 LOCK TABLES `precio` WRITE;
 /*!40000 ALTER TABLE `precio` DISABLE KEYS */;
+INSERT INTO `precio` VALUES (1,'2023-08-08',700),(2,'2023-09-09',8000),(3,'2023-12-06',8000),(4,'2023-12-06',18000);
 /*!40000 ALTER TABLE `precio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +312,7 @@ CREATE TABLE `producto` (
   `imagen` varchar(255) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -319,7 +321,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,20,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.',NULL,'Powerade x500 ml');
+INSERT INTO `producto` VALUES (1,20,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,4,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/Ind_3.png','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/Ind_4.jpg','Zapatillas');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +347,7 @@ CREATE TABLE `suplemento` (
 
 LOCK TABLES `suplemento` WRITE;
 /*!40000 ALTER TABLE `suplemento` DISABLE KEYS */;
-INSERT INTO `suplemento` VALUES (1,'ml',500);
+INSERT INTO `suplemento` VALUES (1,'ml',500),(3,'g',900);
 /*!40000 ALTER TABLE `suplemento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-30 11:32:35
+-- Dump completed on 2023-12-06 18:14:00
