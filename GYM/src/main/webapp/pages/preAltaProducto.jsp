@@ -83,7 +83,7 @@
 				<p>Indumentaria</p>
 			</div>
 			<div class="imagen">
-				<img src="/GYM/img/salondemusculacion.jpg"></img>
+				<img src="/GYM/img/indumentaria.jpeg"></img>
 			</div>
 			
 			<hr>
@@ -95,7 +95,7 @@
 			</div>
 			
 			<div class="final">
-				<a href="/GYM/pages/altaIndumentaria.jsp"><button class="boton">Reservar</button> </a>
+				<a href="/GYM/pages/altaIndumentaria.jsp"><button class="boton">Cargar Indumentaria</button> </a>
 			</div>
 
 	
@@ -105,18 +105,18 @@
 					<p>Suplementos</p>
 				</div>
 			<div class="imagen">
-				<img src="/GYM/pages/altaSuplementos.jsp"></img>
+				<img src="/GYM/img/suplementos.jpg"></img>
 			</div>
 			
 			<hr>
 			<div>
 			<ul>
-				<li>Da de alta productos diseñados para apoyar el rendimiento físico y la recuperación muscular.</li>
+				<li>Da de alta productos diseñados para apoyar el rendimiento físico y la recuperación muscular. Estos productos pueden incluir proteínas aminoácidos, vitaminas y minerales</li>
 			</ul>
 			</div>
 			
 			<div class="final">
-				<a href="/GYM/SvAltaSuplementos"><button class="boton">Reservar</button> </a>
+				<a href="/GYM/pages/altaSuplementos.jsp"><button class="boton">Cargar Suplemento</button> </a>
 			</div>
 
 			

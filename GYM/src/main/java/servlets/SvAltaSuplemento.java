@@ -3,6 +3,7 @@ package servlets;
 import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +15,14 @@ import entities.Suplemento;
 
 
 @WebServlet("/SvAltaSuplemento")
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024*10, // 10 MB
+	    maxFileSize = 1024 * 1024 * 50,  // 50 MB
+	    maxRequestSize = 1024 * 1024 * 100 // 100 MB
+	)
 public class SvAltaSuplemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "img";
+	private static final String UPLOAD_DIR = "img/productos";
        
  
     public SvAltaSuplemento() {
@@ -30,7 +36,7 @@ public class SvAltaSuplemento extends HttpServlet {
 		Part filePart = request.getPart("imagen");
 		String fileName = filePart.getSubmittedFileName();
 		String applicationPath = request.getServletContext().getRealPath("");
-        System.out.println(applicationPath);
+       
 		Suplemento sup = new Suplemento(request.getParameter("descripcion"),request.getParameter("nombre"), Integer.parseInt(request.getParameter("stock")), Integer.parseInt(request.getParameter("precio")), request.getParameter("unidad"), Float.parseFloat(request.getParameter("valor")));
 		Suplemento sup2 = manejador.nuevoSuplemento(sup);
 		if ( sup2 != null) {

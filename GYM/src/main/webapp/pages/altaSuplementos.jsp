@@ -102,15 +102,16 @@
 				
 				<div class="campo">
 					<label>Stock:</label>
-					<input class="stock" type="number" name="cupo" required />
+					<input class="stock" type="number" name="stock" required />
 				</div>
 				
 				
 				<div class="campo">
-					<label for="opciones">Unidad:</label>
-					<input type="text" class="" name="unidad" />
 					<label for="opciones">Valor:</label>
 					<input type="number" class="" name="valor" />
+					<label for="opciones">Unidad:</label>
+					<input type="text" class="" name="unidad" />
+					
 				</div>
 				
 				<div class="campo">

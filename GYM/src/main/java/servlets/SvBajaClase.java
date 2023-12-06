@@ -27,14 +27,11 @@ public class SvBajaClase extends HttpServlet {
 		Clase c = new Clase(Integer.parseInt(request.getParameter("id")));
 		DbActividades mnj = new DbActividades();
 		if (mnj.deleteActividad(c) > 0) {
-			 request.setAttribute("mensaje", "Baja Realizada con Éxito!");
-			response.sendRedirect("/GYM/pages/reservas.jsp");
-			
+			getServletContext().getRequestDispatcher("/pages/reservas.jsp").forward(request, response);
 		} else {
-			 request.setAttribute("mensaje", "Ups! Algo salió mal");
-			response.sendRedirect("/GYM/SvActividades");
-			
+			getServletContext().getRequestDispatcher("/pages/reservas.jsp").forward(request, response);
 		}
+		
 		
 	}
 

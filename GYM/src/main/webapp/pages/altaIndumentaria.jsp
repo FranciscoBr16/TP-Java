@@ -102,7 +102,7 @@
 				
 				<div class="campo">
 					<label>Stock:</label>
-					<input class="stock" type="number" name="cupo" required />
+					<input class="stock" type="number" name="stock" required />
 				</div>
 				
 				

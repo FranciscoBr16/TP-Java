@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import entities.Empleado;
 import entities.Indumentaria;
 import entities.Precio;
 import entities.Producto;
@@ -20,43 +19,47 @@ public class DbProducto extends DbHandler{
 	public ArrayList<Producto> getProductos(){
 		PreparedStatement pstmt=null;
 		PreparedStatement pstmt2=null;
+		PreparedStatement pstmt3=null;
 		Connection conn = null;
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 		ArrayList<Producto> productos = new ArrayList<>();
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("SELECT p.id_producto , p.stock , p.descripcion, p.imagen, s.unidad, s.valor, pr.precio, pr.fecha_desde"
-					+ "FROM precio pr"
-					+ "INNER JOIN producto p ON p.id_producto = pr.id_producto"
-					+ "INNER JOIN suplemento s ON s.id_producto = pr.id_producto"
-					+ "WHERE pr.fecha_desde = (select max(p2.fecha_desde)"
-					+ "FROM precio p2 WHERE p2.fecha_desde < CURRENT_DATE");
+			pstmt = conn.prepareStatement("DROP TEMPORARY TABLE IF EXISTS tt_precios; ");
+			pstmt.executeUpdate();
+			pstmt2 = conn.prepareStatement("CREATE TEMPORARY TABLE tt_precios AS (SELECT id_producto , max(fecha_desde) AS fecha_desde FROM precio WHERE fecha_desde <= CURRENT_DATE GROUP BY id_producto);");
+			pstmt2.executeUpdate();
+			pstmt3 = conn.prepareStatement("SELECT p.id_producto , p.stock , p.nombre, p.imagen, pr.precio, pr.fecha_desde "
+					+ "FROM producto p "
+					+ "INNER JOIN tt_precios tt ON tt.id_producto = p.id_producto "
+					+ "INNER JOIN precio pr ON pr.id_producto = p.id_producto "
+					+ "WHERE pr.fecha_desde = tt.fecha_desde AND p.stock > 0");
 			
+
+			/*
+			pstmt2 = conn.prepareStatement("SELECT p.id_producto , p.stock , p.descripcion, p.imagen, i.talle, pr.precio, pr.fecha_desde "
+					+ "FROM precio pr "
+					+ "INNER JOIN producto p ON p.id_producto = pr.id_producto "
+					+ "INNER JOIN indumentaria i ON s.id_producto = pr.id_producto "
+					+ "WHERE pr.fecha_desde = (select max(p2.fecha_desde) "
+					+ "FROM precio p2 WHERE p2.fecha_desde < CURRENT_DATE) AND p.stock > 0"); 
+					*/
 			
-			pstmt2 = conn.prepareStatement("SELECT p.id_producto , p.stock , p.descripcion, p.imagen, i.talle, pr.precio, pr.fecha_desde"
-					+ "FROM precio pr"
-					+ "INNER JOIN producto p ON p.id_producto = pr.id_producto"
-					+ "INNER JOIN indumentaria i ON s.id_producto = pr.id_producto"
-					+ "WHERE pr.fecha_desde = (select max(p2.fecha_desde)"
-					+ "FROM precio p2 WHERE p2.fecha_desde < CURRENT_DATE"); 
-			
-			rs = pstmt.executeQuery();
+			rs = pstmt3.executeQuery();
 			while (rs.next() && rs!= null ) { 
-				Suplemento sup = new Suplemento();
+				Producto pro = new Producto();
 			
-	            sup.setIdProducto(rs.getInt("p.id_producto"));
-	            sup.setStock(rs.getInt("p.stock"));
-	            sup.setDescripcion(rs.getString("p.descripcion"));
-	            sup.setImagen(rs.getString("imagen"));
-	            sup.setUnidad(rs.getString("s.unidad"));
-	            sup.setValor(rs.getFloat("s.valor"));
+	            pro.setIdProducto(rs.getInt("p.id_producto"));
+	            pro.setStock(rs.getInt("p.stock"));
+	            pro.setNombre(rs.getString("p.nombre"));
+	            pro.setImagen(rs.getString("p.imagen"));
 	            Precio pre = new Precio(rs.getInt("pr.precio"));
-	            sup.setPrecio(pre);
-	            productos.add(sup);
+	            pro.setPrecio(pre);
+	            productos.add(pro);
 	}
 			
-			
+			/*
 			rs2 = pstmt2.executeQuery(); 
 			
 			while (rs2.next() && rs2!= null ) { 
@@ -71,6 +74,7 @@ public class DbProducto extends DbHandler{
 	            ind.setPrecio(pre);
 	            productos.add(ind);
 	}
+	*/
 			return productos;
 			
 		} catch (SQLException e) {

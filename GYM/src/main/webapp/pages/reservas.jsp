@@ -33,12 +33,12 @@
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 <% Usuario user = (Usuario) session.getAttribute("user");
- Contrato contrato = (Contrato) request.getAttribute("contrato");
 %>
 
 </head>
 
 <body>
+
 	<header>
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
@@ -69,7 +69,7 @@
                         <a id="textoregistro" href="pages/signUp.jsp"
                             >Registrate</a
                         >
-                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesiï¿½n</button></a
                         >
                     </div>
                     <% } else {%>
@@ -94,12 +94,12 @@
 			<hr>
 			<div>
 			<ul>
-				<li>Máquina de pesas y barras</li>
+				<li>Mï¿½quina de pesas y barras</li>
 				<li>Bancos de entrenamiento ajustables</li>
-				<li>Cintas de correr y elípticas</li>
-				<li>Máquinas de poleas y cables</li>
+				<li>Cintas de correr y elï¿½pticas</li>
+				<li>Mï¿½quinas de poleas y cables</li>
 				<li>Mancuernas y kettlebells variados</li>
-				<li>y mucho más...</li>
+				<li>y mucho mï¿½s...</li>
 			</ul>
 			</div>
 			
@@ -120,12 +120,12 @@
 			<hr>
 			<div>
 			<ul>
-				<li>Clases de Yoga y meditación</li>
+				<li>Clases de Yoga y meditaciï¿½n</li>
 				<li>Crossfit</li>
 				<li>Clases de Zumba y baile</li>
 				<li>Clases de artes marciales</li>
 				<li>Entrenamiento de alta intensidad en grupo</li>
-				<li>y mucho más...</li>
+				<li>y mucho mï¿½s...</li>
 			</ul>
 			</div>
 			
