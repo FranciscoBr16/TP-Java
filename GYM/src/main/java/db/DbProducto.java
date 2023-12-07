@@ -213,22 +213,38 @@ public class DbProducto extends DbHandler{
 		ResultSet rs = null;
 		try{
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Select * from producto pro INNER JOIN precio pre ON pro.id_producto = pre.id_producto where id_producto=? ");
+			pstmt = conn.prepareStatement("Select pro.id_producto, pro.stock, pro.descripcion, pro.imagen, pro.nombre, pre.fecha_desde, pre.precio, i.talle, s.unidad, s.valor from producto pro "
+					+ "INNER JOIN precio pre ON pro.id_producto = pre.id_producto "
+					+ "LEFT JOIN indumentaria i ON i.id_producto = pro.id_producto "
+					+ "LEFT JOIN suplemento s ON s.id_producto = pro.id_producto  "
+					+ "where pro.id_producto=? ");
 			pstmt.setInt(1, p.getIdProducto());
 			rs = pstmt.executeQuery();
 			
 			rs.next();
-			 p.setIdProducto(rs.getInt("id_producto"));
-			 p.setStock(rs.getInt("stock"));
-	         p.setDescripcion(rs.getString("descripcion"));
-	            /*p.setImagen(rs.getString("imagen")); */
-	         p.setNombre(rs.getString("Nombre"));
-	         
-	         Date fechaux = rs.getDate("fecha_desde");
-	         Precio pre = new Precio(fechaux.toLocalDate(), rs.getInt("precio"));
-				p.setPrecio(pre);	
+			int id = rs.getInt("id_producto");
+			int stock = rs.getInt("stock");
+	        String desc =rs.getString("descripcion");
+	        String img = rs.getString("imagen");
+	        String nomb = rs.getString("nombre");
+	        LocalDate fecha = rs.getDate("fecha_desde").toLocalDate();
+	        int pre = rs.getInt("precio");
+			
+	        Producto p2;
+	        
+			String c = null;
+			c = rs.getString("talle");
+			if (c != null) {
+				p2 = new Indumentaria (id, stock, desc, img, nomb, fecha, pre , c);
+				} else {
+				String unidad = rs.getString("unidad");
+				Float valor = rs.getFloat("valor");
+				p2 = new Suplemento (id, stock, desc, img, nomb, fecha, pre , unidad, valor);
+				}
+			
+				
 					
-				return p;
+				return p2;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

@@ -1,5 +1,7 @@
 package entities;
 
+import java.time.LocalDate;
+
 public class Suplemento extends Producto{
 	
 	public float valor;
@@ -32,6 +34,13 @@ public class Suplemento extends Producto{
 	public Suplemento() {
 		super();
 	
+	}
+
+	public Suplemento(int id, int stock, String desc, String img, String nomb, LocalDate fecha, int pre, String unidad, Float valor) {
+		super (id, stock,img,desc, nomb, fecha, pre);
+		this.unidad = unidad;
+		this.valor = valor;
+		
 	}
 	
 	

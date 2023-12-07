@@ -35,6 +35,16 @@ public class Producto {
 		this.precio = p;
 		
 	}
+	
+	public Producto(int id, int stock, String img, String desc, String nomb, LocalDate fecha, Integer pre) {
+		this.idProducto = id;
+		this.imagen=img;
+		this.stock = stock;
+		this.descripcion = desc;
+		this.nombre = nomb;
+		Precio p = new Precio(fecha, pre);
+		this.precio = p;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -74,6 +84,7 @@ public class Producto {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
+	
 	
 	
 }
