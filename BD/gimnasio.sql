@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: gimnasio
+-- Host: 127.0.0.1    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -240,7 +240,7 @@ CREATE TABLE `indumentaria` (
 
 LOCK TABLES `indumentaria` WRITE;
 /*!40000 ALTER TABLE `indumentaria` DISABLE KEYS */;
-INSERT INTO `indumentaria` VALUES (2,'L'),(3,NULL),(4,'39');
+INSERT INTO `indumentaria` VALUES (2,'XL'),(3,NULL),(4,'39'),(5,'L');
 /*!40000 ALTER TABLE `indumentaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,9 +281,9 @@ DROP TABLE IF EXISTS `precio`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `precio` (
   `id_producto` int NOT NULL,
-  `fecha_desde` date DEFAULT NULL,
-  `precio` int NOT NULL,
-  PRIMARY KEY (`id_producto`),
+  `fecha_desde` date NOT NULL,
+  `precio` int DEFAULT NULL,
+  PRIMARY KEY (`id_producto`,`fecha_desde`),
   CONSTRAINT `fk_producto3` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -294,7 +294,7 @@ CREATE TABLE `precio` (
 
 LOCK TABLES `precio` WRITE;
 /*!40000 ALTER TABLE `precio` DISABLE KEYS */;
-INSERT INTO `precio` VALUES (1,'2023-08-08',700),(2,'2023-09-09',8000),(3,'2023-12-06',8000),(4,'2023-12-06',18000);
+INSERT INTO `precio` VALUES (1,'2023-08-08',700),(2,'2023-09-09',8000),(2,'2023-12-01',9000),(2,'2023-12-08',9550),(2,'2023-12-12',10000),(3,'2023-12-06',8000),(4,'2023-12-06',18000),(5,'2023-12-07',700);
 /*!40000 ALTER TABLE `precio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +312,7 @@ CREATE TABLE `producto` (
   `imagen` varchar(255) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +321,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,20,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,4,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/Ind_3.png','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/Ind_4.jpg','Zapatillas');
+INSERT INTO `producto` VALUES (1,30,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,25,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/Ind_3.png','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/Ind_4.jpg','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/Ind_6.jpg','Medias de Boxeo');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-06 18:14:00
+-- Dump completed on 2023-12-08 11:20:48

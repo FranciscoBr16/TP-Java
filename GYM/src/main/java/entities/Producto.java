@@ -45,6 +45,17 @@ public class Producto {
 		Precio p = new Precio(fecha, pre);
 		this.precio = p;
 	}
+	public Producto(int id, int stock2, String desc, String nomb) {
+		this.idProducto = id;
+		this.stock = stock2;
+		this.descripcion = desc;
+		this.nombre = nomb;
+	}
+	public Producto(Integer id_producto, LocalDate fecha_desde, Integer precio2) {
+		this.idProducto=id_producto;
+		Precio p = new Precio(fecha_desde,precio2);
+		this.precio=p;
+	}
 	public String getNombre() {
 		return nombre;
 	}

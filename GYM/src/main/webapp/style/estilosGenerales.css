@@ -207,3 +207,14 @@ input:focus {
 }
 
 
+.botonPrecio {
+	font-size: 15px ;
+	text-align: center ;
+	width: 150px ;
+	padding: 5px ;
+	border-radius: 20px ;
+	background-color: #d95126 ;
+	color: white ;
+	margin: 10px ;
+	border: solid 2px black ;
+}

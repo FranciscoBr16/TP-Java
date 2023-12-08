@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import db.DbEmpleado;
 import db.DbProducto;
 import entities.Empleado;
+import entities.Indumentaria;
 import entities.Producto;
+import entities.Suplemento;
 
 
 @WebServlet("/SvModificacionProducto")
@@ -27,7 +29,7 @@ public class SvModificacionProducto extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Producto p = new Producto(Integer.parseInt(request.getParameter("id")));
+		Producto p = new Producto(Integer.parseInt(request.getParameter("id_producto")));
 		DbProducto manejador = new DbProducto();
 		p = manejador.getProducto(p);
 		request.setAttribute("producto", p);
@@ -41,19 +43,23 @@ public class SvModificacionProducto extends HttpServlet {
 		Integer stock = Integer.parseInt(request.getParameter("stock")); 
 		String descripcion = request.getParameter("descripcion"); 
 		String nombre = request.getParameter("nombre"); 
-		LocalDate fecha_desde = LocalDate.parse(request.getParameter("nombre"));
-		Integer precio = Integer.parseInt(request.getParameter("precio")); 
-		// String imagen = request.getParameter("imagen"); 
 		
-		Producto p = new Producto(id_producto, stock,descripcion, nombre, fecha_desde, precio);
 		
 		DbProducto manejadorDb = new DbProducto();
 		
-		if(manejadorDb.actualizarProducto(p) > 0 ) {
-			response.sendRedirect("/GYM/SvConsultaProducto");
+		if(request.getParameter("talle") != null) {
+			String talle = request.getParameter("talle"); 
+			Indumentaria i = new Indumentaria(id_producto, stock, descripcion, nombre, talle);
+			manejadorDb.actualizarIndumentaria(i);
 		} else {
-			response.sendRedirect("/GYM/index.jsp");
+			String unidad = request.getParameter("unidad");
+			Float valor = Float.parseFloat(request.getParameter("valor"));
+			Suplemento s = new Suplemento(id_producto, stock, descripcion, nombre, unidad, valor);
+			manejadorDb.actualizarSuplemento(s);
 		}
+		
+		response.sendRedirect("/GYM/SvProductos");
+		
 		
 		
 	}

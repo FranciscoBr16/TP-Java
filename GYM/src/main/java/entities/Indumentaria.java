@@ -20,6 +20,11 @@ public class Indumentaria extends Producto {
 		this.talle = c;
 	}
 
+	public Indumentaria(Integer id_producto, Integer stock, String descripcion, String nombre,String talle) {
+		super(id_producto, stock, descripcion, nombre);
+		this.talle = talle;
+	}
+
 	public String getTalle() {
 		return talle;
 	}

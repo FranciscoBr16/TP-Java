@@ -111,33 +111,33 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
 								<button type="submit" class="boton4">Ver Detalles</button>
 							</form>
 							
-        			<% if (user != null){ if(user.isAdmin()){ %>
+        			
                    		
 							<form action="/GYM/SvComprar" method="GET">
 								<input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
 								<button type="submit" class="boton3">Comprar</button>
 							</form>
-					<%} }%>
+					
                    		</div>
                   
                     
         	
-        		</div>
+        			</div>
         
         		<%} %>
         		</div>
         		
+        </div>
+       			<% if (user != null){ if(user.isAdmin()){ %>
         		<div>
         		<a href="/GYM/pages/preAltaProducto.jsp"> <button class="boton">Nuevo Producto</button> </a>
         		</div>
         
-        </div>
-        
-        <form action="/GYM/SvModificarProductos" method="POST">
+        <form action="/GYM/SvModificarProductos" method="GET">
 			<button type="submit" class="boton">Modificar Productos</button>
 		</form>
-        
-    </div>
+        <%} }%>
+  </div>
 
 </body>
 

@@ -36,12 +36,27 @@ public class Suplemento extends Producto{
 	
 	}
 
-	public Suplemento(int id, int stock, String desc, String img, String nomb, LocalDate fecha, int pre, String unidad, Float valor) {
-		super (id, stock,img,desc, nomb, fecha, pre);
+	public Suplemento(int id, int stock, String desc, String nomb, String unidad, Float valor) {
+		super (id, stock,desc,nomb);
 		this.unidad = unidad;
 		this.valor = valor;
 		
 	}
+
+	public Suplemento(Integer id_producto, Integer stock, String descripcion,String img, String nombre, LocalDate fecha_desde, Integer precio, String unidad, Float valor) {
+		super( id_producto,  stock,  descripcion, img, nombre,  fecha_desde,  precio);
+		this.unidad = unidad;
+		this.valor = valor;
+	}
+
+	public Suplemento(Integer id_producto, Integer stock, String descripcion, String nombre, String unidad2,
+			Float valor2) {
+		super(id_producto, stock, descripcion, nombre);
+		this.unidad=unidad2;
+		this.valor=valor2;
+	}
+
+	
 	
 	
 }
