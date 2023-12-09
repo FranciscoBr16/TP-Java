@@ -29,7 +29,7 @@
 
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/styleAltaAbono.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
@@ -84,8 +84,9 @@
 	<div class="contenedor">
 		<div class="formulario">
 			<div class="headerForm">
-				<p>Crear un nuevo abono</p>
+				<p class="titulo">Crear un nuevo <span class="anaranjado">abono</span></p>
 			</div>
+			<hr>
 			<form action="/GYM/SvAltaAbono" method="POST" class="formulario-campos" enctype="multipart/form-data">
 			<div class="campo">
 				<label for="imagen">Selecciona una imagen:</label>

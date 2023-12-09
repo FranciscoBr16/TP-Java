@@ -30,9 +30,9 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilsoGenerales2.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
@@ -89,7 +89,7 @@
 	</header>
 
 	<div class="contenedor">
-		<div class="cajaModificar">
+		<div class="formulario">
 		<div class="headerForm">
 			<p class="titulo">Modifica al <span class="anaranjado"> Empleado </span></p>
 		</div>

@@ -45,14 +45,17 @@ body{
 .contenedorImg{
 	width:294px;
 	height:312px;
+	display: flex;
+	align-items: center;
+	justify-content:center;
+	
 }
 
 .imagen {
  max-width: 100%;
  max-height: 100%;
  height: auto;
- display: block;
- 
+
 
 }
 

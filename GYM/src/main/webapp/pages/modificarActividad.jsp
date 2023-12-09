@@ -32,7 +32,7 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
@@ -65,11 +65,11 @@
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Tienda</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
+							id="links" href="/GYM/SvProductos">Tienda</a></li>
+						<li class="nav-item"><a class="nav-link text-light active"
 							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Sobre Nosotros</a></li>
+							id="links" href="/GYM/SvEmpleados">Sobre Nosotros</a></li>
 					</ul>
 				</div>
 				<% if (user == null){ %>
@@ -92,7 +92,7 @@
 
 	<div class="contenedor">
 	
-		<div class="cajaModificar">
+		<div class="formulario">
 		<div class="headerForm">
 			<p class="titulo">Modifica la <span class="anaranjado">Actividad</span></p>
 		</div>
@@ -106,20 +106,20 @@
 			<form action="/GYM/SvModificarActividad" method="POST" class="formulario-campos">
 				<div class="campo">
 					<label for="idClase">Id Clase:</label> 
-					<input class="inputCorto" type="number" name="idClase" id="idAbono" value="<%=clase.getIdClase()%>" readonly/>
+					<input type="number" name="idClase" id="idAbono" value="<%=clase.getIdClase()%>" readonly/>
 				</div>
 				
 				<div class="campo">
 					<label for="nombreClase">Nombre Actividad:</label> 
-					<input class="inputMediano" type="text" name="nombreClase" id="nombreClase" value="<%=clase.getNombre()%>" required/>
+					<input  type="text" name="nombreClase" id="nombreClase" value="<%=clase.getNombre()%>" required/>
 				</div>
 				<div class="campo">
 					<label for="descripcion">Descripcion:</label> 
-					<input class ="inputLargo" type="text" name="descripcion" id="descripcion" value="<%=clase.getDescripcion()%>" required/>
+					<input type="text" name="descripcion" id="descripcion" value="<%=clase.getDescripcion()%>" required/>
 				</div>
 				<div class="campo">
 					<label for="cupo">Cupo:</label>
-					<input class="inputCorto" type="number" name="cupo" id="cupo" value="<%=clase.getCupo()%>" required/>
+					<input  type="number" name="cupo" id="cupo" value="<%=clase.getCupo()%>" required/>
 				</div>
 				<div class="campo">
 				<label for="opciones">Día:</label>
@@ -131,7 +131,20 @@
         				<option value="Viernes" <%if(clase.getDia().equals("Viernes")){ %> selected <%} %>>Viernes</option>
     				</select>
 					<label for="horario">Horario:</label> 
-					<input class="inputMediano" type="number" name="horario" id="horario" value="<%=clase.getHorario()%>" required/> 
+					<select name="horario" id="opciones">
+        				<option value="8:00" <%if(clase.getHorario().equals("8:00")){ %> selected <%} %>> 8:00</option>
+        				<option value="9:00" <%if(clase.getHorario().equals("9:00")){ %> selected <%} %>>9:00</option>
+        				<option value="10:00"<%if(clase.getHorario().equals("10:00")){ %> selected <%} %>>10:00</option>
+        				<option value="11:00"<%if(clase.getHorario().equals("11:00")){ %> selected <%} %>>11:00</option>
+        				<option value="12:00"<%if(clase.getHorario().equals("12:00")){ %> selected <%} %>>12:00</option>
+        				<option value="13:00"<%if(clase.getHorario().equals("13:00")){ %> selected <%} %>>13:00</option>
+        				<option value="14:00"<%if(clase.getHorario().equals("14:00")){ %> selected <%} %>>14:00</option>
+        				<option value="15:00"<%if(clase.getHorario().equals("15:00")){ %> selected <%} %>>15:00</option>
+        				<option value="16:00"<%if(clase.getHorario().equals("16:00")){ %> selected <%} %>>16:00</option>
+        				<option value="17:00"<%if(clase.getHorario().equals("17:00")){ %> selected <%} %>>17:00</option>
+        				<option value="18:00"<%if(clase.getHorario().equals("18:00")){ %> selected <%} %>>18:00</option>
+        				<option value="19:00"<%if(clase.getHorario().equals("19:00")){ %> selected <%} %>>19:00</option>
+    				</select>
 				</div>
 				
 				<div class="campo">
@@ -148,7 +161,7 @@
 
 				<div class="campo">
 				<label for="opciones">Tipo:</label>
-					<input type="text" class="inputMediano" name="tipo" value="actividad" readonly/>
+					<input type="text" name="tipo" value="actividad" readonly/>
 				</div>
 				
 				

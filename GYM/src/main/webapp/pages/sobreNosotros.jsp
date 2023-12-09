@@ -138,10 +138,11 @@ ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("e
         
         		<%} %>
         		</div>
-        		
+        		<% if (user != null){ if(user.isAdmin()){ %>
         		<div>
         		<a href="/GYM/pages/altaEmpleado.jsp"> <button class="boton">Nuevo Empleado</button> </a>
         		</div>
+        		<%} }%>
         
         </div>
         

@@ -53,6 +53,9 @@ body{
 .contenedorImg{
 	width:294px;
 	height:312px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 
 .imagen {

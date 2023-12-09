@@ -122,9 +122,12 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				<div>
 					<p class="cupo">Cupo: <%=act.getCupo()%> </p>
 				</div>
+				<% if(user != null){  %>
+					<% if(!user.isAdmin()){ %>
 				<div class="pie">
 					<a href="#"><button class="boton3">Reservar</button> </a>
 				</div>
+				<% } }%>
 				
 				<div class="pie">
 					

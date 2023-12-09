@@ -131,7 +131,7 @@ public class DbEmpleado extends DbHandler {
 		
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into empleado(nombre, apellido, mail, fecha_desde, rol) values (?,?,?,?,?,?)" , PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt = conn.prepareStatement("Insert into empleado(nombre, apellido, mail, fecha_desde, rol) values (?,?,?,?,?)" , PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, emp.getNombre() );
 			pstmt.setString(2, emp.getApellido() );
 			pstmt.setString(3, emp.getCorreo() );

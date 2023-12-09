@@ -57,11 +57,11 @@
 						<li class="nav-item"><a class="nav-link text-light active"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Tienda</a></li>
+							id="links" href="/GYM/SvProductos">Tienda</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="/GYM/pages/sobreNosotros.jsp">Sobre Nosotros</a></li>
+							id="links" href="/GYM/SvEmpleados">Sobre Nosotros</a></li>
 					</ul>
 				</div>
 

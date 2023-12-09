@@ -94,12 +94,12 @@
 			<hr>
 			<div>
 			<ul>
-				<li>Mï¿½quina de pesas y barras</li>
+				<li>Máquina de pesas y barras</li>
 				<li>Bancos de entrenamiento ajustables</li>
-				<li>Cintas de correr y elï¿½pticas</li>
-				<li>Mï¿½quinas de poleas y cables</li>
+				<li>Cintas de correr y elípticas</li>
+				<li>Máquinas de poleas y cables</li>
 				<li>Mancuernas y kettlebells variados</li>
-				<li>y mucho mï¿½s...</li>
+				<li>y mucho más...</li>
 			</ul>
 			</div>
 			
@@ -120,12 +120,12 @@
 			<hr>
 			<div>
 			<ul>
-				<li>Clases de Yoga y meditaciï¿½n</li>
+				<li>Clases de Yoga y meditación</li>
 				<li>Crossfit</li>
 				<li>Clases de Zumba y baile</li>
 				<li>Clases de artes marciales</li>
 				<li>Entrenamiento de alta intensidad en grupo</li>
-				<li>y mucho mï¿½s...</li>
+				<li>y mucho más...</li>
 			</ul>
 			</div>
 			

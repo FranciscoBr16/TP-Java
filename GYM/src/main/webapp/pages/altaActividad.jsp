@@ -31,7 +31,7 @@
 
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/actAltaEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
@@ -59,11 +59,11 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 					<li class="nav-item"><a class="nav-link text-light" id="links"
 						href="/GYM/SvAbono">Planes</a></li>
 					<li class="nav-item"><a class="nav-link text-light" id="links"
-						href="#">Tienda</a></li>
-					<li class="nav-item"><a class="nav-link text-light" id="links"
+						href="/GYM/SvProductos">Tienda</a></li>
+					<li class="nav-item"><a class="nav-link text-light active" id="links"
 						href="/GYM/pages/reservas.jsp">Reservas</a></li>
 					<li class="nav-item"><a class="nav-link text-light" id="links"
-						href="#">Sobre Nosotros</a></li>
+						href="/GYM/SvEmpleados">Sobre Nosotros</a></li>
 				</ul>
 			</div>
 
@@ -91,6 +91,7 @@ ArrayList<Empleado> empleados = (ArrayList<Empleado>) request.getAttribute("empl
 			<div class="headerForm">
 				<p class= "titulo">Crear una nueva <span class="anaranjado">Clase </span></p>
 			</div>
+			<hr>
 			<form action="/GYM/SvAltaActividad" method="POST" class="formulario-campos" enctype="multipart/form-data">
 				<div class="campo">
 					<label>Nombre de la Clase:</label> 

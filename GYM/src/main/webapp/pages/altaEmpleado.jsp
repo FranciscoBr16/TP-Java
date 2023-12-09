@@ -30,7 +30,7 @@
 
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/actAltaEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
@@ -87,7 +87,7 @@
 	<div class="contenedor">
 		<div class="formulario">
 			<div class="headerForm">
-				<p class= "titulo">Crear <span class="anaranjado">Producto </span></p>
+				<p class= "titulo">Crear <span class="anaranjado">Empleado </span></p>
 			</div>
 			<form action="/GYM/SvAltaEmpleado" method="POST" class="formulario-campos" enctype="multipart/form-data">
 				<div class="campo">
@@ -108,7 +108,7 @@
 				
 				<div class="campo">
 				<label for="opciones">Rol:</label>
-					<input type="text" class="" name="talle" />
+					<input type="text" name="rol" />
 				</div>
 				
 

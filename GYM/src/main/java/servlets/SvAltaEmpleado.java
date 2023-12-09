@@ -26,7 +26,7 @@ import entities.Empleado;
 	)
 public class SvAltaEmpleado extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "img/empleado";
+	private static final String UPLOAD_DIR = "img/empleados";
        
 
     public SvAltaEmpleado() {
@@ -68,14 +68,14 @@ public class SvAltaEmpleado extends HttpServlet {
 			int b = dbEmpleado.actualizarImg(emp2);
 			
 			response.sendRedirect("/GYM/SvEmpleados");
-		} else {response.sendRedirect("/GYM/pages/index.jsp");}
+		} else {response.sendRedirect("/GYM/index.jsp");}
 	
 	}
 	
 	private String getFileExtension(String name) {
 	    int lastIndexOf = name.lastIndexOf(".");
 	    if (lastIndexOf == -1) {
-	        return ""; // empty extension
+	        return ""; 
 	    }
 	    return name.substring(lastIndexOf);
 	}

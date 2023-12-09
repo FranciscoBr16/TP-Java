@@ -30,7 +30,7 @@
 
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/actAltaEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
@@ -53,15 +53,15 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link text-light"
-						id="links" aria-current="page" href="index.jsp">Inicio</a></li>
+						id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a></li>
 					<li class="nav-item"><a class="nav-link text-light" id="links"
 						href="/GYM/SvAbono">Planes</a></li>
 					<li class="nav-item"><a class="nav-link text-light" id="links"
-						href="#">Tienda</a></li>
+						href="/GYM/SvProductos">Tienda</a></li>
 					<li class="nav-item"><a class="nav-link text-light" id="links"
 						href="/GYM/pages/reservas.jsp">Reservas</a></li>
 					<li class="nav-item"><a class="nav-link text-light" id="links"
-						href="#">Sobre Nosotros</a></li>
+						href="/GYM/SvEmpleados">Sobre Nosotros</a></li>
 				</ul>
 			</div>
 
@@ -89,6 +89,7 @@
 			<div class="headerForm">
 				<p class= "titulo">Crear <span class="anaranjado">Producto </span></p>
 			</div>
+			<hr>
 			<form action="/GYM/SvAltaIndumentaria" method="POST" class="formulario-campos" enctype="multipart/form-data">
 				<div class="campo">
 					<label>Nombre del producto:</label> 

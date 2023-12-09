@@ -44,7 +44,7 @@ public class Suplemento extends Producto{
 	}
 
 	public Suplemento(Integer id_producto, Integer stock, String descripcion,String img, String nombre, LocalDate fecha_desde, Integer precio, String unidad, Float valor) {
-		super( id_producto,  stock,  descripcion, img, nombre,  fecha_desde,  precio);
+		super( id_producto,  stock, img, descripcion,  nombre,  fecha_desde,  precio);
 		this.unidad = unidad;
 		this.valor = valor;
 	}

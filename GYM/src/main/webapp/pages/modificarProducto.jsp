@@ -32,7 +32,7 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
@@ -63,12 +63,12 @@
 							id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
 							id="links" href="/GYM/SvAbono">Planes</a></li>
+						<li class="nav-item"><a class="nav-link text-light active"
+							id="links" href="/GYM/SvProductos">Tienda</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Tienda</a></li>
+							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
 						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Reservas</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Sobre Nosotros</a></li>
+							id="links" href="/GYM/SvEmpleados">Sobre Nosotros</a></li>
 					</ul>
 				</div>
 				<% if (user == null){ %>
@@ -90,7 +90,7 @@
 	</header>
 
 	<div class="contenedor">
-		<div class="cajaModificar">
+		<div class="formulario">
 		<div class="headerForm">
 			<p class="titulo">Modifica el <span class="anaranjado"> Producto </span></p>
 		</div>
