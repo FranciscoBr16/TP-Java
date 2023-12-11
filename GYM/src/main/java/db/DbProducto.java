@@ -449,4 +449,28 @@ public class DbProducto extends DbHandler{
 		}
 }
 	}
+	
+	public int actualizarStock(Producto p) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE producto SET stock = ? where id_producto = ?");
+			pstmt.setInt(1, p.getStock()-1);
+			pstmt.setInt(2, p.getIdProducto());
+			
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+		
+	}
 	}

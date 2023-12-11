@@ -1,6 +1,5 @@
-<%@page import="entities.Clase"%>
+<%@page import="entities.Producto"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="entities.Contrato"%>
 <%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -10,7 +9,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Actividades </title>
+<title>Carrito de compras</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,20 +31,23 @@
 	
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/actListadoEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/finalCompra.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
-ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");
+/*ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("productos");*/
+Producto pro = (Producto)request.getAttribute("producto");
 %>	
 
 
 </head>
 
-
+<body>
+<%if(user == null){ 
+response.sendRedirect("/GYM/SvLogin");}%>
 
 	<header>
 		<nav class="navbar navbar-expand-lg">
@@ -60,17 +62,22 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="/GYM/SvAbono">Planes</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Tienda</a></li>
-						<li class="nav-item"><a class="nav-link text-light active"
-							id="links" href="/GYM/pages/reservas.jsp">Reservas</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Sobre Nosotros</a></li>
-					</ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-light active" id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/SvAbono">Planes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/SvProductos" >Tienda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/pages/reservas.jsp" >Reservas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/SvEmpleados" >Sobre Nosotros</a>
+                            </li>
+                        </ul>
 				</div>
 				<% if (user == null){ %>
                     <div class="cajalogin">
@@ -90,69 +97,61 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 		</nav>
 	</header>
 	
-	<!--  Usar para la barra de busqueda y filtrado 
-	<div>
-	
-	</div>
-	-->
 
 	<div class="contenedor">
 	
-		<%for(Clase act : actividades){ %>
+		
 		<div class="cajaAlargada">
 		
 			<div class="caja1">
-				<img class="imagenact" src="<%=act.getImagen()%>"></img> 
+				<img class="imagenact" src="<%=pro.getImagen()%>"></img> 
 			</div>
 		
 			<div class="caja2">
 				<div class="titulo">
-					<span><%=act.getNombre()%></span>
+					<span><%=pro.getNombre()%></span>
 				</div>
 				<div>
-					<p><%=act.getDescripcion()%></p>
+					<p><%=pro.getDescripcion()%></p>
 				</div>
-				<div> <p>Profesor: <%=act.getEmpleado().getNombre()%> <%=act.getEmpleado().getApellido() %> </p> </div>
 			</div>
 			
 			<div class="caja3">
-				<div class="diayhorario">
-					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
-				</div>
+				
 				<div>
-					<p class="cupo">Cupo: <%=act.getCupo()%> </p>
+					<p class="precio">Precio: $<%=pro.getPrecio().getPrecio()%> </p>
 				</div>
 				<% if(user != null){  %>
-					<% if(!user.isAdmin()){ %>
-				<div class="pie">
-					<a href="#"><button class="boton3">Reservar</button> </a>
-				</div>
-				<% } }%>
 				
 				<div class="pie">
-					
-					<% if(user != null){  %>
-					<% if(user.isAdmin()){ %>
-					<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Clase</button>
-							</form>
-							<form action="/GYM/SvBajaClase" method ="POST">
-								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
-								<button type="submit" class="boton3">Eliminar</button>
-							</form>
-							<% } }%>
+					<a href=#><button class="boton3" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmar compra</button> </a>
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Orden de compra</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       Se generara una orden de compra, para pagar en la sucursal mas cercana.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="boton4" data-bs-dismiss="modal">Cerrar</button>
+        <form action="/GYM/SvCompra" method="POST">
+        <input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
+        <button type="submit" class="boton2">Confirmar</button>
+        
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 				</div>
+				<%}%>
 
 			</div>
 			
 		</div>
-		  <%} %>
-		<% if(user != null){  %>
-		<% if(user.isAdmin()){ %>
-		<div> <a href="/GYM/SvPreAltaActividad"><button class="boton">Nueva Actividad</button></a> </div>
-		
-		<% } }%>
 		
 	</div>
 	

@@ -113,7 +113,7 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
 							
         			
                    		
-							<form action="/GYM/SvComprar" method="GET">
+							<form action="/GYM/SvCompra" method="GET">
 								<input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
 								<button type="submit" class="boton3">Comprar</button>
 							</form>
