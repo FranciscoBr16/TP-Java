@@ -32,7 +32,7 @@ public class SvModificarEmpleado extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		Integer id = Integer.parseInt(request.getParameter("idEmpleado"));
 		String nombre = request.getParameter("nombre"); 
 		String apellido = request.getParameter("apellido"); 
 		String email = request.getParameter("email"); 
@@ -41,12 +41,12 @@ public class SvModificarEmpleado extends HttpServlet {
 		String rol = request.getParameter("rol"); 
 		// String imagen = request.getParameter("imagen"); 
 		
-		Empleado emp = new Empleado(nombre, apellido, email, fecha, rol);
+		Empleado emp = new Empleado(id, nombre, apellido, email, fecha, rol);
 		
 		DbEmpleado manejadorDb = new DbEmpleado();
 		
 		if(manejadorDb.actualizarEmpleado(emp) > 0 ) {
-			response.sendRedirect("/GYM/SvConsultaEmpleado");
+			response.sendRedirect("/GYM/SvEmpleados");
 		} else {
 			response.sendRedirect("/GYM/index.jsp");
 		}

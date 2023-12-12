@@ -26,8 +26,9 @@ public Empleado(String nombre2, String apellido2, String correo2, String rol2,
 	this.rol = rol2;
 	this.fechaDesde = fecha_desde;
 }
-public Empleado(String nombre, String apellido, String email, LocalDate fecha, String rol) {
-    this.nombre = nombre;
+public Empleado(Integer id,String nombre, String apellido, String email, LocalDate fecha, String rol) {
+    this.idEmpleado = id;
+	this.nombre = nombre;
     this.apellido = apellido;
     this.correo = email;
     this.fechaDesde = fecha;

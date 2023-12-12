@@ -28,7 +28,7 @@
   </script>
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/modificacionEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
@@ -83,7 +83,7 @@
 	</header>
 
 	<div class="contenedor">
-		<div class="cajaModificar">
+		<div class="formulario">
 		<div class="headerForm">
 			<p class="titulo" >Modifica tu <span class="anaranjado"> perfil </span> </p>
 		</div>

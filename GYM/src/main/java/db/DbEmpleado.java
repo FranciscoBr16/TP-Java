@@ -166,13 +166,13 @@ public class DbEmpleado extends DbHandler {
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("UPDATE empleado SET nombre = ?, apellido = ?, email = ?, rol= ?, fechaDesde = ? where id = ?");
+			pstmt = conn.prepareStatement("UPDATE empleado SET nombre = ?, apellido = ?, mail = ?, rol= ?, fecha_desde = ? where id_empleado = ?");
 			pstmt.setString(1, emp.getNombre());
 			pstmt.setString(2, emp.getApellido());
 			pstmt.setString(3, emp.getCorreo());
-			pstmt.setString(3, emp.getRol());
-			pstmt.setDate(4, java.sql.Date.valueOf(emp.getFechaDesde()));
-			pstmt.setInt(5, emp.getIdEmpleado());
+			pstmt.setString(4, emp.getRol());
+			pstmt.setDate(5, java.sql.Date.valueOf(emp.getFechaDesde()));
+			pstmt.setInt(6, emp.getIdEmpleado());
 			
 			return pstmt.executeUpdate();
 			

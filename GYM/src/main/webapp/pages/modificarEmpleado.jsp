@@ -48,7 +48,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="../index.jsp"><img
+				<a class="navbar-brand" href="/GYM/index.jsp"><img
 					src="/GYM/img/logo.png" alt="logo del gimnasio" /></a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -58,17 +58,22 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" aria-current="page" href="../index.jsp">Inicio</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="/GYM/SvAbono">Planes</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Tienda</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Reservas</a></li>
-						<li class="nav-item"><a class="nav-link text-light"
-							id="links" href="#">Sobre Nosotros</a></li>
-					</ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-light active" id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/SvAbono">Planes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/SvProductos" >Tienda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/pages/reservas.jsp" >Reservas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" id="links" href="/GYM/SvEmpleados" >Sobre Nosotros</a>
+                            </li>
+                        </ul>
 				</div>
 				<% if (user == null){ %>
                     <div class="cajalogin">
@@ -107,18 +112,21 @@
 				</div>
 				
 				<div class="campo">
-					<label for="nombreEmpleado">Nombre Empleado:</label> 
-					<input class="inputMediano" type="text" name="nombreEmpleado" id="nombreEmpleado" value="<%=emp.getNombre()%>" />
+					<label for="nombre">Nombre Empleado:</label> 
+					<input  type="text" name="nombre" id="nombre" value="<%=emp.getNombre()%>" />
 				</div>
 				<div class="campo">
-					<label for="apellidoEmpleado">Apellido Empleado:</label> 
-					<input class="inputMediano" type="text" name="apellidoEmpleado" id="apellidoEmpleado" value="<%=emp.getApellido()%>" />
+					<label for="apellido">Apellido Empleado:</label> 
+					<input  type="text" name="apellido" id="apellido" value="<%=emp.getApellido()%>" />
 				</div>
 				<div class="campo">
-					<label for="mailEmpleado">Mail Empleado:</label> 
-					<input class="inputLargo" type="text" name="mailEmpleado" id="mailEmpleado" value="<%=emp.getCorreo()%>" />
+					<label for="email">Mail Empleado:</label> 
+					<input type="text" name="email" id="email" value="<%=emp.getCorreo()%>" />
 				</div>
-				
+				<div class="campo">
+					<label for="fechaDesde">Fecha de ingreso:</label> 
+					<input type="date" name="fechaDesde" id="fechaDesde" value="<%=emp.getFechaDesde()%>"/>
+				</div>
 				<div class="campo">
 					<label for="rol">Rol:</label> 
 					<input class="inputMediano" type="text" name="rol" id="rol" value="<%=emp.getRol()%>"/> 

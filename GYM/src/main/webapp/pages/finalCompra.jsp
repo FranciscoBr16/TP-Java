@@ -47,7 +47,7 @@ Producto pro = (Producto)request.getAttribute("producto");
 
 <body>
 <%if(user == null){ 
-response.sendRedirect("/GYM/SvLogin");}%>
+response.sendRedirect("/GYM/pages/logIn.jsp");}%>
 
 	<header>
 		<nav class="navbar navbar-expand-lg">
@@ -81,11 +81,8 @@ response.sendRedirect("/GYM/SvLogin");}%>
 				</div>
 				<% if (user == null){ %>
                     <div class="cajalogin">
-                        <a id="textoregistro" href="pages/signUp.jsp"
-                            >Registrate</a
-                        >
-                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
-                        >
+                        <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a>
                     </div>
                     <% } else {%>
                     <div class="cajaUser">

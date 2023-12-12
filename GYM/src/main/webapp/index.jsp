@@ -84,13 +84,13 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
             </nav>
         </header>
         <div class="caja">
-            <a class="caja1" href="#">
+            <a class="caja1" href="/GYM/pages/reservas.jsp">
                 <p>ENTRENA</p>
             </a>
-            <a class="caja2" href="#">
+            <a class="caja2" href="/GYM/SvProductos">
                 <p>COMPRA</p>
             </a>
-            <a class="caja3" href="#">
+            <a class="caja3" href="/GYM/SvEmpleados">
                 <p>CONOCENOS</p>
             </a>
         </div>
