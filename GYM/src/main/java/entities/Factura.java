@@ -6,14 +6,27 @@ import java.time.format.DateTimeFormatter;
 
 public class Factura {
 	
-	private static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private int nroFactura;
 	private LocalDate fecha;
-	private int CUIT;
+	private String CUIT;
 	private double total;
 	private String descripcion;
 	private String tipo;
 	private ArrayList<Detalle_Factura> detalles = new ArrayList<>();
+	private Usuario usuario;
+	private Producto producto;
+	public Producto getProducto() {
+		return producto;
+	}
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public int getNroFactura() {
 		return nroFactura;
 	}
@@ -26,10 +39,10 @@ public class Factura {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-	public int getCUIT() {
+	public String getCUIT() {
 		return CUIT;
 	}
-	public void setCUIT(int cUIT) {
+	public void setCUIT(String cUIT) {
 		CUIT = cUIT;
 	}
 	public double getTotal() {

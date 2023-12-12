@@ -2,9 +2,9 @@ CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4
 USE `gimnasio`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: gimnasio
+-- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -146,7 +146,6 @@ CREATE TABLE `detalle-factura` (
   `sub_total` float DEFAULT NULL,
   PRIMARY KEY (`nro_factura`,`id_producto`),
   KEY `fk_producto_idx` (`id_producto`),
-  CONSTRAINT `fk_factura` FOREIGN KEY (`nro_factura`) REFERENCES `factura` (`nro_factura`) ON UPDATE CASCADE,
   CONSTRAINT `fk_producto4` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -198,16 +197,20 @@ DROP TABLE IF EXISTS `factura`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `factura` (
-  `nro_factura` int NOT NULL,
-  `fecha` varchar(45) DEFAULT NULL,
+  `nro_factura` int NOT NULL AUTO_INCREMENT,
+  `fecha` date DEFAULT NULL,
   `tipo` char(1) DEFAULT NULL,
   `cuit` varchar(45) DEFAULT NULL,
-  `nom_usuario` varchar(45) NOT NULL,
+  `dni` varchar(45) NOT NULL,
   `total` float DEFAULT NULL,
+  `id_producto` int NOT NULL,
+  `estado` tinyint DEFAULT '0',
   PRIMARY KEY (`nro_factura`),
-  KEY `fk_usuario2_idx` (`nom_usuario`),
-  CONSTRAINT `fk_usuario3` FOREIGN KEY (`nom_usuario`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_usuario2_idx` (`dni`),
+  KEY `fk_id_producto_idx` (`id_producto`),
+  CONSTRAINT `fk_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
+  CONSTRAINT `fk_usuario3` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,6 +219,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
+INSERT INTO `factura` VALUES (1,'2023-12-12','C','6942069','00000001',10000,2,0);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +325,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,30,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,23,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/Ind_3.png','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/Ind_4.jpg','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/Ind_6.jpg','Medias de Boxeo');
+INSERT INTO `producto` VALUES (1,30,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,22,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/Ind_3.png','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/Ind_4.jpg','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/Ind_6.jpg','Medias de Boxeo');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,4 +399,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-12 16:06:50
+-- Dump completed on 2023-12-12 16:56:07
