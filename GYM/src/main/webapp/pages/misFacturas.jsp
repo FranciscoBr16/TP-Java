@@ -1,6 +1,6 @@
-<%@page import="entities.Clase"%>
+
+<%@page import="entities.Factura"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="entities.Contrato"%>
 <%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Actividades </title>
+<title>Facturas</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -32,20 +32,18 @@
 	
 
 
-<link rel="stylesheet" type="text/css" href="/GYM/style/actListadoEstilos.css" />
+<link rel="stylesheet" type="text/css" href="/GYM/style/listado.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
-ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");
+ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas");
 %>	
 
 
 </head>
-
-
 
 	<header>
 		<nav class="navbar navbar-expand-lg">
@@ -61,7 +59,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-light " id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
+                                <a class="nav-link text-light" id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" id="links" href="/GYM/SvAbono">Planes</a>
@@ -70,7 +68,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
                                 <a class="nav-link text-light" id="links" href="/GYM/SvProductos" >Tienda</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light active" id="links" href="/GYM/pages/reservas.jsp" >Reservas</a>
+                                <a class="nav-link text-light" id="links" href="/GYM/pages/reservas.jsp" >Reservas</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" id="links" href="/GYM/SvEmpleados" >Sobre Nosotros</a>
@@ -79,11 +77,8 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				</div>
 				<% if (user == null){ %>
                     <div class="cajalogin">
-                        <a id="textoregistro" href="pages/signUp.jsp"
-                            >Registrate</a
-                        >
-                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
-                        >
+                        <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a>
                     </div>
                     <% } else {%>
                     <div class="cajaUser">
@@ -94,74 +89,39 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 			</div>
 		</nav>
 	</header>
-	
-	<!--  Usar para la barra de busqueda y filtrado 
-	<div>
-	
-	</div>
-	-->
 
-	<div class="contenedor">
-	
-		<%for(Clase act : actividades){ %>
-		<div class="cajaAlargada">
+<body>
+	<div class="container mt-4">
+		<% if(!facturas.isEmpty()){ %>
 		
-			<div class="caja1">
-				<img class="imagenact" src="<%=act.getImagen()%>"></img> 
-			</div>
-		
-			<div class="caja2">
-				<div class="titulo">
-					<span><%=act.getNombre()%></span>
-				</div>
-				<div>
-					<p><%=act.getDescripcion()%></p>
-				</div>
-				<div> <p>Profesor: <%=act.getEmpleado().getNombre()%> <%=act.getEmpleado().getApellido() %> </p> </div>
-			</div>
 			
-			<div class="caja3">
-				<div class="diayhorario">
-					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
-				</div>
-				<div>
-					<p class="cupo">Cupo: <%=act.getCupo()%> </p>
-				</div>
-				<% if(user != null){  %>
-					<% if(!user.isAdmin()){ %>
-				<div class="pie">
-					<a href="#"><button class="boton3">Reservar</button> </a>
-				</div>
-				<% } }%>
-				
-				<div class="pie">
-					
-					<% if(user != null){  %>
-					<% if(user.isAdmin()){ %>
-					<form action="/GYM/SvModificarActividad" method="GET">
-								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
-								<button type="submit" class="boton4">Modificar Clase</button>
-							</form>
-							<form action="/GYM/SvBajaClase" method ="POST">
-								<input type="hidden" name="id" value="<%=act.getIdClase()%>">
-								<button type="submit" class="boton3">Eliminar</button>
-							</form>
-							<% } }%>
-				</div>
+			  <table class="table table-responsive">
+			    <thead>
+			      <tr>
+			        <th scope="col">Número de Factura</th>
+			        <th scope="col">Fecha</th>
+			        <th scope="col">Precio</th>
+			        <th scope="col">Estado</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			    <%for(Factura f : facturas){ %> 
+			      <tr>
+			        <td><%=f.getNroFactura()%> </td>
+			        <td><%=f.getFecha() %> </td>
+			        <td><%=f.getTotal() %> </td> <%-- En el metodo de la BD asignar el valor del producto al total de la factura --%>
+			        <td><% if (f.isEstado()){ %> Pagado <% } else {%> Sin pagar <%} %></td>
+			      </tr>
+			     	<% } %>
+			  
+			    </tbody>
+			  </table>
+			
 
-			</div>
-			
-		</div>
-		  <%} %>
-		<% if(user != null){  %>
-		<% if(user.isAdmin()){ %>
-		<div> <a href="/GYM/SvPreAltaActividad"><button class="boton">Nueva Actividad</button></a> </div>
-		
-		<% } }%>
-		
+		<%} else { %>
+	<div class="fondo-sin-facturas"> <h1>No has realizado ninguna compra</h1> </div>
+	<%} %> 
 	</div>
-	
-	
 
 </body>
 

@@ -47,7 +47,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-light active" id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
+                                <a class="nav-link text-light" id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" id="links" href="/GYM/SvAbono">Planes</a>

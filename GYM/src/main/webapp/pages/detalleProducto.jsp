@@ -57,13 +57,13 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-light active" id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
+                                <a class="nav-link text-light " id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" id="links" href="/GYM/SvAbono">Planes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" id="links" href="/GYM/SvProductos" >Tienda</a>
+                                <a class="nav-link text-light active" id="links" href="/GYM/SvProductos" >Tienda</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-light" id="links" href="/GYM/pages/reservas.jsp" >Reservas</a>
@@ -131,7 +131,8 @@
 			</div>
 
 			<div>
-				<form action="#" method="POST">
+				<form action="/GYM/SvCompra" method="POST">
+				<input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
 					<button type="submit" class="boton">Comprar</button>
 				</form>
 			<% if (user != null){ if(user.isAdmin()){ %>

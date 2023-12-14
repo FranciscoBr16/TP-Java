@@ -15,6 +15,16 @@ public class Factura {
 	private ArrayList<Detalle_Factura> detalles = new ArrayList<>();
 	private Usuario usuario;
 	private Producto producto;
+	private boolean estado;
+	
+	
+	
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 	public Producto getProducto() {
 		return producto;
 	}
