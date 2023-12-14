@@ -9,14 +9,15 @@
 
 .caja {
   width: 400px;
-  border-radius: 10px;
+  border-radius: 15px;
+  border: none;
   display: flex;
   flex-direction: column;
   background-color: white;
   align-items: center;
-  border: 2px solid black;
   margin: 50px 30px 10px 30px;
   padding: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
 }
 
 .imagen img {
