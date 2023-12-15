@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DbActividades;
+import db.DbContrato;
+import entities.Clase;
+
 
 @WebServlet("/SvInscripcion")
 public class SvInscripcion extends HttpServlet {
@@ -24,7 +28,15 @@ public class SvInscripcion extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getAttribute("id");
+		Clase clase = new Clase((Integer)request.getAttribute("id"));
+		DbActividades dbact = new DbActividades();
+		if(dbact.cupoClases(clase)) {
+			
+		}else {
+			
+		}
+		
+		
 		
 	}
 
