@@ -120,6 +120,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				<div> <p>Profesor: <%=act.getEmpleado().getNombre()%> <%=act.getEmpleado().getApellido() %> </p> </div>
 			</div>
 			
+
 			<div class="caja3">
 				<div class="diayhorario">
 					<span><%=act.getDia() %></span> <span><%=act.getHorario() %></span>
@@ -130,8 +131,12 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 				<% if(user != null){  %>
 					<% if(!user.isAdmin()){ %>
 				<div class="pie">
-					<a href="#"><button class="boton3">Reservar</button> </a>
+					<form action="/GYM/SvInscripcion" method ="POST">
+						<input type="hidden" name="id" value="<%=act.getIdClase()%>">
+						<button type="submit" class="boton3">Reservar</button>
+					</form>
 				</div>
+				
 				<% } }%>
 				
 				<div class="pie">

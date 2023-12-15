@@ -352,4 +352,58 @@ public class DbActividades extends DbHandler {
 			}
 	}
 	}
+	
+	public boolean cupoClases(Clase clase) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		Connection conn = null;
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		int cant = 0;
+		int cupo = 0;
+		
+		LogicaActividad la = new LogicaActividad();
+		try {
+			conn = this.getConnection();
+			pstmt2 = conn.prepareStatement("SELECT dia, cupo FROM clase WHERE id_clase=?");
+			pstmt2.setInt(1, clase.getIdClase());
+			rs = pstmt.executeQuery(); 
+			
+				while (rs.next() && rs!= null ) { 
+					  String dia = rs.getString("dia");
+					  cupo = rs.getInt("cupo");
+					  LocalDate fecha = la.fechaIncripcion(dia);
+			            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
+			            Date f2 = java.sql.Date.valueOf(fecha);
+				
+			pstmt = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND fecha BETWEEN ? AND ? GROUP BY 1");
+			pstmt.setInt(1, clase.getIdClase());
+			pstmt.setDate(2, f1);
+			pstmt.setDate(3, f2);
+			rs2 = pstmt.executeQuery();
+			
+					while(rs2.next() && rs2!= null) {
+						cant = rs2.getInt("cantidad");
+					}
+				}
+			
+				if(cupo - cant > 0) {
+					return true;
+				}else {
+					return false;
+				}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
+	}
+	
 	}

@@ -13,7 +13,7 @@ public class LogicaActividad {
 		LocalDate hoy = LocalDate.now();
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("EEEE");
 		String nombreDelDia = hoy.format(formato);
-		System.out.println(nombreDelDia);
+		
 		
 		switch(fechastr) {
 		
