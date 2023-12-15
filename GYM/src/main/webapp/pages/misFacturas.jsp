@@ -78,7 +78,7 @@ ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas
 				<% if (user == null){ %>
                     <div class="cajalogin">
                         <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
-                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a>
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesiï¿½n</button></a>
                     </div>
                     <% } else {%>
                     <div class="cajaUser">
@@ -98,10 +98,10 @@ ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas
 			  <table class="table table-responsive">
 			    <thead>
 			      <tr>
-			        <th scope="col">Número de Factura</th>
-			        <th scope="col">Fecha</th>
-			        <th scope="col">Precio</th>
-			        <th scope="col">Estado</th>
+			        <th scope="col" class="">Nï¿½mero de Factura</th>
+			        <th scope="col" class="">Fecha</th>
+			        <th scope="col" class="">Precio</th>
+			        <th scope="col" class="">Estado</th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -109,7 +109,7 @@ ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas
 			      <tr>
 			        <td><%=f.getNroFactura()%> </td>
 			        <td><%=f.getFecha() %> </td>
-			        <td><%=f.getTotal() %> </td> <%-- En el metodo de la BD asignar el valor del producto al total de la factura --%>
+			        <td>$ <%=f.getTotal() %> </td> <%-- En el metodo de la BD asignar el valor del producto al total de la factura --%>
 			        <td><% if (f.isEstado()){ %> Pagado <% } else {%> Sin pagar <%} %></td>
 			      </tr>
 			     	<% } %>
