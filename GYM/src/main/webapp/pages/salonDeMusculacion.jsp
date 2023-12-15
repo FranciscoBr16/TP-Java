@@ -141,12 +141,16 @@
 						<p class="cupo">Cupo: <%=lun.getCupo()%> </p>
 					</div>
 					<div class="cajaBotones">
-						<a href="#"><button class="boton5">Reservar</button> </a>
 							<% if(user != null){  %>
+							<form action="/GYM/SvInscripcion" method ="POST">
+						<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
+						<button type="submit" class="boton3">Reservar</button>
+							</form>	
 								<% if(user.isAdmin()){ %>
 									<div class="botonesFinales">
 									<form action="/GYM/SvModificarSalon" method="GET">
 										<input type="hidden" name="id" value="<%=lun.getIdClase()%>">
+										
 										<button type="submit" class="boton5">Modificar Clase</button>
 									</form>
 									<form action="/GYM/SvBajaClase" method="POST">
@@ -175,9 +179,12 @@
 				</div>
 				<div class="cajaDerecha">
 					<p class="cupo">Cupo: <%=mar.getCupo()%> </p>
-					<a href="#"><button class="boton5">Reservar</button> </a>
 					<% if(user != null){  %>
-						<% if(user.isAdmin()){ %>
+					<form action="/GYM/SvInscripcion" method ="POST">
+						<input type="hidden" name="id" value="<%=mar.getIdClase()%>">
+						<button type="submit" class="boton3">Reservar</button>
+					</form>		
+					<% if(user.isAdmin()){ %>	
 						<div class="botonesFinales">
 						<form action="/GYM/SvModificarSalon" method="GET">
 								<input type="hidden" name="id" value="<%=mar.getIdClase()%>">
@@ -207,8 +214,11 @@
 					</div>
 					<div class="cajaDerecha">
 						<p class="cupo">Cupo: <%=mier.getCupo()%> </p>
-						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
+						<form action="/GYM/SvInscripcion" method ="POST">
+						<input type="hidden" name="id" value="<%=mier.getIdClase()%>">
+						<button type="submit" class="boton3">Reservar</button>
+					</form>	
 							<% if(user.isAdmin()){ %>
 								<div class="botonesFinales">
 								<form action="/GYM/SvModificarSalon" method="GET">
@@ -239,8 +249,11 @@
 					</div>
 					<div class="cajaDerecha">
 						<p class="cupo">Cupo: <%=jue.getCupo()%> </p>
-						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
+						<form action="/GYM/SvInscripcion" method ="POST">
+						<input type="hidden" name="id" value="<%=jue.getIdClase()%>">
+						<button type="submit" class="boton3">Reservar</button>
+					</form>	
 							<% if(user.isAdmin()){ %>
 								<div class="botonesFinales">
 								<form action="/GYM/SvModificarSalon" method="GET">
@@ -271,8 +284,11 @@
 					</div>
 					<div class="cajaDerecha">
 						<p class="cupo">Cupo: <%=vie.getCupo()%> </p>
-						<a href="#"><button class="boton5">Reservar</button> </a>
 						<% if(user != null){  %>
+						<form action="/GYM/SvInscripcion" method ="POST">
+						<input type="hidden" name="id" value="<%=vie.getIdClase()%>">
+						<button type="submit" class="boton3">Reservar</button>
+					</form>	
 							<% if(user.isAdmin()){ %>
 								<div class="botonesFinales">
 								<form action="/GYM/SvModificarSalon" method="GET">

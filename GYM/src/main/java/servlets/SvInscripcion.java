@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import db.DbActividades;
 import db.DbContrato;
 import entities.Clase;
+import entities.Usuario;
 
 
 @WebServlet("/SvInscripcion")
@@ -28,13 +29,23 @@ public class SvInscripcion extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Clase clase = new Clase((Integer)request.getAttribute("id"));
+		Clase clase = new Clase(Integer.parseInt(request.getParameter("id")));
 		DbActividades dbact = new DbActividades();
+		Usuario usuario = (Usuario)request.getSession().getAttribute("user");
+		DbContrato dbcon = new DbContrato();
+		
+		
 		if(dbact.cupoClases(clase)) {
-			
-		}else {
-			
+			if(dbact.disponibilidadAbono(usuario)) {
+				if(dbact.agregarInscripcion(usuario, clase)) {
+					dbcon.actualizaClasesDisponibles(usuario);
+					response.sendRedirect("/GYM/SvUsuario");
+				}
+			}
+		}	else {
+			response.sendRedirect("/GYM/index.jsp");
 		}
+		
 		
 		
 		

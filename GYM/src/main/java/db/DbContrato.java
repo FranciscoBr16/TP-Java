@@ -65,6 +65,7 @@ public class DbContrato extends DbHandler {
 		} finally {
 			try {
 				if(pstmt!=null)pstmt.close();
+				if(rs!=null)rs.close();
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -75,4 +76,29 @@ public class DbContrato extends DbHandler {
 		
 	}
 
+	public boolean actualizaClasesDisponibles(Usuario usuario) {
+		PreparedStatement pstmt=null;
+		Connection conn = null;
+		
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("UPDATE contrato SET clases_disponibles = clases_disponibles-1 WHERE dni_usuario =?");
+			pstmt.setString(1, usuario.getDni());
+			pstmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if(pstmt!=null)
+				pstmt.close();
+				this.cerrarConnection();
+				} catch (SQLException e) {
+				e.printStackTrace();
+				}
+			}
+	}
 }
+
