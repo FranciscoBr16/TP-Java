@@ -1,6 +1,18 @@
+@charset "ISO-8859-1";
+
 .fondo-sin-facturas{
 	background-color: white;
 	text-align: center;
 	padding: 10px;
 	
+}
+
+th{
+	background-color: #d95126 ;
+	color: white ;
+}
+
+table{
+	margin-top: 20px;
+	border-radius: 10px;
 }
