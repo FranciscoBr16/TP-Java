@@ -1,5 +1,5 @@
 
-<%@page import="entities.Factura"%>
+<%@page import="entities.Inscripcion"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entities.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Facturas</title>
+<title>Mis Reservas</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -39,7 +39,7 @@
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
-ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas");
+ArrayList<Inscripcion> ins = (ArrayList<Inscripcion>)request.getAttribute("reservas");
 %>	
 
 
@@ -92,25 +92,25 @@ ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas
 
 <body>
 	<div class="container mt-4">
-		<% if(!facturas.isEmpty()){ %>
+		<% if(!ins.isEmpty()){ %>
 		
 			
 			  <table class="table table-responsive">
 			    <thead>
 			      <tr>
-			        <th scope="col" class="">Número de Factura</th>
-			        <th scope="col" class="">Fecha</th>
-			        <th scope="col" class="">Precio</th>
-			        <th scope="col" class="">Estado</th>
+			        <th scope="col" class="">Fecha de la Reserva</th>
+			        <th scope="col" class="">Nombre de la Clase</th>
+			        <th scope="col" class="">Dia de la clase</th>
+			        <th scope="col" class="">Horario de la clase</th>
 			      </tr>
 			    </thead>
 			    <tbody>
-			    <%for(Factura f : facturas){ %> 
+			    <%for(Inscripcion i : ins){ %> 
 			      <tr>
-			        <td><%=f.getNroFactura()%> </td>
-			        <td><%=f.getFecha() %> </td>
-			        <td>$ <%=f.getTotal() %> </td> <%-- En el metodo de la BD asignar el valor del producto al total de la factura --%>
-			        <td><% if (f.isEstado()){ %> Pagado <% } else {%> Sin pagar <%} %></td>
+			        <td><%=i.getFechaInscripcion() %> </td>
+			        <td><%=i.getClase().getNombre() %> </td>
+			        <td><%=i.getClase().getDia() %> </td>
+			        <td><%=i.getClase().getHorario()%> </td>
 			      </tr>
 			     	<% } %>
 			  
@@ -119,7 +119,7 @@ ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas
 			
 
 		<%} else { %>
-	<div class="fondo-sin-facturas"> <h1>No has realizado ninguna compra</h1> </div>
+	<div class="fondo-sin-facturas"> <h1>No has realizado ninguna reserva en estos días</h1> </div>
 	<%} %> 
 	</div>
 

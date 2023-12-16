@@ -5,15 +5,24 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Usuario {
-	private static DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
     private String telefono;
     private String dni, password, email, nombre, apellido;
     private boolean beneficio, admin;
     private LocalDate fechaNac;
 	private String imagen;
 	private ArrayList<Contrato> contratos= new ArrayList<>(); 
+	private ArrayList<Inscripcion> inscripciones= new ArrayList<>();
 	
 	
+	public ArrayList<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(ArrayList<Inscripcion> inscripciones) {
+		this.inscripciones = inscripciones;
+	}
+
 	public ArrayList<Contrato> getContratos() {
 		return contratos;
 	}
@@ -24,15 +33,6 @@ public class Usuario {
 
 	public String getImagen() {
 		return imagen;
-	}
-
-    
-    public static DateTimeFormatter getFormato() {
-		return formato;
-	}
-    
-	public static void setFormato(DateTimeFormatter formato) {
-		Usuario.formato = formato;
 	}
 	
 	

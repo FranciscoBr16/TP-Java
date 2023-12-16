@@ -476,6 +476,48 @@ public class DbActividades extends DbHandler {
 				}
 				}
 	}
+
+	public ArrayList<Inscripcion> getMisReservas(Usuario usuario) {
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+		
+		try {
+			conn = this.getConnection();
+			pstmt = conn.prepareStatement("SELECT * FROM inscripcion i INNER JOIN clase c ON i.id_clase = c.id_clase WHERE i.dni = ? AND WEEK(i.fecha) >= WEEK(CURDATE()) - 1");
+			pstmt.setString(1, usuario.getDni());
+			rs = pstmt.executeQuery();
+			while(rs.next() && rs!= null) {
+				Inscripcion ins = new Inscripcion();
+				Clase cl = new Clase();
+				cl.setIdClase(rs.getInt("id_clase"));
+				cl.setNombre(rs.getString("nombre_clase"));
+				cl.setHorario(rs.getString("horario"));
+				cl.setDia(rs.getString("dia"));
+				ins.setClase(cl);;
+				Date fechaux = rs.getDate("fecha");
+				if (fechaux != null) {
+					ins.setFechaInscripcion(fechaux.toLocalDate());
+				} else ins.setFechaInscripcion(null);
+				
+				inscripciones.add(ins);
+			}
+			return inscripciones;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+			} finally {
+				try {
+					if(pstmt!=null && rs!=null) {
+					rs.close();
+					pstmt.close();}
+					this.cerrarConnection();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				}
+	}
 	
 	
 	

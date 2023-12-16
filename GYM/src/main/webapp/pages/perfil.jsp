@@ -130,7 +130,7 @@
 				<% } %>
 			</div>
 			<div>
-				<a href="#"><button class="boton">Ver reservas</button> </a>
+				<a href="/GYM/SvMisReservas"><button class="boton">Ver reservas</button> </a>
 			</div>
 			<div>
 				<a href="/GYM/SvMisFacturas"><button class="boton">Ver facturas</button> </a>
