@@ -92,11 +92,12 @@ CREATE TABLE `contrato` (
   `id_abono` int NOT NULL AUTO_INCREMENT,
   `fecha_desde` date NOT NULL,
   `fecha_hasta` date NOT NULL,
+  `clases_disponibles` int NOT NULL,
   PRIMARY KEY (`dni_usuario`,`fecha_desde`,`fecha_hasta`),
   KEY `fk_abono_idx` (`id_abono`),
   CONSTRAINT `fk_abono` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_usuario2` FOREIGN KEY (`dni_usuario`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,6 +106,7 @@ CREATE TABLE `contrato` (
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
+INSERT INTO `contrato` VALUES ('00000001',3,'2023-12-01','2023-12-31',27),('42424242',1,'2023-11-01','2023-11-30',8);
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +187,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'Benjamín','Fares','benjabaldursgate@gmail.com','2023-08-23','Dios Nordico','/GYM/img/empleados/emp_1.jpeg',1),(2,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista','/GYM/img/empleados/FB233.jpg',1),(3,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor','/GYM/img/empleados/emp_3.png',1),(4,'Jerónimo','Álvarez','jeroaguiladorada@gmail.com','2023-08-23','Maestro','/GYM/img/empleados/emp_4.png',1);
+INSERT INTO `empleado` VALUES (1,'Benjamín','Fares','benjabaldursgate@gmail.com','2023-08-23','Mira a tu novia','/GYM/img/empleados/emp_1.jpg',1),(2,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista','/GYM/img/empleados/FB233.jpg',1),(3,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor','/GYM/img/empleados/emp_3.png',1),(4,'Jerónimo','Álvarez','jeroaguiladorada@gmail.com','2023-08-23','Maestro','/GYM/img/empleados/emp_4.png',1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +212,7 @@ CREATE TABLE `factura` (
   KEY `fk_id_producto_idx` (`id_producto`),
   CONSTRAINT `fk_id_producto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
   CONSTRAINT `fk_usuario3` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +221,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (1,'2023-12-12','C','6942069','00000001',10000,2,0);
+INSERT INTO `factura` VALUES (1,'2023-12-12','C','6942069','00000001',10000,2,0),(2,'2023-12-13','C','6942069','00000001',700,1,0);
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,7 +274,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('00000001',2,'2023-10-18');
+INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('00000001',1,'2023-12-15'),('00000001',2,'2023-10-18'),('00000001',2,'2023-12-15'),('00000001',3,'2023-12-15');
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +327,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,30,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,22,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/Ind_3.png','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/Ind_4.jpg','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/Ind_6.jpg','Medias de Boxeo');
+INSERT INTO `producto` VALUES (1,29,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,22,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/ind_3.jpg','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/ind_4.png','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/ind_6.jpg','Medias de Boxeo');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,4 +401,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-12 16:56:07
+-- Dump completed on 2023-12-16 16:45:14
