@@ -74,7 +74,7 @@ ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("e
                         <a id="textoregistro" href="pages/signUp.jsp"
                             >Registrate</a
                         >
-                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesiï¿½n</button></a
                         >
                     </div>
                     <% } else {%>
@@ -96,8 +96,8 @@ ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("e
         
         <div class="caja">
         
-        	<div class="titulo"><span>¿Quiénes Somos?</span></div>
-        	<div class="descripcion"><span>Valhalla es un club de entrenamiento donde el concepto de lo social adquiere valor a través de lo deportivo.</span> 
+        	<div class="titulo"><span>ï¿½Quiï¿½nes Somos?</span></div>
+        	<div class="descripcion"><span>Valhalla es un club de entrenamiento donde el concepto de lo social adquiere valor a travï¿½s de lo deportivo.</span> 
         							<br>
         							<span>Para nosotros es muy importante que te diviertas mientras entrenas, para ello conformamos un equipo humano entusiasta y profesional acorde a cada necesidad.</span>
         	</div>
@@ -107,7 +107,7 @@ ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("e
         <div class="caja">
         	<div class="titulo"><p>Nuestro Equipo</p></div>
         	<div class="descripcion">
-        		<p>Conocé un poco más al equipo de Valhalla, ellos te ayudarán a llegar a donde te lo propongas.</p>
+        		<p>Conocï¿½ un poco mï¿½s al equipo de Valhalla, ellos te ayudarï¿½n a llegar a donde te lo propongas.</p>
         	</div>
         		<div class="tarjetasEmpelado">
        		 <% for (Empleado emp : listaEmpleado){ %>
