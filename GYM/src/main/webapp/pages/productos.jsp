@@ -98,6 +98,7 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
         <div class="caja">
         
         		<div class="tarjetasProducto">
+
        		 		<% for (Producto pro : productos){ %>
         				<div class="cajaProducto">
         					<div class="contenedorImg">

@@ -16,59 +16,46 @@ import entities.Suplemento;
 
 public class DbProducto extends DbHandler{
 	
-	public ArrayList<Producto> getProductos(){
-		PreparedStatement pstmt=null;
-		PreparedStatement pstmt2=null;
-		PreparedStatement pstmt3=null;
-		Connection conn = null;
-		ResultSet rs = null;
-		ResultSet rs2 = null;
-		ArrayList<Producto> productos = new ArrayList<>();
-		try{
-			conn = this.getConnection();
-			pstmt = conn.prepareStatement("DROP TEMPORARY TABLE IF EXISTS tt_precios; ");
-			pstmt.executeUpdate();
-			pstmt2 = conn.prepareStatement("CREATE TEMPORARY TABLE tt_precios AS (SELECT id_producto , max(fecha_desde) AS fecha_desde FROM precio WHERE fecha_desde <= CURRENT_DATE GROUP BY id_producto);");
-			pstmt2.executeUpdate();
-			pstmt3 = conn.prepareStatement("SELECT p.id_producto , p.stock , p.nombre, p.imagen, pr.precio, pr.fecha_desde "
-					+ "FROM producto p "
-					+ "INNER JOIN tt_precios tt ON tt.id_producto = p.id_producto "
-					+ "INNER JOIN precio pr ON pr.id_producto = p.id_producto "
-					+ "WHERE pr.fecha_desde = tt.fecha_desde AND p.stock > 0");
-			
+	public ArrayList<Producto> getProductos() {
+	    ArrayList<Producto> productos = new ArrayList<>();
 
-			
-			
-			rs = pstmt3.executeQuery();
-			while (rs.next() && rs!= null ) { 
-				Producto pro = new Producto();
-			
-	            pro.setIdProducto(rs.getInt("p.id_producto"));
-	            pro.setStock(rs.getInt("p.stock"));
-	            pro.setNombre(rs.getString("p.nombre"));
-	            pro.setImagen(rs.getString("p.imagen"));
-	            Precio pre = new Precio(rs.getInt("pr.precio"));
+	    String sql =
+	        "SELECT p.id_producto, p.stock, p.nombre, p.imagen, pr.precio " +
+	        "FROM producto p " +
+	        "INNER JOIN precio pr ON pr.id_producto = p.id_producto " +
+	        "WHERE pr.fecha_desde = ( " +
+	        "   SELECT MAX(fecha_desde) " +
+	        "   FROM precio " +
+	        "   WHERE id_producto = p.id_producto " +
+	        "     AND fecha_desde <= CURRENT_DATE " +
+	        ") " +
+	        "AND p.stock > 0";
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql);
+	         ResultSet rs = ps.executeQuery()) {
+
+	        while (rs.next()) {
+	            Producto pro = new Producto();
+	            pro.setIdProducto(rs.getInt("id_producto"));
+	            pro.setStock(rs.getInt("stock"));
+	            pro.setNombre(rs.getString("nombre"));
+	            pro.setImagen(rs.getString("imagen"));
+
+	            Precio pre = new Precio(rs.getInt("precio"));
 	            pro.setPrecio(pre);
+
 	            productos.add(pro);
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return productos;
 	}
-			
-			
-			return productos;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			try {
-				if(pstmt!=null)pstmt.close();
-				this.cerrarConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-	
-			}
-		
-	}
+
+
 
 	public Suplemento nuevoSuplemento(Suplemento sup) {
 		PreparedStatement pstmt=null;

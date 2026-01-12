@@ -1,8 +1,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entities.Empleado"%>
 <%@page import="entities.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -71,10 +72,8 @@ ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("e
 
 				<% if (user == null){ %>
                     <div class="cajalogin">
-                        <a id="textoregistro" href="pages/signUp.jsp"
-                            >Registrate</a
-                        >
-                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesi�n</button></a
+                        <a id="textoregistro" href="pages/signUp.jsp">Registrate</a>
+                        <a href="/GYM/pages/logIn.jsp"><button class="boton2">Iniciar Sesión</button></a
                         >
                     </div>
                     <% } else {%>
@@ -96,8 +95,8 @@ ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("e
         
         <div class="caja">
         
-        	<div class="titulo"><span>�Qui�nes Somos?</span></div>
-        	<div class="descripcion"><span>Valhalla es un club de entrenamiento donde el concepto de lo social adquiere valor a trav�s de lo deportivo.</span> 
+        	<div class="titulo"><span>¿Quiénes Somos?</span></div>
+        	<div class="descripcion"><span>Valhalla es un club de entrenamiento donde el concepto de lo social adquiere valor a través de lo deportivo.</span> 
         							<br>
         							<span>Para nosotros es muy importante que te diviertas mientras entrenas, para ello conformamos un equipo humano entusiasta y profesional acorde a cada necesidad.</span>
         	</div>
@@ -107,7 +106,7 @@ ArrayList<Empleado> listaEmpleado = (ArrayList<Empleado>)request.getAttribute("e
         <div class="caja">
         	<div class="titulo"><p>Nuestro Equipo</p></div>
         	<div class="descripcion">
-        		<p>Conoc� un poco m�s al equipo de Valhalla, ellos te ayudar�n a llegar a donde te lo propongas.</p>
+        		<p>Conocé un poco más al equipo de Valhalla, ellos te ayudarán a llegar a donde te lo propongas.</p>
         	</div>
         		<div class="tarjetasEmpelado">
        		 <% for (Empleado emp : listaEmpleado){ %>
