@@ -92,9 +92,15 @@
 			</div>
 
 			<div>
-				<form action="/GYM/SvCompra" method="POST">
-				<input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
-					<button type="submit" class="boton">Comprar</button>
+				<form action="/GYM/SvCarrito" method="POST">
+				<input type="hidden" name="accion" value="agregar">
+				<input type="hidden" name="accion" value="agregar">
+				<input type="hidden" name="idProducto" value="<%= pro.getIdProducto() %>">
+				<input type="hidden" name="nombre" value="<%= pro.getNombre() %>">
+				<input type="hidden" name="imagen" value="<%= pro.getImagen() %>">
+			    <input type="hidden" name="precio" value="<%= pro.getPrecio().getPrecio() %>">
+				<input type="hidden" name="stock" value="<%= pro.getStock() %>">
+					<button type="submit" class="boton">Agregar al carrito</button>
 				</form>
 			<% if (user != null){ if(user.isAdmin()){ %>
 				<form action="/GYM/SvModificacionProducto" method="GET">

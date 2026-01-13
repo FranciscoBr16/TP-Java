@@ -88,6 +88,43 @@
 	margin-right: 8px;
 }
 
+.botones {
+    display: flex;
+    gap: 6px;
+}
+
+.boton5{
+	height: 37px;                 
+    min-width: 140px;             
+    padding: 0 14px;
+	background-color: #d95126;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:5px;
+    color: white;
+    
+
+    white-space: nowrap;          
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: 14px;              
+    line-height: 1;
+    
+    font-size: clamp(12px, 1vw, 14px);
+    border: solid 2px black;
+
+    border-radius: 999px;
+}
+.boton5:hover{
+	background-color: rgb(245, 148, 118);
+ 	border: 2px solid rgb(245, 148, 118);
+  	color: white;
+  	transition: background-color 250ms ease-in-out;
+}
+
+
 /* NAVBAR */
 nav {
     background-color: #191617;

@@ -73,12 +73,23 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
 								<button type="submit" class="boton4">Ver Detalles</button>
 							</form>
 							
-        			
+        				 <% if (user != null) { %>
                    		
-							<form action="/GYM/SvCompra" method="GET">
-								<input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
-								<button type="submit" class="boton3">Comprar</button>
+							<form action="/GYM/SvCarrito" method="post">
+							    <input type="hidden" name="accion" value="agregar">
+							    <input type="hidden" name="idProducto" value="<%= pro.getIdProducto() %>">
+							    <input type="hidden" name="nombre" value="<%= pro.getNombre() %>">
+							    <input type="hidden" name="imagen" value="<%= pro.getImagen() %>">
+							    <input type="hidden" name="precio" value="<%= pro.getPrecio().getPrecio() %>">
+							    <input type="hidden" name="stock" value="<%= pro.getStock() %>">
+							
+							    <button class="boton5" >
+							        Agregar al carrito
+							    </button>
 							</form>
+							
+						<% } %>
+
 					
                    		</div>
                   

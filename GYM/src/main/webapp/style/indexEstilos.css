@@ -17,7 +17,7 @@ body header {
     transition: font-size 200ms ease-in-out;
 }
 
-p {
+a > p {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
         1px 1px 0 black;
 }
