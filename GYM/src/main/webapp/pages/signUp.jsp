@@ -35,43 +35,12 @@
 </head>
 
 <header>
-	<nav class="navbar navbar-expand-lg">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="index.jsp"><img
-				src="../img/logo.png" alt="logo del gimnasio" /></a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-light" id="links" aria-current="page" href="/GYM/index.jsp">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" id="links" href="/GYM/SvAbono">Planes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" id="links" href="/GYM/SvProductos" >Tienda</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" id="links" href="/GYM/pages/reservas.jsp" >Reservas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" id="links" href="/GYM/SvEmpleados" >Sobre Nosotros</a>
-                            </li>
-                        </ul>
-			</div>
-
-			<div class="cajalogin">
-				<a id="textoregistro" href="signUp.jsp">Registrate</a> <a href="logIn.jsp"><button class="boton2">Iniciar Sesion</button></a>
-			</div>
-
-		</div>
-	</nav>
-</header>
+		<%
+		    request.setAttribute("activePage", "none");
+		%>
+		<jsp:include page="/pages/components/navbar.jsp" />
+		
+	</header> 
 
 <body>
 
@@ -147,4 +116,5 @@
 		</div>
 	</div>
 </body>
+<jsp:include page="/pages/components/carrito.jsp" />
 </html>

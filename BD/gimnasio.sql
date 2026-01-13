@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.0.42
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -246,7 +244,7 @@ CREATE TABLE `indumentaria` (
 
 LOCK TABLES `indumentaria` WRITE;
 /*!40000 ALTER TABLE `indumentaria` DISABLE KEYS */;
-INSERT INTO `indumentaria` VALUES (2,'XL'),(3,NULL),(4,'39'),(5,'L');
+INSERT INTO `indumentaria` VALUES (2,'XL'),(3,NULL),(4,'39'),(5,'L'),(8,'M'),(9,'12 oz');
 /*!40000 ALTER TABLE `indumentaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,7 +298,7 @@ CREATE TABLE `precio` (
 
 LOCK TABLES `precio` WRITE;
 /*!40000 ALTER TABLE `precio` DISABLE KEYS */;
-INSERT INTO `precio` VALUES (1,'2023-08-08',700),(2,'2023-09-09',8000),(2,'2023-12-01',9000),(2,'2023-12-08',9550),(2,'2023-12-12',10000),(3,'2023-12-06',8000),(4,'2023-12-06',18000),(5,'2023-12-07',700);
+INSERT INTO `precio` VALUES (1,'2023-08-08',700),(2,'2023-09-09',8000),(2,'2023-12-01',9000),(2,'2023-12-08',9550),(2,'2023-12-12',10000),(3,'2023-12-06',8000),(4,'2023-12-06',18000),(5,'2023-12-07',700),(7,'2026-01-01',1400),(8,'2026-01-01',18000),(9,'2026-01-01',32000);
 /*!40000 ALTER TABLE `precio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,7 +316,7 @@ CREATE TABLE `producto` (
   `imagen` varchar(255) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -327,7 +325,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,29,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,22,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/ind_3.jpg','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/ind_4.png','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/ind_6.jpg','Medias de Boxeo');
+INSERT INTO `producto` VALUES (1,29,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,22,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,3,'Cake','/GYM/img/productos/ind_3.jpg','Prote'),(4,1,'zapatilas deportivas Jaguar','/GYM/img/productos/ind_4.png','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/ind_6.jpg','Medias de Boxeo'),(7,24,'Agua purificada ideal para la hidratación antes, durante y después de la actividad física.','/GYM/img/productos/agua.jpg','Agua Smart Water'),(8,2,'Short cómodo y liviano que permite libertad de movimiento durante la actividad física.','/GYM/img/productos/short.jpg','Pantalón corto deportivo'),(9,4,'Guantes acolchados diseñados para entrenamientos de boxeo y deportes de contacto.','/GYM/img/productos/guantes.jpg','Guantes de boxeo');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +351,7 @@ CREATE TABLE `suplemento` (
 
 LOCK TABLES `suplemento` WRITE;
 /*!40000 ALTER TABLE `suplemento` DISABLE KEYS */;
-INSERT INTO `suplemento` VALUES (1,'ml',500),(3,'g',900);
+INSERT INTO `suplemento` VALUES (1,'ml',500),(3,'g',900),(7,'ml',500);
 /*!40000 ALTER TABLE `suplemento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,4 +399,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-16 16:45:14
+-- Dump completed on 2026-01-13 11:44:38
