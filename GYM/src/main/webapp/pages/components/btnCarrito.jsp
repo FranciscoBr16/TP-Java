@@ -4,7 +4,9 @@
     class="btn btn-outline-light position-relative"
     type="button"
     data-bs-toggle="offcanvas"
-    data-bs-target="#offcanvasCarrito">
+    data-bs-target="#offcanvasCarrito"
+    style="margin-right: 10px">
+
 
     <i class="bi bi-cart3"></i>
 
