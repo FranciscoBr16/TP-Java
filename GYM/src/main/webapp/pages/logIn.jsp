@@ -60,13 +60,11 @@
 				</div>
 				
 				<div class="final">
-				<p class="text-danger text-center mt-2">
 				<% if (request.getAttribute("errorLogin") != null) { %>
-				    
+				    <p class="text-danger text-center mt-2">
 				        <%= request.getAttribute("errorLogin") %>
-				    
+				    </p>
 				<% } %>
-				</p>
 				
 					<a><button  type="submit" class="boton">Iniciar Sesión</button> </a>
 				</div>
