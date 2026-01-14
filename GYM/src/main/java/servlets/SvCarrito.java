@@ -53,8 +53,13 @@ public class SvCarrito extends HttpServlet {
                 break;
         }
 
-        session.setAttribute("carrito", carrito);
-        session.setAttribute("cantidadCarrito", carrito.size());
+        if (carrito.isEmpty()) {
+            session.removeAttribute("carrito");
+        } else {
+            session.setAttribute("carrito", carrito);
+        }
+
+ 
 
         response.sendRedirect(request.getHeader("Referer"));
 
