@@ -47,6 +47,8 @@
 			<div class="inicia">
 				<p>Iniciar Sesión</p>
 			</div>
+			
+			
 			<form action="/GYM/SvLogIn" method="POST">
 				<div class="inputs">
 					<label for="username">DNI</label> <input type="text" id="username"
@@ -56,7 +58,16 @@
 					<label for="password">Contraseña</label> <input type="password"
 						id="password" name="password" required class="form-control">
 				</div>
+				
 				<div class="final">
+				<p class="text-danger text-center mt-2">
+				<% if (request.getAttribute("errorLogin") != null) { %>
+				    
+				        <%= request.getAttribute("errorLogin") %>
+				    
+				<% } %>
+				</p>
+				
 					<a><button  type="submit" class="boton">Iniciar Sesión</button> </a>
 				</div>
 

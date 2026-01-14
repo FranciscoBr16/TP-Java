@@ -12,21 +12,24 @@ import entities.Usuario;
 
 @WebServlet("/SvLogIn")
 public class SvLogIn extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private static final long serialVersionUID = 1L;
 
-		Usuario user = new Usuario(request.getParameter("dni"), request.getParameter("password"));
-		// hay que validar que sea un usuario valido 
-		DbUsuario db = new DbUsuario();	
-		if ( db.logIn(user) != null) {
-			request.getSession().setAttribute("user",user);
-			
-			response.sendRedirect("index.jsp");
-		} else {
-			response.sendRedirect("/GYM/SvLogIn");
-		}
-			
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        String dni = request.getParameter("dni");
+        String password = request.getParameter("password");
+
+        DbUsuario db = new DbUsuario();
+        Usuario user = db.logIn(new Usuario(dni, password));
+
+        if (user != null) {
+            request.getSession().setAttribute("user", user);
+            response.sendRedirect("/GYM/index.jsp");
+        } else {
+            request.setAttribute("errorLogin", "DNI o contraseña incorrectos");
+            request.getRequestDispatcher("/pages/logIn.jsp")
+                   .forward(request, response);
+        }
+    }
 }
