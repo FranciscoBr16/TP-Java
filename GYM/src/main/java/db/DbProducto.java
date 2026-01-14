@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entities.Indumentaria;
+import entities.ItemCarrito;
 import entities.Precio;
 import entities.Producto;
 import entities.Suplemento;
@@ -173,6 +174,66 @@ public class DbProducto extends DbHandler{
 	}
 
 	public Producto getProducto(Producto p) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+	
+		Connection conn = null;
+		ResultSet rs = null;
+		try{
+			conn = this.getConnection();
+			pstmt2 = conn.prepareStatement("SET @FechaProxima = (SELECT max(fecha_desde) FROM precio WHERE fecha_desde <= current_date() AND id_producto = ?);");
+			pstmt2.setInt(1,p.getIdProducto());
+			pstmt2.executeUpdate();
+			
+			pstmt = conn.prepareStatement("Select pro.id_producto, pro.stock, pro.descripcion, pro.imagen, pro.nombre, pre.fecha_desde, pre.precio, i.talle, s.unidad, s.valor from producto pro "
+					+ "INNER JOIN precio pre ON pro.id_producto = pre.id_producto "
+					+ "LEFT JOIN indumentaria i ON i.id_producto = pro.id_producto "
+					+ "LEFT JOIN suplemento s ON s.id_producto = pro.id_producto "
+					+ "where pro.id_producto=? AND pre.fecha_desde = @FechaProxima;");
+		
+			pstmt.setInt(1, p.getIdProducto());
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			int id = rs.getInt("id_producto");
+			int stock = rs.getInt("stock");
+	        String desc =rs.getString("descripcion");
+	        String img = rs.getString("imagen");
+	        String nomb = rs.getString("nombre");
+	        LocalDate fecha = rs.getDate("fecha_desde").toLocalDate();
+	        int pre = rs.getInt("precio");
+			
+	        Producto p2;
+	        
+			String c = null;
+			c = rs.getString("talle");
+			if (c != null) {
+				p2 = new Indumentaria (id, stock, desc, img, nomb, fecha, pre , c);
+				} else {
+				String unidad = rs.getString("unidad");
+				Float valor = rs.getFloat("valor");
+				p2 = new Suplemento (id, stock, desc, img, nomb, fecha, pre , unidad, valor);
+				}
+			
+				
+					
+				return p2;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				if(pstmt!=null)pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	
+			}
+	}
+	
+	public Producto getProducto(ItemCarrito p) {
 		PreparedStatement pstmt=null;
 		PreparedStatement pstmt2=null;
 	
@@ -437,27 +498,34 @@ public class DbProducto extends DbHandler{
 }
 	}
 	
-	public int actualizarStock(Producto p) {
-		PreparedStatement pstmt=null;
-		Connection conn = null;
-		try {
-			conn = this.getConnection();
-			pstmt = conn.prepareStatement("UPDATE producto SET stock = ? where id_producto = ?");
-			pstmt.setInt(1, p.getStock()-1);
-			pstmt.setInt(2, p.getIdProducto());
-			
-			return pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			try {
-				if(pstmt!=null)pstmt.close();
-				this.cerrarConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+	public int actualizarStock(Producto p, int cant) {
+	    PreparedStatement pstmt = null;
+	    Connection conn = null;
+
+	    try {
+	        conn = this.getConnection();
+
+	        pstmt = conn.prepareStatement(
+	            "UPDATE producto SET stock = stock - ? WHERE id_producto = ?"
+	        );
+
+	        pstmt.setInt(1, cant);
+	        pstmt.setInt(2, p.getIdProducto());
+
+	        return pstmt.executeUpdate();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return 0;
+
+	    } finally {
+	        try {
+	            if (pstmt != null) pstmt.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
-		
-	}
+
 	}

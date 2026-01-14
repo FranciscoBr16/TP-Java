@@ -75,7 +75,7 @@ ArrayList<Factura> facturas = (ArrayList<Factura>)request.getAttribute("facturas
 			        <td><%=f.getNroFactura()%> </td>
 			        <td><%=f.getFecha() %> </td>
 			        <td>$ <%=f.getTotal() %> </td> <%-- En el metodo de la BD asignar el valor del producto al total de la factura --%>
-			        <td><% if (f.isEstado()){ %> Pagado <% } else {%> Sin pagar <%} %></td>
+			        <td><%=f.getEstado() %> </td>
 			      </tr>
 			     	<% } %>
 			  

@@ -102,7 +102,7 @@
             <strong>$<%= total %></strong>
         </div>
 
-        <form action="/GYM/SvCheckout" method="get">
+        <form action="/GYM/SvConfirmarCompra" method="get">
             <button class="btn boton w-100">
                 Finalizar compra
             </button>

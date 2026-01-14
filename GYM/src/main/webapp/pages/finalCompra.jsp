@@ -1,123 +1,86 @@
-<%@page import="entities.Producto"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="entities.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entities.ItemCarrito" %>
+<%@ page import="entities.Usuario" %>
+
+<%
+    Usuario user = (Usuario) session.getAttribute("user");
+    ArrayList<ItemCarrito> carrito =
+        (ArrayList<ItemCarrito>) session.getAttribute("carrito");
+    Double total = (Double) request.getAttribute("total");
+%>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Carrito de compras</title>
+    <meta charset="UTF-8">
+    <title>Confirmar Compra</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@347&display=swap"
-	rel="stylesheet" />
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-	crossorigin="anonymous" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-	crossorigin="anonymous">
-  </script>
-
-	
-
-
-<link rel="stylesheet" type="text/css" href="/GYM/style/finalCompra.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
-
-<% Usuario user = (Usuario) session.getAttribute("user");
-/*ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("productos");*/
-Producto pro = (Producto)request.getAttribute("producto");
-%>	
-
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/GYM/style/estilosGenerales.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 
 <body>
-<%if(user == null){ 
-response.sendRedirect("/GYM/pages/logIn.jsp");}%>
 
-	<header>
-		<%
-		    request.setAttribute("activePage", "tienda");
-		%>
-		<jsp:include page="/pages/components/navbar.jsp" />
-		
-	</header> 
-	
+<header>
+    <%
+        request.setAttribute("activePage", "tienda");
+    %>
+    <jsp:include page="/pages/components/navbar.jsp" />
+</header>
 
-	<div class="contenedor">
-	
-		
-		<div class="cajaAlargada">
-		
-			<div class="caja1">
-				<img class="imagenact" src="<%=pro.getImagen()%>"></img> 
-			</div>
-		
-			<div class="caja2">
-				<div class="titulo">
-					<span><%=pro.getNombre()%></span>
-				</div>
-				<div>
-					<p><%=pro.getDescripcion()%></p>
-				</div>
-			</div>
-			
-			<div class="caja3">
-				
-				<div>
-					<p class="precio">Precio: $<%=pro.getPrecio().getPrecio()%> </p>
-				</div>
-				<% if(user != null){  %>
-				
-				<div class="pie">
-					<a href=#><button class="boton3" data-bs-toggle="modal" data-bs-target="#exampleModal">Confirmar compra</button> </a>
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h1 class="modal-title fs-5" id="exampleModalLabel">Orden de compra</h1>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body">
-				       Se generara una orden de compra, para pagar en la sucursal mas cercana.
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="boton4" data-bs-dismiss="modal">Cerrar</button>
-				        <form action="/GYM/SvCompra" method="POST">
-				        <input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
-				        <button type="submit" class="boton2">Confirmar</button>
-				        
-				        </form>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				</div>
-				<%}%>
+<div class="container mt-5">
 
-			</div>
-			
-		</div>
-		
-	</div>
-	
-	
+    <h2 class="mb-4 text-center">Confirmar compra</h2>
+
+    <% if (request.getAttribute("error") != null) { %>
+        <div class="alert alert-danger text-center">
+            <%= request.getAttribute("error") %>
+        </div>
+    <% } %>
+
+    <div class="card p-3 mb-4">
+
+        <% for (ItemCarrito item : carrito) { %>
+            <div class="d-flex align-items-center border-bottom py-3">
+                <img src="<%= item.getImagen() %>" width="70">
+
+                <div class="ms-3 flex-grow-1">
+                    <strong><%= item.getNombre() %></strong><br>
+                    Precio unitario: $<%= item.getPrecio() %><br>
+                    Cantidad: <%= item.getCantidad() %>
+                </div>
+
+                <div class="fw-bold">
+                    $<%= item.getCantidad() * item.getPrecio() %>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="d-flex justify-content-end mt-4">
+            <h4>Total: $<%= total %></h4>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+
+        <form action="/GYM/SvCancelarCompra" method="post">
+            <button class="btn btn-outline-danger">
+                Cancelar compra
+            </button>
+        </form>
+
+
+        <form action="/GYM/SvConfirmarCompra" method="post">
+            <button class="btn btn-success">
+                Confirmar compra
+            </button>
+        </form>
+    </div>
+
+</div>
 
 </body>
-<jsp:include page="/pages/components/carrito.jsp" />
 </html>

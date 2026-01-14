@@ -14,23 +14,24 @@ public class Factura {
 	private String tipo;
 	private ArrayList<Detalle_Factura> detalles = new ArrayList<>();
 	private Usuario usuario;
-	private Producto producto;
-	private boolean estado;
+	private String DNI;
+	private String estado;
 	
 	
 	
-	public boolean isEstado() {
+	public String getDNI() {
+		return DNI;
+	}
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+	public String getEstado() {
 		return estado;
 	}
-	public void setEstado(boolean estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Producto getProducto() {
-		return producto;
-	}
-	public void setProducto(Producto producto) {
-		this.producto = producto;
-	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
