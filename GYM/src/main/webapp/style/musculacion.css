@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+
+/* CONTENEDOR GENERAL */
+.agenda-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* CARD POR DÍA */
+.dia-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* TÍTULO DEL DÍA */
+.dia-titulo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+}
+
+/* LISTA DE CLASES */
+.dia-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* CLASE INDIVIDUAL */
+.clase-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 12px 16px;
+    transition: background 0.2s ease;
+}
+
+.clase-item:hover {
+    background: #f1f1f1;
+}
+
+/* HORARIO */
+.clase-horario {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    min-width: 90px;
+}
+
+/* INFO DERECHA */
+.clase-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* CUPO */
+.clase-cupo {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* BOTONES */
+.clase-info form {
+    margin: 0;
+}
+
+.clase-info button {
+    height: 36px;
+    padding: 0 14px;
+}
+
+/* BOTONES ADMIN */
+.clase-admin {
+    display: flex;
+    gap: 8px;
+}
+
+/* ACCIONES ADMIN ABAJO */
+.admin-acciones {
+    margin-top: 30px;
+    text-align: right;
+}

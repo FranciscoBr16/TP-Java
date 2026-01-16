@@ -52,7 +52,7 @@ public class DbActividades extends DbHandler {
 	            ac.setImagen(rs.getString("imagen"));
 	            String d = rs.getString("dia");
 	            ac.setDia(d);
-	            LocalDate fecha = la.fechaIncripcion(d);
+	            LocalDate fecha = la.fechaInscripcion(d);
 	            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
 	            Date f2 = java.sql.Date.valueOf(fecha);
 	            pstmt2 = conn.prepareStatement("SELECT id_clase, count(dni) AS cantidad FROM inscripcion WHERE id_clase=? AND fecha BETWEEN ? AND ? GROUP BY 1");
@@ -113,7 +113,7 @@ public class DbActividades extends DbHandler {
 	            String dia = rs.getString("dia");
 	            ac.setDia(dia);
 
-	            LocalDate fecha = la.fechaIncripcion(dia);
+	            LocalDate fecha = la.fechaInscripcion(dia);
 	            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
 	            Date f2 = java.sql.Date.valueOf(fecha);
 	            
@@ -376,7 +376,7 @@ public class DbActividades extends DbHandler {
 				while (rs.next() && rs!= null ) { 
 					  String dia = rs.getString("dia");
 					  cupo = rs.getInt("cupo");
-					  LocalDate fecha = la.fechaIncripcion(dia);
+					  LocalDate fecha = la.fechaInscripcion(dia);
 			            Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
 			            Date f2 = java.sql.Date.valueOf(fecha);
 				
