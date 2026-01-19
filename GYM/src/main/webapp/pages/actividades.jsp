@@ -56,6 +56,29 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 		
 	</header> 
 	
+	<%
+    String mensajeError = (String) session.getAttribute("mensajeError");
+    String mensajeOk = (String) session.getAttribute("mensajeOk");
+
+	    if (mensajeError != null) {
+	%>
+	    <div class="alert alert-danger text-center mx-3 mt-3">
+	        <%= mensajeError %>
+	    </div>
+	<%
+	        session.removeAttribute("mensajeError");
+	    }
+	
+	    if (mensajeOk != null) {
+	%>
+	    <div class="alert alert-success text-center mx-3 mt-3">
+	        <%= mensajeOk %>
+	    </div>
+	<%
+	        session.removeAttribute("mensajeOk");
+	    }
+	%>
+	
 	<!--  Usar para la barra de busqueda y filtrado 
 	<div>
 	

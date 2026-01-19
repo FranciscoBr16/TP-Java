@@ -29,36 +29,43 @@ public class SvInscripcion extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	        throws ServletException, IOException {
 
-        Clase clase = new Clase(Integer.parseInt(request.getParameter("id")));
-        DbActividades dbact = new DbActividades();
-        DbContrato dbcon = new DbContrato();
-        Usuario usuario = (Usuario) request.getSession().getAttribute("user");
+	    Clase clase = new Clase(Integer.parseInt(request.getParameter("id")));
+	    DbActividades dbact = new DbActividades();
+	    Usuario usuario = (Usuario) request.getSession().getAttribute("user");
+	    DbContrato dbcon = new DbContrato();
 
-        String mensaje = null;
-        String tipo = "danger"; 
+	    String origen = request.getHeader("Referer"); 
 
-        if (!dbact.cupoClases(clase)) {
-            mensaje = "No hay cupos disponibles para esta clase.";
-        } 
-        else if (!dbact.disponibilidadAbono(usuario)) {
-            mensaje = "No tenés clases disponibles en tu abono.";
-        } 
-        else if (!dbact.agregarInscripcion(usuario, clase)) {
-            mensaje = "Ocurrió un error al realizar la inscripción.";
-        } 
-        else {
-            dbcon.actualizaClasesDisponibles(usuario);
-            mensaje = "Inscripción realizada correctamente.";
-            tipo = "success";
-        }
+	    if (usuario == null) {
+	        request.getSession().setAttribute("mensajeError", "Debes iniciar sesión para reservar.");
+	        response.sendRedirect(origen);
+	        return;
+	    }
 
-        request.getSession().setAttribute("mensaje", mensaje);
-        request.getSession().setAttribute("tipoMensaje", tipo);
+	    if (!dbact.cupoClases(clase)) {
+	        request.getSession().setAttribute("mensajeError", "No hay cupos disponibles para esta clase.");
+	        response.sendRedirect(origen);
+	        return;
+	    }
 
-        response.sendRedirect(request.getContextPath() + "/SvMusculacion");
-    }
+	    if (!dbact.disponibilidadAbono(usuario)) {
+	        request.getSession().setAttribute("mensajeError", "No tienes un abono disponible.");
+	        response.sendRedirect(origen);
+	        return;
+	    }
+
+	    if (dbact.agregarInscripcion(usuario, clase)) {
+	        dbcon.actualizaClasesDisponibles(usuario);
+	        request.getSession().setAttribute("mensajeOk", "Reserva realizada con éxito.");
+	        response.sendRedirect(origen);
+	    } else {
+	        request.getSession().setAttribute("mensajeError", "No se pudo realizar la reserva.");
+	        response.sendRedirect(origen);
+	    }
+	}
+
 		
 		
 		
