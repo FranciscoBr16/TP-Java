@@ -139,4 +139,61 @@ public class DbUsuario extends DbHandler {
 	}
 
 }
+	public boolean existeDni(String dni) {
+	    PreparedStatement pstmt = null;
+	    Connection conn = null;
+	    ResultSet rs = null;
+	    try {
+	        conn = this.getConnection();
+	        pstmt = conn.prepareStatement("SELECT COUNT(*) as total FROM usuario WHERE dni = ?");
+	        pstmt.setString(1, dni);
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            return rs.getInt("total") > 0;
+	        }
+	        return false;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (pstmt != null) pstmt.close();
+	            this.cerrarConnection();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+
+	public boolean existeEmail(String email) {
+	    PreparedStatement pstmt = null;
+	    Connection conn = null;
+	    ResultSet rs = null;
+	    try {
+	        conn = this.getConnection();
+	        pstmt = conn.prepareStatement("SELECT COUNT(*) as total FROM usuario WHERE correo = ?");
+	        pstmt.setString(1, email);
+	        rs = pstmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            return rs.getInt("total") > 0;
+	        }
+	        return false;
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (pstmt != null) pstmt.close();
+	            this.cerrarConnection();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 }

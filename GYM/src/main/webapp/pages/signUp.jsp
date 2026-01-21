@@ -25,14 +25,12 @@
 	crossorigin="anonymous">
   </script>
 
-
-<link rel="stylesheet" type="text/css" href="../style/usuRegistroEstilos.css" />
-<link rel="stylesheet" type="text/css" href="../style/estilosGenerales.css" />
-<link rel="stylesheet" type="text/css" href="../style/estilosGenerales2.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/usuRegistroEstilos.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/estilosGenerales.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/estilosGenerales2.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
-
-<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/img/logo.ico" type="image/x-icon" />
 </head>
 
 <header>
@@ -40,78 +38,85 @@
 		    request.setAttribute("activePage", "none");
 		%>
 		<jsp:include page="/pages/components/navbar.jsp" />
-		
-	</header> 
+</header> 
 
 <body>
-
-
 	<div class="contenedor">
 		<div class="formulario">
 			<div class="headerForm">
 				<p>Unite al Club!</p>
 			</div>
-			<form action="/GYM/SvSignUp" method="POST" class="formulario-campos">
+
+			<% 
+			    String msjError = (String) session.getAttribute("mensajeError");
+			    if (msjError != null && !msjError.isEmpty()) { 
+			%>
+			    <div class="error-message">
+			        <i class="bi bi-exclamation-triangle-fill"></i>
+			        <span><%= msjError %></span>
+			    </div>
+			<% 
+			        session.removeAttribute("mensajeError"); 
+			    } 
+			%>
+
+			<form action="${pageContext.request.contextPath}/SvSignUp" method="POST" class="formulario-campos">
 				<div class="campo">
-					<label for="dni">Numero de Documento (DNI):</label> <input
-						type="number" name="dni" id="dni" required min="1000000"
-						max="99999999" /> <label for="password">Contraseña:</label>
+					<label for="dni">Numero de Documento (DNI):</label> 
+					<input type="number" name="dni" id="dni" required min="1000000" max="99999999" /> 
+					<label for="password">Contraseña:</label>
 					<input type="password" name="password" id="password" required />
 				</div>
 				<div class="campo">
-					<label for="nombre">Nombre:</label> <input type="text" name="name"
-						id="name" required /> <label for="apellido">Apellido:</label> <input
-						type="text" name="surname" id="surname" required />
+					<label for="nombre">Nombre:</label> 
+					<input type="text" name="name" id="name" required /> 
+					<label for="apellido">Apellido:</label> 
+					<input type="text" name="surname" id="surname" required />
 				</div>
 				<div class="campo">
-					<label for="email">Correo Electrónico:</label> <input type="email"
-						name="email" id="email" required />
+					<label for="email">Correo Electrónico:</label> 
+					<input type="email" name="email" id="email" required />
 				</div>
 				<div class="campo">
-					<label for="phonenumber">Teléfono:</label> <input type="text"
-						name="phonenumber" id="phonenumber" required />
+					<label for="phonenumber">Teléfono:</label> 
+					<input type="text" name="phonenumber" id="phonenumber" required />
 				</div>
 				<div class="campo">
-					<label for="birthdate">Fecha de Nacimiento:</label> <input
-						type="date" name="fecha" id="birthdate" required />
+					<label for="birthdate">Fecha de Nacimiento:</label> 
+					<input type="date" name="fecha" id="birthdate" required />
 				</div>
 				
 				<div class="campo">
 				<label>Imágen de perfil:</label>
         			<div class="opcionesimg">
         				<div class="opcion">
-        					<label for="imagen1"><img class="opcionimg" src="/GYM/img/perfil/imgperfil1.jpg" alt="Imagen Fitness"></label>
+        					<label for="imagen1"><img class="opcionimg" src="${pageContext.request.contextPath}/img/perfil/imgperfil1.jpg" alt="Imagen Fitness"></label>
 				            <input type="radio" name="imagenesPerfil" value="imgperfil1.jpg" checked required>
-				            
 						</div>
 						<div class="opcion">
-							<label for="imagen2"><img class="opcionimg" src="/GYM/img/perfil/imgperfil2.jpg" alt="Imagen Mujer"></label>
+							<label for="imagen2"><img class="opcionimg" src="${pageContext.request.contextPath}/img/perfil/imgperfil2.jpg" alt="Imagen Mujer"></label>
 				            <input type="radio" name="imagenesPerfil" value="imgperfil2.jpg" required>
-				            
 						</div>
 						<div class="opcion">
-							<label for="imagen3"><img class="opcionimg" src="/GYM/img/perfil/imgperfil3.jpg" alt="Imagen Bebida"></label>
+							<label for="imagen3"><img class="opcionimg" src="${pageContext.request.contextPath}/img/perfil/imgperfil3.jpg" alt="Imagen Bebida"></label>
 				            <input type="radio" name="imagenesPerfil" value="imgperfil3.jpg" required>
-				            
 						</div>
 						<div class="opcion">
-							<label for="imagen4"><img class="opcionimg" src="/GYM/img/perfil/imgperfil4.jpg" alt="Imagen Hombre"></label>
+							<label for="imagen4"><img class="opcionimg" src="${pageContext.request.contextPath}/img/perfil/imgperfil4.jpg" alt="Imagen Hombre"></label>
 				            <input type="radio" name="imagenesPerfil" value="imgperfil4.jpg" required>
-				            
 						</div>
 						<div class="opcion">
-							<label for="imagen5"><img class="opcionimg" src="/GYM/img/perfil/imgperfil5.jpg" alt="Imagen Puño"></label>
+							<label for="imagen5"><img class="opcionimg" src="${pageContext.request.contextPath}/img/perfil/imgperfil5.jpg" alt="Imagen Puño"></label>
 				            <input type="radio"  name="imagenesPerfil" value="imgperfil5.jpg" required>
-				            
 				        </div>
-						
 				     </div>
 				  </div>
 				
-				
 				<div class="finalform">
-					<button class="boton botonregistro" type="submit">Registrarse</button>
-
+    				<button class="boton botonregistro" type="submit">Registrarse</button>
+    				<a href="${pageContext.request.contextPath}/index.jsp" class="boton-volver">
+        				<i class="bi bi-arrow-left"></i> Volver al inicio
+    				</a>
 				</div>
 			</form>
 		</div>

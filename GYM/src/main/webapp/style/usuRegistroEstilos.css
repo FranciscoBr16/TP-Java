@@ -107,3 +107,70 @@ input {
 	align-items:center;
 	flex-direction: column;
 }
+/* Para que los campos no se amontonen en una línea */
+.campo {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.sub-campo {
+    display: flex;
+    flex-direction: column; /* Etiqueta arriba, input abajo */
+    flex: 1; /* Hace que ambos ocupen el mismo ancho */
+}
+
+/* Mejora visual del error para que no descompagine */
+.error-message {
+    background-color: #f8d7da;
+    border-left: 5px solid #d75128; /* Naranja Valhalla */
+    color: #842029;
+    padding: 10px 15px;
+    margin: 15px 30px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.error-message i {
+    font-size: 22px;
+}
+
+/* Botón volver */
+.boton-volver {
+    font-size: 18px;
+    text-align: center;
+    width: 250px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #6c757d;
+    color: white;
+    margin: 10px;
+    border: solid 2px black;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.boton-volver:hover {
+    background-color: #5a6268;
+    border: 2px solid black;
+    color: white;
+    transition: background-color 250ms ease-in-out;
+}
