@@ -77,190 +77,214 @@
 	
     <!-- LUNES -->
     <div class="dia-card">
+    <div class="dia-header" onclick="toggleDia(this)">
         <h2 class="dia-titulo">Lunes</h2>
-        <div class="dia-contenido">
-            <% for (Clase c : lunes) { %>
-                <div class="clase-item">
-                    <div class="clase-horario"><%= c.getHorario() %></div>
-                    <div class="clase-info">
-                        <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
-
-                        <% if (user != null) { %>
-                            <form action="/GYM/SvInscripcion" method="post">
-                                <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                <button class="btn boton2">Reservar</button>
-                            </form>
-
-                            <% if (user.isAdmin()) { %>
-                                <div class="clase-admin">
-                                    <form action="/GYM/SvModificarSalon" method="get">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-warning btn-sm">Modificar</button>
-                                    </form>
-                                    <form action="/GYM/SvBajaClase" method="post">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            <% } %>
-                        <% } %>
-                    </div>
-                </div>
-            <% } %>
-        </div>
+        <i class="bi bi-chevron-down flecha"></i>
     </div>
 
-    <!-- MARTES -->
+    <div class="dia-contenido oculto">
+        <% for (Clase c : lunes) { %>
+            <div class="clase-item">
+                <div class="clase-horario"><%= c.getHorario() %></div>
+                <div class="clase-info">
+                    <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
+
+                    <% if (user != null) { %>
+                        <form action="/GYM/SvInscripcion" method="post">
+                            <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                            <button class="btn boton3">Reservar</button>
+                        </form>
+
+                        <% if (user.isAdmin()) { %>
+                            <div class="clase-admin">
+                                <form action="/GYM/SvModificarSalon" method="get">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton4">Modificar</button>
+                                </form>
+                                <form action="/GYM/SvBajaClase" method="post">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton-eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+	</div>
+
+
+ 
     <div class="dia-card">
+    <div class="dia-header" onclick="toggleDia(this)">
         <h2 class="dia-titulo">Martes</h2>
-        <div class="dia-contenido">
-            <% for (Clase c : martes) { %>
-                <div class="clase-item">
-                    <div class="clase-horario"><%= c.getHorario() %></div>
-                    <div class="clase-info">
-                        <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
-
-                        <% if (user != null) { %>
-                            <form action="/GYM/SvInscripcion" method="post">
-                                <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                <button class="btn boton2">Reservar</button>
-                            </form>
-
-                            <% if (user.isAdmin()) { %>
-                                <div class="clase-admin">
-                                    <form action="/GYM/SvModificarSalon" method="get">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-warning btn-sm">Modificar</button>
-                                    </form>
-                                    <form action="/GYM/SvBajaClase" method="post">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            <% } %>
-                        <% } %>
-                    </div>
-                </div>
-            <% } %>
-        </div>
+        <i class="bi bi-chevron-down flecha"></i>
     </div>
+
+    <div class="dia-contenido oculto">
+        <% for (Clase c : martes) { %>
+            <div class="clase-item">
+                <div class="clase-horario"><%= c.getHorario() %></div>
+                <div class="clase-info">
+                    <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
+
+                    <% if (user != null) { %>
+                        <form action="/GYM/SvInscripcion" method="post">
+                            <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                            <button class="btn boton3">Reservar</button>
+                        </form>
+
+                        <% if (user.isAdmin()) { %>
+                            <div class="clase-admin">
+                                <form action="/GYM/SvModificarSalon" method="get">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton4">Modificar</button>
+                                </form>
+                                <form action="/GYM/SvBajaClase" method="post">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton-eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+	</div>
     
+     <!-- LUNES -->
     <div class="dia-card">
+    <div class="dia-header" onclick="toggleDia(this)">
         <h2 class="dia-titulo">Miercoles</h2>
-        <div class="dia-contenido">
-            <% for (Clase c : miercoles) { %>
-                <div class="clase-item">
-                    <div class="clase-horario"><%= c.getHorario() %></div>
-                    <div class="clase-info">
-                        <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
-
-                        <% if (user != null) { %>
-                            <form action="/GYM/SvInscripcion" method="post">
-                                <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                <button class="btn boton2">Reservar</button>
-                            </form>
-
-                            <% if (user.isAdmin()) { %>
-                                <div class="clase-admin">
-                                    <form action="/GYM/SvModificarSalon" method="get">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-warning btn-sm">Modificar</button>
-                                    </form>
-                                    <form action="/GYM/SvBajaClase" method="post">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            <% } %>
-                        <% } %>
-                    </div>
-                </div>
-            <% } %>
-        </div>
+        <i class="bi bi-chevron-down flecha"></i>
     </div>
+
+    <div class="dia-contenido oculto">
+        <% for (Clase c : miercoles) { %>
+            <div class="clase-item">
+                <div class="clase-horario"><%= c.getHorario() %></div>
+                <div class="clase-info">
+                    <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
+
+                    <% if (user != null) { %>
+                        <form action="/GYM/SvInscripcion" method="post">
+                            <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                            <button class="btn boton3">Reservar</button>
+                        </form>
+
+                        <% if (user.isAdmin()) { %>
+                            <div class="clase-admin">
+                                <form action="/GYM/SvModificarSalon" method="get">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton4">Modificar</button>
+                                </form>
+                                <form action="/GYM/SvBajaClase" method="post">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton-eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+	</div>
     
+     <!-- LUNES -->
     <div class="dia-card">
+    <div class="dia-header" onclick="toggleDia(this)">
         <h2 class="dia-titulo">Jueves</h2>
-        <div class="dia-contenido">
-            <% for (Clase c : jueves) { %>
-                <div class="clase-item">
-                    <div class="clase-horario"><%= c.getHorario() %></div>
-                    <div class="clase-info">
-                        <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
-
-                        <% if (user != null) { %>
-                            <form action="/GYM/SvInscripcion" method="post">
-                                <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                <button class="btn boton2">Reservar</button>
-                            </form>
-
-                            <% if (user.isAdmin()) { %>
-                                <div class="clase-admin">
-                                    <form action="/GYM/SvModificarSalon" method="get">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-warning btn-sm">Modificar</button>
-                                    </form>
-                                    <form action="/GYM/SvBajaClase" method="post">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            <% } %>
-                        <% } %>
-                    </div>
-                </div>
-            <% } %>
-        </div>
+        <i class="bi bi-chevron-down flecha"></i>
     </div>
+
+    <div class="dia-contenido oculto">
+        <% for (Clase c : jueves) { %>
+            <div class="clase-item">
+                <div class="clase-horario"><%= c.getHorario() %></div>
+                <div class="clase-info">
+                    <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
+
+                    <% if (user != null) { %>
+                        <form action="/GYM/SvInscripcion" method="post">
+                            <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                            <button class="btn boton3">Reservar</button>
+                        </form>
+
+                        <% if (user.isAdmin()) { %>
+                            <div class="clase-admin">
+                                <form action="/GYM/SvModificarSalon" method="get">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton4">Modificar</button>
+                                </form>
+                                <form action="/GYM/SvBajaClase" method="post">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton-eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+	</div>
     
+     <!-- LUNES -->
     <div class="dia-card">
+    <div class="dia-header" onclick="toggleDia(this)">
         <h2 class="dia-titulo">Viernes</h2>
-        <div class="dia-contenido">
-            <% for (Clase c : viernes) { %>
-                <div class="clase-item">
-                    <div class="clase-horario"><%= c.getHorario() %></div>
-                    <div class="clase-info">
-                        <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
-
-                        <% if (user != null) { %>
-                            <form action="/GYM/SvInscripcion" method="post">
-                                <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                <button class="btn boton2">Reservar</button>
-                            </form>
-
-                            <% if (user.isAdmin()) { %>
-                                <div class="clase-admin">
-                                    <form action="/GYM/SvModificarSalon" method="get">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-warning btn-sm">Modificar</button>
-                                    </form>
-                                    <form action="/GYM/SvBajaClase" method="post">
-                                        <input type="hidden" name="id" value="<%= c.getIdClase() %>">
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            <% } %>
-                        <% } %>
-                    </div>
-                </div>
-            <% } %>
-        </div>
+        <i class="bi bi-chevron-down flecha"></i>
     </div>
+
+    <div class="dia-contenido oculto">
+        <% for (Clase c : viernes) { %>
+            <div class="clase-item">
+                <div class="clase-horario"><%= c.getHorario() %></div>
+                <div class="clase-info">
+                    <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
+
+                    <% if (user != null) { %>
+                        <form action="/GYM/SvInscripcion" method="post">
+                            <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                            <button class="btn boton3">Reservar</button>
+                        </form>
+
+                        <% if (user.isAdmin()) { %>
+                            <div class="clase-admin">
+                                <form action="/GYM/SvModificarSalon" method="get">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton4">Modificar</button>
+                                </form>
+                                <form action="/GYM/SvBajaClase" method="post">
+                                    <input type="hidden" name="id" value="<%= c.getIdClase() %>">
+                                    <button class="boton-eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+	</div>
 
 
     <% if (user != null && user.isAdmin()) { %>
         <div class="admin-acciones">
-            <a href="/GYM/pages/altaSalon.jsp" class="btn btn-primary">
+            <a href="/GYM/pages/altaSalon.jsp" class="boton5">
                 Nueva Clase
             </a>
         </div>
@@ -269,6 +293,15 @@
 </div>
 
 <jsp:include page="/pages/components/carrito.jsp" />
+<script>
+function toggleDia(header) {
+    const card = header.parentElement;
+    const contenido = card.querySelector(".dia-contenido");
+
+    contenido.classList.toggle("oculto");
+    card.classList.toggle("abierto");
+}
+</script>
 
 </body>
 </html>
