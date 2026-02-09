@@ -27,20 +27,35 @@ public class SvMisFacturas extends HttpServlet {
     }
 
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario usuario = (Usuario) request.getSession().getAttribute("user");
-		DbFactura dbfac = new DbFactura();
-		ArrayList<Factura> facturas = new ArrayList<>();
-		facturas.addAll(dbfac.getmisfacturas(usuario));
-		request.setAttribute("facturas", facturas);
-		request.getRequestDispatcher("/pages/misFacturas.jsp").forward(request,response);
-		
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doGet(request, response);
-	}
+        Usuario usuario = (Usuario) request.getSession().getAttribute("user");
+
+        if (usuario == null) {
+            response.sendRedirect("/GYM/pages/logIn.jsp");
+            return;
+        }
+
+        DbFactura dbfac = new DbFactura();
+        ArrayList<Factura> facturas;
+
+        if (usuario.isAdmin()) {
+            facturas = dbfac.getFacturas(); 
+        } else {
+            facturas = dbfac.getmisfacturas(usuario); 
+        }
+
+        request.setAttribute("facturas", facturas);
+        request.setAttribute("esAdmin", usuario.isAdmin());
+
+        request.getRequestDispatcher("/pages/misFacturas.jsp")
+               .forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
 
 }

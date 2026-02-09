@@ -164,5 +164,87 @@ public class DbFactura extends DbHandler{
 	    }
 	}
 
+
+	public ArrayList<Factura> getFacturas() {
+
+	    ArrayList<Factura> facturas = new ArrayList<>();
+	    String sqlFactura = "SELECT * FROM factura";
+	    String sqlDetalle = "SELECT * FROM `detalle-factura` WHERE nro_factura = ?";
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement psFactura = conn.prepareStatement(sqlFactura);
+	         ResultSet rsFactura = psFactura.executeQuery()) {
+
+	        while (rsFactura.next()) {
+
+	            Factura fac = new Factura();
+	            fac.setNroFactura(rsFactura.getInt("nro_factura"));
+
+	            Date fecha = rsFactura.getDate("fecha");
+	            if (fecha != null) {
+	                fac.setFecha(fecha.toLocalDate());
+	            }
+
+	            fac.setTipo(rsFactura.getString("tipo"));
+	            fac.setCUIT(rsFactura.getString("cuit"));
+	            fac.setDNI(rsFactura.getString("dni"));
+	            fac.setTotal(rsFactura.getDouble("total"));
+	            fac.setEstado(rsFactura.getString("estado"));
+
+	            /* ===== DETALLES ===== */
+	            ArrayList<Detalle_Factura> detalles = new ArrayList<>();
+
+	            try (PreparedStatement psDetalle = conn.prepareStatement(sqlDetalle)) {
+	                psDetalle.setInt(1, fac.getNroFactura());
+
+	                try (ResultSet rsDetalle = psDetalle.executeQuery()) {
+	                    DbProducto dbProducto = new DbProducto();
+
+	                    while (rsDetalle.next()) {
+	                        Detalle_Factura df = new Detalle_Factura();
+	                        df.setNroFactura(fac.getNroFactura());
+	                        df.setIdProducto(rsDetalle.getInt("id_producto"));
+	                        df.setCantidad(rsDetalle.getInt("cantidad"));
+	                        df.setSubTotal(rsDetalle.getDouble("sub_total"));
+
+	                        Producto p = new Producto(rsDetalle.getInt("id_producto"));
+	                        p = dbProducto.getProducto(p);
+	                        df.setProducto(p);
+
+	                        detalles.add(df);
+	                    }
+	                }
+	            }
+
+	            fac.setDetalles(detalles);
+	            facturas.add(fac);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return facturas;
+	}
+
+
+	public boolean actualizarEstadoFactura(int nroFactura, String estado) {
+
+	    String sql = "UPDATE factura SET estado = ? WHERE nro_factura = ?";
+	    try (Connection conn = getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+	        ps.setString(1, estado);
+	        ps.setInt(2, nroFactura);
+	        return ps.executeUpdate() > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
+
+
 	
 }
