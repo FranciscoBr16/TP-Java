@@ -45,6 +45,9 @@ public class Detalle_Factura {
 		this.id_producto = id_producto;
 		this.sub_total = sub_total;
 	}
+	public Detalle_Factura() {
+
+	}
 	
 	
 	

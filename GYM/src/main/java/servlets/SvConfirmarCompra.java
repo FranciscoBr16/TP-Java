@@ -91,7 +91,7 @@ public class SvConfirmarCompra extends HttpServlet {
             factura.setTipo("C");
             factura.setCUIT("6942069");
             factura.setDNI(user.getDni());
-            factura.setEstado("pendiente de pago");
+            factura.setEstado("Pendiente de pago");
 
             double total = 0;
             for (ItemCarrito item : carrito) {
