@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import db.DbActividades;
 import db.DbContrato;
@@ -37,31 +38,38 @@ public class SvInscripcion extends HttpServlet {
 	    DbContrato dbcon = new DbContrato();
 
 	    String origen = request.getHeader("Referer"); 
+	    
+	    HttpSession session = request.getSession();
 
 	    if (usuario == null) {
-	        request.getSession().setAttribute("mensajeError", "Debes iniciar sesión para reservar.");
+	        session.setAttribute("mensaje", "Debes iniciar sesión para reservar.");
+	        session.setAttribute("tipoMensaje", "warning");
 	        response.sendRedirect(origen);
 	        return;
 	    }
 
 	    if (!dbact.cupoClases(clase)) {
-	        request.getSession().setAttribute("mensajeError", "No hay cupos disponibles para esta clase.");
+	        session.setAttribute("mensaje", "No hay cupos disponibles para esta clase.");
+	        session.setAttribute("tipoMensaje", "danger");
 	        response.sendRedirect(origen);
 	        return;
 	    }
 
 	    if (!dbact.disponibilidadAbono(usuario)) {
-	        request.getSession().setAttribute("mensajeError", "No tienes un abono disponible.");
+	        session.setAttribute("mensaje", "No tienes un abono disponible.");
+	        session.setAttribute("tipoMensaje", "warning");
 	        response.sendRedirect(origen);
 	        return;
 	    }
 
 	    if (dbact.agregarInscripcion(usuario, clase)) {
 	        dbcon.actualizaClasesDisponibles(usuario);
-	        request.getSession().setAttribute("mensajeOk", "Reserva realizada con éxito.");
+	        session.setAttribute("mensaje", "Reserva realizada con éxito.");
+	        session.setAttribute("tipoMensaje", "success");
 	        response.sendRedirect(origen);
 	    } else {
-	        request.getSession().setAttribute("mensajeError", "No se pudo realizar la reserva.");
+	        session.setAttribute("mensaje", "No se pudo realizar la reserva.");
+	        session.setAttribute("tipoMensaje", "danger");
 	        response.sendRedirect(origen);
 	    }
 	}
