@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,24 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import db.DbFactura;
-import entities.Clase;
 import entities.Factura;
 import entities.Usuario;
 
-
 @WebServlet("/SvMisFacturas")
 public class SvMisFacturas extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    
+    private static final long serialVersionUID = 1L;
+
     public SvMisFacturas() {
         super();
-        
     }
 
-	
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -37,17 +32,41 @@ public class SvMisFacturas extends HttpServlet {
             return;
         }
 
-        DbFactura dbfac = new DbFactura();
-        ArrayList<Factura> facturas;
 
-        if (usuario.isAdmin()) {
-            facturas = dbfac.getFacturas(); 
-        } else {
-            facturas = dbfac.getmisfacturas(usuario); 
+        String estado = request.getParameter("estado");      
+        String nroFacturaStr = request.getParameter("nro"); 
+        String ordenFecha = request.getParameter("orden");  
+
+        Integer nroFactura = null;
+        if (nroFacturaStr != null && !nroFacturaStr.isEmpty()) {
+            nroFactura = Integer.parseInt(nroFacturaStr);
         }
 
+        DbFactura dbFactura = new DbFactura();
+        ArrayList<Factura> facturas;
+
+
+        if (usuario.isAdmin()) {
+            facturas = dbFactura.getFacturasFiltradasAdmin(
+                    nroFactura,
+                    estado,
+                    ordenFecha
+            );
+        } else {
+            facturas = dbFactura.getFacturasFiltradasUsuario(
+                    usuario.getDni(),   
+                    nroFactura,
+                    estado,
+                    ordenFecha
+            );
+        }
+
+
         request.setAttribute("facturas", facturas);
-        request.setAttribute("esAdmin", usuario.isAdmin());
+
+        request.setAttribute("estado", estado);
+        request.setAttribute("nro", nroFacturaStr);
+        request.setAttribute("orden", ordenFecha);
 
         request.getRequestDispatcher("/pages/misFacturas.jsp")
                .forward(request, response);
@@ -57,5 +76,4 @@ public class SvMisFacturas extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
-
 }

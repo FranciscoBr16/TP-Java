@@ -1,0 +1,420 @@
+
+.factura-container {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.factura-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #d95126;
+}
+
+.factura-header i {
+    font-size: 2.5rem;
+    color: #d95126;
+}
+
+.factura-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #191617;
+}
+
+
+.filtros-factura {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    border: 2px solid #e0e0e0;
+}
+
+.filtros-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.filtro-grupo {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filtro-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #191617;
+}
+
+.filtro-input,
+.filtro-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #d95126;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.filtro-input:focus,
+.filtro-select:focus {
+    outline: none;
+    border-color: #d95126;
+    box-shadow: 0 0 0 3px rgba(217, 81, 38, 0.1);
+}
+
+
+.tabla-facturas {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tabla-facturas table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-facturas thead {
+    background-color: #191617;
+    color: white;
+}
+
+.tabla-facturas th {
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.tabla-facturas tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+.tabla-facturas tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.tabla-facturas td {
+    padding: 15px;
+    font-size: 15px;
+}
+
+
+.btn-expandir {
+    background-color: transparent;
+    border: 2px solid #191617;
+    color: #191617;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-expandir:hover {
+    background-color: #191617;
+    color: white;
+    transform: scale(1.1);
+}
+
+.btn-expandir i {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.btn-expandir[aria-expanded="true"] i {
+    transform: rotate(180deg);
+}
+
+
+.estado-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+}
+
+.estado-pagada {
+    background-color: #28a745;
+    color: white;
+}
+
+.estado-pendiente {
+    background-color: #ffc107;
+    color: #191617;
+}
+
+.estado-rechazada {
+    background-color: #dc3545;
+    color: white;
+}
+
+.contador-dias {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+
+.fila-detalles {
+    background-color: #f8f9fa;
+}
+
+.detalles-content {
+    padding: 20px;
+}
+
+.detalles-titulo {
+    font-size: 18px;
+    color: #191617;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detalles-titulo i {
+    color: #d95126;
+}
+
+.producto-detalle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+.producto-detalle:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.producto-detalle:last-child {
+    margin-bottom: 0;
+}
+
+.producto-imagen {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #d95126;
+}
+
+.producto-imagen-placeholder {
+    width: 80px;
+    height: 80px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #d95126;
+}
+
+.producto-imagen-placeholder i {
+    font-size: 2rem;
+    color: #999;
+}
+
+.producto-info {
+    flex: 1;
+}
+
+.producto-nombre {
+    font-size: 18px;
+    font-weight: bold;
+    color: #191617;
+    margin-bottom: 5px;
+}
+
+.producto-descripcion {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.producto-cantidad {
+    display: inline-block;
+    background-color: #d95126;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+}
+
+.producto-precios {
+    text-align: right;
+}
+
+.precio-unitario {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.precio-subtotal {
+    font-size: 18px;
+    font-weight: bold;
+    color: #191617;
+}
+
+.total-factura {
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #d95126;
+}
+
+.total-factura-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #191617;
+}
+
+.total-factura-monto {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d95126;
+}
+
+
+.btn-confirmar-pago {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #191617;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-confirmar-pago:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.btn-confirmar-pago i {
+    font-size: 16px;
+}
+
+
+.sin-facturas {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.sin-facturas i {
+    font-size: 5rem;
+    color: #d95126;
+    margin-bottom: 20px;
+}
+
+.sin-facturas h4 {
+    color: #191617;
+    font-size: 1.5rem;
+}
+
+
+.factura-vencida {
+    background-color: #fff3cd !important;
+}
+
+.factura-vencida:hover {
+    background-color: #ffe69c !important;
+}
+
+
+@media (max-width: 768px) {
+    .filtros-row {
+        flex-direction: column;
+    }
+    
+    .filtro-grupo {
+        width: 100%;
+    }
+    
+    .tabla-facturas {
+        overflow-x: auto;
+    }
+    
+    .producto-detalle {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .producto-precios {
+        text-align: center;
+    }
+}
+
+
+.mensaje-alerta {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    min-width: 300px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: slideIn 0.3s ease-out;
+}
+
+.mensaje-exito {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #191617;
+}
+
+.mensaje-error {
+    background-color: #dc3545;
+    color: white;
+    border: 2px solid #191617;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.btn-cerrar-mensaje {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+}

@@ -243,6 +243,195 @@ public class DbFactura extends DbHandler{
 	        return false;
 	    }
 	}
+	
+	public ArrayList<Factura> getFacturasFiltradasUsuario(
+	        String dniUsuario,
+	        Integer nroFactura,
+	        String estado,
+	        String ordenFecha) {
+
+	    ArrayList<Factura> facturas = new ArrayList<>();
+
+	    StringBuilder sql = new StringBuilder(
+	        "SELECT * FROM factura WHERE dni = ? "
+	    );
+
+	    if (nroFactura != null) {
+	        sql.append("AND nro_factura = ? ");
+	    }
+
+	    if (estado != null && !estado.isEmpty()) {
+	        sql.append("AND estado = ? ");
+	    }
+
+	    if ("asc".equalsIgnoreCase(ordenFecha)) {
+	        sql.append("ORDER BY fecha ASC ");
+	    } else if ("desc".equalsIgnoreCase(ordenFecha)) {
+	        sql.append("ORDER BY fecha DESC ");
+	    } else {
+	        sql.append("ORDER BY fecha DESC "); 
+	    }
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+
+	        int index = 1;
+
+	        pstmt.setString(index++, dniUsuario);
+
+	        if (nroFactura != null) {
+	            pstmt.setInt(index++, nroFactura);
+	        }
+
+	        if (estado != null && !estado.isEmpty()) {
+	            pstmt.setString(index++, estado);
+	        }
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+
+	            while (rs.next()) {
+
+	                Factura f = new Factura();
+	                f.setNroFactura(rs.getInt("nro_factura"));
+
+	                Date fechaSql = rs.getDate("fecha");
+	                if (fechaSql != null) {
+	                    f.setFecha(fechaSql.toLocalDate()); 
+	                }
+
+	                f.setTipo(rs.getString("tipo"));
+	                f.setCUIT(rs.getString("cuit"));
+	                f.setDNI(rs.getString("dni"));
+	                f.setTotal(rs.getDouble("total"));
+	                f.setEstado(rs.getString("estado"));
+
+	   
+	                f.setDetalles(getDetallesFactura(f.getNroFactura()));
+
+	                facturas.add(f);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return facturas;
+	}
+
+
+	public ArrayList<Factura> getFacturasFiltradasAdmin(
+	        Integer nroFactura,
+	        String estado,
+	        String ordenFecha) {
+
+	    ArrayList<Factura> facturas = new ArrayList<>();
+	    StringBuilder sql = new StringBuilder(
+	        "SELECT * FROM factura WHERE 1=1 "
+	    );
+
+	    if (nroFactura != null) {
+	        sql.append("AND nro_factura = ? ");
+	    }
+
+	    if (estado != null && !estado.isEmpty()) {
+	        sql.append("AND estado = ? ");
+	    }
+
+	    if ("asc".equalsIgnoreCase(ordenFecha)) {
+	        sql.append("ORDER BY fecha ASC ");
+	    } else if ("desc".equalsIgnoreCase(ordenFecha)) {
+	        sql.append("ORDER BY fecha DESC ");
+	    } else {
+	        sql.append("ORDER BY fecha DESC "); 
+	    }
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
+
+	        int index = 1;
+
+	        if (nroFactura != null) {
+	            pstmt.setInt(index++, nroFactura);
+	        }
+
+	        if (estado != null && !estado.isEmpty()) {
+	            pstmt.setString(index++, estado);
+	        }
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+
+	            while (rs.next()) {
+
+	                Factura f = new Factura();
+	                f.setNroFactura(rs.getInt("nro_factura"));
+
+	                Date fechaSql = rs.getDate("fecha");
+	                if (fechaSql != null) {
+	                    f.setFecha(fechaSql.toLocalDate()); 
+	                }
+
+	                f.setTipo(rs.getString("tipo"));
+	                f.setCUIT(rs.getString("cuit"));
+	                f.setDNI(rs.getString("dni"));
+	                f.setTotal(rs.getDouble("total"));
+	                f.setEstado(rs.getString("estado"));
+
+
+	                f.setDetalles(getDetallesFactura(f.getNroFactura()));
+
+	                facturas.add(f);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return facturas;
+	}
+
+	
+	
+	public ArrayList<Detalle_Factura> getDetallesFactura(int nroFactura) {
+
+	    ArrayList<Detalle_Factura> detalles = new ArrayList<>();
+	    String sql = "SELECT * FROM `detalle-factura` WHERE nro_factura = ?";
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setInt(1, nroFactura);
+
+	        try (ResultSet rs = pstmt.executeQuery()) {
+
+	            DbProducto dbProducto = new DbProducto();
+
+	            while (rs.next()) {
+	                Detalle_Factura df = new Detalle_Factura();
+
+	                df.setNroFactura(nroFactura);
+	                df.setIdProducto(rs.getInt("id_producto"));
+	                df.setCantidad(rs.getInt("cantidad"));
+	                df.setSubTotal(rs.getDouble("sub_total"));
+
+	                Producto p = new Producto();
+	                p.setIdProducto(df.getIdProducto());
+	                p = dbProducto.getProducto(p);
+
+	                df.setProducto(p);
+
+	                detalles.add(df);
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return detalles;
+	}
+
 
 
 
