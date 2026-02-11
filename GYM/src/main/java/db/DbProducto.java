@@ -327,56 +327,43 @@ public class DbProducto extends DbHandler{
 	}
 	}
 
-	public ArrayList<Producto> getAllProductos(){
-		PreparedStatement pstmt=null;
-		PreparedStatement pstmt2=null;
-		PreparedStatement pstmt3=null;
-		Connection conn = null;
-		ResultSet rs = null;
-		ResultSet rs2 = null;
-		ArrayList<Producto> productos = new ArrayList<>();
-		try{
-			conn = this.getConnection();
-			pstmt = conn.prepareStatement("DROP TEMPORARY TABLE IF EXISTS tt_precios; ");
-			pstmt.executeUpdate();
-			pstmt2 = conn.prepareStatement("CREATE TEMPORARY TABLE tt_precios AS (SELECT id_producto , max(fecha_desde) AS fecha_desde FROM precio WHERE fecha_desde <= CURRENT_DATE GROUP BY id_producto);");
-			pstmt2.executeUpdate();
-			pstmt3 = conn.prepareStatement("SELECT p.id_producto , p.stock , p.nombre, p.imagen, pr.precio, pr.fecha_desde "
-					+ "FROM producto p "
-					+ "INNER JOIN tt_precios tt ON tt.id_producto = p.id_producto "
-					+ "INNER JOIN precio pr ON pr.id_producto = p.id_producto "
-					+ "WHERE pr.fecha_desde = tt.fecha_desde");
-			
-			rs = pstmt3.executeQuery();
-			while (rs.next() && rs!= null ) { 
-				Producto pro = new Producto();
-			
-	            pro.setIdProducto(rs.getInt("p.id_producto"));
-	            pro.setStock(rs.getInt("p.stock"));
-	            pro.setNombre(rs.getString("p.nombre"));
-	            pro.setImagen(rs.getString("p.imagen"));
-	            Precio pre = new Precio(rs.getInt("pr.precio"));
+	public ArrayList<Producto> getAllProductos() {
+	    ArrayList<Producto> productos = new ArrayList<>();
+	    String sql =
+	        "SELECT p.id_producto, p.stock, p.nombre, p.imagen, pr.precio " +
+	        "FROM producto p " +
+	        "JOIN precio pr ON pr.id_producto = p.id_producto " +
+	        "WHERE pr.fecha_desde = (" +
+	        "   SELECT MAX(p2.fecha_desde) " +
+	        "   FROM precio p2 " +
+	        "   WHERE p2.id_producto = p.id_producto " +
+	        "     AND p2.fecha_desde <= CURRENT_DATE" +
+	        ")";
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql);
+	         ResultSet rs = pstmt.executeQuery()) {
+
+	        while (rs.next()) {
+	            Producto pro = new Producto();
+	            pro.setIdProducto(rs.getInt("id_producto"));
+	            pro.setStock(rs.getInt("stock"));
+	            pro.setNombre(rs.getString("nombre"));
+	            pro.setImagen(rs.getString("imagen"));
+
+	            Precio pre = new Precio(rs.getInt("precio"));
 	            pro.setPrecio(pre);
+
 	            productos.add(pro);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return productos;
 	}
-			
-			
-			return productos;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		} finally {
-			try {
-				if(pstmt!=null)pstmt.close();
-				this.cerrarConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-	
-			}
-		
-	}
+
 
 	public int actualizarIndumentaria(Indumentaria i) {
 		PreparedStatement pstmt=null;

@@ -1,8 +1,9 @@
 <%@page import="entities.Producto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entities.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -54,29 +55,40 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
         <div class="caja">
         		
         		<div class="tarjetasProducto">
-       		 		<% for (Producto pro : productos){ %>
-        				<div class="cajaProducto">
-        					<div class="contenedorImg">
-        						<img class="imagen" src="<%=pro.getImagen()%>">
-        					</div>
-        				<hr>
-        				<div class="nombre">
-        					<p><%=pro.getNombre()%></p>
-        				</div>
-        				<div class="precio">
-        					<p>$ <%=pro.getPrecio().getPrecio()%></p>
-        				</div>
-        				<div class="botones">
-        				<form action="/GYM/SvModificacionProducto" method="GET">
-						<input type="hidden" name="id_producto" value="<%=pro.getIdProducto()%>">
-						<button type="submit" class="boton">Modificar Producto</button>
-						</form>
-        
-                   		</div>
-                  
-        			</div>
-        
-        		<%} %>
+       		 		<% if (productos != null && !productos.isEmpty()) { %>
+				
+				    <% for (Producto pro : productos) { %>
+				        <div class="cajaProducto">
+				            <div class="contenedorImg">
+				                <img class="imagen" src="<%= pro.getImagen() %>">
+				            </div>
+				            <hr>
+				            <div class="nombre">
+				                <p><%= pro.getNombre() %></p>
+				            </div>
+				            <div class="precio">
+				                <p>$ <%= pro.getPrecio().getPrecio() %></p>
+				            </div>
+				            <div class="botones">
+				                <form action="/GYM/SvModificacionProducto" method="GET">
+				                    <input type="hidden" name="id_producto"
+				                           value="<%= pro.getIdProducto() %>">
+				                    <button type="submit" class="boton">
+				                        Modificar Producto
+				                    </button>
+				                </form>
+				            </div>
+				        </div>
+				    <% } %>
+				
+				<% } else { %>
+				
+				    <div class="text-center mt-4">
+				        <h4>No hay productos para mostrar</h4>
+				    </div>
+				
+				<% } %>
+
         		</div>
         		
         </div>
