@@ -17,16 +17,17 @@ import entities.Usuario;
 @WebServlet("/SvSignUp")
 public class SvSignUp extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Redirige al formulario de registro directamente para mantener URL limpia
         response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
     }
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
+
         // Obtener parámetros
         String dni = request.getParameter("dni");
         String nombre = request.getParameter("name");
@@ -36,7 +37,7 @@ public class SvSignUp extends HttpServlet {
         String telefono = request.getParameter("phonenumber");
         String fechaStr = request.getParameter("fecha");
         String imagen = request.getParameter("imagenesPerfil");
-        
+
         // 1. Validar campos vacíos
         if (dni == null || dni.trim().isEmpty() ||
             nombre == null || nombre.trim().isEmpty() ||
@@ -45,33 +46,33 @@ public class SvSignUp extends HttpServlet {
             email == null || email.trim().isEmpty() ||
             telefono == null || telefono.trim().isEmpty() ||
             fechaStr == null || fechaStr.trim().isEmpty()) {
-            
+
             session.setAttribute("mensajeError", "Todos los campos son obligatorios");
             response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
             return;
         }
-        
+
         // 2. Validar formato DNI
         if (!dni.matches("^[0-9]{7,8}$")) {
             session.setAttribute("mensajeError", "El DNI debe contener entre 7 y 8 dígitos numéricos");
             response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
             return;
         }
-        
+
         // 3. Validar formato email
         if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
             session.setAttribute("mensajeError", "El formato del email no es válido");
             response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
             return;
         }
-        
+
         // 4. Validar longitud de contraseña
         if (password.length() < 6) {
             session.setAttribute("mensajeError", "La contraseña debe tener al menos 6 caracteres");
             response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
             return;
         }
-        
+
         // 5. Validar fecha y edad mínima (16 años)
         LocalDate fecha;
         try {
@@ -87,26 +88,26 @@ public class SvSignUp extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
             return;
         }
-        
+
         DbUsuario db = new DbUsuario();
-        
+
         // 6. Validar DNI duplicado
         if (db.existeDni(dni)) {
             session.setAttribute("mensajeError", "El DNI ya está registrado en el sistema");
             response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
             return;
         }
-        
+
         // 7. Validar email duplicado
         if (db.existeEmail(email)) {
             session.setAttribute("mensajeError", "El correo electrónico ya está registrado");
             response.sendRedirect(request.getContextPath() + "/pages/signUp.jsp");
             return;
         }
-        
+
         // Registro del usuario
         Usuario usu = new Usuario(dni, nombre, apellido, password, email, telefono, fecha, imagen);
-        
+
         if (db.newUser(usu)) {
             response.sendRedirect(request.getContextPath() + "/pages/signUpExitoso.jsp");
         } else {

@@ -65,7 +65,7 @@
 							<h2><span class="naranja">Plan</span><%=i.getNombreAbono()%></h2>
 							<p>Desde $<%=i.getPrecio()%>/mes</p>
 							<p><%=i.getCantReservas()%> clases mensuales</p>
-							<button class="boton-linea">Incribirse</button>
+							<button class="boton-linea" onclick="confirmarAbono(<%=i.getIdAbono()%>, '<%=i.getNombreAbono()%>')">Incribirse</button>
 							<% if(user != null){  %>
 							<% if(user.isAdmin()){ %>
 							<form action="/GYM/SvBajaAbono" method="POST">
@@ -87,7 +87,13 @@
 			<a href="/GYM/pages/altaAbono.jsp"><button class="boton">Agregar nuevo plan</button></a>
 		</div>
 		<% } }%>
-
+<script>
+function confirmarAbono(idAbono, nombre) {
+    if (confirm("¿Estás seguro de que querés adquirir el abono: " + nombre + "?")) {
+        window.location.href = "/GYM/SvComprarAbono?id_abono=" + idAbono;
+    }
+}
+</script>
 
 </body>
 <jsp:include page="/pages/components/carrito.jsp" />

@@ -17,14 +17,15 @@ import entities.Usuario;
 @WebServlet("/SvMisReservas")
 public class SvMisReservas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 
     public SvMisReservas() {
         super();
-       
+
     }
 
-	
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("user");
 		DbActividades db = new DbActividades();
@@ -32,13 +33,14 @@ public class SvMisReservas extends HttpServlet {
 		ins.addAll(db.getMisReservas(usuario));
 		request.setAttribute("reservas", ins);
 		request.getRequestDispatcher("/pages/misInscripciones.jsp").forward(request,response);
-		
+
 	}
 
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
+
 	}
 
 }

@@ -16,40 +16,42 @@ import entities.Usuario;
 @WebServlet("/SvModificacionUsuario")
 public class SvModificacionUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
+
+
     public SvModificacionUsuario() {
         super();
     }
 
-	
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
-	
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email"); 
-		String clave = request.getParameter("password"); 
-		String name = request.getParameter("name"); 
-		String surname = request.getParameter("surname"); 
-		String phonenumber = request.getParameter("phonenumber"); 
+		String email = request.getParameter("email");
+		String clave = request.getParameter("password");
+		String name = request.getParameter("name");
+		String surname = request.getParameter("surname");
+		String phonenumber = request.getParameter("phonenumber");
 		String fechaStr = request.getParameter("birthdate");
 		LocalDate fecha = LocalDate.parse(fechaStr);
 		String img = "/GYM/img/perfil/" + request.getParameter("imagenesPerfil");
 		String dni = ((Usuario)request.getSession().getAttribute("user")).getDni();
-		
+
 		Usuario user = new Usuario(dni, name, surname, clave, email, phonenumber, fecha, img);
-		
+
 		DbUsuario manejador = new DbUsuario();
-		
+
 		if(manejador.actualizarUsuario(user) > 0 ) {
 			request.getSession().setAttribute("user",user);
 			response.sendRedirect("/GYM/SvUsuario");
 		} else {
 			response.sendRedirect("/GYM/index.jsp");
 		}
-		
-		
+
+
 	}
 
 }

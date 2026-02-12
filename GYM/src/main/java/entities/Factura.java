@@ -1,11 +1,10 @@
 package entities;
 
-import java.util.ArrayList;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Factura {
-	
+
 	private int nroFactura;
 	private LocalDate fecha;
 	private String CUIT;
@@ -16,9 +15,9 @@ public class Factura {
 	private Usuario usuario;
 	private String DNI;
 	private String estado;
-	
-	
-	
+
+
+
 	public String getDNI() {
 		return DNI;
 	}
@@ -31,7 +30,7 @@ public class Factura {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -80,7 +79,7 @@ public class Factura {
 	public void setDetalles(ArrayList<Detalle_Factura> detalles) {
 		this.detalles = detalles;
 	}
-	
+
 	public double calculaTotal() {
 		double total = 0;
 		for (Detalle_Factura unDetalle : detalles) {
@@ -88,10 +87,10 @@ public class Factura {
 		return total;
 		//PROGRAMAR!!
 		}
-			
-		
-	
-	
-	
-	
+
+
+
+
+
+
 }

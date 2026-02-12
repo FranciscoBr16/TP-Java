@@ -42,7 +42,7 @@ CREATE TABLE `abono` (
 
 LOCK TABLES `abono` WRITE;
 /*!40000 ALTER TABLE `abono` DISABLE KEYS */;
-INSERT INTO `abono` VALUES (1,'Simple',8,4000,'2 reservas por semana',1,'/GYM/img/plan1.jpg'),(2,'Estandar',12,5500,'3 reservas por semana',1,'/GYM/img/plan2.jpg'),(3,'Premium',30,8500,'Todos los dias',1,'/GYM/img/plan3.jpg'),(4,'Plan Estudiantil 2',34,444,'requisitos: Certificado alumno Regular',0,'/GYM/img/inputs/abon4.jpg');
+INSERT INTO `abono` VALUES (1,'Simple',8,15000,'2 reservas por semana',1,'/GYM/img/plan1.jpg'),(2,'Estandar',12,20000,'3 reservas por semana',1,'/GYM/img/plan2.jpg'),(3,'Premium',30,30000,'Todos los dias',1,'/GYM/img/plan3.jpg'),(4,'Plan Estudiantil 2',34,444,'requisitos: Certificado alumno Regular',0,'/GYM/img/inputs/abon4.jpg');
 /*!40000 ALTER TABLE `abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +106,7 @@ CREATE TABLE `contrato` (
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
-INSERT INTO `contrato` VALUES ('00000001',3,'2023-12-01','2023-12-31',27),('42424242',1,'2023-11-01','2023-11-30',8);
+INSERT INTO `contrato` VALUES ('00000001',3,'2023-12-01','2023-12-31',27),('42424242',1,'2023-11-01','2023-11-30',8),('42424242',1,'2026-02-12','2026-03-14',8);
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,8 +134,36 @@ CREATE TABLE `detalle-factura` (
 
 LOCK TABLES `detalle-factura` WRITE;
 /*!40000 ALTER TABLE `detalle-factura` DISABLE KEYS */;
-INSERT INTO `detalle-factura` VALUES (7,2,1,10000),(7,3,1,8000);
+INSERT INTO `detalle-factura` VALUES (7,2,1,10000),(7,3,1,8000),(9,2,1,60000);
 /*!40000 ALTER TABLE `detalle-factura` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `detalle-factura-abono`
+--
+
+DROP TABLE IF EXISTS `detalle-factura-abono`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `detalle-factura-abono` (
+  `nro_factura` int NOT NULL,
+  `id_abono` int DEFAULT NULL,
+  `precio` double DEFAULT NULL,
+  PRIMARY KEY (`nro_factura`),
+  KEY `fk_abono_idx` (`id_abono`),
+  CONSTRAINT `fk_abono3` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`),
+  CONSTRAINT `fk_facturaa` FOREIGN KEY (`nro_factura`) REFERENCES `factura` (`nro_factura`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `detalle-factura-abono`
+--
+
+LOCK TABLES `detalle-factura-abono` WRITE;
+/*!40000 ALTER TABLE `detalle-factura-abono` DISABLE KEYS */;
+INSERT INTO `detalle-factura-abono` VALUES (12,1,15000);
+/*!40000 ALTER TABLE `detalle-factura-abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -186,7 +214,7 @@ CREATE TABLE `factura` (
   PRIMARY KEY (`nro_factura`),
   KEY `fk_usuario2_idx` (`dni`),
   CONSTRAINT `fk_usuario3` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +223,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (7,'2026-02-09','C','6942069','42424242',18000,'Pendiente de pago');
+INSERT INTO `factura` VALUES (9,'2026-02-11','C','6942069','42424242',60000,'Pagada'),(12,'2026-02-11','S','6942069','42424242',15000,'Pagada');
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -301,7 +329,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,28,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,19,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,0,'Cake','/GYM/img/productos/ind_3.jpg','Prote'),(4,2,'zapatilas deportivas Jaguar','/GYM/img/productos/ind_4.png','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/ind_6.jpg','Medias de Boxeo'),(7,24,'Agua purificada ideal para la hidratación antes, durante y después de la actividad física.','/GYM/img/productos/agua.jpg','Agua Smart Water'),(8,1,'Short cómodo y liviano que permite libertad de movimiento durante la actividad física.','/GYM/img/productos/short.jpg','Pantalón corto deportivo'),(9,4,'Guantes acolchados diseñados para entrenamientos de boxeo y deportes de contacto.','/GYM/img/productos/guantes.jpg','Guantes de boxeo');
+INSERT INTO `producto` VALUES (1,28,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,18,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,0,'Cake','/GYM/img/productos/ind_3.jpg','Prote'),(4,2,'zapatilas deportivas Jaguar','/GYM/img/productos/ind_4.png','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/ind_6.jpg','Medias de Boxeo'),(7,24,'Agua purificada ideal para la hidratación antes, durante y después de la actividad física.','/GYM/img/productos/agua.jpg','Agua Smart Water'),(8,1,'Short cómodo y liviano que permite libertad de movimiento durante la actividad física.','/GYM/img/productos/short.jpg','Pantalón corto deportivo'),(9,4,'Guantes acolchados diseñados para entrenamientos de boxeo y deportes de contacto.','/GYM/img/productos/guantes.jpg','Guantes de boxeo');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -375,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-11 11:11:22
+-- Dump completed on 2026-02-12 18:24:11

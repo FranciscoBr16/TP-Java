@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +16,16 @@ import entities.Clase;
 @WebServlet("/SvBajaClase")
 public class SvBajaClase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
- 
+
+
     public SvBajaClase() {
         super();
-       
+
     }
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		Clase c = new Clase(Integer.parseInt(request.getParameter("id")));
 		DbActividades mnj = new DbActividades();
 		if (mnj.deleteActividad(c) > 0) {
@@ -31,8 +33,8 @@ public class SvBajaClase extends HttpServlet {
 		} else {
 			getServletContext().getRequestDispatcher("/pages/reservas.jsp").forward(request, response);
 		}
-		
-		
+
+
 	}
 
 }

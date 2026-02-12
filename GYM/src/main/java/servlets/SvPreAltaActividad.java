@@ -16,15 +16,16 @@ import entities.Empleado;
 @WebServlet("/SvPreAltaActividad")
 public class SvPreAltaActividad extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	DbEmpleado dbemp = new DbEmpleado();
     	ArrayList<Empleado> empleados = new ArrayList<>();
     	empleados.addAll(dbemp.getEmpleados());
     	request.setAttribute("empleados", empleados);
     	request.getRequestDispatcher("/pages/altaActividad.jsp").forward(request,response);
-    	
+
 	}
 
 

@@ -1,10 +1,10 @@
 package db;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import entities.Suplemento;
 
 
 public class DbProducto extends DbHandler{
-	
+
 	public ArrayList<Producto> getProductos() {
 	    ArrayList<Producto> productos = new ArrayList<>();
 
@@ -66,7 +66,7 @@ public class DbProducto extends DbHandler{
 		ResultSet rs = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into producto (id_producto, stock, descripcion, nombre) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt = conn.prepareStatement("Insert into producto (id_producto, stock, descripcion, nombre) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, sup.getIdProducto() );
 			pstmt.setInt(2, sup.getStock());
 			pstmt.setString(3, sup.getDescripcion());
@@ -87,20 +87,22 @@ public class DbProducto extends DbHandler{
 				pstmt3.setInt(3, sup.getValorPrecio());
 				pstmt3.executeUpdate();
 			}
-			
+
 			return sup;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	
+
 			}
 	}
 
@@ -112,20 +114,22 @@ public class DbProducto extends DbHandler{
 			pstmt = conn.prepareStatement("UPDATE producto SET imagen = ? where id_producto = ?");
 			pstmt.setString(1, pro.getImagen());
 			pstmt.setInt(2, pro.getIdProducto());
-			
+
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 	}
-		
+
 	}
 
 	public Indumentaria nuevaIndumentaria(Indumentaria ind) {
@@ -136,7 +140,7 @@ public class DbProducto extends DbHandler{
 		ResultSet rs = null;
 		try {
 			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Insert into producto (id_producto, stock, descripcion, nombre) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt = conn.prepareStatement("Insert into producto (id_producto, stock, descripcion, nombre) values (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, ind.getIdProducto() );
 			pstmt.setInt(2, ind.getStock());
 			pstmt.setString(3, ind.getDescripcion());
@@ -156,27 +160,29 @@ public class DbProducto extends DbHandler{
 				pstmt3.setInt(3, ind.getValorPrecio());
 				pstmt3.executeUpdate();
 			}
-			
+
 			return ind;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	
+
 			}
 	}
 
 	public Producto getProducto(Producto p) {
 		PreparedStatement pstmt=null;
 		PreparedStatement pstmt2=null;
-	
+
 		Connection conn = null;
 		ResultSet rs = null;
 		try{
@@ -184,17 +190,17 @@ public class DbProducto extends DbHandler{
 			pstmt2 = conn.prepareStatement("SET @FechaProxima = (SELECT max(fecha_desde) FROM precio WHERE fecha_desde <= current_date() AND id_producto = ?);");
 			pstmt2.setInt(1,p.getIdProducto());
 			pstmt2.executeUpdate();
-			
+
 			pstmt = conn.prepareStatement("Select pro.id_producto, pro.stock, pro.descripcion, pro.imagen, pro.nombre, pre.fecha_desde, pre.precio, i.talle, s.unidad, s.valor from producto pro "
 					+ "INNER JOIN precio pre ON pro.id_producto = pre.id_producto "
 					+ "LEFT JOIN indumentaria i ON i.id_producto = pro.id_producto "
 					+ "LEFT JOIN suplemento s ON s.id_producto = pro.id_producto "
 					+ "where pro.id_producto=? AND pre.fecha_desde = @FechaProxima;");
-		
+
 			pstmt.setInt(1, p.getIdProducto());
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			rs.next();
 			int id = rs.getInt("id_producto");
 			int stock = rs.getInt("stock");
@@ -203,9 +209,9 @@ public class DbProducto extends DbHandler{
 	        String nomb = rs.getString("nombre");
 	        LocalDate fecha = rs.getDate("fecha_desde").toLocalDate();
 	        int pre = rs.getInt("precio");
-			
+
 	        Producto p2;
-	        
+
 			String c = null;
 			c = rs.getString("talle");
 			if (c != null) {
@@ -215,28 +221,30 @@ public class DbProducto extends DbHandler{
 				Float valor = rs.getFloat("valor");
 				p2 = new Suplemento (id, stock, desc, img, nomb, fecha, pre , unidad, valor);
 				}
-			
-				
-					
+
+
+
 				return p2;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	
+
 			}
 	}
-	
+
 	public Producto getProducto(ItemCarrito p) {
 		PreparedStatement pstmt=null;
 		PreparedStatement pstmt2=null;
-	
+
 		Connection conn = null;
 		ResultSet rs = null;
 		try{
@@ -244,17 +252,17 @@ public class DbProducto extends DbHandler{
 			pstmt2 = conn.prepareStatement("SET @FechaProxima = (SELECT max(fecha_desde) FROM precio WHERE fecha_desde <= current_date() AND id_producto = ?);");
 			pstmt2.setInt(1,p.getIdProducto());
 			pstmt2.executeUpdate();
-			
+
 			pstmt = conn.prepareStatement("Select pro.id_producto, pro.stock, pro.descripcion, pro.imagen, pro.nombre, pre.fecha_desde, pre.precio, i.talle, s.unidad, s.valor from producto pro "
 					+ "INNER JOIN precio pre ON pro.id_producto = pre.id_producto "
 					+ "LEFT JOIN indumentaria i ON i.id_producto = pro.id_producto "
 					+ "LEFT JOIN suplemento s ON s.id_producto = pro.id_producto "
 					+ "where pro.id_producto=? AND pre.fecha_desde = @FechaProxima;");
-		
+
 			pstmt.setInt(1, p.getIdProducto());
-			
+
 			rs = pstmt.executeQuery();
-			
+
 			rs.next();
 			int id = rs.getInt("id_producto");
 			int stock = rs.getInt("stock");
@@ -263,9 +271,9 @@ public class DbProducto extends DbHandler{
 	        String nomb = rs.getString("nombre");
 	        LocalDate fecha = rs.getDate("fecha_desde").toLocalDate();
 	        int pre = rs.getInt("precio");
-			
+
 	        Producto p2;
-	        
+
 			String c = null;
 			c = rs.getString("talle");
 			if (c != null) {
@@ -275,21 +283,23 @@ public class DbProducto extends DbHandler{
 				Float valor = rs.getFloat("valor");
 				p2 = new Suplemento (id, stock, desc, img, nomb, fecha, pre , unidad, valor);
 				}
-			
-				
-					
+
+
+
 				return p2;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	
+
 			}
 	}
 
@@ -308,17 +318,18 @@ public class DbProducto extends DbHandler{
 			pstmt2.setInt(1, p.getIdProducto());
 			pstmt2.setDate(2, java.sql.Date.valueOf(p.getPrecio().getFechaDesde()));
 			pstmt2.setInt(3, p.getPrecio().getPrecio());
-		
+
 			pstmt2.execute();
 			return pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
 		} finally {
 			try {
-				if(pstmt!=null || pstmt2!=null)
+				if(pstmt!=null || pstmt2!=null) {
 					pstmt.close();
+				}
 					pstmt2.close();
 				this.cerrarConnection();
 			} catch (SQLException e) {
@@ -367,7 +378,7 @@ public class DbProducto extends DbHandler{
 
 	public int actualizarIndumentaria(Indumentaria i) {
 		PreparedStatement pstmt=null;
-		
+
 		PreparedStatement pstmt3=null;
 		Connection conn = null;
 		try {
@@ -378,20 +389,20 @@ public class DbProducto extends DbHandler{
 	        pstmt.setString(2, i.getDescripcion());
 	        pstmt.setString(3, i.getNombre());
 	        pstmt.setInt(4, i.getIdProducto());
-	        
-			
+
+
 	        pstmt3 = conn.prepareStatement("UPDATE indumentaria SET talle = ? WHERE id_producto = ?;");
 	        pstmt3.setString(1, i.getTalle());
 	        pstmt3.setInt(2, i.getIdProducto());
 	        pstmt.executeUpdate();
-	        
+
 	        int result = pstmt3.executeUpdate();
-			
-	        
+
+
 	        conn.commit();
 			return result;
-			
-			
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 	        try {
@@ -404,58 +415,60 @@ public class DbProducto extends DbHandler{
 			return 0;
 		} finally {
 			try {
-				if(pstmt!=null || pstmt3!=null)
+				if(pstmt!=null || pstmt3!=null) {
 					pstmt.close();
-					
+				}
+
 					pstmt3.close();
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
-	
-	 
+
+
 			}
 	}
-	}	
+	}
 
 	public int actualizarSuplemento(Suplemento s) {
 		PreparedStatement pstmt=null;
-		
+
 		PreparedStatement pstmt3=null;
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement("UPDATE producto SET stock = ?, descripcion = ?, nombre = ? where id_producto = ?;");
-			
+
 			pstmt3 = conn.prepareStatement("UPDATE suplemento SET valor = ?, unidad =? where id_producto= ?;");
 			pstmt.setInt(1, s.getStock());
 			pstmt.setString(2, s.getDescripcion());
 			pstmt.setString(3, s.getNombre());
 			pstmt.setInt(4, s.getIdProducto());
-			
+
 			pstmt3.setString(1,s.getUnidad());
 			pstmt3.setFloat(2,s.getValor());
 			pstmt3.setInt(3, s.getIdProducto());
-			
+
 			pstmt.executeUpdate();
-			
+
 			return pstmt3.executeUpdate();
-			
-			
+
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
 		} finally {
 			try {
-				if(pstmt!=null || pstmt3!=null)
+				if(pstmt!=null || pstmt3!=null) {
 					pstmt.close();
-			
+				}
+
 					pstmt3.close();
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 	}
-		
+
 	}
 
 	public boolean actualizarPrecio(Producto p) {
@@ -463,7 +476,7 @@ public class DbProducto extends DbHandler{
 		Connection conn = null;
 		try {
 			conn = this.getConnection();
-		pstmt2 = conn.prepareStatement("INSERT INTO precio (id_producto,fecha_desde,precio) VALUES (?,?,?);"); 
+		pstmt2 = conn.prepareStatement("INSERT INTO precio (id_producto,fecha_desde,precio) VALUES (?,?,?);");
 		pstmt2.setInt(1, p.getIdProducto());
 		pstmt2.setDate(2, java.sql.Date.valueOf(p.getPrecio().getFechaDesde()));
 		pstmt2.setInt(3, p.getPrecio().getPrecio());
@@ -474,17 +487,17 @@ public class DbProducto extends DbHandler{
 		return false;
 	} finally {
 		try {
-			if( pstmt2!=null)
-				
+			if( pstmt2!=null) {
 				pstmt2.close();
-				
+			}
+
 			this.cerrarConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 }
 	}
-	
+
 	public int actualizarStock(Producto p, int cant) {
 	    PreparedStatement pstmt = null;
 	    Connection conn = null;
@@ -507,8 +520,12 @@ public class DbProducto extends DbHandler{
 
 	    } finally {
 	        try {
-	            if (pstmt != null) pstmt.close();
-	            if (conn != null) conn.close();
+	            if (pstmt != null) {
+					pstmt.close();
+				}
+	            if (conn != null) {
+					conn.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }

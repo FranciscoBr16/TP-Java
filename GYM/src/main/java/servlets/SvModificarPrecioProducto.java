@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.DbProducto;
-import entities.Precio;
 import entities.Producto;
 
 /**
@@ -19,23 +18,25 @@ import entities.Producto;
 @WebServlet("/SvModificarPrecioProducto")
 public class SvModificarPrecioProducto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+
     public SvModificarPrecioProducto() {
         super();
-        
+
     }
 
-	
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Integer id_producto = Integer.parseInt(request.getParameter("id"));
-		
+
 		LocalDate fecha_desde = LocalDate.parse(request.getParameter("fecha"));
-		Integer precio = Integer.parseInt(request.getParameter("precio")); 
+		Integer precio = Integer.parseInt(request.getParameter("precio"));
 		Producto p = new Producto(id_producto,fecha_desde,precio);
 		DbProducto manejador = new DbProducto();
 		if(manejador.actualizarPrecio(p)) {
@@ -43,7 +44,7 @@ public class SvModificarPrecioProducto extends HttpServlet {
 		} else {
 			response.sendRedirect("/GYM/index.jsp");
 		}
-		
+
 	}
 
 }

@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import entities.Usuario;
 
 public class DbUsuario extends DbHandler {
-	
+
 	public DbUsuario() {
 		super();
 	}
-	
+
 	public boolean newUser(Usuario user) {
 		PreparedStatement pstmt=null;
 		Connection conn = null;
@@ -29,23 +29,25 @@ public class DbUsuario extends DbHandler {
 			pstmt.setDate(7, java.sql.Date.valueOf(user.getFechaNac()));
 			pstmt.setString(8, "/GYM/img/perfil/"+user.getImagen());
 			pstmt.executeUpdate();
-			
+
 			return true;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	
+
 			}
 	}
-	
+
 	public Usuario logIn(Usuario user) {
 		PreparedStatement pstmt=null;
 		Connection conn = null;
@@ -56,7 +58,7 @@ public class DbUsuario extends DbHandler {
 			pstmt.setString(1, user.getDni());
 			pstmt.setString(2, user.getPassword());
 			rs = pstmt.executeQuery();
-			
+
 			rs.next();
 			user.setDni(rs.getString("dni"));
 			user.setNombre(rs.getString("nombre"));
@@ -69,22 +71,26 @@ public class DbUsuario extends DbHandler {
 			Date fechaux = rs.getDate("fechaNacimiento");
 			if (fechaux != null) {
 				user.setFechaNac(fechaux.toLocalDate());
-			} else user.setFechaNac(null);
+			} else {
+				user.setFechaNac(null);
+			}
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-	
+
 			}
 	}
-	
+
 	public int actualizarUsuario(Usuario user) {
 		PreparedStatement pstmt=null;
 		Connection conn = null;
@@ -99,23 +105,25 @@ public class DbUsuario extends DbHandler {
 			pstmt.setDate(6, java.sql.Date.valueOf(user.getFechaNac()));
 			pstmt.setString(7, user.getImagen());
 			pstmt.setString(8, user.getDni());
-			
+
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
 		} finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 	}
 	}
-	
+
 	public int deleteUsuario(Usuario user) {
-		
+
 		PreparedStatement pstmt=null;
 		Connection conn;
 
@@ -124,14 +132,16 @@ public class DbUsuario extends DbHandler {
 			pstmt = conn.prepareStatement("UPDATE usuario SET estado = 0 WHERE dni =?");
 			pstmt.setString(1, user.getDni());
 			return pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
-			
+
 		}finally {
 			try {
-				if(pstmt!=null)pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -148,19 +158,23 @@ public class DbUsuario extends DbHandler {
 	        pstmt = conn.prepareStatement("SELECT COUNT(*) as total FROM usuario WHERE dni = ?");
 	        pstmt.setString(1, dni);
 	        rs = pstmt.executeQuery();
-	        
+
 	        if (rs.next()) {
 	            return rs.getInt("total") > 0;
 	        }
 	        return false;
-	        
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
 	    } finally {
 	        try {
-	            if (rs != null) rs.close();
-	            if (pstmt != null) pstmt.close();
+	            if (rs != null) {
+					rs.close();
+				}
+	            if (pstmt != null) {
+					pstmt.close();
+				}
 	            this.cerrarConnection();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -177,19 +191,23 @@ public class DbUsuario extends DbHandler {
 	        pstmt = conn.prepareStatement("SELECT COUNT(*) as total FROM usuario WHERE correo = ?");
 	        pstmt.setString(1, email);
 	        rs = pstmt.executeQuery();
-	        
+
 	        if (rs.next()) {
 	            return rs.getInt("total") > 0;
 	        }
 	        return false;
-	        
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
 	    } finally {
 	        try {
-	            if (rs != null) rs.close();
-	            if (pstmt != null) pstmt.close();
+	            if (rs != null) {
+					rs.close();
+				}
+	            if (pstmt != null) {
+					pstmt.close();
+				}
 	            this.cerrarConnection();
 	        } catch (SQLException e) {
 	            e.printStackTrace();

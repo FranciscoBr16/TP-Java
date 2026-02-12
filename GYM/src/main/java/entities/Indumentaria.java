@@ -3,7 +3,7 @@ package entities;
 import java.time.LocalDate;
 
 public class Indumentaria extends Producto {
-	
+
 	public String talle;
 
 	public Indumentaria(String desc, String nombre, int stock, int precio, String talle) {
@@ -33,6 +33,6 @@ public class Indumentaria extends Producto {
 		this.talle = talle;
 	}
 
-	
-	
+
+
 }

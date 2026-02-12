@@ -3,17 +3,17 @@ package entities;
 import java.time.LocalDate;
 
 public class Producto {
-	
+
 	private int idProducto;
 	private String nombre;
 	private String descripcion;
 	private int stock;
 	private String imagen;
 	private Precio precio;
-	
-	
-	
-	
+
+
+
+
 	public Producto(String desc, String nombre, int stock, int precio) {
 		this.descripcion = desc;
 		this.nombre = nombre;
@@ -33,9 +33,9 @@ public class Producto {
 		this.nombre = nombre;
 		Precio p = new Precio(fecha_desde, precio);
 		this.precio = p;
-		
+
 	}
-	
+
 	public Producto(int id, int stock, String img, String desc, String nomb, LocalDate fecha, Integer pre) {
 		this.idProducto = id;
 		this.imagen=img;
@@ -95,8 +95,8 @@ public class Producto {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
-	
-	
-	
+
+
+
 }
 

@@ -16,7 +16,7 @@ private String imagen;
 
 
 public Clase(String nombre, String desc, int cupo, String dia, String horario, String tipo, int idEmp) {
-	
+
 	this.empleado = new Empleado(idEmp);
 	this.nombre = nombre;
 	this.descripcion=desc;
@@ -114,7 +114,7 @@ public String getNombre() {
 }
 public void setNombre(String nombre) {
 	this.nombre = nombre;
-	
+
 }
 public String getImagen() {
 	return imagen;
@@ -122,7 +122,7 @@ public String getImagen() {
 
 public void setImagen(String img) {
 	this.imagen = img;
-	
+
 }
 
 

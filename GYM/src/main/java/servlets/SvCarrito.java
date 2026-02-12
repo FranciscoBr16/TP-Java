@@ -16,7 +16,7 @@ import entities.ItemCarrito;
 @WebServlet("/SvCarrito")
 public class SvCarrito extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 
     public SvCarrito() {
         super();
@@ -24,11 +24,12 @@ public class SvCarrito extends HttpServlet {
     }
 
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        ArrayList<ItemCarrito> carrito = 
+        ArrayList<ItemCarrito> carrito =
             (ArrayList<ItemCarrito>) session.getAttribute("carrito");
 
         if (carrito == null) {
@@ -59,7 +60,7 @@ public class SvCarrito extends HttpServlet {
             session.setAttribute("carrito", carrito);
         }
 
- 
+
 
         response.sendRedirect(request.getHeader("Referer"));
 

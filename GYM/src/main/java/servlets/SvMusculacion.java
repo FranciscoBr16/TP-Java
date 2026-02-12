@@ -16,26 +16,28 @@ import entities.Clase;
 @WebServlet("/SvMusculacion")
 public class SvMusculacion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-   
+
     public SvMusculacion() {
         super();
-        
+
     }
 
-	
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DbActividades manejador = new DbActividades();
 		ArrayList<Clase> clases = new ArrayList<>();
 		clases.addAll(manejador.getClases());
 		request.setAttribute("clases", clases);
 		request.getRequestDispatcher("/pages/salonDeMusculacion.jsp").forward(request,response);
-		
+
 	}
 
-	
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
+
 	}
 
 }

@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -22,7 +21,8 @@ public class SvMisFacturas extends HttpServlet {
         super();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         Usuario usuario = (Usuario) request.getSession().getAttribute("user");
@@ -33,9 +33,9 @@ public class SvMisFacturas extends HttpServlet {
         }
 
 
-        String estado = request.getParameter("estado");      
-        String nroFacturaStr = request.getParameter("nro"); 
-        String ordenFecha = request.getParameter("orden");  
+        String estado = request.getParameter("estado");
+        String nroFacturaStr = request.getParameter("nro");
+        String ordenFecha = request.getParameter("orden");
 
         Integer nroFactura = null;
         if (nroFacturaStr != null && !nroFacturaStr.isEmpty()) {
@@ -44,6 +44,7 @@ public class SvMisFacturas extends HttpServlet {
 
         DbFactura dbFactura = new DbFactura();
         ArrayList<Factura> facturas;
+        ArrayList<Factura> facturasAbonos;
 
 
         if (usuario.isAdmin()) {
@@ -52,13 +53,26 @@ public class SvMisFacturas extends HttpServlet {
                     estado,
                     ordenFecha
             );
+            facturas.addAll(dbFactura.getFacturasAbonosFiltradasAdmin(
+                    nroFactura,
+                    estado,
+                    ordenFecha
+            ));
+
+
         } else {
             facturas = dbFactura.getFacturasFiltradasUsuario(
-                    usuario.getDni(),   
+                    usuario.getDni(),
                     nroFactura,
                     estado,
                     ordenFecha
             );
+            facturas.addAll(dbFactura.getFacturasAbonosFiltradasUsuario(
+            		usuario.getDni(),
+                    nroFactura,
+                    estado,
+                    ordenFecha
+            ));
         }
 
 
@@ -72,7 +86,8 @@ public class SvMisFacturas extends HttpServlet {
                .forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }

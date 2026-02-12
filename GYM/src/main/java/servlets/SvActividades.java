@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.DbAbono;
 import db.DbActividades;
 import entities.Clase;
 
@@ -17,12 +16,13 @@ import entities.Clase;
 @WebServlet("/SvActividades")
 public class SvActividades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 
     public SvActividades() {
         super();
     }
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DbActividades manejador = new DbActividades();
 		ArrayList<Clase> actividades = new ArrayList<>();
@@ -32,6 +32,7 @@ public class SvActividades extends HttpServlet {
 	}
 
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

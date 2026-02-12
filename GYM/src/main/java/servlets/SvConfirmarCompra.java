@@ -1,14 +1,15 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import db.DbFactura;
 import db.DbProducto;
@@ -25,7 +26,8 @@ public class SvConfirmarCompra extends HttpServlet {
     /* =========================
        GET → Mostrar confirmación
        ========================= */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
@@ -56,7 +58,8 @@ public class SvConfirmarCompra extends HttpServlet {
     /* =========================
        POST → Confirmar compra
        ========================= */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
@@ -100,12 +103,12 @@ public class SvConfirmarCompra extends HttpServlet {
             factura.setTotal(total);
 
             int nroFactura = dbFactura.nuevaFactura(factura);
-            
-            
+
+
 
             /* ===== CREAR DETALLES + DESCONTAR STOCK ===== */
             for (ItemCarrito item : carrito) {
-            	
+
             	Detalle_Factura df = new Detalle_Factura(nroFactura,item.getCantidad(),item.getIdProducto(),item.getCantidad() * item.getPrecio());
                 dbFactura.crearDetalleFactura(df);
 

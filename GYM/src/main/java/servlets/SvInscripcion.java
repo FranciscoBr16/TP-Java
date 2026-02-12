@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,18 +18,20 @@ import entities.Usuario;
 @WebServlet("/SvInscripcion")
 public class SvInscripcion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
+
+
     public SvInscripcion() {
-        super(); 
+        super();
     }
 
-	
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
 
@@ -37,8 +40,8 @@ public class SvInscripcion extends HttpServlet {
 	    Usuario usuario = (Usuario) request.getSession().getAttribute("user");
 	    DbContrato dbcon = new DbContrato();
 
-	    String origen = request.getHeader("Referer"); 
-	    
+	    String origen = request.getHeader("Referer");
+
 	    HttpSession session = request.getSession();
 
 	    if (usuario == null) {
@@ -74,10 +77,10 @@ public class SvInscripcion extends HttpServlet {
 	    }
 	}
 
-		
-		
-		
-		
+
+
+
+
 	}
 
 

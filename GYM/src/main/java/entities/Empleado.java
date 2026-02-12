@@ -73,7 +73,7 @@ public void setFechaDesde(LocalDate fechaDesde) {
 
 public void setImagen(String img) {
 	this.imagen = img;
-	
+
 }
 public String getImagen() {
 	return imagen;
