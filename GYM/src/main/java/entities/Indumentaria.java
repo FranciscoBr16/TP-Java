@@ -6,7 +6,7 @@ public class Indumentaria extends Producto {
 
 	public String talle;
 
-	public Indumentaria(String desc, String nombre, int stock, int precio, String talle) {
+	public Indumentaria(String desc, String nombre, int stock, double precio, String talle) {
 		super(desc, nombre, stock, precio);
 		this.talle = talle;
 	}
@@ -15,7 +15,7 @@ public class Indumentaria extends Producto {
 		super();
 	}
 
-	public Indumentaria(int id, int stock, String desc, String img, String nomb, LocalDate fecha, Integer pre, String c) {
+	public Indumentaria(int id, int stock, String desc, String img, String nomb, LocalDate fecha, Double pre, String c) {
 		super (id, stock,img, desc, nomb, fecha, pre);
 		this.talle = c;
 	}

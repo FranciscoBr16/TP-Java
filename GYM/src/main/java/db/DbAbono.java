@@ -34,6 +34,8 @@ public class DbAbono extends DbHandler {
 	            ab.setCantReservas(rs.getInt("cant_reservas"));
 	            ab.setPrecio(rs.getInt("precio"));
 	            ab.setImagen(rs.getString("imagen"));
+	            ab.setDescripcion(rs.getString("descripcion"));
+	            ab.setEs_mensual(rs.getBoolean("es_mensual"));
 	            abonos.add(ab);
 	}
 			return abonos;
@@ -139,6 +141,7 @@ public Abono getAbono(Abono abono) {
 		abono.setPrecio(rs.getInt("precio"));
 		abono.setDescripcion(rs.getString("descripcion"));
 		abono.setImagen(rs.getString("imagen"));
+		abono.setEs_mensual(rs.getBoolean("es_mensual"));
 
 		return abono;
 

@@ -3,14 +3,14 @@ import java.time.LocalDate;
 
 public class Precio {
 	private LocalDate fechaDesde;
-	private int precio;
+	private double precio;
 
 
-	public Precio(int precio) {
+	public Precio(double precio) {
 		this.precio = precio;
 	}
 
-	public Precio(LocalDate fecha_desde, Integer precio2) {
+	public Precio(LocalDate fecha_desde, Double precio2) {
 		this.fechaDesde = fecha_desde;
 		this.precio = precio2;
 	}
@@ -21,10 +21,10 @@ public class Precio {
 	public void setFechaDesde(LocalDate fechaDesde) {
 		this.fechaDesde = fechaDesde;
 	}
-	public int getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(int precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 }

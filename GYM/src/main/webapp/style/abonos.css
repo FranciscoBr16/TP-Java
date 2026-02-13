@@ -1,4 +1,4 @@
-@charset "ISO-8859-1";
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Niramit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 * {
@@ -7,13 +7,13 @@
     margin: 0;
 }
 
+/* === CONTENEDOR PRINCIPAL === */
 .principal-box {
     background-color: white;
-    height: 80vh;
-
+    min-height: 100vh;
+    padding: 40px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -25,94 +25,379 @@
     font-weight: bold;
 }
 
+/* === HEADER DE SECCIONES === */
 .contenido-box {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     font-weight: lighter;
+    margin-bottom: 30px;
+    max-width: 800px;
 }
 
+.contenido-box h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.contenido-box p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.clases-adicionales-header {
+    margin-top: 60px;
+}
+
+/* === SEPARADOR ENTRE SECCIONES === */
+.separador {
+    width: 100%;
+    max-width: 1200px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #d95126, transparent);
+    margin: 60px 0 40px 0;
+}
+
+/* === PLANES MENSUALES === */
 .planes-box {
     display: flex;
     flex-direction: row;
     gap: 50px;
-    margin-top: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tarjeta-plan {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-plan:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(217, 81, 38, 0.2);
 }
 
 .tarjeta-plan img {
     width: 300px;
     height: 200px;
     border-radius: 50px 50px 0 0;
+    object-fit: cover;
 }
 
 .tarjeta-plan .descripcion-plan {
-    height: 250px;
-    padding: 15px;
+    width: 300px;
+    min-height: 280px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-
     border-radius: 0 0 50px 50px;
     border-bottom: 1px solid #d95126;
     border-left: 1px solid #d95126;
     border-right: 1px solid #d95126;
 }
 
-.tarjeta-plan .descripcion-plan p {
-    margin: 0;
+.tarjeta-plan .descripcion-plan h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
 }
 
+.tarjeta-plan .descripcion-plan p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+/* === CLASES ADICIONALES === */
+.clases-box {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 40px;
+}
+
+.tarjeta-clase {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border: 2px solid #d95126;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.tarjeta-clase:hover {
+    transform: translateX(10px);
+    box-shadow: 0 8px 15px rgba(217, 81, 38, 0.2);
+    border-color: #d95126;
+}
+
+.icono-clase {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #d95126 0%, #ff6b45 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(217, 81, 38, 0.3);
+}
+
+.icono-clase i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.info-clase {
+    flex: 1;
+}
+
+.info-clase h3 {
+    color: #191617;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.descripcion-clase {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.detalles-clase {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cantidad-clases {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #191617;
+    font-size: 1.1rem;
+}
+
+.cantidad-clases i {
+    color: #d95126;
+    font-size: 1.3rem;
+}
+
+.precio-clase {
+    color: #d95126;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* === BOTONES === */
 .boton-linea {
     text-decoration: none;
-    width: 100px;
-    font-weight: light;
+    min-width: 120px;
+    font-weight: normal;
     background-color: white;
     color: #d95126;
-    padding: 5px;
+    padding: 8px 20px;
     border: 2px solid #d95126;
     border-radius: 30px;
     margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
-.boton-borrar{
-	text-decoration: none;
-    width: 150px;
-    font-weight: light;
+.boton-linea:hover {
+    background-color: #d95126;
+    border: 2px solid #d95126;
+    color: white;
+    transform: scale(1.05);
+}
+
+.boton-comprar-clase {
+    background: linear-gradient(135deg, #d95126 0%, #ff6b45 100%);
+    color: white;
+    border: 2px solid #d95126;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boton-comprar-clase:hover {
+    background: linear-gradient(135deg, #ff6b45 0%, #d95126 100%);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(217, 81, 38, 0.3);
+}
+
+.boton-comprar-clase i {
+    font-size: 1.2rem;
+}
+
+/* === BOTONES ADMIN === */
+.boton-borrar {
+    text-decoration: none;
+    min-width: 150px;
+    font-weight: normal;
     background-color: white;
     color: rgb(255, 0, 0);
-    padding: 5px;
+    padding: 8px 15px;
     border: 2px solid rgb(255, 0, 0);
     border-radius: 30px;
     margin-top: 10px;
-}
-.boton-modificar{
-	text-decoration: none;
-    width: 150px;
-    font-weight: light;
-    background-color: white;
-    color: rgb(128, 128, 128);
-    padding: 5px;
-    border: 2px solid rgb(128, 128, 128);
-    border-radius: 30px;
-    margin-top: 10px;
-}
-.boton-modificar:hover{
-	background-color: rgb(192, 192, 192);
-    border: 2px solid rgb(192, 192, 192);
-    color: white;
-    transition: background-color 250ms ease-in-out;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .boton-borrar:hover {
     background-color: rgb(255, 0, 0);
     border: 2px solid rgb(255, 0, 0);
     color: white;
-    transition: background-color 250ms ease-in-out;
 }
-.boton-linea:hover {
-    background-color: #d95126;
-    border: 2px solid #d95126;
+
+.boton-modificar {
+    text-decoration: none;
+    min-width: 150px;
+    font-weight: normal;
+    background-color: white;
+    color: rgb(128, 128, 128);
+    padding: 8px 15px;
+    border: 2px solid rgb(128, 128, 128);
+    border-radius: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-modificar:hover {
+    background-color: rgb(128, 128, 128);
+    border: 2px solid rgb(128, 128, 128);
     color: white;
-    transition: background-color 250ms ease-in-out;
+}
+
+/* Versiones pequeñas para clases adicionales */
+.admin-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.boton-borrar-small,
+.boton-modificar-small {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-borrar-small {
+    background-color: white;
+    color: rgb(255, 0, 0);
+    border: 2px solid rgb(255, 0, 0);
+}
+
+.boton-borrar-small:hover {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+.boton-modificar-small {
+    background-color: white;
+    color: rgb(128, 128, 128);
+    border: 2px solid rgb(128, 128, 128);
+}
+
+.boton-modificar-small:hover {
+    background-color: rgb(128, 128, 128);
+    color: white;
+}
+
+/* === MENSAJES DE ALERTA === */
+.mensaje-alerta {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    min-width: 350px;
+    max-width: 500px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    animation: slideIn 0.3s ease-out;
+    border: 2px solid #191617;
+}
+
+.mensaje-exito {
+    background-color: #28a745;
+    color: white;
+}
+
+.mensaje-error {
+    background-color: #dc3545;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.btn-cerrar-mensaje {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.btn-cerrar-mensaje:hover {
+    opacity: 0.8;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .planes-box {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .tarjeta-clase {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .detalles-clase {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .contenido-box h2 {
+        font-size: 1.5rem;
+    }
+    
+    .contenido-box p {
+        font-size: 1rem;
+    }
 }

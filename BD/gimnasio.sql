@@ -32,6 +32,7 @@ CREATE TABLE `abono` (
   `descripcion` varchar(45) DEFAULT NULL,
   `estado` tinyint DEFAULT '1',
   `imagen` varchar(450) DEFAULT NULL,
+  `es_mensual` tinyint DEFAULT '1',
   PRIMARY KEY (`id_abono`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -42,7 +43,7 @@ CREATE TABLE `abono` (
 
 LOCK TABLES `abono` WRITE;
 /*!40000 ALTER TABLE `abono` DISABLE KEYS */;
-INSERT INTO `abono` VALUES (1,'Simple',8,15000,'2 reservas por semana',1,'/GYM/img/plan1.jpg'),(2,'Estandar',12,20000,'3 reservas por semana',1,'/GYM/img/plan2.jpg'),(3,'Premium',30,30000,'Todos los dias',1,'/GYM/img/plan3.jpg'),(4,'Plan Estudiantil 2',34,444,'requisitos: Certificado alumno Regular',0,'/GYM/img/inputs/abon4.jpg');
+INSERT INTO `abono` VALUES (1,'Simple',8,15000,'2 reservas por semana',1,'/GYM/img/plan1.jpg',1),(2,'Estandar',12,20000,'3 reservas por semana',1,'/GYM/img/plan2.jpg',1),(3,'Premium',30,30000,'Todos los dias',1,'/GYM/img/plan3.jpg',1),(4,'Reservas',2,5000,'2 clases para que te anotes cuando quieras',1,'/GYM/img/inputs/abon4.jpg',0);
 /*!40000 ALTER TABLE `abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +107,7 @@ CREATE TABLE `contrato` (
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
-INSERT INTO `contrato` VALUES ('00000001',3,'2023-12-01','2023-12-31',27),('42424242',1,'2023-11-01','2023-11-30',8),('42424242',1,'2026-02-12','2026-03-14',8);
+INSERT INTO `contrato` VALUES ('00000001',3,'2023-12-01','2023-12-31',27),('42424242',1,'2023-11-01','2023-11-30',6),('42424242',1,'2026-02-13','2026-03-15',8);
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,8 +152,8 @@ CREATE TABLE `detalle-factura-abono` (
   `precio` double DEFAULT NULL,
   PRIMARY KEY (`nro_factura`),
   KEY `fk_abono_idx` (`id_abono`),
-  CONSTRAINT `fk_abono3` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`),
-  CONSTRAINT `fk_facturaa` FOREIGN KEY (`nro_factura`) REFERENCES `factura` (`nro_factura`)
+  CONSTRAINT `fk_abono3` FOREIGN KEY (`id_abono`) REFERENCES `abono` (`id_abono`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_facturaa` FOREIGN KEY (`nro_factura`) REFERENCES `factura` (`nro_factura`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -162,7 +163,7 @@ CREATE TABLE `detalle-factura-abono` (
 
 LOCK TABLES `detalle-factura-abono` WRITE;
 /*!40000 ALTER TABLE `detalle-factura-abono` DISABLE KEYS */;
-INSERT INTO `detalle-factura-abono` VALUES (12,1,15000);
+INSERT INTO `detalle-factura-abono` VALUES (12,1,15000),(15,1,15000);
 /*!40000 ALTER TABLE `detalle-factura-abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,7 +215,7 @@ CREATE TABLE `factura` (
   PRIMARY KEY (`nro_factura`),
   KEY `fk_usuario2_idx` (`dni`),
   CONSTRAINT `fk_usuario3` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -223,7 +224,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (9,'2026-02-11','C','6942069','42424242',60000,'Pagada'),(12,'2026-02-11','S','6942069','42424242',15000,'Pagada');
+INSERT INTO `factura` VALUES (9,'2026-02-11','C','6942069','42424242',60000,'Pagada'),(12,'2026-02-11','S','6942069','42424242',15000,'Pagada'),(15,'2026-02-13','S','6942069','42424242',15000,'Pagada');
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,7 +277,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('00000001',1,'2023-12-15'),('00000001',2,'2023-10-18'),('00000001',2,'2023-12-15'),('00000001',3,'2023-12-15');
+INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('00000001',1,'2023-12-15'),('00000001',2,'2023-10-18'),('00000001',2,'2023-12-15'),('00000001',3,'2023-12-15'),('42424242',101,'2026-02-13'),('42424242',138,'2026-02-13');
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +291,7 @@ DROP TABLE IF EXISTS `precio`;
 CREATE TABLE `precio` (
   `id_producto` int NOT NULL,
   `fecha_desde` date NOT NULL,
-  `precio` int DEFAULT NULL,
+  `precio` double DEFAULT NULL,
   PRIMARY KEY (`id_producto`,`fecha_desde`),
   CONSTRAINT `fk_producto3` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -403,4 +404,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-12 18:24:11
+-- Dump completed on 2026-02-13 16:44:04

@@ -43,7 +43,7 @@ public class DbProducto extends DbHandler{
 	            pro.setNombre(rs.getString("nombre"));
 	            pro.setImagen(rs.getString("imagen"));
 
-	            Precio pre = new Precio(rs.getInt("precio"));
+	            Precio pre = new Precio(rs.getDouble("precio"));
 	            pro.setPrecio(pre);
 
 	            productos.add(pro);
@@ -84,7 +84,7 @@ public class DbProducto extends DbHandler{
 				pstmt3 = conn.prepareStatement("INSERT INTO precio (id_producto, fecha_desde, precio) VALUES (?,?,?)");
 				pstmt3.setInt(1, id);
 				pstmt3.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
-				pstmt3.setInt(3, sup.getValorPrecio());
+				pstmt3.setDouble(3, sup.getValorPrecio());
 				pstmt3.executeUpdate();
 			}
 
@@ -157,7 +157,7 @@ public class DbProducto extends DbHandler{
 				pstmt3 = conn.prepareStatement("INSERT INTO precio (id_producto, fecha_desde, precio) VALUES (?,?,?)");
 				pstmt3.setInt(1, id);
 				pstmt3.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
-				pstmt3.setInt(3, ind.getValorPrecio());
+				pstmt3.setDouble(3, ind.getValorPrecio());
 				pstmt3.executeUpdate();
 			}
 
@@ -208,7 +208,7 @@ public class DbProducto extends DbHandler{
 	        String img = rs.getString("imagen");
 	        String nomb = rs.getString("nombre");
 	        LocalDate fecha = rs.getDate("fecha_desde").toLocalDate();
-	        int pre = rs.getInt("precio");
+	        double pre = rs.getDouble("precio");
 
 	        Producto p2;
 
@@ -270,7 +270,7 @@ public class DbProducto extends DbHandler{
 	        String img = rs.getString("imagen");
 	        String nomb = rs.getString("nombre");
 	        LocalDate fecha = rs.getDate("fecha_desde").toLocalDate();
-	        int pre = rs.getInt("precio");
+	        double pre = rs.getDouble("precio");
 
 	        Producto p2;
 
@@ -317,7 +317,7 @@ public class DbProducto extends DbHandler{
 			pstmt.setInt(4, p.getIdProducto());
 			pstmt2.setInt(1, p.getIdProducto());
 			pstmt2.setDate(2, java.sql.Date.valueOf(p.getPrecio().getFechaDesde()));
-			pstmt2.setInt(3, p.getPrecio().getPrecio());
+			pstmt2.setDouble(3, p.getPrecio().getPrecio());
 
 			pstmt2.execute();
 			return pstmt.executeUpdate();
@@ -362,7 +362,7 @@ public class DbProducto extends DbHandler{
 	            pro.setNombre(rs.getString("nombre"));
 	            pro.setImagen(rs.getString("imagen"));
 
-	            Precio pre = new Precio(rs.getInt("precio"));
+	            Precio pre = new Precio(rs.getDouble("precio"));
 	            pro.setPrecio(pre);
 
 	            productos.add(pro);
@@ -479,7 +479,7 @@ public class DbProducto extends DbHandler{
 		pstmt2 = conn.prepareStatement("INSERT INTO precio (id_producto,fecha_desde,precio) VALUES (?,?,?);");
 		pstmt2.setInt(1, p.getIdProducto());
 		pstmt2.setDate(2, java.sql.Date.valueOf(p.getPrecio().getFechaDesde()));
-		pstmt2.setInt(3, p.getPrecio().getPrecio());
+		pstmt2.setDouble(3, p.getPrecio().getPrecio());
 		pstmt2.execute();
 		return true;
 	} catch (SQLException e) {

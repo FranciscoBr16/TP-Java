@@ -36,7 +36,7 @@ public class SvModificarPrecioProducto extends HttpServlet {
 		Integer id_producto = Integer.parseInt(request.getParameter("id"));
 
 		LocalDate fecha_desde = LocalDate.parse(request.getParameter("fecha"));
-		Integer precio = Integer.parseInt(request.getParameter("precio"));
+		double precio = Integer.parseInt(request.getParameter("precio"));
 		Producto p = new Producto(id_producto,fecha_desde,precio);
 		DbProducto manejador = new DbProducto();
 		if(manejador.actualizarPrecio(p)) {

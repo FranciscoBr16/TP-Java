@@ -14,7 +14,7 @@ public class Producto {
 
 
 
-	public Producto(String desc, String nombre, int stock, int precio) {
+	public Producto(String desc, String nombre, int stock, Double precio) {
 		this.descripcion = desc;
 		this.nombre = nombre;
 		this.stock = stock;
@@ -26,7 +26,7 @@ public class Producto {
 	public Producto(int id) {
 		this.idProducto = id;
 	}
-	public Producto(Integer id_producto, Integer stock, String descripcion, String nombre, LocalDate fecha_desde, Integer precio) {
+	public Producto(Integer id_producto, Integer stock, String descripcion, String nombre, LocalDate fecha_desde, Double precio) {
 		this.idProducto = id_producto;
 		this.stock = stock;
 		this.descripcion = descripcion;
@@ -36,7 +36,7 @@ public class Producto {
 
 	}
 
-	public Producto(int id, int stock, String img, String desc, String nomb, LocalDate fecha, Integer pre) {
+	public Producto(int id, int stock, String img, String desc, String nomb, LocalDate fecha, Double pre) {
 		this.idProducto = id;
 		this.imagen=img;
 		this.stock = stock;
@@ -51,7 +51,7 @@ public class Producto {
 		this.descripcion = desc;
 		this.nombre = nomb;
 	}
-	public Producto(Integer id_producto, LocalDate fecha_desde, Integer precio2) {
+	public Producto(Integer id_producto, LocalDate fecha_desde, Double precio2) {
 		this.idProducto=id_producto;
 		Precio p = new Precio(fecha_desde,precio2);
 		this.precio=p;
@@ -62,7 +62,7 @@ public class Producto {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getValorPrecio() {
+	public double getValorPrecio() {
 		return precio.getPrecio();
 	}
 	public Precio getPrecio() {

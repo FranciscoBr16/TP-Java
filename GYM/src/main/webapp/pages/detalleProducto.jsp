@@ -65,7 +65,7 @@
 				<span><%=pro.getNombre()%></span> 
 			</div>
 			<div class="precio">
-				<span>$ <%=pro.getPrecio().getPrecio()%></span> 
+				<span>$ <%=pro.getValorPrecio()%></span> 
 			</div>
 			
 			<div class="descripcion">

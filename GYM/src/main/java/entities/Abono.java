@@ -3,8 +3,17 @@ package entities;
 public class Abono {
 	private int idAbono, cantReservas, precio;
 	private String nombreAbono, descripcion, imagen;
+	boolean es_mensual ;
 
 
+
+	public boolean es_mensual() {
+		return es_mensual;
+	}
+
+	public void setEs_mensual(boolean es_mensual) {
+		this.es_mensual = es_mensual;
+	}
 
 	public String getNombreAbono() {
 		return nombreAbono;

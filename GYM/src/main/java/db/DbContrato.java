@@ -191,48 +191,47 @@ public class DbContrato extends DbHandler {
 	 * @return true si tiene contrato activo, false si no
 	 */
 	public boolean tieneContratoActivo(String dniUsuario) {
-		PreparedStatement pstmt = null;
-		Connection conn = null;
-		ResultSet rs = null;
+	    PreparedStatement pstmt = null;
+	    Connection conn = null;
+	    ResultSet rs = null;
 
-		try {
-			conn = this.getConnection();
-			LocalDate hoy = LocalDate.now();
+	    try {
+	        conn = this.getConnection();
+	        LocalDate hoy = LocalDate.now();
 
-			pstmt = conn.prepareStatement(
-				"SELECT COUNT(*) as total FROM contrato " +
-				"WHERE dni_usuario = ? AND ? BETWEEN fecha_desde AND fecha_hasta"
-			);
+	        pstmt = conn.prepareStatement(
+	            "SELECT COUNT(*) AS total " +
+	            "FROM contrato " +
+	            "WHERE dni_usuario = ? " +
+	            "AND ? BETWEEN fecha_desde AND fecha_hasta"
+	        );
 
-			pstmt.setString(1, dniUsuario);
-			pstmt.setDate(2, java.sql.Date.valueOf(hoy));
+	        pstmt.setString(1, dniUsuario);
+	        pstmt.setDate(2, java.sql.Date.valueOf(hoy));
 
-			rs = pstmt.executeQuery();
+	        rs = pstmt.executeQuery();
 
-			if (rs.next()) {
-				return rs.getInt("total") > 0;
-			}
+	        if (rs.next()) {
+	            return rs.getInt("total") > 0; // ✔ true = tiene contrato activo
+	        }
 
-			return false;
+	        return false;
 
-		} catch (SQLException e) {
-			System.err.println("DbContrato.tieneContratoActivo: Error SQL - " + e.getMessage());
-			e.printStackTrace();
-			return false;
-		} finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+	    } catch (SQLException e) {
+	        System.err.println("DbContrato.tieneContratoActivo: Error SQL - " + e.getMessage());
+	        e.printStackTrace();
+	        return false; // mejor no bloquear por error
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (pstmt != null) pstmt.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
+
+
+
 }

@@ -65,7 +65,7 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
         					<p><%=pro.getNombre()%></p>
         				</div>
         				<div class="precio">
-        					<p>$ <%=pro.getPrecio().getPrecio()%></p>
+        					<p>$ <%=pro.getValorPrecio()%></p>
         				</div>
         				<div class="botones">
         				<form action="/GYM/SvDetalleProducto" method="GET">
