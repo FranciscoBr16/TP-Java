@@ -70,7 +70,7 @@ public class SvCarrito extends HttpServlet {
         int idProducto = Integer.parseInt(request.getParameter("idProducto"));
         String nombre = request.getParameter("nombre");
         String imagen = request.getParameter("imagen");
-        int precio = Integer.parseInt(request.getParameter("precio"));
+        float precio = Float.parseFloat(request.getParameter("precio"));
         int stock = Integer.parseInt(request.getParameter("stock"));
 
         for (ItemCarrito item : carrito) {
