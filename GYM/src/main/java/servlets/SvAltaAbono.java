@@ -46,7 +46,7 @@ public class SvAltaAbono extends HttpServlet {
 		Integer precio = Integer.parseInt(request.getParameter("precio"));
 		String nombreAbono = request.getParameter("nombreAbono");
 		String descripcion = request.getParameter("descripcion");
-		
+
 		// Capturar el campo esMensual del formulario
 		String esMensualParam = request.getParameter("esMensual");
 		boolean esMensual = "true".equals(esMensualParam);
