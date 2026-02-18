@@ -5,13 +5,13 @@ public class ItemCarrito {
     private int idProducto;
     private String nombre;
     private String imagen;
-    private float precio;
+    private double precio;
     private int cantidad;
     private int stockDisponible;
 
     public ItemCarrito() {}
 
-    public ItemCarrito(int idProducto, String nombre, String imagen, float precio, int cantidad, int stockDisponible) {
+    public ItemCarrito(int idProducto, String nombre, String imagen, double precio, int cantidad, int stockDisponible) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -20,7 +20,7 @@ public class ItemCarrito {
         this.stockDisponible = stockDisponible;
     }
 
-    public float getSubtotal() {
+    public double getSubtotal() {
         return precio * cantidad;
     }
 
@@ -48,7 +48,7 @@ public class ItemCarrito {
 		this.imagen = imagen;
 	}
 
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
