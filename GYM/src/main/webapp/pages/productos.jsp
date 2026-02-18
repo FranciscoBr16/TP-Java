@@ -33,8 +33,11 @@ pageEncoding="ISO-8859-1"%>
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
+
 <% Usuario user = (Usuario) session.getAttribute("user");
 ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("productos");
+String query = request.getParameter("txtBuscar") != null ? request.getParameter("txtBuscar") : "";
+String orden = request.getParameter("ordenPrecio") != null ? request.getParameter("ordenPrecio") : "";
 %>
 </head>
 
@@ -44,71 +47,86 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
 		    request.setAttribute("activePage", "tienda");
 		%>
 		<jsp:include page="/pages/components/navbar.jsp" />
-		
 	</header> 
 
 
     <div class="contenedor">
         
-        
+        <div class="seccion-filtros">
+            <form action="/GYM/SvProductos" method="GET" class="form-filtro">
+                <div class="input-filtro">
+                    <label><i class="bi bi-search"></i> Buscar Producto:</label>
+                    <input type="text" name="txtBuscar" value="<%= query %>" placeholder="Nombre del producto...">
+                </div>
+                
+                <div class="input-filtro" style="flex-grow: 0.5;">
+                    <label><i class="bi bi-sort-down"></i> Precio:</label>
+                    <select name="ordenPrecio">
+                        <option value="" <%= orden.equals("") ? "selected" : "" %>>Relevancia</option>
+                        <option value="asc" <%= orden.equals("asc") ? "selected" : "" %>>Menor precio</option>
+                        <option value="desc" <%= orden.equals("desc") ? "selected" : "" %>>Mayor precio</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="boton2" style="margin:0; width: 120px;">Filtrar</button>
+                <a href="/GYM/SvProductos" class="boton-linea" style="margin:0; text-align:center; width: 120px;">Limpiar</a>
+            </form>
+        </div>
+
         <div class="caja">
-        
         		<div class="tarjetasProducto">
 
-       		 		<% for (Producto pro : productos){ %>
-        				<div class="cajaProducto">
-        					<div class="contenedorImg">
-        						<img class="imagen" src="<%=pro.getImagen()%>">
-        					</div>
-        				<hr>
-        				<div class="nombre">
-        					<p><%=pro.getNombre()%></p>
-        				</div>
-        				<div class="precio">
-        					<p>$ <%=pro.getValorPrecio()%></p>
-        				</div>
-        				<div class="botones">
-        				<form action="/GYM/SvDetalleProducto" method="GET">
-								<input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
-								<button type="submit" class="boton4">Ver Detalles</button>
-							</form>
+                    <% if (productos != null && !productos.isEmpty()) { %>
+       		 		    <% for (Producto pro : productos){ %>
+        				    <div class="cajaProducto">
+        					    <div class="contenedorImg">
+        						    <img class="imagen" src="<%=pro.getImagen()%>">
+        					    </div>
+        				    <hr>
+        				    <div class="nombre">
+        					    <p><%=pro.getNombre()%></p>
+        				    </div>
+        				    <div class="precio">
+        					    <p>$ <%=pro.getValorPrecio()%></p>
+        				    </div>
+        				    <div class="botones">
+        				        <form action="/GYM/SvDetalleProducto" method="GET">
+								    <input type="hidden" name="id" value="<%=pro.getIdProducto()%>">
+								    <button type="submit" class="boton4">Ver Detalles</button>
+							    </form>
 							
-        				 <% if (user != null) { %>
-                   		
-							<form action="/GYM/SvCarrito" method="post">
-							    <input type="hidden" name="accion" value="agregar">
-							    <input type="hidden" name="idProducto" value="<%= pro.getIdProducto() %>">
-							    <input type="hidden" name="nombre" value="<%= pro.getNombre() %>">
-							    <input type="hidden" name="imagen" value="<%= pro.getImagen() %>">
-							    <input type="hidden" name="precio" value="<%= pro.getPrecio().getPrecio() %>">
-							    <input type="hidden" name="stock" value="<%= pro.getStock() %>">
+        				        <% if (user != null) { %>
+							        <form action="/GYM/SvCarrito" method="post">
+							            <input type="hidden" name="accion" value="agregar">
+							            <input type="hidden" name="idProducto" value="<%= pro.getIdProducto() %>">
+							            <input type="hidden" name="nombre" value="<%= pro.getNombre() %>">
+							            <input type="hidden" name="imagen" value="<%= pro.getImagen() %>">
+							            <input type="hidden" name="precio" value="<%= pro.getPrecio().getPrecio() %>">
+							            <input type="hidden" name="stock" value="<%= pro.getStock() %>">
 							
-							    <button class="boton5" >
-							        Agregar al carrito
-							    </button>
-							</form>
-							
-						<% } %>
-
-					
-                   		</div>
-                  
-                    
-        	
-        			</div>
-        
-        		<%} %>
+							            <button class="boton5" >
+							                Agregar al carrito
+							            </button>
+							        </form>
+						        <% } %>
+                   		    </div>
+        			    </div>
+        		        <%} %>
+                    <% } else { %>
+                        <div style="text-align: center; width: 100%; padding: 50px;">
+                            <h3 style="color: white;">No se encontraron productos que coincidan con la búsqueda.</h3>
+                        </div>
+                    <% } %>
         		</div>
-        		
         </div>
-       			<% if (user != null){ if(user.isAdmin()){ %>
-        		<div>
+
+       	<% if (user != null){ if(user.isAdmin()){ %>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
         		<a href="/GYM/pages/preAltaProducto.jsp"> <button class="boton">Nuevo Producto</button> </a>
-        		</div>
-        
-        <form action="/GYM/SvModificarProductos" method="GET">
-			<button type="submit" class="boton">Modificar Productos</button>
-		</form>
+                <form action="/GYM/SvModificarProductos" method="GET">
+			        <button type="submit" class="boton">Modificar Productos</button>
+		        </form>
+            </div>
         <%} }%>
   </div>
 
