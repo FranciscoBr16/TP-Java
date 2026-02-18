@@ -63,12 +63,13 @@ public class DbAbono extends DbHandler {
         ResultSet rs = null;
         try {
             conn = this.getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO abono (nombreAbono, cant_reservas, precio, descripcion) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            pstmt = conn.prepareStatement("INSERT INTO abono (nombreAbono, cant_reservas, precio, descripcion, es_mensual) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             pstmt.setString(1, abono.getNombreAbono());
             pstmt.setInt(2, abono.getCantReservas());
             pstmt.setInt(3, abono.getPrecio());
             pstmt.setString(4, abono.getDescripcion());
+            pstmt.setBoolean(5, abono.es_mensual());
             pstmt.executeUpdate();
             // ejecuta la consulta de inserción
             rs=pstmt.getGeneratedKeys();

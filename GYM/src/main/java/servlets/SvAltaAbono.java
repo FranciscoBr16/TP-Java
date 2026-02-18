@@ -42,14 +42,19 @@ public class SvAltaAbono extends HttpServlet {
 		Part filePart = request.getPart("imagen");
 		String fileName = filePart.getSubmittedFileName();
 
-		Integer cantReservas = (Integer.parseInt(request.getParameter("cantReservas")));
-		Integer precio = (Integer.parseInt(request.getParameter("precio")));
+		Integer cantReservas = Integer.parseInt(request.getParameter("cantReservas"));
+		Integer precio = Integer.parseInt(request.getParameter("precio"));
 		String nombreAbono = request.getParameter("nombreAbono");
 		String descripcion = request.getParameter("descripcion");
+		
+		// Capturar el campo esMensual del formulario
+		String esMensualParam = request.getParameter("esMensual");
+		boolean esMensual = "true".equals(esMensualParam);
 
 
 		DbAbono manejador = new DbAbono();
-		Abono abono = new Abono( cantReservas, precio, nombreAbono, descripcion);
+		Abono abono = new Abono(cantReservas, precio, nombreAbono, descripcion);
+		abono.setEs_mensual(esMensual); // Establecer si es mensual o no
 
 
 		DbAbono dbAbono = new DbAbono();
