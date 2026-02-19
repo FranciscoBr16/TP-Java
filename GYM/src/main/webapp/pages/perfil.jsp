@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Log In</title>
+<title>Perfil de Usuario</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +27,6 @@
 	crossorigin="anonymous">
   </script>
 
-
 <link rel="stylesheet" type="text/css" href="/GYM/style/usuPerfilEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
@@ -36,7 +35,7 @@
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");
- Contrato contrato = (Contrato) request.getAttribute("contrato");
+Contrato contrato = (Contrato) request.getAttribute("contrato");
 %>
 
 </head>
@@ -84,11 +83,11 @@
 				</p>
 			</div>
 			<div>
-			<% if (contrato != null){ %>
-				<p>Abono Activo: <%=contrato.getAbono().getDescripcion()%> </p>
+			<% if (contrato != null && contrato.getAbono() != null){ %>
+				<p>Abono Activo: <%=contrato.getAbono().getDescripcion()%> (<span style="color: #d95126;"><%=contrato.getReservasRestantes()%></span> restantes)</p>
 			<%} else { %>
 				<p>Abono Activo: Ninguno </p>
-				<% } %>
+			<% } %>
 			</div>
 			<div>
 				<a href="/GYM/SvMisReservas"><button class="boton">Ver reservas</button> </a>
@@ -109,8 +108,6 @@
 		</div>
 	</div>
 	
-	
-
 </body>
 <jsp:include page="/pages/components/carrito.jsp" />
 

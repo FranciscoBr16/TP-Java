@@ -39,7 +39,33 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
 		%>
 		<jsp:include page="/pages/components/navbar.jsp" />
 		
-	</header> 
+	    </header> 
+
+        <% 
+            String mensaje = (String) session.getAttribute("mensaje");
+            String tipoMensaje = (String) session.getAttribute("tipoMensaje");
+            if (mensaje != null) { 
+                // Definimos el color según el tipo de mensaje (verde éxito, rojo error)
+                String colorFondo = (tipoMensaje != null && tipoMensaje.equals("success")) ? "#28a745" : "#dc3545";
+        %>
+            <div id="mensajeAlerta" style="position: fixed; top: 80px; right: 20px; z-index: 1000; min-width: 300px; padding: 15px 20px; border-radius: 8px; background-color: <%= colorFondo %>; color: white; font-weight: bold; border: 2px solid #191617; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+                <button onclick="document.getElementById('mensajeAlerta').style.display='none'" style="background: transparent; border: none; color: white; font-size: 20px; cursor: pointer; float: right; margin-left: 15px; margin-top: -5px;">&times;</button>
+                <%= mensaje %>
+            </div>
+            <script>
+                // Ocultar automáticamente después de 5 segundos
+                setTimeout(function() {
+                    var msj = document.getElementById('mensajeAlerta');
+                    if (msj) { msj.style.display = 'none'; }
+                }, 5000);
+            </script>
+        <% 
+                // Limpiamos la sesión para que el mensaje no vuelva a aparecer si recargan la página
+                session.removeAttribute("mensaje");
+                session.removeAttribute("tipoMensaje");
+            } 
+        %>
+
         <div class="caja">
             <a class="caja1" href="/GYM/pages/reservas.jsp">
                 <p>ENTRENA</p>
