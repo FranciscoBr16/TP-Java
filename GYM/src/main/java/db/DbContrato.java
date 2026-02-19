@@ -197,4 +197,58 @@ public class DbContrato extends DbHandler {
 	        }
 	    }
 	}
+
+	// ===============================================================
+	// NUEVO MÉTODO: SUMAR CLASES A UN CONTRATO QUE YA ESTÁ ACTIVO
+	// ===============================================================
+	public boolean sumarClasesAlContrato(String dniUsuario, int idAbono) {
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmtAbono = null;
+		Connection conn = null;
+		ResultSet rs = null;
+
+		try {
+			conn = this.getConnection();
+
+			// 1. Buscamos cuántas clases trae este pack/abono
+			pstmtAbono = conn.prepareStatement("SELECT cant_reservas FROM abono WHERE id_abono = ?");
+			pstmtAbono.setInt(1, idAbono);
+			rs = pstmtAbono.executeQuery();
+
+			int cantReservas = 0;
+			if (rs.next()) {
+				cantReservas = rs.getInt("cant_reservas");
+			} else {
+				return false; // Si no encuentra el abono, falla
+			}
+
+			// 2. Le sumamos esas clases al contrato que está vigente hoy
+			LocalDate fecha = LocalDate.now();
+			String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+			pstmt = conn.prepareStatement(
+				"UPDATE contrato SET clases_disponibles = clases_disponibles + ? " +
+				"WHERE dni_usuario = ? AND ? BETWEEN fecha_desde AND fecha_hasta"
+			);
+			pstmt.setInt(1, cantReservas);
+			pstmt.setString(2, dniUsuario);
+			pstmt.setString(3, fechaFormateada);
+
+			int filasAfectadas = pstmt.executeUpdate();
+			return filasAfectadas > 0;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (pstmtAbono != null) pstmtAbono.close();
+				if (pstmt != null) pstmt.close();
+				this.cerrarConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

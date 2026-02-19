@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Actividades </title>
+<title>Actividades</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,9 +29,6 @@
 	crossorigin="anonymous">
   </script>
 
-	
-
-
 <link rel="stylesheet" type="text/css" href="/GYM/style/actListadoEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
@@ -43,10 +40,9 @@
 ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividades");
 %>	
 
-
 </head>
 
-
+<body>
 
 	<header>
 		<%
@@ -56,35 +52,33 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 		
 	</header> 
 	
-	<%
-    String mensajeError = (String) session.getAttribute("mensajeError");
-    String mensajeOk = (String) session.getAttribute("mensajeOk");
-
-	    if (mensajeError != null) {
+	<% 
+		String mensaje = (String) session.getAttribute("mensaje");
+		String tipoMensaje = (String) session.getAttribute("tipoMensaje");
+		if (mensaje != null) { 
+			// Definimos el color según el tipo de mensaje (verde éxito, rojo error o amarillo advertencia)
+			String colorFondo = "#dc3545"; // Rojo por defecto (error/danger)
+			if ("success".equals(tipoMensaje)) colorFondo = "#28a745"; // Verde
+			else if ("warning".equals(tipoMensaje)) colorFondo = "#ffc107"; // Amarillo
 	%>
-	    <div class="alert alert-danger text-center mx-3 mt-3">
-	        <%= mensajeError %>
-	    </div>
-	<%
-	        session.removeAttribute("mensajeError");
-	    }
-	
-	    if (mensajeOk != null) {
+		<div id="mensajeAlerta" style="position: fixed; top: 80px; right: 20px; z-index: 1000; min-width: 300px; padding: 15px 20px; border-radius: 8px; background-color: <%= colorFondo %>; color: <%= "warning".equals(tipoMensaje) ? "#191617" : "white" %>; font-weight: bold; border: 2px solid #191617; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+			<button onclick="document.getElementById('mensajeAlerta').style.display='none'" style="background: transparent; border: none; color: inherit; font-size: 20px; cursor: pointer; float: right; margin-left: 15px; margin-top: -5px;">&times;</button>
+			<%= mensaje %>
+		</div>
+		<script>
+			// Ocultar automáticamente después de 5 segundos
+			setTimeout(function() {
+				var msj = document.getElementById('mensajeAlerta');
+				if (msj) { msj.style.display = 'none'; }
+			}, 5000);
+		</script>
+	<% 
+			// Limpiamos la sesión para que el mensaje no vuelva a aparecer
+			session.removeAttribute("mensaje");
+			session.removeAttribute("tipoMensaje");
+		} 
 	%>
-	    <div class="alert alert-success text-center mx-3 mt-3">
-	        <%= mensajeOk %>
-	    </div>
-	<%
-	        session.removeAttribute("mensajeOk");
-	    }
-	%>
 	
-	<!--  Usar para la barra de busqueda y filtrado 
-	<div>
-	
-	</div>
-	-->
-
 	<div class="contenedor">
 	
 		<%for(Clase act : actividades){ %>
@@ -150,8 +144,6 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 		
 	</div>
 	
-	
-
 </body>
 <jsp:include page="/pages/components/carrito.jsp" />
 </html>

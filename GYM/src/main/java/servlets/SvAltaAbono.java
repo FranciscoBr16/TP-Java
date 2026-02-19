@@ -14,93 +14,87 @@ import javax.servlet.http.Part;
 import db.DbAbono;
 import entities.Abono;
 
-
 @WebServlet("/SvAltaAbono")
 @MultipartConfig(
-	    fileSizeThreshold = 1024 * 1024*10, // 10 MB
-	    maxFileSize = 1024 * 1024 * 50,  // 50 MB
-	    maxRequestSize = 1024 * 1024 * 100 // 100 MB
-	)
+    fileSizeThreshold = 1024 * 1024 * 10, // 10 MB
+    maxFileSize = 1024 * 1024 * 50,  // 50 MB
+    maxRequestSize = 1024 * 1024 * 100 // 100 MB
+)
 public class SvAltaAbono extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "img/inputs";
+    private static final long serialVersionUID = 1L;
+    private static final String UPLOAD_DIR = "img/inputs";
 
     public SvAltaAbono() {
         super();
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.getWriter().append("Served at: ").append(request.getContextPath());
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        Part filePart = request.getPart("imagen");
+        String fileName = filePart.getSubmittedFileName();
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Integer cantReservas = Integer.parseInt(request.getParameter("cantReservas"));
+        Integer precio = Integer.parseInt(request.getParameter("precio"));
+        String nombreAbono = request.getParameter("nombreAbono");
+        String descripcion = request.getParameter("descripcion");
 
-		Part filePart = request.getPart("imagen");
-		String fileName = filePart.getSubmittedFileName();
+        // Capturar el campo esMensual del formulario
+        String esMensualParam = request.getParameter("esMensual");
+        boolean esMensual = "true".equals(esMensualParam);
 
-		Integer cantReservas = Integer.parseInt(request.getParameter("cantReservas"));
-		Integer precio = Integer.parseInt(request.getParameter("precio"));
-		String nombreAbono = request.getParameter("nombreAbono");
-		String descripcion = request.getParameter("descripcion");
+        DbAbono manejador = new DbAbono();
+        Abono abono = new Abono(cantReservas, precio, nombreAbono, descripcion);
+        abono.setEs_mensual(esMensual); // Establecer si es mensual o no
 
-		// Capturar el campo esMensual del formulario
-		String esMensualParam = request.getParameter("esMensual");
-		boolean esMensual = "true".equals(esMensualParam);
+        DbAbono dbAbono = new DbAbono();
 
+        Abono a2 = dbAbono.nuevoAbono(abono);
 
-		DbAbono manejador = new DbAbono();
-		Abono abono = new Abono(cantReservas, precio, nombreAbono, descripcion);
-		abono.setEs_mensual(esMensual); // Establecer si es mensual o no
+        if (a2 != null) {
+            // Verificamos que se haya subido un archivo válido
+            if (filePart != null && fileName != null && !fileName.isEmpty()) {
+                Integer id = a2.getIdAbono();
 
+                String applicationPath = request.getServletContext().getRealPath("");
+                System.out.println("Ruta de la app: " + applicationPath);
 
-		DbAbono dbAbono = new DbAbono();
+                String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
 
-		Abono a2 = dbAbono.nuevoAbono(abono);
+                // SOLUCIÓN: Verificar si el directorio existe, y si no, crearlo
+                File fileSaveDir = new File(uploadFilePath);
+                if (!fileSaveDir.exists()) {
+                    fileSaveDir.mkdirs(); // Esto crea la carpeta 'img/inputs' si no existe
+                }
 
-		if ( a2 != null) {
-			if (filePart != null ){
-			Integer id = a2.getIdAbono();
+                String newfileName = "abon" + id.toString();
+                String extension = this.getFileExtension(fileName);
 
+                // Escribimos el archivo en el disco
+                filePart.write(uploadFilePath + File.separator + newfileName + extension);
 
-	        String applicationPath = request.getServletContext().getRealPath("");
-	        System.out.println(applicationPath);
+                // Guardamos la ruta en la base de datos
+                a2.setImagen("/GYM/" + UPLOAD_DIR + "/" + newfileName + extension);
+                int b = manejador.actualizarImgAbono(a2);
+            }
 
+            response.sendRedirect("/GYM/SvAbono");
+        } else {
+            response.sendRedirect("/GYM/index.jsp");
+        }
+    }
 
-	        String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR ;
-
-	        String newfileName = "abon"+ id.toString();
-
-
-	        filePart.write(uploadFilePath+ File.separator  + newfileName + this.getFileExtension(fileName));
-
-
-	        /* System.out.println("Upload File Directory=" + uploadFilePath  + newfileName);
-
-			request.setAttribute("message", newfileName + " File uploaded successfully!"); */
-
-			a2.setImagen("/GYM/" + UPLOAD_DIR  + "/" + newfileName + this.getFileExtension(fileName));
-
-			int b = manejador.actualizarImgAbono(a2);
-			}
-
-			response.sendRedirect("/GYM/SvAbono");
-		} else {response.sendRedirect("/GYM/index.jsp");}
-
-}
-
-	private String getFileExtension(String name) {
-	    int lastIndexOf = name.lastIndexOf(".");
-	    if (lastIndexOf == -1) {
-	        return ""; // empty extension
-	    }
-	    return name.substring(lastIndexOf);
-	}
-
-
+    private String getFileExtension(String name) {
+        int lastIndexOf = name.lastIndexOf(".");
+        if (lastIndexOf == -1) {
+            return ""; // empty extension
+        }
+        return name.substring(lastIndexOf);
+    }
 
 }
-
