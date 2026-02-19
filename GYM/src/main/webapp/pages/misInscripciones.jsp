@@ -29,19 +29,22 @@
 	crossorigin="anonymous">
   </script>
 
-	
-
-
 <link rel="stylesheet" type="text/css" href="/GYM/style/listado.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");
+<% 
+Usuario user = (Usuario) session.getAttribute("user");
 ArrayList<Inscripcion> ins = (ArrayList<Inscripcion>)request.getAttribute("reservas");
-%>	
 
+// Recuperamos los filtros para mantenerlos seleccionados
+String diaFiltro = request.getParameter("diaFiltro") != null ? request.getParameter("diaFiltro") : "";
+String horarioFiltro = request.getParameter("horarioFiltro") != null ? request.getParameter("horarioFiltro") : "";
+String fechaFiltro = request.getParameter("fechaFiltro") != null ? request.getParameter("fechaFiltro") : "";
+boolean tieneFiltros = !diaFiltro.isEmpty() || !horarioFiltro.isEmpty() || !fechaFiltro.isEmpty();
+%>	
 
 </head>
 
@@ -50,14 +53,43 @@ ArrayList<Inscripcion> ins = (ArrayList<Inscripcion>)request.getAttribute("reser
 		    request.setAttribute("activePage", "none");
 		%>
 		<jsp:include page="/pages/components/navbar.jsp" />
-		
 	</header> 
 
 <body>
 	<div class="container mt-4">
-		<% if(!ins.isEmpty()){ %>
-		
-			
+	
+		<div class="seccion-filtros">
+            <form action="/GYM/SvMisReservas" method="GET" class="form-filtro">
+                
+                <div class="input-filtro">
+                    <label><i class="bi bi-calendar-event"></i> Fecha:</label>
+                    <input type="date" name="fechaFiltro" value="<%= fechaFiltro %>">
+                </div>
+                
+                <div class="input-filtro">
+                    <label><i class="bi bi-calendar-day"></i> Día:</label>
+                    <select name="diaFiltro">
+                        <option value="">Todos los días</option>
+                        <option value="Lunes" <%= diaFiltro.equals("Lunes") ? "selected" : "" %>>Lunes</option>
+                        <option value="Martes" <%= diaFiltro.equals("Martes") ? "selected" : "" %>>Martes</option>
+                        <option value="Miercoles" <%= diaFiltro.equals("Miercoles") ? "selected" : "" %>>Miércoles</option>
+                        <option value="Jueves" <%= diaFiltro.equals("Jueves") ? "selected" : "" %>>Jueves</option>
+                        <option value="Viernes" <%= diaFiltro.equals("Viernes") ? "selected" : "" %>>Viernes</option>
+                        <option value="Sabado" <%= diaFiltro.equals("Sabado") ? "selected" : "" %>>Sábado</option>
+                    </select>
+                </div>
+
+                <div class="input-filtro">
+                    <label><i class="bi bi-clock"></i> Horario:</label>
+                    <input type="time" name="horarioFiltro" value="<%= horarioFiltro %>">
+                </div>
+
+                <button type="submit" class="boton2" style="margin:0; width: 120px;">Filtrar</button>
+                <a href="/GYM/SvMisReservas" class="boton-linea" style="margin:0; padding-top: 8px; text-align:center; width: 120px; text-decoration: none;">Limpiar</a>
+            </form>
+        </div>
+
+		<% if(ins != null && !ins.isEmpty()){ %>
 			  <table class="table table-responsive">
 			    <thead>
 			      <tr>
@@ -75,15 +107,18 @@ ArrayList<Inscripcion> ins = (ArrayList<Inscripcion>)request.getAttribute("reser
 			        <td><%=i.getClase().getDia() %> </td>
 			        <td><%=i.getClase().getHorario()%> </td>
 			      </tr>
-			     	<% } %>
-			  
+			     <% } %>
 			    </tbody>
 			  </table>
-			
-
 		<%} else { %>
-	<div class="fondo-sin-facturas"> <h1>No has realizado ninguna reserva en estos días</h1> </div>
-	<%} %> 
+			<div class="fondo-sin-facturas"> 
+				<% if(tieneFiltros) { %>
+					<h3>No se encontraron reservas con esos filtros.</h3>
+				<% } else { %>
+					<h3>No has realizado ninguna reserva en estos días.</h3>
+				<% } %>
+			</div>
+		<%} %> 
 	</div>
 
 </body>

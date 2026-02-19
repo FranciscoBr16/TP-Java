@@ -4,7 +4,7 @@
 	background-color: white;
 	text-align: center;
 	padding: 10px;
-	
+	border-radius: 10px;
 }
 
 th{
@@ -15,4 +15,45 @@ th{
 table{
 	margin-top: 20px !important;
 	border-radius: 10px !important;
+	overflow: hidden; 
+}
+
+
+.seccion-filtros {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-filtro {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap; 
+}
+
+.input-filtro {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+}
+
+.input-filtro input, .input-filtro select {
+    background-color: rgb(192, 192, 192);
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.input-filtro select {
+    cursor: pointer;
 }

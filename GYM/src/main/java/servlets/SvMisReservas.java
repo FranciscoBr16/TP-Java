@@ -13,34 +13,53 @@ import db.DbActividades;
 import entities.Inscripcion;
 import entities.Usuario;
 
-
 @WebServlet("/SvMisReservas")
 public class SvMisReservas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
     public SvMisReservas() {
         super();
-
     }
-
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("user");
+		
+		
+		if (usuario == null) {
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			return;
+		}
+
 		DbActividades db = new DbActividades();
-		ArrayList<Inscripcion> ins = new ArrayList<>();
-		ins.addAll(db.getMisReservas(usuario));
+		ArrayList<Inscripcion> ins;
+		
+		
+		String diaFiltro = request.getParameter("diaFiltro");
+		String horarioFiltro = request.getParameter("horarioFiltro");
+		String fechaFiltro = request.getParameter("fechaFiltro");
+
+		
+		boolean tieneFiltros = (diaFiltro != null && !diaFiltro.trim().isEmpty()) ||
+		                       (horarioFiltro != null && !horarioFiltro.trim().isEmpty()) ||
+		                       (fechaFiltro != null && !fechaFiltro.trim().isEmpty());
+
+		
+		if (tieneFiltros) {
+			ins = db.getMisReservasFiltradas(usuario, diaFiltro, horarioFiltro, fechaFiltro);
+		} else {
+			
+			ins = db.getMisReservas(usuario);
+		}
+		
 		request.setAttribute("reservas", ins);
 		request.getRequestDispatcher("/pages/misInscripciones.jsp").forward(request,response);
-
 	}
-
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+		
+		doGet(request, response);
 	}
 
 }
