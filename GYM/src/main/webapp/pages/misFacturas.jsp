@@ -44,7 +44,6 @@
     <jsp:include page="/pages/components/navbar.jsp" />
 </header>
 
-<!-- Mensaje de confirmación -->
 <% if (mensaje != null) { %>
     <div class="mensaje-alerta <%= tipoMensaje != null && tipoMensaje.equals("success") ? "mensaje-exito" : "mensaje-error" %>" id="mensajeAlerta">
         <button class="btn-cerrar-mensaje" onclick="cerrarMensaje()">&times;</button>
@@ -54,16 +53,13 @@
 
 <div class="factura-container">
 
-    <!-- Header -->
     <div class="factura-header">
         <i class="bi <%= esAdmin ? "bi-receipt-cutoff" : "bi-receipt" %>"></i>
         <h2><%= esAdmin ? "Todas las Facturas (Administrador)" : "Mis Facturas" %></h2>
     </div>
 
-    <!-- Formulario de Filtros -->
     <form method="get" action="SvMisFacturas" class="filtros-factura">
         <div class="filtros-row">
-            <!-- Buscar por N° Factura -->
             <div class="filtro-grupo">
                 <label for="nro">N° Factura</label>
                 <input type="number" 
@@ -74,7 +70,18 @@
                        value="<%= request.getAttribute("nro") != null ? request.getAttribute("nro") : "" %>">
             </div>
 
-            <!-- Estado -->
+            <% if (esAdmin) { %>
+            <div class="filtro-grupo">
+                <label for="dniCliente">DNI Cliente</label>
+                <input type="number" 
+                       id="dniCliente"
+                       name="dniCliente" 
+                       class="filtro-input"
+                       placeholder="Buscar DNI"
+                       value="<%= request.getAttribute("dniCliente") != null ? request.getAttribute("dniCliente") : "" %>">
+            </div>
+            <% } %>
+
             <div class="filtro-grupo">
                 <label for="estado">Estado</label>
                 <select name="estado" id="estado" class="filtro-select">
@@ -85,7 +92,6 @@
                 </select>
             </div>
 
-            <!-- Orden Fecha -->
             <div class="filtro-grupo">
                 <label for="orden">Orden por fecha</label>
                 <select name="orden" id="orden" class="filtro-select">
@@ -95,7 +101,6 @@
                 </select>
             </div>
 
-            <!-- Botón -->
             <div class="filtro-grupo">
                 <button type="submit" class="boton3">
                     <i class="bi bi-funnel"></i> Filtrar
@@ -104,7 +109,6 @@
         </div>
     </form>
 
-    <!-- Tabla de Facturas -->
     <% if (facturas != null && !facturas.isEmpty()) { %>
 
     <div class="tabla-facturas">
@@ -134,7 +138,6 @@
                 }
             %>
 
-                <!-- FILA FACTURA -->
                 <tr class="<%= esVencida ? "factura-vencida" : "" %>">
                     <td style="text-align: center;">
                         <button class="btn-expandir"
@@ -176,7 +179,6 @@
                         <% } %>
                     </td>
 
-                    <!-- ACCIONES -->
                     <td style="text-align: center;">
                         <% if (esAdmin && f.getEstado() != null && f.getEstado().equalsIgnoreCase("Pendiente de pago")) { %>
                             <form action="SvConfirmarPago" method="post" style="display:inline;">
@@ -194,7 +196,6 @@
                     </td>
                 </tr>
 
-                <!-- FILA DETALLES -->
                 <tr class="collapse fila-detalles" id="detalles-<%= f.getNroFactura() %>">
                     <td colspan="<%= esAdmin ? "7" : "6" %>">
                         <div class="detalles-content">
@@ -205,13 +206,10 @@
 
                             <% if (f.getDetalles() != null && !f.getDetalles().isEmpty()) { %>
                                 <% for (Detalle_Factura df : f.getDetalles()) { 
-                                    // Determinar si es producto o abono
                                     boolean esProducto = (df.getProducto() != null);
                                     boolean esAbono = (df.getAbono() != null);
                                 %>
-
                                     <div class="producto-detalle">
-                                        <!-- Imagen -->
                                         <% if (esProducto && df.getProducto().getImagen() != null) { %>
                                             <img src="<%= df.getProducto().getImagen() %>"
                                                  alt="<%= df.getProducto().getNombre() %>"
@@ -226,7 +224,6 @@
                                             </div>
                                         <% } %>
 
-                                        <!-- Información -->
                                         <div class="producto-info">
                                             <div class="producto-nombre">
                                                 <% if (esProducto) { %>
@@ -257,7 +254,6 @@
                                             <% } %>
                                         </div>
 
-                                        <!-- Precios -->
                                         <div class="producto-precios">
                                             <% if (esProducto && df.getCantidad() > 0) { %>
                                                 <div class="precio-unitario">
@@ -269,15 +265,12 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 <% } %>
                                 
-                                <!-- Total -->
                                 <div class="total-factura">
                                     <span class="total-factura-label">Total: </span>
                                     <span class="total-factura-monto">$ <%= String.format("%.2f", f.getTotal()) %></span>
                                 </div>
-                                
                             <% } else { %>
                                 <p style="color: #999; text-align: center; padding: 20px;">
                                     Esta factura no tiene productos ni abonos registrados.
@@ -294,7 +287,6 @@
     </div>
 
     <% } else { %>
-
     <div class="sin-facturas">
         <i class="bi bi-receipt"></i>
         <h4>
@@ -305,13 +297,11 @@
             <% } %>
         </h4>
     </div>
-
     <% } %>
 
 </div>
 
 <script>
-// Auto-cerrar mensaje después de 5 segundos
 setTimeout(function() {
     var mensaje = document.getElementById('mensajeAlerta');
     if (mensaje) {

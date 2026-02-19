@@ -32,10 +32,10 @@ public class SvMisFacturas extends HttpServlet {
             return;
         }
 
-
         String estado = request.getParameter("estado");
         String nroFacturaStr = request.getParameter("nro");
         String ordenFecha = request.getParameter("orden");
+        String dniCliente = request.getParameter("dniCliente");
 
         Integer nroFactura = null;
         if (nroFacturaStr != null && !nroFacturaStr.isEmpty()) {
@@ -44,46 +44,22 @@ public class SvMisFacturas extends HttpServlet {
 
         DbFactura dbFactura = new DbFactura();
         ArrayList<Factura> facturas;
-        ArrayList<Factura> facturasAbonos;
-
 
         if (usuario.isAdmin()) {
-            facturas = dbFactura.getFacturasFiltradasAdmin(
-                    nroFactura,
-                    estado,
-                    ordenFecha
-            );
-            facturas.addAll(dbFactura.getFacturasAbonosFiltradasAdmin(
-                    nroFactura,
-                    estado,
-                    ordenFecha
-            ));
-
-
+            facturas = dbFactura.getFacturasFiltradasAdmin(nroFactura, estado, ordenFecha, dniCliente);
+            facturas.addAll(dbFactura.getFacturasAbonosFiltradasAdmin(nroFactura, estado, ordenFecha, dniCliente));
         } else {
-            facturas = dbFactura.getFacturasFiltradasUsuario(
-                    usuario.getDni(),
-                    nroFactura,
-                    estado,
-                    ordenFecha
-            );
-            facturas.addAll(dbFactura.getFacturasAbonosFiltradasUsuario(
-            		usuario.getDni(),
-                    nroFactura,
-                    estado,
-                    ordenFecha
-            ));
+            facturas = dbFactura.getFacturasFiltradasUsuario(usuario.getDni(), nroFactura, estado, ordenFecha);
+            facturas.addAll(dbFactura.getFacturasAbonosFiltradasUsuario(usuario.getDni(), nroFactura, estado, ordenFecha));
         }
 
-
         request.setAttribute("facturas", facturas);
-
         request.setAttribute("estado", estado);
         request.setAttribute("nro", nroFacturaStr);
         request.setAttribute("orden", ordenFecha);
+        request.setAttribute("dniCliente", dniCliente);
 
-        request.getRequestDispatcher("/pages/misFacturas.jsp")
-               .forward(request, response);
+        request.getRequestDispatcher("/pages/misFacturas.jsp").forward(request, response);
     }
 
     @Override

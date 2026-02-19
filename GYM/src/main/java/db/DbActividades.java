@@ -558,19 +558,17 @@ public class DbActividades extends DbHandler {
 				}
 	}
 
-	// ==========================================
-	// NUEVO MÉTODO PARA FILTROS DINÁMICOS
-	// ==========================================
+	
 	public ArrayList<Inscripcion> getMisReservasFiltradas(Usuario usuario, String diaFiltro, String horarioFiltro, String fechaFiltro) {
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
 		ArrayList<Inscripcion> inscripciones = new ArrayList<>();
 
-		// 1. Armamos la consulta base
+		
 		String sql = "SELECT * FROM inscripcion i INNER JOIN clase c ON i.id_clase = c.id_clase WHERE i.dni = ? ";
 
-		// 2. Concatenamos condiciones dinámicamente según lo que haya ingresado el usuario
+		
 		if (diaFiltro != null && !diaFiltro.trim().isEmpty()) {
 			sql += " AND c.dia = ? ";
 		}
@@ -581,14 +579,14 @@ public class DbActividades extends DbHandler {
 			sql += " AND i.fecha = ? ";
 		}
 
-		// Ordenamos para que las reservas más recientes se vean arriba
+		
 		sql += " ORDER BY i.fecha DESC";
 
 		try {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			// 3. Asignamos los parámetros dinámicamente llevando cuenta de la posición (index)
+		
 			int paramIndex = 1;
 			pstmt.setString(paramIndex++, usuario.getDni());
 			

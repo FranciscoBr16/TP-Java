@@ -16,7 +16,6 @@ import entities.Usuario;
 
 public class DbFactura extends DbHandler{
 
-
 	public int nuevaFactura(Factura fac) {
 	    PreparedStatement pstmt = null;
 	    ResultSet rs = null;
@@ -48,20 +47,13 @@ public class DbFactura extends DbHandler{
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (rs != null) {
-					rs.close();
-				}
-	            if (pstmt != null) {
-					pstmt.close();
-				}
-	            if (conn != null) {
-					conn.close();
-				}
+	            if (rs != null) rs.close();
+	            if (pstmt != null) pstmt.close();
+	            if (conn != null) conn.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
-
 	    return -1; // error
 	}
 
@@ -72,26 +64,21 @@ public class DbFactura extends DbHandler{
 
 		try {
 			conn = this.getConnection();
-
 			pstmt = conn.prepareStatement(
 				"SELECT * FROM factura f " +
 				"LEFT JOIN `detalle-factura-abono` dfa ON dfa.nro_factura = f.nro_factura " +
 				"WHERE f.nro_factura = ?"
 			);
-
 			pstmt.setInt(1, f.getNroFactura());
-
 			rs = pstmt.executeQuery();
 
 			if (!rs.next()) {
-				System.err.println("DbFactura.getFacturaAbono: No se encontró factura con nro " + f.getNroFactura());
 				return null;
 			}
 
 			Factura f2 = new Factura();
 			f2.setNroFactura(f.getNroFactura());
 
-			// Validar y setear fecha
 			Date fecha = rs.getDate("fecha");
 			if (fecha != null) {
 				f2.setFecha(fecha.toLocalDate());
@@ -101,13 +88,11 @@ public class DbFactura extends DbHandler{
 			f2.setCUIT(rs.getString("cuit"));
 			f2.setDNI(rs.getString("dni"));
 			f2.setTotal(rs.getFloat("total"));
-			f2.setEstado(rs.getString("estado")); // Corregido: era "string"
+			f2.setEstado(rs.getString("estado"));
 
-			// Solo agregar abono si existe en la tabla detalle-factura-abono
 			ArrayList<Detalle_Factura> dfs = new ArrayList<>();
-
 			int idAbono = rs.getInt("id_abono");
-			if (!rs.wasNull()) { // Verificar que id_abono no sea NULL
+			if (!rs.wasNull()) { 
 				Detalle_Factura df = new Detalle_Factura();
 				Abono a = new Abono();
 				a.setIdAbono(idAbono);
@@ -116,24 +101,16 @@ public class DbFactura extends DbHandler{
 			}
 
 			f2.setDetalles(dfs);
-
 			return f2;
 
 		} catch (SQLException e) {
-			System.err.println("DbFactura.getFacturaAbono: Error SQL - " + e.getMessage());
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
+				if (rs != null) rs.close();
+				if (pstmt != null) pstmt.close();
+				if (conn != null) conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -141,94 +118,44 @@ public class DbFactura extends DbHandler{
 	}
 
 	public ArrayList<Factura> getmisfacturas(Usuario usuario) {
-		PreparedStatement pstmt=null;
-		PreparedStatement pstmt2=null;
-		Connection conn = null;
-		ResultSet rs=null , rs2 = null;
-
 		ArrayList<Factura> facturas = new ArrayList<>();
-		try{
-			conn = this.getConnection();
-			pstmt = conn.prepareStatement("Select * from factura where dni=?");
+		String sql = "Select * from factura where dni=?";
+
+		try (Connection conn = this.getConnection();
+			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
 			pstmt.setString(1, usuario.getDni());
-			rs = pstmt.executeQuery();
-
-			while (rs.next() && rs!= null ) {
-
-	            Factura fac = new Factura();
-	            fac.setNroFactura(rs.getInt("nro_factura"));
-	            Date fechaux = rs.getDate("fecha");
-				if (fechaux != null) {
-					fac.setFecha(fechaux.toLocalDate());
-				} else {
-					fac.setFecha(null);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs.next()) {
+					Factura fac = new Factura();
+					fac.setNroFactura(rs.getInt("nro_factura"));
+					Date fechaux = rs.getDate("fecha");
+					if (fechaux != null) fac.setFecha(fechaux.toLocalDate());
+					fac.setTipo(rs.getString("tipo"));
+					fac.setCUIT(rs.getString("cuit"));
+					fac.setUsuario(usuario);
+					fac.setTotal(rs.getFloat("total"));
+					fac.setEstado(rs.getString("estado"));
+					
+					
+					fac.setDetalles(getDetallesFactura(conn, fac.getNroFactura()));
+					facturas.add(fac);
 				}
-				fac.setTipo(rs.getString("tipo"));
-				fac.setCUIT(rs.getString("cuit"));
-				fac.setUsuario(usuario);
-				fac.setTotal(rs.getFloat("total"));
-				fac.setEstado(rs.getString("estado"));
-				pstmt2 = conn.prepareStatement("SELECT * FROM `detalle-factura` where nro_factura =?");
-				pstmt2.setInt(1, fac.getNroFactura());
-				rs2 = pstmt2.executeQuery();
-				DbProducto bdp = new DbProducto();
-				ArrayList<Detalle_Factura> detalles = new ArrayList<>();
-				while (rs2.next() && rs2!=null) {
-
-					Detalle_Factura df = new Detalle_Factura();
-					df.setNroFactura(rs2.getInt("nro_factura"));
-					df.setIdProducto(rs2.getInt("id_producto"));
-					df.setCantidad(rs2.getInt("cantidad"));
-					df.setSubTotal(rs2.getFloat("sub_total"));
-
-					Producto p = bdp.getProducto(new Producto(rs2.getInt("id_producto")));
-					df.setProducto(p);
-					detalles.add(df);
-				}
-
-				fac.setDetalles(detalles);
-
-
-	            facturas.add(fac);
-
-	}
-			return facturas;
-
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
-		} finally {
-		    try {
-		        if (rs2 != null) {
-					rs2.close();
-				}
-		        if (rs != null) {
-					rs.close();
-				}
-		        if (pstmt2 != null) {
-					pstmt2.close();
-				}
-		        if (pstmt != null) {
-					pstmt.close();
-				}
-		        this.cerrarConnection();
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
 		}
+		return facturas;
+	}
 
-
-}
 	public boolean crearDetalleFactura(Detalle_Factura df) {
 	    PreparedStatement pstmt = null;
 	    Connection conn = null;
 
 	    try {
 	        conn = this.getConnection();
-
 	        pstmt = conn.prepareStatement(
-	            "INSERT INTO `detalle-factura` (nro_factura, id_producto, cantidad, sub_total) " +
-	            "VALUES (?,?,?,?)"
+	            "INSERT INTO `detalle-factura` (nro_factura, id_producto, cantidad, sub_total) VALUES (?,?,?,?)"
 	        );
 
 	        pstmt.setInt(1, df.getNroFactura());
@@ -242,41 +169,30 @@ public class DbFactura extends DbHandler{
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
-
 	    } finally {
 	        try {
-	            if (pstmt != null) {
-					pstmt.close();
-				}
-	            if (conn != null) {
-					conn.close();
-				}
+	            if (pstmt != null) pstmt.close();
+	            if (conn != null) conn.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 	}
 
-
 	public ArrayList<Factura> getFacturas() {
-
 	    ArrayList<Factura> facturas = new ArrayList<>();
 	    String sqlFactura = "SELECT * FROM factura";
-	    String sqlDetalle = "SELECT * FROM `detalle-factura` WHERE nro_factura = ?";
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement psFactura = conn.prepareStatement(sqlFactura);
 	         ResultSet rsFactura = psFactura.executeQuery()) {
 
 	        while (rsFactura.next()) {
-
 	            Factura fac = new Factura();
 	            fac.setNroFactura(rsFactura.getInt("nro_factura"));
 
 	            Date fecha = rsFactura.getDate("fecha");
-	            if (fecha != null) {
-	                fac.setFecha(fecha.toLocalDate());
-	            }
+	            if (fecha != null) fac.setFecha(fecha.toLocalDate());
 
 	            fac.setTipo(rsFactura.getString("tipo"));
 	            fac.setCUIT(rsFactura.getString("cuit"));
@@ -284,45 +200,17 @@ public class DbFactura extends DbHandler{
 	            fac.setTotal(rsFactura.getDouble("total"));
 	            fac.setEstado(rsFactura.getString("estado"));
 
-	            /* ===== DETALLES ===== */
-	            ArrayList<Detalle_Factura> detalles = new ArrayList<>();
-
-	            try (PreparedStatement psDetalle = conn.prepareStatement(sqlDetalle)) {
-	                psDetalle.setInt(1, fac.getNroFactura());
-
-	                try (ResultSet rsDetalle = psDetalle.executeQuery()) {
-	                    DbProducto dbProducto = new DbProducto();
-
-	                    while (rsDetalle.next()) {
-	                        Detalle_Factura df = new Detalle_Factura();
-	                        df.setNroFactura(fac.getNroFactura());
-	                        df.setIdProducto(rsDetalle.getInt("id_producto"));
-	                        df.setCantidad(rsDetalle.getInt("cantidad"));
-	                        df.setSubTotal(rsDetalle.getDouble("sub_total"));
-
-	                        Producto p = new Producto(rsDetalle.getInt("id_producto"));
-	                        p = dbProducto.getProducto(p);
-	                        df.setProducto(p);
-
-	                        detalles.add(df);
-	                    }
-	                }
-	            }
-
-	            fac.setDetalles(detalles);
+	            
+	            fac.setDetalles(getDetallesFactura(conn, fac.getNroFactura()));
 	            facturas.add(fac);
 	        }
-
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-
 	    return facturas;
 	}
 
-
 	public boolean actualizarEstadoFactura(int nroFactura, String estado) {
-
 	    String sql = "UPDATE factura SET estado = ? WHERE nro_factura = ?";
 	    try (Connection conn = getConnection();
 	         PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -337,60 +225,32 @@ public class DbFactura extends DbHandler{
 	    }
 	}
 
-	public ArrayList<Factura> getFacturasFiltradasUsuario(
-	        String dniUsuario,
-	        Integer nroFactura,
-	        String estado,
-	        String ordenFecha) {
-
+	public ArrayList<Factura> getFacturasFiltradasUsuario(String dniUsuario, Integer nroFactura, String estado, String ordenFecha) {
 	    ArrayList<Factura> facturas = new ArrayList<>();
+	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE dni = ? AND tipo = 'C' ");
 
-	    StringBuilder sql = new StringBuilder(
-	        "SELECT * FROM factura WHERE dni = ? AND tipo = 'C' "
-	    );
-
-	    if (nroFactura != null) {
-	        sql.append("AND nro_factura = ? ");
-	    }
-
-	    if (estado != null && !estado.isEmpty()) {
-	        sql.append("AND estado = ? ");
-	    }
-
-	    if ("asc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha ASC ");
-	    } else if ("desc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha DESC ");
-	    } else {
-	        sql.append("ORDER BY fecha DESC ");
-	    }
+	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
+	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
+	    
+	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
+	    else sql.append("ORDER BY fecha DESC ");
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
 	        int index = 1;
-
 	        pstmt.setString(index++, dniUsuario);
 
-	        if (nroFactura != null) {
-	            pstmt.setInt(index++, nroFactura);
-	        }
-
-	        if (estado != null && !estado.isEmpty()) {
-	            pstmt.setString(index++, estado);
-	        }
+	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
+	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
-
 	            while (rs.next()) {
-
 	                Factura f = new Factura();
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) {
-	                    f.setFecha(fechaSql.toLocalDate());
-	                }
+	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));
@@ -398,71 +258,43 @@ public class DbFactura extends DbHandler{
 	                f.setTotal(rs.getDouble("total"));
 	                f.setEstado(rs.getString("estado"));
 
-
-	                f.setDetalles(getDetallesFactura(f.getNroFactura()));
-
+	                
+	                f.setDetalles(getDetallesFactura(conn, f.getNroFactura()));
 	                facturas.add(f);
 	            }
 	        }
-
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-
 	    return facturas;
 	}
 
-
-	public ArrayList<Factura> getFacturasFiltradasAdmin(
-	        Integer nroFactura,
-	        String estado,
-	        String ordenFecha) {
-
+	public ArrayList<Factura> getFacturasFiltradasAdmin(Integer nroFactura, String estado, String ordenFecha, String dniCliente) {
 	    ArrayList<Factura> facturas = new ArrayList<>();
-	    StringBuilder sql = new StringBuilder(
-	        "SELECT * FROM factura WHERE tipo='C' "
-	    );
+	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE tipo='C' ");
 
-	    if (nroFactura != null) {
-	        sql.append("AND nro_factura = ? ");
-	    }
+	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
+	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
+	    if (dniCliente != null && !dniCliente.trim().isEmpty()) sql.append("AND dni LIKE ? ");
 
-	    if (estado != null && !estado.isEmpty()) {
-	        sql.append("AND estado = ? ");
-	    }
-
-	    if ("asc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha ASC ");
-	    } else if ("desc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha DESC ");
-	    } else {
-	        sql.append("ORDER BY fecha DESC ");
-	    }
+	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
+	    else sql.append("ORDER BY fecha DESC ");
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
 	        int index = 1;
-
-	        if (nroFactura != null) {
-	            pstmt.setInt(index++, nroFactura);
-	        }
-
-	        if (estado != null && !estado.isEmpty()) {
-	            pstmt.setString(index++, estado);
-	        }
+	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
+	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
+	        if (dniCliente != null && !dniCliente.trim().isEmpty()) pstmt.setString(index++, "%" + dniCliente.trim() + "%");
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
-
 	            while (rs.next()) {
-
 	                Factura f = new Factura();
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) {
-	                    f.setFecha(fechaSql.toLocalDate());
-	                }
+	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));
@@ -470,70 +302,43 @@ public class DbFactura extends DbHandler{
 	                f.setTotal(rs.getDouble("total"));
 	                f.setEstado(rs.getString("estado"));
 
-
-	                f.setDetalles(getDetallesFactura(f.getNroFactura()));
-
+	                
+	                f.setDetalles(getDetallesFactura(conn, f.getNroFactura()));
 	                facturas.add(f);
 	            }
 	        }
-
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-
 	    return facturas;
 	}
 
-	public ArrayList<Factura> getFacturasAbonosFiltradasAdmin(
-	        Integer nroFactura,
-	        String estado,
-	        String ordenFecha) {
-
+	public ArrayList<Factura> getFacturasAbonosFiltradasAdmin(Integer nroFactura, String estado, String ordenFecha, String dniCliente) {
 	    ArrayList<Factura> facturas = new ArrayList<>();
-	    StringBuilder sql = new StringBuilder(
-	        "SELECT * FROM factura WHERE tipo= 'S' "
-	    );
+	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE tipo= 'S' ");
 
-	    if (nroFactura != null) {
-	        sql.append("AND nro_factura = ? ");
-	    }
+	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
+	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
+	    if (dniCliente != null && !dniCliente.trim().isEmpty()) sql.append("AND dni LIKE ? ");
 
-	    if (estado != null && !estado.isEmpty()) {
-	        sql.append("AND estado = ? ");
-	    }
-
-	    if ("asc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha ASC ");
-	    } else if ("desc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha DESC ");
-	    } else {
-	        sql.append("ORDER BY fecha DESC ");
-	    }
+	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
+	    else sql.append("ORDER BY fecha DESC ");
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
 	        int index = 1;
-
-	        if (nroFactura != null) {
-	            pstmt.setInt(index++, nroFactura);
-	        }
-
-	        if (estado != null && !estado.isEmpty()) {
-	            pstmt.setString(index++, estado);
-	        }
+	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
+	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
+	        if (dniCliente != null && !dniCliente.trim().isEmpty()) pstmt.setString(index++, "%" + dniCliente.trim() + "%");
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
-
 	            while (rs.next()) {
-
 	                Factura f = new Factura();
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) {
-	                    f.setFecha(fechaSql.toLocalDate());
-	                }
+	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));
@@ -541,73 +346,66 @@ public class DbFactura extends DbHandler{
 	                f.setTotal(rs.getDouble("total"));
 	                f.setEstado(rs.getString("estado"));
 
-	                // Cargar detalles de abonos
-	                f.setDetalles(getDetalleFacturaAbono(f.getNroFactura()));
-
+	                
+	                f.setDetalles(getDetalleFacturaAbono(conn, f.getNroFactura()));
 	                facturas.add(f);
 	            }
 	        }
-
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-
 	    return facturas;
 	}
 
+	
 
-
-	public ArrayList<Detalle_Factura> getDetallesFactura(int nroFactura) {
-
+	public ArrayList<Detalle_Factura> getDetallesFactura(Connection conn, int nroFactura) {
 	    ArrayList<Detalle_Factura> detalles = new ArrayList<>();
-	    String sql = "SELECT * FROM `detalle-factura` WHERE nro_factura = ?";
+	    String sql = "SELECT df.*, p.nombre, p.descripcion, p.imagen " +
+	                 "FROM `detalle-factura` df " +
+	                 "JOIN producto p ON df.id_producto = p.id_producto " +
+	                 "WHERE df.nro_factura = ?";
 
-	    try (Connection conn = this.getConnection();
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	    
+	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 	        pstmt.setInt(1, nroFactura);
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
-
-	            DbProducto dbProducto = new DbProducto();
-
 	            while (rs.next()) {
 	                Detalle_Factura df = new Detalle_Factura();
-
-	                df.setNroFactura(nroFactura);
+	                df.setNroFactura(rs.getInt("nro_factura"));
 	                df.setIdProducto(rs.getInt("id_producto"));
 	                df.setCantidad(rs.getInt("cantidad"));
 	                df.setSubTotal(rs.getDouble("sub_total"));
 
 	                Producto p = new Producto();
 	                p.setIdProducto(df.getIdProducto());
-	                p = dbProducto.getProducto(p);
+	                p.setNombre(rs.getString("nombre"));
+	                p.setDescripcion(rs.getString("descripcion"));
+	                p.setImagen(rs.getString("imagen"));
 
 	                df.setProducto(p);
-
 	                detalles.add(df);
 	            }
 	        }
-
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-
 	    return detalles;
 	}
 
-	public ArrayList<Detalle_Factura> getDetalleFacturaAbono(int nroFactura) {
+	public ArrayList<Detalle_Factura> getDetalleFacturaAbono(Connection conn, int nroFactura) {
 		ArrayList<Detalle_Factura> detalles = new ArrayList<>();
 	    String sql = "SELECT dfa.nro_factura, dfa.precio, a.id_abono, a.nombreAbono, a.descripcion, a.imagen " +
 	                 "FROM `detalle-factura-abono` dfa " +
 	                 "JOIN abono a ON a.id_abono = dfa.id_abono " +
 	                 "WHERE dfa.nro_factura = ?";
 
-	    try (Connection conn = this.getConnection();
-	         PreparedStatement ps = conn.prepareStatement(sql);) {
+	    // Usamos el 'conn' que nos pasan
+	    try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 	        ps.setInt(1, nroFactura);
-
 	        try (ResultSet rs = ps.executeQuery()) {
 		        while (rs.next()) {
 		            Abono a = new Abono();
@@ -620,7 +418,7 @@ public class DbFactura extends DbHandler{
 		            d.setNroFactura(nroFactura);
 		            d.setAbono(a);
 		            d.setSub_total(rs.getDouble("precio"));
-		            d.setCantidad(1); // Los abonos siempre tienen cantidad 1
+		            d.setCantidad(1); 
 
 		            detalles.add(d);
 		        }
@@ -631,18 +429,14 @@ public class DbFactura extends DbHandler{
 	    return detalles;
 	}
 
-
-
 	public boolean facturarAbono(Detalle_Factura df) {
 		PreparedStatement pstmt = null;
 	    Connection conn = null;
 
 	    try {
 	        conn = this.getConnection();
-
 	        pstmt = conn.prepareStatement(
-	            "INSERT INTO `detalle-factura-abono` (nro_factura, id_abono, precio) " +
-	            "VALUES (?,?,?)"
+	            "INSERT INTO `detalle-factura-abono` (nro_factura, id_abono, precio) VALUES (?,?,?)"
 	        );
 
 	        pstmt.setInt(1, df.getNroFactura());
@@ -655,73 +449,42 @@ public class DbFactura extends DbHandler{
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;
-
 	    } finally {
 	        try {
-	            if (pstmt != null) {
-					pstmt.close();
-				}
-	            if (conn != null) {
-					conn.close();
-				}
+	            if (pstmt != null) pstmt.close();
+	            if (conn != null) conn.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
-
 	}
 
-
-	public ArrayList<Factura> getFacturasAbonosFiltradasUsuario(String dni, Integer nroFactura, String estado,
-			String ordenFecha) {
+	public ArrayList<Factura> getFacturasAbonosFiltradasUsuario(String dni, Integer nroFactura, String estado, String ordenFecha) {
 		ArrayList<Factura> facturas = new ArrayList<>();
+	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE dni = ? AND tipo = 'S'");
 
-	    StringBuilder sql = new StringBuilder(
-	        "SELECT * FROM factura WHERE dni = ? AND tipo = 'S'"
-	    );
+	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
+	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
 
-	    if (nroFactura != null) {
-	        sql.append("AND nro_factura = ? ");
-	    }
-
-	    if (estado != null && !estado.isEmpty()) {
-	        sql.append("AND estado = ? ");
-	    }
-
-	    if ("asc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha ASC ");
-	    } else if ("desc".equalsIgnoreCase(ordenFecha)) {
-	        sql.append("ORDER BY fecha DESC ");
-	    } else {
-	        sql.append("ORDER BY fecha DESC ");
-	    }
+	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
+	    else sql.append("ORDER BY fecha DESC ");
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
 	        int index = 1;
-
 	        pstmt.setString(index++, dni);
 
-	        if (nroFactura != null) {
-	            pstmt.setInt(index++, nroFactura);
-	        }
-
-	        if (estado != null && !estado.isEmpty()) {
-	            pstmt.setString(index++, estado);
-	        }
+	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
+	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
-
 	            while (rs.next()) {
-
 	                Factura f = new Factura();
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) {
-	                    f.setFecha(fechaSql.toLocalDate());
-	                }
+	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));
@@ -730,27 +493,17 @@ public class DbFactura extends DbHandler{
 	                f.setEstado(rs.getString("estado"));
 
 	                if(!"S".equals(f.getTipo())) {
-
-	                f.setDetalles(getDetallesFactura(f.getNroFactura()));
+	                	f.setDetalles(getDetallesFactura(conn, f.getNroFactura()));
 	                } else {
-	                f.setDetalles(getDetalleFacturaAbono(f.getNroFactura()));
+	                	f.setDetalles(getDetalleFacturaAbono(conn, f.getNroFactura()));
 	                }
-
 
 	                facturas.add(f);
 	            }
 	        }
-
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-
 	    return facturas;
-
 	}
-
-
-
-
-
 }
