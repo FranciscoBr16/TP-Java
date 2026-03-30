@@ -1,6 +1,5 @@
 @charset "ISO-8859-1";
 
-/* BODY */
 body {
     background-color: #191617 !important;
 }
@@ -9,7 +8,6 @@ body header {
     font-weight: bold;
 }
 
-/*CONTENIDO PROPIO*/
 .caja a {
     color: white;
     text-decoration: none;
@@ -18,7 +16,10 @@ body header {
 }
 
 a > p {
-    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    text-shadow:
+        -1px -1px 0 black,
+        1px -1px 0 black,
+        -1px 1px 0 black,
         1px 1px 0 black;
 }
 
@@ -77,6 +78,8 @@ a > p {
 .caja3:hover {
     opacity: 85%;
     transform: scale(1.05);
-    transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+    transition:
+        transform 200ms ease-in-out,
+        opacity 200ms ease-in-out;
     overflow: hidden;
 }

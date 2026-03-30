@@ -557,7 +557,136 @@ public class DbActividades extends DbHandler {
 				}
 				}
 	}
+	
+	
+	public ArrayList<Inscripcion> getTodasLasReservas() {
+	    PreparedStatement pstmt = null;
+	    Connection conn = null;
+	    ResultSet rs = null;
+	    ArrayList<Inscripcion> reservas = new ArrayList<>();
 
+	    try {
+	        conn = this.getConnection();
+	        pstmt = conn.prepareStatement(
+	            "SELECT i.dni, u.nombre, u.apellido, i.fecha, c.nombre_clase, c.horario, c.dia, c.tipo FROM inscripcion i INNER JOIN usuario u ON i.dni = u.dni  INNER JOIN clase c ON i.id_clase = c.id_clase ORDER BY i.fecha DESC");
+	        rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            Inscripcion ins = new Inscripcion();
+
+	            Usuario u = new Usuario(rs.getString("dni"), null);
+	            u.setNombre(rs.getString("nombre"));
+	            u.setApellido(rs.getString("apellido"));
+	            ins.setUsuario(u);
+
+	            Clase c = new Clase();
+	            c.setNombre(rs.getString("nombre_clase"));
+	            c.setHorario(rs.getString("horario"));
+	            c.setDia(rs.getString("dia"));
+	            c.setTipo(rs.getString("tipo"));
+	            ins.setClase(c);
+
+	            ins.setFechaInscripcion(rs.getDate("fecha").toLocalDate());
+
+	            reservas.add(ins);
+	        }
+	        return reservas;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (pstmt != null) pstmt.close();
+	            this.cerrarConnection();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
+	
+	public ArrayList<Inscripcion> getReservasFiltradas(String dniFiltro, String nombreFiltro, String fechaFiltro) {
+	    PreparedStatement pstmt = null;
+	    Connection conn = null;
+	    ResultSet rs = null;
+	    ArrayList<Inscripcion> inscripciones = new ArrayList<>();
+
+	    String sql = "SELECT i.dni, u.nombre, u.apellido, i.fecha, " +
+	                 "c.nombre_clase, c.horario, c.dia, c.tipo " +
+	                 "FROM inscripcion i " +
+	                 "INNER JOIN usuario u ON i.dni = u.dni " +
+	                 "INNER JOIN clase c ON i.id_clase = c.id_clase " +
+	                 "WHERE 1=1 ";
+
+	    if (dniFiltro != null && !dniFiltro.trim().isEmpty()) {
+	        sql += " AND i.dni = ? ";
+	    }
+	    if (nombreFiltro != null && !nombreFiltro.trim().isEmpty()) {
+	        sql += " AND u.nombre LIKE ? ";
+	    }
+	    if (fechaFiltro != null && !fechaFiltro.trim().isEmpty()) {
+	        sql += " AND i.fecha = ? ";
+	    }
+
+	    sql += " ORDER BY i.fecha DESC";
+
+	    try {
+	        conn = this.getConnection();
+	        pstmt = conn.prepareStatement(sql);
+
+	        int paramIndex = 1;
+	        if (dniFiltro != null && !dniFiltro.trim().isEmpty()) {
+	            pstmt.setString(paramIndex++, dniFiltro);
+	        }
+	        if (nombreFiltro != null && !nombreFiltro.trim().isEmpty()) {
+	            pstmt.setString(paramIndex++, "%" + nombreFiltro + "%");
+	        }
+	        if (fechaFiltro != null && !fechaFiltro.trim().isEmpty()) {
+	            pstmt.setDate(paramIndex++, java.sql.Date.valueOf(fechaFiltro));
+	        }
+
+	        rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            Inscripcion ins = new Inscripcion();
+
+	            Usuario u = new Usuario(rs.getString("dni"), null);
+	            u.setNombre(rs.getString("nombre"));
+	            u.setApellido(rs.getString("apellido"));
+	            ins.setUsuario(u);
+
+	            Clase cl = new Clase();
+	            cl.setNombre(rs.getString("nombre_clase"));
+	            cl.setHorario(rs.getString("horario"));
+	            cl.setDia(rs.getString("dia"));
+	            cl.setTipo(rs.getString("tipo"));
+	            ins.setClase(cl);
+
+	            Date fechaux = rs.getDate("fecha");
+	            if (fechaux != null) {
+	                ins.setFechaInscripcion(fechaux.toLocalDate());
+	            } else {
+	                ins.setFechaInscripcion(null);
+	            }
+
+	            inscripciones.add(ins);
+	        }
+	        return inscripciones;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (pstmt != null) pstmt.close();
+	            this.cerrarConnection();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 	
 	public ArrayList<Inscripcion> getMisReservasFiltradas(Usuario usuario, String diaFiltro, String horarioFiltro, String fechaFiltro) {
 		PreparedStatement pstmt = null;

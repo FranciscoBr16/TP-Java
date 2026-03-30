@@ -5,8 +5,17 @@ import java.time.LocalDate;
 public class Inscripcion {
 private LocalDate fechaInscripcion;
 private Clase clase;
+private Usuario usuario;
 
 
+
+public Usuario getUsuario() {
+	return usuario;
+}
+
+public void setUsuario(Usuario elUsuario) {
+	this.usuario = elUsuario;
+}
 
 public Clase getClase() {
 	return clase;
@@ -23,5 +32,8 @@ public LocalDate getFechaInscripcion() {
 public void setFechaInscripcion(LocalDate fechaInscripcion) {
 	this.fechaInscripcion = fechaInscripcion;
 }
+
+
+
 
 }
