@@ -30,12 +30,12 @@ public class DbProducto extends DbHandler {
 				+ "     AND fecha_desde <= CURRENT_DATE "
 				+ ") AND p.stock > 0 ";
 
-	
+
 		if (nombreBusqueda != null && !nombreBusqueda.trim().isEmpty()) {
 			sql += " AND p.nombre LIKE ? ";
 		}
 
-		
+
 		if ("asc".equals(ordenPrecio)) {
 			sql += " ORDER BY pr.precio ASC ";
 		} else if ("desc".equals(ordenPrecio)) {
@@ -45,7 +45,7 @@ public class DbProducto extends DbHandler {
 		try (Connection conn = this.getConnection();
 			 PreparedStatement ps = conn.prepareStatement(sql)) {
 
-			
+
 			if (nombreBusqueda != null && !nombreBusqueda.trim().isEmpty()) {
 				ps.setString(1, "%" + nombreBusqueda + "%");
 			}

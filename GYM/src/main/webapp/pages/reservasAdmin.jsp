@@ -1,6 +1,6 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
-<%@ page import="entities.Clase, entities.Inscripcion, java.util.ArrayList" %>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="entities.Clase, entities.Usuario,  entities.Inscripcion, java.util.ArrayList" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -117,6 +117,22 @@ pageEncoding="ISO-8859-1"%>
             <% request.setAttribute("activePage", "reservas-admin"); %>
             <jsp:include page="/pages/components/navbar.jsp" />
         </header>
+        
+        <%
+		    Usuario user = (Usuario) session.getAttribute("user");
+		    
+		    // Validar que el usuario esté logueado
+		    if (user == null) {
+		        response.sendRedirect("/GYM/pages/logIn.jsp");
+		        return;
+		    }
+		    
+		    // Validar que sea administrador
+		    if (!user.isAdmin()) {
+		        response.sendRedirect("/GYM/index.jsp"); // o la página que quieras
+		        return;
+		    }
+		%>
 
         <div class="container py-4">
 
@@ -135,7 +151,7 @@ pageEncoding="ISO-8859-1"%>
                             <input type="text" name="nombre" placeholder="Buscar por nombre..." />
                         </div>
                         <div class="col-md-4">
-                            <label class="form-label text-secondary" style="font-size:13px;">Fecha de Inscripci�n</label>
+                            <label class="form-label text-secondary" style="font-size:13px;">Fecha de Inscripción</label>
                             <input type="date" name="fecha" />
                         </div>
                         <div class="col-12 d-flex gap-2 mt-2">

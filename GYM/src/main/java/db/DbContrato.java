@@ -40,34 +40,38 @@ public class DbContrato extends DbHandler {
 				ab.setPrecio(rs.getInt("precio"));
 				ab.setCantReservas(rs.getInt("cant_reservas"));
 				ab.setDescripcion(rs.getString("descripcion"));
-	
+
 				cont.setAbono(ab);
 				cont.setReservasRestantes(rs.getInt("clases_disponibles"));
-	
+
 				Date fechaux = rs.getDate("fecha_desde");
 				if (fechaux != null) {
 					cont.setFechaDesde(fechaux.toLocalDate());
 				} else {
 					cont.setFechaDesde(null);
 				}
-	
+
 				Date fechaux2 = rs.getDate("fecha_hasta");
 				if (fechaux2 != null) {
-					cont.setFechaHasta(fechaux2.toLocalDate()); 
+					cont.setFechaHasta(fechaux2.toLocalDate());
 				} else {
 					cont.setFechaHasta(null);
 				}
 				return cont;
 			}
 			return null;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if(pstmt!=null) pstmt.close();
-				if(rs!=null) rs.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
+				if(rs!=null) {
+					rs.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -81,15 +85,15 @@ public class DbContrato extends DbHandler {
 
 		try {
 			conn = this.getConnection();
-			
+
 			// Usamos EXACTAMENTE la misma fecha que en el getter para que no falle
 			LocalDate fecha = LocalDate.now();
 			String fechaFormateada = fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-			
+
 			pstmt = conn.prepareStatement("UPDATE contrato SET clases_disponibles = clases_disponibles - 1 WHERE dni_usuario = ? AND ? BETWEEN fecha_desde AND fecha_hasta AND clases_disponibles > 0");
 			pstmt.setString(1, usuario.getDni());
 			pstmt.setString(2, fechaFormateada);
-			
+
 			int filasAfectadas = pstmt.executeUpdate();
 			return filasAfectadas > 0;
 
@@ -98,7 +102,9 @@ public class DbContrato extends DbHandler {
 			return false;
 		} finally {
 			try {
-				if(pstmt!=null) pstmt.close();
+				if(pstmt!=null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -147,10 +153,18 @@ public class DbContrato extends DbHandler {
 			return false;
 		} finally {
 			try {
-				if(rs != null) rs.close();
-				if(pstmtAbono != null) pstmtAbono.close();
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmtAbono != null) {
+					pstmtAbono.close();
+				}
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -186,12 +200,18 @@ public class DbContrato extends DbHandler {
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        return false; 
+	        return false;
 	    } finally {
 	        try {
-	            if (rs != null) rs.close();
-	            if (pstmt != null) pstmt.close();
-	            if (conn != null) conn.close();
+	            if (rs != null) {
+					rs.close();
+				}
+	            if (pstmt != null) {
+					pstmt.close();
+				}
+	            if (conn != null) {
+					conn.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -242,9 +262,15 @@ public class DbContrato extends DbHandler {
 			return false;
 		} finally {
 			try {
-				if (rs != null) rs.close();
-				if (pstmtAbono != null) pstmtAbono.close();
-				if (pstmt != null) pstmt.close();
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmtAbono != null) {
+					pstmtAbono.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();

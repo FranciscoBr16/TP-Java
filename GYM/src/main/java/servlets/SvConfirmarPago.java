@@ -53,7 +53,7 @@ public class SvConfirmarPago extends HttpServlet {
 
 	        DbFactura dbFactura = new DbFactura();
 
-	        
+
 	        boolean facturaActualizada = dbFactura.actualizarEstadoFactura(nroFactura, "Pagada");
 
 	        if (!facturaActualizada) {
@@ -63,30 +63,30 @@ public class SvConfirmarPago extends HttpServlet {
 	            return;
 	        }
 
-	       
+
 	        Factura factura = new Factura();
 	        factura.setNroFactura(nroFactura);
 	        factura = dbFactura.getFacturaAbono(factura);
 
-	        
+
 	        if (factura != null && "S".equals(factura.getTipo())) {
 
-	            
+
 	            if (factura.getDetalles() != null && !factura.getDetalles().isEmpty() &&
 	                factura.getDetalles().get(0).getAbono() != null) {
 
-	               
+
 	                String dniCliente = factura.getDNI();
 	                int idAbono = factura.getDetalles().get(0).getAbono().getIdAbono();
 
-	                
+
 	                DbContrato dbContrato = new DbContrato();
 	                boolean tieneContratoActivo = dbContrato.tieneContratoActivo(dniCliente);
 
 	                if (tieneContratoActivo) {
-	                  
+
 	                    boolean clasesSumadas = dbContrato.sumarClasesAlContrato(dniCliente, idAbono);
-	                    
+
 	                    if (clasesSumadas) {
 	                        request.getSession().setAttribute("mensaje", "Pago confirmado. ¡Se han sumado las clases adicionales al contrato activo del cliente!");
 	                        request.getSession().setAttribute("tipoMensaje", "success");
@@ -95,7 +95,7 @@ public class SvConfirmarPago extends HttpServlet {
 	                        request.getSession().setAttribute("tipoMensaje", "error");
 	                    }
 	                } else {
-	                    
+
 	                    boolean contratoCreado = dbContrato.crearContrato(dniCliente, idAbono);
 
 	                    if (contratoCreado) {
@@ -107,12 +107,12 @@ public class SvConfirmarPago extends HttpServlet {
 	                    }
 	                }
 	            } else {
-	                
+
 	                request.getSession().setAttribute("mensaje", "Pago confirmado pero no se pudo obtener información del abono");
 	                request.getSession().setAttribute("tipoMensaje", "warning");
 	            }
 	        } else {
-	            
+
 	            request.getSession().setAttribute("mensaje", "Pago confirmado exitosamente");
 	            request.getSession().setAttribute("tipoMensaje", "success");
 	        }

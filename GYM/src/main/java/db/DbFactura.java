@@ -47,9 +47,15 @@ public class DbFactura extends DbHandler{
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (rs != null) rs.close();
-	            if (pstmt != null) pstmt.close();
-	            if (conn != null) conn.close();
+	            if (rs != null) {
+					rs.close();
+				}
+	            if (pstmt != null) {
+					pstmt.close();
+				}
+	            if (conn != null) {
+					conn.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -92,7 +98,7 @@ public class DbFactura extends DbHandler{
 
 			ArrayList<Detalle_Factura> dfs = new ArrayList<>();
 			int idAbono = rs.getInt("id_abono");
-			if (!rs.wasNull()) { 
+			if (!rs.wasNull()) {
 				Detalle_Factura df = new Detalle_Factura();
 				Abono a = new Abono();
 				a.setIdAbono(idAbono);
@@ -108,9 +114,15 @@ public class DbFactura extends DbHandler{
 			return null;
 		} finally {
 			try {
-				if (rs != null) rs.close();
-				if (pstmt != null) pstmt.close();
-				if (conn != null) conn.close();
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -130,14 +142,16 @@ public class DbFactura extends DbHandler{
 					Factura fac = new Factura();
 					fac.setNroFactura(rs.getInt("nro_factura"));
 					Date fechaux = rs.getDate("fecha");
-					if (fechaux != null) fac.setFecha(fechaux.toLocalDate());
+					if (fechaux != null) {
+						fac.setFecha(fechaux.toLocalDate());
+					}
 					fac.setTipo(rs.getString("tipo"));
 					fac.setCUIT(rs.getString("cuit"));
 					fac.setUsuario(usuario);
 					fac.setTotal(rs.getFloat("total"));
 					fac.setEstado(rs.getString("estado"));
-					
-					
+
+
 					fac.setDetalles(getDetallesFactura(conn, fac.getNroFactura()));
 					facturas.add(fac);
 				}
@@ -171,8 +185,12 @@ public class DbFactura extends DbHandler{
 	        return false;
 	    } finally {
 	        try {
-	            if (pstmt != null) pstmt.close();
-	            if (conn != null) conn.close();
+	            if (pstmt != null) {
+					pstmt.close();
+				}
+	            if (conn != null) {
+					conn.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -192,7 +210,9 @@ public class DbFactura extends DbHandler{
 	            fac.setNroFactura(rsFactura.getInt("nro_factura"));
 
 	            Date fecha = rsFactura.getDate("fecha");
-	            if (fecha != null) fac.setFecha(fecha.toLocalDate());
+	            if (fecha != null) {
+					fac.setFecha(fecha.toLocalDate());
+				}
 
 	            fac.setTipo(rsFactura.getString("tipo"));
 	            fac.setCUIT(rsFactura.getString("cuit"));
@@ -200,7 +220,7 @@ public class DbFactura extends DbHandler{
 	            fac.setTotal(rsFactura.getDouble("total"));
 	            fac.setEstado(rsFactura.getString("estado"));
 
-	            
+
 	            fac.setDetalles(getDetallesFactura(conn, fac.getNroFactura()));
 	            facturas.add(fac);
 	        }
@@ -229,11 +249,18 @@ public class DbFactura extends DbHandler{
 	    ArrayList<Factura> facturas = new ArrayList<>();
 	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE dni = ? AND tipo = 'C' ");
 
-	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
-	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
-	    
-	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
-	    else sql.append("ORDER BY fecha DESC ");
+	    if (nroFactura != null) {
+			sql.append("AND nro_factura = ? ");
+		}
+	    if (estado != null && !estado.isEmpty()) {
+			sql.append("AND estado = ? ");
+		}
+
+	    if ("asc".equalsIgnoreCase(ordenFecha)) {
+			sql.append("ORDER BY fecha ASC ");
+		} else {
+			sql.append("ORDER BY fecha DESC ");
+		}
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
@@ -241,8 +268,12 @@ public class DbFactura extends DbHandler{
 	        int index = 1;
 	        pstmt.setString(index++, dniUsuario);
 
-	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
-	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
+	        if (nroFactura != null) {
+				pstmt.setInt(index++, nroFactura);
+			}
+	        if (estado != null && !estado.isEmpty()) {
+				pstmt.setString(index++, estado);
+			}
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
 	            while (rs.next()) {
@@ -250,7 +281,9 @@ public class DbFactura extends DbHandler{
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
+	                if (fechaSql != null) {
+						f.setFecha(fechaSql.toLocalDate());
+					}
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));
@@ -258,7 +291,7 @@ public class DbFactura extends DbHandler{
 	                f.setTotal(rs.getDouble("total"));
 	                f.setEstado(rs.getString("estado"));
 
-	                
+
 	                f.setDetalles(getDetallesFactura(conn, f.getNroFactura()));
 	                facturas.add(f);
 	            }
@@ -273,20 +306,35 @@ public class DbFactura extends DbHandler{
 	    ArrayList<Factura> facturas = new ArrayList<>();
 	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE tipo='C' ");
 
-	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
-	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
-	    if (dniCliente != null && !dniCliente.trim().isEmpty()) sql.append("AND dni LIKE ? ");
+	    if (nroFactura != null) {
+			sql.append("AND nro_factura = ? ");
+		}
+	    if (estado != null && !estado.isEmpty()) {
+			sql.append("AND estado = ? ");
+		}
+	    if (dniCliente != null && !dniCliente.trim().isEmpty()) {
+			sql.append("AND dni LIKE ? ");
+		}
 
-	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
-	    else sql.append("ORDER BY fecha DESC ");
+	    if ("asc".equalsIgnoreCase(ordenFecha)) {
+			sql.append("ORDER BY fecha ASC ");
+		} else {
+			sql.append("ORDER BY fecha DESC ");
+		}
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
 	        int index = 1;
-	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
-	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
-	        if (dniCliente != null && !dniCliente.trim().isEmpty()) pstmt.setString(index++, "%" + dniCliente.trim() + "%");
+	        if (nroFactura != null) {
+				pstmt.setInt(index++, nroFactura);
+			}
+	        if (estado != null && !estado.isEmpty()) {
+				pstmt.setString(index++, estado);
+			}
+	        if (dniCliente != null && !dniCliente.trim().isEmpty()) {
+				pstmt.setString(index++, "%" + dniCliente.trim() + "%");
+			}
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
 	            while (rs.next()) {
@@ -294,7 +342,9 @@ public class DbFactura extends DbHandler{
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
+	                if (fechaSql != null) {
+						f.setFecha(fechaSql.toLocalDate());
+					}
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));
@@ -302,7 +352,7 @@ public class DbFactura extends DbHandler{
 	                f.setTotal(rs.getDouble("total"));
 	                f.setEstado(rs.getString("estado"));
 
-	                
+
 	                f.setDetalles(getDetallesFactura(conn, f.getNroFactura()));
 	                facturas.add(f);
 	            }
@@ -317,20 +367,35 @@ public class DbFactura extends DbHandler{
 	    ArrayList<Factura> facturas = new ArrayList<>();
 	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE tipo= 'S' ");
 
-	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
-	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
-	    if (dniCliente != null && !dniCliente.trim().isEmpty()) sql.append("AND dni LIKE ? ");
+	    if (nroFactura != null) {
+			sql.append("AND nro_factura = ? ");
+		}
+	    if (estado != null && !estado.isEmpty()) {
+			sql.append("AND estado = ? ");
+		}
+	    if (dniCliente != null && !dniCliente.trim().isEmpty()) {
+			sql.append("AND dni LIKE ? ");
+		}
 
-	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
-	    else sql.append("ORDER BY fecha DESC ");
+	    if ("asc".equalsIgnoreCase(ordenFecha)) {
+			sql.append("ORDER BY fecha ASC ");
+		} else {
+			sql.append("ORDER BY fecha DESC ");
+		}
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
 	        int index = 1;
-	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
-	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
-	        if (dniCliente != null && !dniCliente.trim().isEmpty()) pstmt.setString(index++, "%" + dniCliente.trim() + "%");
+	        if (nroFactura != null) {
+				pstmt.setInt(index++, nroFactura);
+			}
+	        if (estado != null && !estado.isEmpty()) {
+				pstmt.setString(index++, estado);
+			}
+	        if (dniCliente != null && !dniCliente.trim().isEmpty()) {
+				pstmt.setString(index++, "%" + dniCliente.trim() + "%");
+			}
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
 	            while (rs.next()) {
@@ -338,7 +403,9 @@ public class DbFactura extends DbHandler{
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
+	                if (fechaSql != null) {
+						f.setFecha(fechaSql.toLocalDate());
+					}
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));
@@ -346,7 +413,7 @@ public class DbFactura extends DbHandler{
 	                f.setTotal(rs.getDouble("total"));
 	                f.setEstado(rs.getString("estado"));
 
-	                
+
 	                f.setDetalles(getDetalleFacturaAbono(conn, f.getNroFactura()));
 	                facturas.add(f);
 	            }
@@ -357,7 +424,7 @@ public class DbFactura extends DbHandler{
 	    return facturas;
 	}
 
-	
+
 
 	public ArrayList<Detalle_Factura> getDetallesFactura(Connection conn, int nroFactura) {
 	    ArrayList<Detalle_Factura> detalles = new ArrayList<>();
@@ -366,7 +433,7 @@ public class DbFactura extends DbHandler{
 	                 "JOIN producto p ON df.id_producto = p.id_producto " +
 	                 "WHERE df.nro_factura = ?";
 
-	    
+
 	    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 	        pstmt.setInt(1, nroFactura);
@@ -418,7 +485,7 @@ public class DbFactura extends DbHandler{
 		            d.setNroFactura(nroFactura);
 		            d.setAbono(a);
 		            d.setSub_total(rs.getDouble("precio"));
-		            d.setCantidad(1); 
+		            d.setCantidad(1);
 
 		            detalles.add(d);
 		        }
@@ -451,8 +518,12 @@ public class DbFactura extends DbHandler{
 	        return false;
 	    } finally {
 	        try {
-	            if (pstmt != null) pstmt.close();
-	            if (conn != null) conn.close();
+	            if (pstmt != null) {
+					pstmt.close();
+				}
+	            if (conn != null) {
+					conn.close();
+				}
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -463,11 +534,18 @@ public class DbFactura extends DbHandler{
 		ArrayList<Factura> facturas = new ArrayList<>();
 	    StringBuilder sql = new StringBuilder("SELECT * FROM factura WHERE dni = ? AND tipo = 'S'");
 
-	    if (nroFactura != null) sql.append("AND nro_factura = ? ");
-	    if (estado != null && !estado.isEmpty()) sql.append("AND estado = ? ");
+	    if (nroFactura != null) {
+			sql.append("AND nro_factura = ? ");
+		}
+	    if (estado != null && !estado.isEmpty()) {
+			sql.append("AND estado = ? ");
+		}
 
-	    if ("asc".equalsIgnoreCase(ordenFecha)) sql.append("ORDER BY fecha ASC ");
-	    else sql.append("ORDER BY fecha DESC ");
+	    if ("asc".equalsIgnoreCase(ordenFecha)) {
+			sql.append("ORDER BY fecha ASC ");
+		} else {
+			sql.append("ORDER BY fecha DESC ");
+		}
 
 	    try (Connection conn = this.getConnection();
 	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
@@ -475,8 +553,12 @@ public class DbFactura extends DbHandler{
 	        int index = 1;
 	        pstmt.setString(index++, dni);
 
-	        if (nroFactura != null) pstmt.setInt(index++, nroFactura);
-	        if (estado != null && !estado.isEmpty()) pstmt.setString(index++, estado);
+	        if (nroFactura != null) {
+				pstmt.setInt(index++, nroFactura);
+			}
+	        if (estado != null && !estado.isEmpty()) {
+				pstmt.setString(index++, estado);
+			}
 
 	        try (ResultSet rs = pstmt.executeQuery()) {
 	            while (rs.next()) {
@@ -484,7 +566,9 @@ public class DbFactura extends DbHandler{
 	                f.setNroFactura(rs.getInt("nro_factura"));
 
 	                Date fechaSql = rs.getDate("fecha");
-	                if (fechaSql != null) f.setFecha(fechaSql.toLocalDate());
+	                if (fechaSql != null) {
+						f.setFecha(fechaSql.toLocalDate());
+					}
 
 	                f.setTipo(rs.getString("tipo"));
 	                f.setCUIT(rs.getString("cuit"));

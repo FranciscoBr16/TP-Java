@@ -62,14 +62,14 @@ public class SvInscripcion extends HttpServlet {
 
 	    // ACÁ INTENTA INSERTAR EN LA BASE DE DATOS
 	    if (dbact.agregarInscripcion(usuario, clase)) {
-	    	
+
 	    	// Si insertó la reserva, ACÁ DESCUENTA
 	        dbcon.actualizaClasesDisponibles(usuario);
-	        
+
 	        session.setAttribute("mensaje", "Reserva realizada con éxito. Se descontó 1 cupo.");
 	        session.setAttribute("tipoMensaje", "success");
 	        response.sendRedirect(origen);
-	        
+
 	    } else {
 	    	// Si falla al insertar (ej: ya estabas anotado a esa clase)
 	        session.setAttribute("mensaje", "No se pudo reservar. ¿Ya estabas inscripto en esta clase?");

@@ -45,7 +45,7 @@ public class SvMisFacturas extends HttpServlet {
         DbFactura dbFactura = new DbFactura();
         ArrayList<Factura> facturas;
 
-       
+
         if (usuario.isAdmin()) {
             facturas = dbFactura.getFacturasFiltradasAdmin(nroFactura, estado, ordenFecha, dniCliente);
             facturas.addAll(dbFactura.getFacturasAbonosFiltradasAdmin(nroFactura, estado, ordenFecha, dniCliente));
@@ -54,28 +54,40 @@ public class SvMisFacturas extends HttpServlet {
             facturas.addAll(dbFactura.getFacturasAbonosFiltradasUsuario(usuario.getDni(), nroFactura, estado, ordenFecha));
         }
 
-        
+
         if (facturas != null && !facturas.isEmpty()) {
             if ("asc".equalsIgnoreCase(ordenFecha)) {
-                
+
                 facturas.sort((f1, f2) -> {
-                    if (f1.getFecha() == null && f2.getFecha() == null) return 0;
-                    if (f1.getFecha() == null) return 1;
-                    if (f2.getFecha() == null) return -1;
+                    if (f1.getFecha() == null && f2.getFecha() == null) {
+						return 0;
+					}
+                    if (f1.getFecha() == null) {
+						return 1;
+					}
+                    if (f2.getFecha() == null) {
+						return -1;
+					}
                     return f1.getFecha().compareTo(f2.getFecha());
                 });
             } else {
-                
+
                 facturas.sort((f1, f2) -> {
-                    if (f1.getFecha() == null && f2.getFecha() == null) return 0;
-                    if (f1.getFecha() == null) return 1;
-                    if (f2.getFecha() == null) return -1;
+                    if (f1.getFecha() == null && f2.getFecha() == null) {
+						return 0;
+					}
+                    if (f1.getFecha() == null) {
+						return 1;
+					}
+                    if (f2.getFecha() == null) {
+						return -1;
+					}
                     return f2.getFecha().compareTo(f1.getFecha());
                 });
             }
         }
 
-        
+
         request.setAttribute("facturas", facturas);
         request.setAttribute("estado", estado);
         request.setAttribute("nro", nroFacturaStr);

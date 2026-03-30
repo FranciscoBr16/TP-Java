@@ -67,6 +67,13 @@
                             Productos
                         </a>
                     </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light <%= "nosotros".equals(activePage) ? "active" : "" %>" id="links"
+                           href="/GYM/SvEmpleados">
+                            Empleados
+                        </a>
+                    </li>
 
                 <% } else { %>
 

@@ -13,11 +13,12 @@ import db.DbActividades;
 @WebServlet("/SvReservasAdmin")
 public class SvReservasAdmin extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
-	    
+
 	    DbActividades db = new DbActividades();
-	    
+
 	    String dni = request.getParameter("dni");
 	    String nombre = request.getParameter("nombre");
 	    String fecha = request.getParameter("fecha");
@@ -34,5 +35,5 @@ public class SvReservasAdmin extends HttpServlet {
 
 	    request.getRequestDispatcher("/pages/reservasAdmin.jsp").forward(request, response);
 	}
-        
+
 }

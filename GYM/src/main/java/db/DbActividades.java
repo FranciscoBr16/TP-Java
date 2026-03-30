@@ -557,8 +557,8 @@ public class DbActividades extends DbHandler {
 				}
 				}
 	}
-	
-	
+
+
 	public ArrayList<Inscripcion> getTodasLasReservas() {
 	    PreparedStatement pstmt = null;
 	    Connection conn = null;
@@ -597,15 +597,19 @@ public class DbActividades extends DbHandler {
 	        return null;
 	    } finally {
 	        try {
-	            if (rs != null) rs.close();
-	            if (pstmt != null) pstmt.close();
+	            if (rs != null) {
+					rs.close();
+				}
+	            if (pstmt != null) {
+					pstmt.close();
+				}
 	            this.cerrarConnection();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 	}
-	
+
 	public ArrayList<Inscripcion> getReservasFiltradas(String dniFiltro, String nombreFiltro, String fechaFiltro) {
 	    PreparedStatement pstmt = null;
 	    Connection conn = null;
@@ -679,25 +683,29 @@ public class DbActividades extends DbHandler {
 	        return null;
 	    } finally {
 	        try {
-	            if (rs != null) rs.close();
-	            if (pstmt != null) pstmt.close();
+	            if (rs != null) {
+					rs.close();
+				}
+	            if (pstmt != null) {
+					pstmt.close();
+				}
 	            this.cerrarConnection();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 	}
-	
+
 	public ArrayList<Inscripcion> getMisReservasFiltradas(Usuario usuario, String diaFiltro, String horarioFiltro, String fechaFiltro) {
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
 		ArrayList<Inscripcion> inscripciones = new ArrayList<>();
 
-		
+
 		String sql = "SELECT * FROM inscripcion i INNER JOIN clase c ON i.id_clase = c.id_clase WHERE i.dni = ? ";
 
-		
+
 		if (diaFiltro != null && !diaFiltro.trim().isEmpty()) {
 			sql += " AND c.dia = ? ";
 		}
@@ -708,17 +716,17 @@ public class DbActividades extends DbHandler {
 			sql += " AND i.fecha = ? ";
 		}
 
-		
+
 		sql += " ORDER BY i.fecha DESC";
 
 		try {
 			conn = this.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			
-		
+
+
 			int paramIndex = 1;
 			pstmt.setString(paramIndex++, usuario.getDni());
-			
+
 			if (diaFiltro != null && !diaFiltro.trim().isEmpty()) {
 				pstmt.setString(paramIndex++, diaFiltro);
 			}
@@ -730,7 +738,7 @@ public class DbActividades extends DbHandler {
 			}
 
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next() && rs != null) {
 				Inscripcion ins = new Inscripcion();
 				Clase cl = new Clase();
@@ -739,7 +747,7 @@ public class DbActividades extends DbHandler {
 				cl.setHorario(rs.getString("horario"));
 				cl.setDia(rs.getString("dia"));
 				ins.setClase(cl);
-				
+
 				Date fechaux = rs.getDate("fecha");
 				if (fechaux != null) {
 					ins.setFechaInscripcion(fechaux.toLocalDate());
@@ -750,14 +758,18 @@ public class DbActividades extends DbHandler {
 				inscripciones.add(ins);
 			}
 			return inscripciones;
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		} finally {
 			try {
-				if(rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmt != null) {
+					pstmt.close();
+				}
 				this.cerrarConnection();
 			} catch (SQLException e) {
 				e.printStackTrace();

@@ -23,18 +23,18 @@ public class SvBajaUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Usuario user = (Usuario)request.getSession().getAttribute("user");
-		
+
 		if (user != null) {
 			DbUsuario dbusu = new DbUsuario();
-			
+
 			if (dbusu.deleteUsuario(user) > 0) {
 				// 1. Destruimos la sesión actual por seguridad
 				request.getSession().invalidate();
-				
+
 				// 2. Creamos una sesión nueva limpia (true) para mandar el mensaje
 				request.getSession(true).setAttribute("mensaje", "Tu cuenta ha sido eliminada con éxito. ¡Esperamos verte pronto!");
 				request.getSession().setAttribute("tipoMensaje", "success");
-				
+
 				// 3. Redirigimos al inicio
 				response.sendRedirect(request.getContextPath() + "/index.jsp");
 			} else {
