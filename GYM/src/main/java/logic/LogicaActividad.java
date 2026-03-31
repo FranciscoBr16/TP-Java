@@ -1,5 +1,6 @@
 package logic;
 
+import java.text.Normalizer;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -10,20 +11,23 @@ public class LogicaActividad {
     private static final Map<String, DayOfWeek> DIAS = new HashMap<>();
 
     static {
-        DIAS.put("Lunes", DayOfWeek.MONDAY);
-        DIAS.put("Martes", DayOfWeek.TUESDAY);
-        DIAS.put("Miercoles", DayOfWeek.WEDNESDAY);
-        DIAS.put("Miércoles", DayOfWeek.WEDNESDAY);
-        DIAS.put("Jueves", DayOfWeek.THURSDAY);
-        DIAS.put("Viernes", DayOfWeek.FRIDAY);
-        DIAS.put("Sabado", DayOfWeek.SATURDAY);
-        DIAS.put("Sábado", DayOfWeek.SATURDAY);
-        DIAS.put("Domingo", DayOfWeek.SUNDAY);
+        DIAS.put("LUNES", DayOfWeek.MONDAY);
+        DIAS.put("MARTES", DayOfWeek.TUESDAY);
+        DIAS.put("MIERCOLES", DayOfWeek.WEDNESDAY);
+        DIAS.put("JUEVES", DayOfWeek.THURSDAY);
+        DIAS.put("VIERNES", DayOfWeek.FRIDAY);
+        DIAS.put("SABADO", DayOfWeek.SATURDAY);
+        DIAS.put("DOMINGO", DayOfWeek.SUNDAY);
     }
 
     public LocalDate fechaInscripcion(String diaClaseStr) {
 
-        DayOfWeek diaClase = DIAS.get(diaClaseStr);
+        String normalizado = Normalizer
+            .normalize(diaClaseStr, Normalizer.Form.NFD)
+            .replaceAll("\\p{InCombiningDiacriticalMarks}", "")
+            .toUpperCase();
+
+        DayOfWeek diaClase = DIAS.get(normalizado);
 
         if (diaClase == null) {
             throw new IllegalArgumentException("Día inválido: " + diaClaseStr);
