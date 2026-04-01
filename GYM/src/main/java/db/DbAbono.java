@@ -42,7 +42,7 @@ public class DbAbono extends DbHandler {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			return abonos;
 		} finally {
 			try {
 				if(pstmt!=null) {
