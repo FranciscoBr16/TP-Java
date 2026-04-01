@@ -95,7 +95,7 @@ String orden = request.getParameter("ordenPrecio") != null ? request.getParamete
 								    <button type="submit" class="boton4">Ver Detalles</button>
 							    </form>
 							
-        				        <% if (user != null) { %>
+        				        <% if (user != null && !user.isAdmin()) { %>
 							        <form action="/GYM/SvCarrito" method="post">
 							            <input type="hidden" name="accion" value="agregar">
 							            <input type="hidden" name="idProducto" value="<%= pro.getIdProducto() %>">
