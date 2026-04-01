@@ -7,7 +7,7 @@ public class Usuario {
 
     private String telefono;
     private String dni, password, email, nombre, apellido;
-    private boolean beneficio, admin;
+    private boolean beneficio, admin, planActivo;
     private LocalDate fechaNac;
 	private String imagen;
 	private ArrayList<Contrato> contratos= new ArrayList<>();
@@ -131,6 +131,14 @@ public class Usuario {
 
 	}
 
+		
+	public boolean isTienePlanActivo() {
+	    return planActivo;
+	}
+
+	public void setTienePlanActivo(boolean tienePlanActivo) {
+	    this.planActivo = tienePlanActivo;
+	}
 
 
 

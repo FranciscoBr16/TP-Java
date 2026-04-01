@@ -114,7 +114,7 @@ String orden = request.getParameter("ordenPrecio") != null ? request.getParamete
         		        <%} %>
                     <% } else { %>
                         <div style="text-align: center; width: 100%; padding: 50px;">
-                            <h3 style="color: white;">No se encontraron productos que coincidan con la búsqueda.</h3>
+                            <h3 style="color: white;">No se encontraron productos que coincidan con la bï¿½squeda.</h3>
                         </div>
                     <% } %>
         		</div>
