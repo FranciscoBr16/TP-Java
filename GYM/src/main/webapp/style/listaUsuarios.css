@@ -1,0 +1,84 @@
+body { min-height: 100vh; }
+
+.page-wrapper { padding: 40px 30px 60px; }
+
+.accent-line { height: 4px; width: 60px; background: #d95126; border-radius: 4px; margin-top: 8px; }
+
+.filtros-card {
+   background-color: #1e1c1d; border: 1px solid #2e2b2c;
+   border-radius: 14px; padding: 22px 26px; margin-bottom: 28px;
+ }
+
+.filtros-card label { color: #c5c5c5; font-size: 14px; margin-bottom: 5px; display: block; }
+
+.filtros-card input {
+   background-color: #2a2728; border: 1px solid #3d3a3b;
+   color: #ffffff; border-radius: 8px; padding: 8px 14px;
+   font-size: 15px; width: 100%; transition: border-color 150ms;
+}
+.filtros-card input:focus { outline: none; border-color: #d95126; }
+.filtros-card input::placeholder { color: #6b6668; }
+
+.btn-filtrar {
+   background-color: #d95126; color: white; border: 2px solid #d95126;
+   border-radius: 8px; padding: 8px 22px; font-size: 15px; cursor: pointer;
+	font-weight: bold; transition: background-color 200ms;
+}
+
+.btn-filtrar:hover { background-color: #f5947a; border-color: #f5947a; }
+
+ .btn-limpiar {
+     background-color: transparent; color: #999; border: 2px solid #3d3a3b;
+     border-radius: 8px; padding: 8px 18px; font-size: 15px; cursor: pointer;
+     font-weight: bold;
+     text-decoration: none; display: inline-flex; align-items: center; transition: all 200ms;
+ }
+ .btn-limpiar:hover { border-color: #777; color: #ccc; }
+
+ .tabla-wrapper {
+     background-color: #1e1c1d; border: 1px solid #2e2b2c;
+     border-radius: 14px; overflow: hidden;
+ }
+ .tabla-usuarios { width: 100%; border-collapse: collapse; }
+ .tabla-usuarios thead { background-color: #191617; }
+ .tabla-usuarios thead th {
+     color: #d95126; font-size: 13px; text-transform: uppercase;
+     letter-spacing: 0.8px; padding: 14px 18px; border-bottom: 2px solid #2e2b2c; white-space: nowrap;
+ }
+ .tabla-usuarios tbody tr { border-bottom: 1px solid #272425; transition: background-color 150ms; }
+ .tabla-usuarios tbody tr:last-child { border-bottom: none; }
+ .tabla-usuarios tbody tr:hover { background-color: #252223; }
+ .tabla-usuarios tbody td { color: #e0e0e0; font-size: 15px; padding: 14px 18px; vertical-align: middle; }
+
+ .avatar-usuario { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #d95126; }
+ .avatar-iniciales {
+     width: 40px; height: 40px; border-radius: 50%; background-color: #d95126;
+     color: white; display: flex; align-items: center; justify-content: center;
+     font-size: 15px; font-weight: bold;
+ }
+
+ .badge-admin-tag { background-color: #d95126; color: white; border-radius: 20px; padding: 3px 11px; font-size: 12px; }
+ .badge-cliente { background-color: #2e2b2c; color: #aaa; border-radius: 20px; padding: 3px 11px; font-size: 12px; }
+ .badge-activo { background-color: #1a3d2b; color: #4caf84; border: 1px solid #2e6b4f; border-radius: 20px; padding: 3px 11px; font-size: 12px; }
+ .badge-sin-abono { background-color: #2e2b2c; color: #888; border-radius: 20px; padding: 3px 11px; font-size: 12px; }
+ .badge-clases { background-color: #1c2a3e; color: #6aabf7; border: 1px solid #2a4870; border-radius: 20px; padding: 3px 11px; font-size: 12px; min-width: 52px; display: inline-block; text-align: center; }
+
+ .btn-editar {
+     width: 36px; height: 36px; border-radius: 50%; background-color: transparent;
+     border: 2px solid #d95126; color: #d95126; display: flex; align-items: center;
+     justify-content: center; cursor: pointer; transition: background-color 200ms, color 200ms;
+     text-decoration: none; font-size: 16px;
+ }
+ .btn-editar:hover { background-color: #d95126; color: white; }
+
+ .sin-resultados { text-align: center; padding: 60px 20px; color: #666; }
+ .sin-resultados i { font-size: 48px; color: #3d3a3b; margin-bottom: 14px; display: block; }
+
+ .contador-resultados { color: #888; font-size: 14px; margin-bottom: 12px; }
+ .contador-resultados span { color: #d95126; font-weight: bold; }
+
+ @media (max-width: 768px) {
+     .tabla-wrapper { overflow-x: auto; }
+     .tabla-usuarios thead th, .tabla-usuarios tbody td { font-size: 13px; padding: 10px 12px; }
+     .page-header h1 { font-size: 1.5rem; }
+ }

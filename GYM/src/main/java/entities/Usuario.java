@@ -5,14 +5,17 @@ import java.util.ArrayList;
 
 public class Usuario {
 
-    private String telefono;
+
+	private String telefono;
     private String dni, password, email, nombre, apellido;
-    private boolean beneficio, admin, planActivo;
+    private boolean beneficio, admin, estado;
     private LocalDate fechaNac;
 	private String imagen;
 	private ArrayList<Contrato> contratos= new ArrayList<>();
 	private ArrayList<Inscripcion> inscripciones= new ArrayList<>();
 
+	
+	
 
 	public ArrayList<Inscripcion> getInscripciones() {
 		return inscripciones;
@@ -106,6 +109,14 @@ public class Usuario {
 	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
+	
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 
 	public Usuario(String dni, String nombre, String apellido, String password, String email , String telefono, LocalDate fecha, String img) {
 		this.dni = dni;
@@ -117,6 +128,20 @@ public class Usuario {
 		this.fechaNac = fecha;
 		this.admin = false;
 		this.imagen = img;
+	}
+	
+    public Usuario(String telefono, String dni, String password, String email, String nombre, String apellido,
+			boolean admin, LocalDate fechaNac, boolean estado) {
+		super();
+		this.telefono = telefono;
+		this.dni = dni;
+		this.password = password;
+		this.email = email;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.admin = admin;
+		this.fechaNac = fechaNac;
+		this.estado = estado;
 	}
 
 	public Usuario(String dni, String password) {
@@ -130,16 +155,6 @@ public class Usuario {
 		this.imagen = imagen;
 
 	}
-
-		
-	public boolean isTienePlanActivo() {
-	    return planActivo;
-	}
-
-	public void setTienePlanActivo(boolean tienePlanActivo) {
-	    this.planActivo = tienePlanActivo;
-	}
-
 
 
 

@@ -45,7 +45,6 @@ pageEncoding="ISO-8859-1"%> <%@ page import="entities.Usuario"%>
             String mensaje = (String) session.getAttribute("mensaje");
             String tipoMensaje = (String) session.getAttribute("tipoMensaje");
             if (mensaje != null) { 
-                // Definimos el color según el tipo de mensaje (verde éxito, rojo error)
                 String colorFondo = (tipoMensaje != null && tipoMensaje.equals("success")) ? "#28a745" : "#dc3545";
         %>
             <div id="mensajeAlerta" style="position: fixed; top: 80px; right: 20px; z-index: 1000; min-width: 300px; padding: 15px 20px; border-radius: 8px; background-color: <%= colorFondo %>; color: white; font-weight: bold; border: 2px solid #191617; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">

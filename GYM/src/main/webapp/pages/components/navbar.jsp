@@ -48,21 +48,21 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-light <%= "actividades".equals(activePage) ? "active" : "" %>" id="links"
+                        <a class="nav-link text-light <%= "reservas".equals(activePage) ? "active" : "" %>" id="links"
                            href="/GYM/SvActividades">
                             Actividades
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-light <%= "musculacion".equals(activePage) ? "active" : "" %>" id="links"
+                        <a class="nav-link text-light <%= "salon".equals(activePage) ? "active" : "" %>" id="links"
                            href="/GYM/SvMusculacion">
                             Musculación
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-light <%= "productos-admin".equals(activePage) ? "active" : "" %>" id="links"
+                        <a class="nav-link text-light <%= "tienda".equals(activePage) ? "active" : "" %>" id="links"
                            href="/GYM/SvProductos">
                             Productos
                         </a>
@@ -72,6 +72,13 @@
                         <a class="nav-link text-light <%= "nosotros".equals(activePage) ? "active" : "" %>" id="links"
                            href="/GYM/SvEmpleados">
                             Empleados
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light <%= "usuarios".equals(activePage) ? "active" : "" %>" id="links"
+                           href="/GYM/SvUsuarios">
+                            Usuarios
                         </a>
                     </li>
 
@@ -95,11 +102,11 @@
                     <% if (user != null) { %>
                         <%-- Reservas solo si está logueado --%>
                         <li class="nav-item">
-                            <a class="nav-link text-light <%= "reservas".equals(activePage) ? "active" : "" %>" id="links"
-                               href="/GYM/SvMisReservas">
-                                Reservas
-                            </a>
-                        </li>
+						    <a class="nav-link text-light <%= ("reservas".equals(activePage) || "salon".equals(activePage)) ? "active" : "" %>" id="links"
+						       href="/GYM/SvMisReservas">
+						        Reservas
+						    </a>
+						</li>
                     <% } %>
 
                     <li class="nav-item">

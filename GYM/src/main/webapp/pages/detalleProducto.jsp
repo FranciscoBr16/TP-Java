@@ -100,16 +100,16 @@
 				<input type="hidden" name="imagen" value="<%= pro.getImagen() %>">
 			    <input type="hidden" name="precio" value="<%= pro.getPrecio().getPrecio() %>">
 				<input type="hidden" name="stock" value="<%= pro.getStock() %>">
-				<% if (user != null){ %>
+				<% if (user != null && !user.isAdmin()){ %>
 					<button type="submit" class="boton">Agregar al carrito</button>
 				</form>
-			   <% if(user.isAdmin()){ %>
+			   <%} if(user != null && user.isAdmin()){ %>
 				<form action="/GYM/SvModificacionProducto" method="GET">
 				<input type="hidden" name="id_producto" value="<%=pro.getIdProducto()%>">
 				
 					<button type="submit" class="boton">Modificar Producto</button>
 				</form>
-				<% }} %>
+				<% } %>
 			</div>
 
 		</div>
