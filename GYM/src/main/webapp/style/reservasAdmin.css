@@ -1,0 +1,83 @@
+.page-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.filtros-card {
+    background-color: #2a2528;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+}
+.filtros-card input {
+    background-color: #191617;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100%;
+}
+.filtros-card input::placeholder {
+    color: #888;
+}
+.filtros-card input:focus {
+    outline: 2px solid #d95126;
+    border-color: #d95126;
+}
+
+.reservas-card {
+    background-color: #2a2528;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.reservas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.reservas-table th {
+    text-align: left;
+    font-size: 12px;
+    color: #aaa;
+    padding: 10px 16px;
+    border-bottom: 1px solid #444;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.reservas-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #333;
+    color: white;
+}
+
+.reservas-table tr:last-child td {
+    border-bottom: none;
+}
+.reservas-table tbody tr:hover td {
+    background-color: #333;
+}
+
+.badge-act {
+    background-color: #0f6e5620;
+    color: #5dcaa5;
+    border: 1px solid #0f6e56;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.badge-musc {
+    background-color: #185fa520;
+    color: #85b7eb;
+    border: 1px solid #185fa5;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+}

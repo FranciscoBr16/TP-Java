@@ -15,9 +15,12 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
 
-        <a class="navbar-brand" href="/GYM/index.jsp">
+
+    
+        <a class="navbar-brand">
             <img src="/GYM/img/logo.png" alt="logo del gimnasio" />
-        </a>
+        </a>        
+
 
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -27,17 +30,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
 
-                <%-- Inicio: visible para todos --%>
-                <li class="nav-item">
-                    <a class="nav-link text-light <%= "inicio".equals(activePage) ? "active" : "" %>" id="links"
-                       href="/GYM/index.jsp">
-                        Inicio
-                    </a>
-                </li>
+                <%-- Inicio: solo para clientes --%>
+                    <% if (!esAdmin) { %>
+                        <li class="nav-item">
+                            <a class="nav-link text-light <%= "inicio".equals(activePage) ? "active" : "" %>" id="links"
+                            href="/GYM/index.jsp">
+                                Inicio
+                            </a>
+                        </li>
+                    <% } %>
 
                 <% if (esAdmin) { %>
 
                     <%-- NAVBAR ADMIN --%>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light <%= "usuarios".equals(activePage) ? "active" : "" %>" id="links"
+                           href="/GYM/SvUsuarios">
+                            Usuarios
+                        </a>
+                    </li>
 
                     <%-- TODO: crear SvReservasAdmin (listado de reservas por día, musculación + actividades) --%>
                     <li class="nav-item">
@@ -75,12 +87,6 @@
                         </a>
                     </li>
                     
-                    <li class="nav-item">
-                        <a class="nav-link text-light <%= "usuarios".equals(activePage) ? "active" : "" %>" id="links"
-                           href="/GYM/SvUsuarios">
-                            Usuarios
-                        </a>
-                    </li>
 
                 <% } else { %>
 
@@ -121,7 +127,6 @@
             </ul>
         </div>
 
-        <%-- Zona derecha: login o usuario logueado --%>
         <% if (user == null) { %>
             <div class="cajalogin">
                 <a id="textoregistro" href="/GYM/pages/signUp.jsp">Registrate</a>

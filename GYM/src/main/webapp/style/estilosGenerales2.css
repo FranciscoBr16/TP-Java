@@ -1,13 +1,12 @@
-@charset "ISO-8859-1";
-
 /* BODY */
 body {
-    background-image: url(/GYM/img/fondo.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-    /* overflow-y: auto; */
+    background-color: #1e2128;
+    background-image: none;
     font-family: "Ubuntu", sans-serif;
     height: 100%;
+}
+
+.reservas-card,
+.filtros-card {
+    background-color: #2c3040;
 }
