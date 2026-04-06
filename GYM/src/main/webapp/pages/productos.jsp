@@ -1,8 +1,8 @@
 <%@page import="entities.Producto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entities.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -95,7 +95,7 @@ String orden = request.getParameter("ordenPrecio") != null ? request.getParamete
 								    <button type="submit" class="boton4">Ver Detalles</button>
 							    </form>
 							
-        				        <% if (user != null) { %>
+        				        <% if (user != null && !user.isAdmin()) { %>
 							        <form action="/GYM/SvCarrito" method="post">
 							            <input type="hidden" name="accion" value="agregar">
 							            <input type="hidden" name="idProducto" value="<%= pro.getIdProducto() %>">
@@ -114,7 +114,7 @@ String orden = request.getParameter("ordenPrecio") != null ? request.getParamete
         		        <%} %>
                     <% } else { %>
                         <div style="text-align: center; width: 100%; padding: 50px;">
-                            <h3 style="color: white;">No se encontraron productos que coincidan con la búsqueda.</h3>
+                            <h3 style="color: white;">No se encontraron productos que coincidan con la bÃºsqueda.</h3>
                         </div>
                     <% } %>
         		</div>

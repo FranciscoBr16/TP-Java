@@ -35,7 +35,7 @@
 
 <header>
     <%
-        request.setAttribute("activePage", "reservas");
+        request.setAttribute("activePage", "salon");
     %>
     <jsp:include page="/pages/components/navbar.jsp" />
 </header>
@@ -89,13 +89,13 @@
                 <div class="clase-info">
                     <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
 
-                    <% if (user != null) { %>
+                    <% if (user != null && !user.isAdmin()) { %>
                         <form action="/GYM/SvInscripcion" method="post">
                             <input type="hidden" name="id" value="<%= c.getIdClase() %>">
                             <button class="btn boton3">Reservar</button>
                         </form>
 
-                        <% if (user.isAdmin()) { %>
+                        <% } if ( user != null && user.isAdmin()) { %>
                             <div class="clase-admin">
                                 <form action="/GYM/SvModificarSalon" method="get">
                                     <input type="hidden" name="id" value="<%= c.getIdClase() %>">
@@ -108,7 +108,6 @@
                                     </button>
                                 </form>
                             </div>
-                        <% } %>
                     <% } %>
                 </div>
             </div>
@@ -131,13 +130,13 @@
                 <div class="clase-info">
                     <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
 
-                    <% if (user != null) { %>
+                    <% if (user != null && !user.isAdmin()) { %>
                         <form action="/GYM/SvInscripcion" method="post">
                             <input type="hidden" name="id" value="<%= c.getIdClase() %>">
                             <button class="btn boton3">Reservar</button>
                         </form>
 
-                        <% if (user.isAdmin()) { %>
+                        <% } if ( user != null && user.isAdmin()) { %>
                             <div class="clase-admin">
                                 <form action="/GYM/SvModificarSalon" method="get">
                                     <input type="hidden" name="id" value="<%= c.getIdClase() %>">
@@ -150,7 +149,6 @@
                                     </button>
                                 </form>
                             </div>
-                        <% } %>
                     <% } %>
                 </div>
             </div>
@@ -172,13 +170,13 @@
                 <div class="clase-info">
                     <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
 
-                    <% if (user != null) { %>
+                    <% if (user != null && !user.isAdmin()) { %>
                         <form action="/GYM/SvInscripcion" method="post">
                             <input type="hidden" name="id" value="<%= c.getIdClase() %>">
                             <button class="btn boton3">Reservar</button>
                         </form>
 
-                        <% if (user.isAdmin()) { %>
+                        <% } if ( user != null && user.isAdmin()) { %>
                             <div class="clase-admin">
                                 <form action="/GYM/SvModificarSalon" method="get">
                                     <input type="hidden" name="id" value="<%= c.getIdClase() %>">
@@ -191,7 +189,7 @@
                                     </button>
                                 </form>
                             </div>
-                        <% } %>
+                      
                     <% } %>
                 </div>
             </div>
@@ -213,13 +211,13 @@
                 <div class="clase-info">
                     <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
 
-                    <% if (user != null) { %>
+                    <% if (user != null && !user.isAdmin()) { %>
                         <form action="/GYM/SvInscripcion" method="post">
                             <input type="hidden" name="id" value="<%= c.getIdClase() %>">
                             <button class="btn boton3">Reservar</button>
                         </form>
 
-                        <% if (user.isAdmin()) { %>
+                        <% } if ( user != null && user.isAdmin()) { %>
                             <div class="clase-admin">
                                 <form action="/GYM/SvModificarSalon" method="get">
                                     <input type="hidden" name="id" value="<%= c.getIdClase() %>">
@@ -232,7 +230,7 @@
                                     </button>
                                 </form>
                             </div>
-                        <% } %>
+             
                     <% } %>
                 </div>
             </div>
@@ -254,13 +252,13 @@
                 <div class="clase-info">
                     <span class="clase-cupo">Cupo: <%= c.getCupo() %></span>
 
-                    <% if (user != null) { %>
+                    <% if (user != null && !user.isAdmin()) { %>
                         <form action="/GYM/SvInscripcion" method="post">
                             <input type="hidden" name="id" value="<%= c.getIdClase() %>">
                             <button class="btn boton3">Reservar</button>
                         </form>
 
-                        <% if (user.isAdmin()) { %>
+                        <% } if ( user != null && user.isAdmin()) { %>
                             <div class="clase-admin">
                                 <form action="/GYM/SvModificarSalon" method="get">
                                     <input type="hidden" name="id" value="<%= c.getIdClase() %>">
@@ -273,7 +271,6 @@
                                     </button>
                                 </form>
                             </div>
-                        <% } %>
                     <% } %>
                 </div>
             </div>
