@@ -17,7 +17,7 @@
 
 
     
-        <a class="navbar-brand">
+        <a class="navbar-brand" href="/GYM/index.jsp">
             <img src="/GYM/img/logo.png" alt="logo del gimnasio" />
         </a>        
 
@@ -109,7 +109,7 @@
                         <%-- Reservas solo si está logueado --%>
                         <li class="nav-item">
 						    <a class="nav-link text-light <%= ("reservas".equals(activePage) || "salon".equals(activePage)) ? "active" : "" %>" id="links"
-						       href="/GYM/SvMisReservas">
+						       href="/GYM/pages/reservas.jsp">
 						        Reservas
 						    </a>
 						</li>
