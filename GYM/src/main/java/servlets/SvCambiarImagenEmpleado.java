@@ -6,63 +6,61 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 
 import db.DbEmpleado;
 import entities.Empleado;
 
-
 @WebServlet("/SvCambiarImagenEmpleado")
 @MultipartConfig(
-	    fileSizeThreshold = 1024 * 1024*10, // 10 MB
-	    maxFileSize = 1024 * 1024 * 50,  // 50 MB
-	    maxRequestSize = 1024 * 1024 * 100 // 100 MB
-	)
+        fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 50,
+        maxRequestSize = 1024 * 1024 * 100
+)
 public class SvCambiarImagenEmpleado extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "img/empleados";
 
-    public SvCambiarImagenEmpleado() {
-        super();
+    private static final long serialVersionUID = 1L;
 
-    }
+    private static final String PROJECT_PATH =
+            "C:\\Users\\bebof\\Desktop\\Bebo\\5to Año\\Java\\TP-Java\\GYM\\src\\main\\webapp\\img\\empleados";
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id = (Integer)request.getSession().getAttribute("idempleado");
-		Empleado e = new Empleado(id);
-		Part filePart = request.getPart("imagen");
-		String fileName = filePart.getSubmittedFileName();
-		DbEmpleado manejador = new DbEmpleado();
+        Integer id = (Integer) request.getSession().getAttribute("idempleado");
 
-		String applicationPath = request.getServletContext().getRealPath("");
-		String newfileName = "emp_"+ id.toString();
+        Part filePart = request.getPart("imagen");
+        String fileName = filePart.getSubmittedFileName();
 
-		String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR ;
-		String aux = uploadFilePath + File.separator + newfileName + this.getFileExtension(fileName);
-		File fileSaveDir = new File(aux);
-        if (fileSaveDir.exists()) {
-        	fileSaveDir.delete();
+        String extension = getFileExtension(fileName);
+        String newFileName = "emp_" + id + extension;
+
+        File uploadDir = new File(PROJECT_PATH);
+
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
         }
 
-        filePart.write(uploadFilePath+ File.separator  + newfileName + this.getFileExtension(fileName));
-        e.setImagen("/GYM/" + UPLOAD_DIR  + "/" + newfileName + this.getFileExtension(fileName));
+        String fullPath = PROJECT_PATH + File.separator + newFileName;
 
-		int b = manejador.actualizarImg(e);
-		if (b > 0) {response.sendRedirect("/GYM/SvEmpleados");}
-		else {response.sendRedirect("/GYM/index.jsp");}
+        filePart.write(fullPath);
 
-	}
+        Empleado e = new Empleado(id);
+        e.setImagen("/GYM/img/empleados/" + newFileName);
 
-private String getFileExtension(String name) {
-    int lastIndexOf = name.lastIndexOf(".");
-    if (lastIndexOf == -1) {
-        return ""; // empty extension
+        DbEmpleado manejador = new DbEmpleado();
+        int r = manejador.actualizarImg(e);
+
+        if (r > 0) {
+            response.sendRedirect("/GYM/SvEmpleados");
+        } else {
+            response.sendRedirect("/GYM/index.jsp");
+        }
     }
-    return name.substring(lastIndexOf);
-}
+
+    private String getFileExtension(String name) {
+        int lastIndex = name.lastIndexOf(".");
+        if (lastIndex == -1) return "";
+        return name.substring(lastIndex);
+    }
 }

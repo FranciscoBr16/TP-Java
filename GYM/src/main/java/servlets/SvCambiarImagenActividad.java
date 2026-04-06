@@ -6,64 +6,80 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 
 import db.DbActividades;
 import entities.Clase;
 
-
 @WebServlet("/SvCambiarImagenActividad")
 @MultipartConfig(
-	    fileSizeThreshold = 1024 * 1024*10, // 10 MB
-	    maxFileSize = 1024 * 1024 * 50,  // 50 MB
-	    maxRequestSize = 1024 * 1024 * 100 // 100 MB
-	)
+        fileSizeThreshold = 1024 * 1024 * 10,
+        maxFileSize = 1024 * 1024 * 50,
+        maxRequestSize = 1024 * 1024 * 100
+)
 public class SvCambiarImagenActividad extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static final String UPLOAD_DIR = "img/inputs";
 
-	public SvCambiarImagenActividad() {
-        super();
+    private static final long serialVersionUID = 1L;
 
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+        Integer id = (Integer) request.getSession().getAttribute("idclase");
 
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id = (Integer)request.getSession().getAttribute("idclase");
-		Clase c = new Clase(id);
-		Part filePart = request.getPart("imagen");
-		String fileName = filePart.getSubmittedFileName();
-		DbActividades manejador = new DbActividades();
-
-		String applicationPath = request.getServletContext().getRealPath("");
-		String newfileName = "act"+ id.toString();
-
-		String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR ;
-		String aux = uploadFilePath + File.separator + newfileName + this.getFileExtension(fileName);
-		File fileSaveDir = new File(aux);
-        if (fileSaveDir.exists()) {
-        	fileSaveDir.delete();
+        if (id == null) {
+            response.sendRedirect("/GYM/index.jsp");
+            return;
         }
 
-        filePart.write(uploadFilePath+ File.separator  + newfileName + this.getFileExtension(fileName));
-        c.setImagen("/GYM/" + UPLOAD_DIR  + "/" + newfileName + this.getFileExtension(fileName));
+        Part filePart = request.getPart("imagen");
 
-		int b = manejador.actualizarImgClase(c);
-		if (b > 0) {response.sendRedirect("/GYM/SvActividades");}
-		else {response.sendRedirect("/GYM/index.jsp");}
+        if (filePart == null || filePart.getSize() == 0) {
+            response.sendRedirect("/GYM/SvActividades");
+            return;
+        }
 
-	}
+        String originalName = filePart.getSubmittedFileName();
+        String extension = getFileExtension(originalName);
 
-private String getFileExtension(String name) {
-    int lastIndexOf = name.lastIndexOf(".");
-    if (lastIndexOf == -1) {
-        return ""; // empty extension
+        String newFileName = "act" + id + extension;
+
+        String projectPath = "C:\\Users\\bebof\\Desktop\\Bebo\\5to Año\\Java\\TP-Java\\GYM\\src\\main\\webapp\\img\\inputs";
+
+        File uploadDir = new File(projectPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        // borrar imagen anterior
+        File[] files = uploadDir.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.getName().startsWith("act" + id)) {
+                    f.delete();
+                }
+            }
+        }
+
+        String filePath = projectPath + File.separator + newFileName;
+
+        filePart.write(filePath);
+
+        Clase c = new Clase(id);
+        c.setImagen("/GYM/img/inputs/" + newFileName);
+
+        DbActividades manejador = new DbActividades();
+        int r = manejador.actualizarImgClase(c);
+
+        if (r > 0) {
+            response.sendRedirect("/GYM/SvActividades");
+        } else {
+            response.sendRedirect("/GYM/index.jsp");
+        }
     }
-    return name.substring(lastIndexOf);
-}
 
+    private String getFileExtension(String name) {
+        int lastIndex = name.lastIndexOf(".");
+        if (lastIndex == -1) return "";
+        return name.substring(lastIndex);
+    }
 }
