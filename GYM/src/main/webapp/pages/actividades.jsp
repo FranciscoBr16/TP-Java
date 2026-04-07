@@ -138,7 +138,7 @@ ArrayList<Clase> actividades = (ArrayList<Clase>)request.getAttribute("actividad
 		  <%} %>
 		<% if(user != null){  %>
 		<% if(user.isAdmin()){ %>
-		<div> <a href="/GYM/SvPreAltaActividad"><button class="boton">Nueva Actividad</button></a> </div>
+		<div style="margin-bottom: 40px;"> <a href="/GYM/SvPreAltaActividad"><button class="boton">Nueva Actividad</button></a> </div>
 		
 		<% } }%>
 		

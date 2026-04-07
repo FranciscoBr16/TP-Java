@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.DbProducto;
+import entities.Usuario;
 
 
 @WebServlet("/SvModificarProductos")
@@ -22,12 +23,23 @@ public class SvModificarProductos extends HttpServlet {
     }
 
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DbProducto db = new DbProducto();
-		request.setAttribute("productos", db.getAllProductos());
-		request.getRequestDispatcher("/pages/modificarProductos.jsp").forward(request,response);
-	}
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+    	
+    	Usuario usuario = (Usuario) request.getSession().getAttribute("user");
+        if (usuario == null || !usuario.isAdmin()) {
+            response.sendRedirect("/GYM/index.jsp");
+            return;
+        }
+
+        String nombre      = request.getParameter("txtBuscar");
+        String ordenPrecio = request.getParameter("ordenPrecio");
+
+        DbProducto db = new DbProducto();
+        request.setAttribute("productos", db.getAllProductos(nombre, ordenPrecio));
+        request.getRequestDispatcher("/pages/modificarProductos.jsp").forward(request, response);
+    }
 
 
 	@Override

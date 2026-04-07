@@ -2,119 +2,122 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entities.Empleado"%>
 <%@page import="entities.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Modificar Salon</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@347&display=swap"
-	rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="/GYM/style/estilosGenerales.css"/>
+<link rel="stylesheet" href="/GYM/style/estilosGenerales2.css"/>
+<link rel="stylesheet" href="/GYM/style/listaUsuarios.css"/>
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon"/>
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-	crossorigin="anonymous" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-	crossorigin="anonymous">
-  </script>
+<style>
+  select {
+    background-color: #2a2728; border: 1px solid #3d3a3b;
+    color: #ffffff; border-radius: 8px; padding: 8px 14px;
+    font-size: 15px; width: 100%; transition: border-color 150ms;
+  }
+  select:focus { outline: none; border-color: #d95126; }
+</style>
 
-
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
-<link rel="stylesheet" type="text/css" href="/GYM/style/actAltaEstilos.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
-
-<% Usuario user = (Usuario) session.getAttribute("user");%>
-<% Clase cla = (Clase) request.getAttribute("clase");%>
-
-
-
+<% Usuario user = (Usuario) session.getAttribute("user"); %>
+<% Clase cla = (Clase) request.getAttribute("clase"); %>
 </head>
 
 <header>
-		<%
-		    request.setAttribute("activePage", "reservas");
-		%>
-		<jsp:include page="/pages/components/navbar.jsp" />
-		
-	</header>
+  <% request.setAttribute("activePage", "reservas"); %>
+  <jsp:include page="/pages/components/navbar.jsp" />
+</header>
 
 <body>
 
+  <div class="page-wrapper">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
 
-	<div class="contenedor">
-		<div class="formulario">
-			<div class="headerForm">
-				<p class= "titulo">Modificar <span class="anaranjado">Salon </span></p>
-			</div>
-			<form action="/GYM/SvModificarSalon" method="POST" class="formulario-campos" >
-				
-				<div class="campo">
-					<label>Id del salon:</label> 
-					<input value="<%=cla.getIdClase() %>" type="number" name="id" readonly/> 
-				</div>
-				
-				<div class="campo">
-					<label>Nombre de la Clase:</label> 
-					<input value="<%=cla.getNombre() %>" type="text" name="nombre" required/> 
-				</div>
-					
-				<div class="campo">
-					<label>Cupo:</label>
-					<input value="<%=cla.getCupo() %>" class="cupo" type="number" name="cupo" required />
-				</div>
-				
-				<div class="campo">
-					<label for="opciones">D�a:</label>
-					<select name="dia" id="opciones">
-        				<option <%if(cla.getDia().equals("Lunes")){ %> selected<% }%>value="Lunes">Lunes</option>
-        				<option <%if(cla.getDia().equals("Martes")){ %> selected<% }%> value="Martes">Martes</option>
-        				<option <%if(cla.getDia().equals("Miercoles")){ %> selected<% }%> value="Miercoles">Miercoles</option>
-        				<option <%if(cla.getDia().equals("Jueves")){ %> selected<% }%> value="Jueves">Jueves</option>
-        				<option <%if(cla.getDia().equals("Viernes")){ %> selected<% }%> value="Viernes">Viernes</option>
-    				
-    				</select>
-					<label for="opciones">Horario:</label>
-					<select name="horario" id="opciones">
-        				<option <%if(cla.getHorario().equals("8:00")){ %> selected<% }%> value="8:00">8:00</option>
-        				<option <%if(cla.getHorario().equals("9:00")){ %> selected<% }%> value="9:00">9:00</option>
-        				<option <%if(cla.getHorario().equals("10:00")){ %> selected<% }%> value="10:00">10:00</option>
-        				<option <%if(cla.getHorario().equals("11:00")){ %> selected<% }%> value="11:00">11:00</option>
-        				<option <%if(cla.getHorario().equals("12:00")){ %> selected<% }%> value="12:00">12:00</option>
-        				<option <%if(cla.getHorario().equals("13:00")){ %> selected<% }%> value="13:00">13:00</option>
-        				<option <%if(cla.getHorario().equals("14:00")){ %> selected<% }%> value="14:00">14:00</option>
-        				<option <%if(cla.getHorario().equals("15:00")){ %> selected<% }%> value="15:00">15:00</option>
-        				<option <%if(cla.getHorario().equals("16:00")){ %> selected<% }%> value="16:00">16:00</option>
-        				<option <%if(cla.getHorario().equals("17:00")){ %> selected<% }%> value="17:00">17:00</option>
-        				<option <%if(cla.getHorario().equals("18:00")){ %> selected<% }%> value="18:00">18:00</option>
-        				<option <%if(cla.getHorario().equals("19:00")){ %> selected<% }%> value="19:00">19:00</option>
-    				</select>
-					
-				</div>
-				<div class="campo">
-				<label for="opciones">Tipo:</label>
-					<input type="text" class="tipoACT" name="tipo" value="musculacion" readonly/>
-				</div>
-				<div class="final">
-					<button class="boton" type="submit">Modificar</button>
 
-				</div>
-			</form>
-		</div>
-	</div>
+        <div class="d-flex align-items-center gap-3 mb-4">
+          <div class="avatar-iniciales" style="width:52px;height:52px;font-size:20px;flex-shrink:0;">
+            <i class="bi bi-building"></i>
+          </div>
+          <div>
+            <h2 class="mb-0" style="font-size:1.75rem; color:white;">Modificar Salón</h2>
+            <div class="accent-line"></div>
+          </div>
+        </div>
+
+
+        <div class="filtros-card formulario">
+          <form action="/GYM/SvModificarSalon" method="POST">
+
+
+
+            <div class="mb-3">
+              <label>ID del salón</label>
+              <input value="<%=cla.getIdClase()%>" type="number" name="id" readonly
+                     style="background:#1a1818;color:#666;cursor:not-allowed;width:100%"/>
+            </div>
+
+            <div class="mb-4">
+              <label>Nombre de la clase</label>
+              <input value="<%=cla.getNombre()%>" type="text" name="nombre" required style="width:100%"/>
+            </div>
+
+
+            <div class="mb-3">
+              <label>Cupo</label>
+              <input value="<%=cla.getCupo()%>" type="number" name="cupo" required style="width:100%"/>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-sm-6">
+                <label>Día</label>
+                <select name="dia">
+                  <% String[] dias = {"Lunes","Martes","Miercoles","Jueves","Viernes"}; %>
+                  <% for (String d : dias) { %>
+                    <option value="<%=d%>" <%=cla.getDia().equals(d) ? "selected" : ""%>><%=d%></option>
+                  <% } %>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label>Horario</label>
+                <select name="horario">
+                  <% String[] horarios = {"8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00"}; %>
+                  <% for (String h : horarios) { %>
+                    <option value="<%=h%>" <%=cla.getHorario().equals(h) ? "selected" : ""%>><%=h%></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label>Tipo de actividad</label>
+              <input type="text" name="tipo" value="musculacion" readonly
+                     style="background:#1a1818;color:#666;cursor:not-allowed;width:100%"/>
+            </div>
+
+
+            <div class="d-flex align-items-center gap-2" style="border-top:1px solid #2e2b2c;padding-top:16px;">
+              <button type="submit" class="btn-filtrar">
+                <i class="bi bi-pencil-square me-1"></i> Modificar
+              </button>
+              <a href="/GYM/SvMusculacion" class="boton4">Cancelar</a>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </body>
 <jsp:include page="/pages/components/carrito.jsp" />
 </html>
