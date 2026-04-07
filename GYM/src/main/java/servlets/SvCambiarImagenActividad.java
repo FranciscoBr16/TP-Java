@@ -13,13 +13,16 @@ import entities.Clase;
 
 @WebServlet("/SvCambiarImagenActividad")
 @MultipartConfig(
-        fileSizeThreshold = 1024 * 1024 * 10,
-        maxFileSize = 1024 * 1024 * 50,
-        maxRequestSize = 1024 * 1024 * 100
+    fileSizeThreshold = 1024 * 1024 * 10,
+    maxFileSize = 1024 * 1024 * 50,
+    maxRequestSize = 1024 * 1024 * 100
 )
 public class SvCambiarImagenActividad extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    
+    // Definimos la carpeta relativa dentro de webapp
+    private static final String UPLOAD_DIR = "img/inputs";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,47 +36,52 @@ public class SvCambiarImagenActividad extends HttpServlet {
 
         Part filePart = request.getPart("imagen");
 
-        if (filePart == null || filePart.getSize() == 0) {
-            response.sendRedirect("/GYM/SvActividades");
-            return;
-        }
+        if (filePart != null && filePart.getSize() > 0) {
+            String originalName = filePart.getSubmittedFileName();
+            String extension = getFileExtension(originalName);
+            String newFileName = "act" + id + extension;
 
-        String originalName = filePart.getSubmittedFileName();
-        String extension = getFileExtension(originalName);
+            // --- LÓGICA DE RUTA RELATIVA ---
+            // Obtiene la ruta real en el servidor (funciona en cualquier PC)
+            String applicationPath = request.getServletContext().getRealPath("");
+            String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
 
-        String newFileName = "act" + id + extension;
+            File uploadDir = new File(uploadFilePath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
+            }
 
-        String projectPath = "C:\\Users\\bebof\\Desktop\\Bebo\\5to Año\\Java\\TP-Java\\GYM\\src\\main\\webapp\\img\\inputs";
-
-        File uploadDir = new File(projectPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs();
-        }
-
-        // borrar imagen anterior
-        File[] files = uploadDir.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.getName().startsWith("act" + id)) {
-                    f.delete();
+            // --- BORRAR IMAGEN ANTERIOR ---
+            // Buscamos cualquier archivo que empiece con "actID" para que no queden duplicados
+            File[] files = uploadDir.listFiles();
+            if (files != null) {
+                for (File f : files) {
+                    if (f.getName().startsWith("act" + id + ".")) { // Agregué el "." para ser más preciso
+                        f.delete();
+                    }
                 }
             }
-        }
 
-        String filePath = projectPath + File.separator + newFileName;
+            // Guardar el nuevo archivo
+            String fullPath = uploadFilePath + File.separator + newFileName;
+            filePart.write(fullPath);
 
-        filePart.write(filePath);
+            // --- ACTUALIZAR BASE DE DATOS ---
+            Clase c = new Clase(id);
+            // La ruta que guardamos en la DB es la que entiende el navegador
+            c.setImagen("/GYM/" + UPLOAD_DIR + "/" + newFileName);
 
-        Clase c = new Clase(id);
-        c.setImagen("/GYM/img/inputs/" + newFileName);
+            DbActividades manejador = new DbActividades();
+            int r = manejador.actualizarImgClase(c);
 
-        DbActividades manejador = new DbActividades();
-        int r = manejador.actualizarImgClase(c);
-
-        if (r > 0) {
-            response.sendRedirect("/GYM/SvActividades");
+            if (r > 0) {
+                response.sendRedirect("/GYM/SvActividades");
+            } else {
+                response.sendRedirect("/GYM/index.jsp");
+            }
         } else {
-            response.sendRedirect("/GYM/index.jsp");
+            // Si no enviaron archivo, volvemos a la lista
+            response.sendRedirect("/GYM/SvActividades");
         }
     }
 
