@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Log In</title>
+<title>Modificar Perfil</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +27,6 @@
 	crossorigin="anonymous">
   </script>
 
-
 <link rel="stylesheet" type="text/css" href="/GYM/style/formularioEstilos.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales.css" />
 <link rel="stylesheet" type="text/css" href="/GYM/style/estilosGenerales2.css" />
@@ -35,6 +34,29 @@
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
 <% Usuario user = (Usuario) session.getAttribute("user");%>
+
+<style>
+    .bottomForm {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .boton-cancelar {
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        padding: 10px 25px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        transition: 0.3s;
+    }
+    .boton-cancelar:hover {
+        background-color: #5a6268;
+        color: white;
+    }
+</style>
 
 </head>
 
@@ -44,7 +66,6 @@
 		    request.setAttribute("activePage", "none");
 		%>
 		<jsp:include page="/pages/components/navbar.jsp" />
-		
 	</header>
 
 	<div class="contenedor">
@@ -54,6 +75,29 @@
 		</div>
 		
 		<hr>
+		
+		<div class="alert alert-info d-flex align-items-center" role="alert" style="font-size: 0.9rem;">
+		  <i class="bi bi-shield-lock-fill me-2" style="font-size: 1.2rem;"></i>
+		  <div>
+		    Por seguridad, debes ingresar tu <strong>contraseña actual</strong> para aplicar cualquier cambio.
+		  </div>
+		</div>
+
+			<div id="clientErrorMessage" class="alert alert-danger" style="display: none;"></div>
+
+			<% String error = request.getParameter("error"); %>
+
+			<% if ("passwordMismatch".equals(error)) { %>
+   				 <div class="alert alert-danger">
+      				  Las nuevas contraseñas no coinciden.
+   				</div>
+				<% } %>
+
+				<% if ("wrongPassword".equals(error)) { %>
+  			 	<div class="alert alert-danger">
+       			La contraseña actual es incorrecta.
+   				</div>
+   				<% } %>
 
 			<form action="/GYM/SvModificacionUsuario" method="POST" class="formulario-campos">
 				<div class="campo">
@@ -64,11 +108,22 @@
 					<label for="email">Correo Electrónico:</label> 
 					<input class="inputLargo" type="email" name="email" id="email" value="<%=user.getEmail()%>"/>
 				</div>
+				
 				<div class="campo">
-					
-					<label for="password">Contraseña:</label>
-					<input class="inputMediano" type="password" name="password" id="password" value="<%=user.getPassword()%>"/>
+					<label for="currentPassword"><strong>Contraseña actual:</strong></label>
+					<input class="inputMediano" type="password" name="currentPassword" id="currentPassword" required />
 				</div>
+
+				<div class="campo">
+					<label for="newPassword">Nueva contraseña (opcional):</label>
+					<input class="inputMediano" type="password" name="newPassword" id="newPassword" />
+				</div>
+
+				<div class="campo">
+					<label for="confirmPassword">Confirmar nueva contraseña:</label>
+					<input class="inputMediano" type="password" name="confirmPassword" id="confirmPassword" />
+				</div>
+				
 				<div class="campo">
 					<label for="nombre">Nombre:</label> 
 					<input class="inputMediano" type="text" name="name" id="name" value="<%=user.getNombre()%>"/> 
@@ -107,23 +162,38 @@
 						<div class="opcion">
 							<label for="imagen5"><img class="opcionimg" src="/GYM/img/perfil/imgperfil5.jpg" alt="Imagen Puño"></label>
 				            <input type="radio"  name="imagenesPerfil" value="imgperfil5.jpg" <% if (user.getImagen().equals("/GYM/img/perfil/imgperfil5.jpg")){%>checked <%} %> required>
-				            
 				        </div>
-						
 				     </div>
 				  </div>
 				
 				<div class="bottomForm">
 					<button class="boton" type="submit"> Aplicar cambios </button>
+					<a href="/GYM/SvUsuario" class="boton-cancelar"> Cancelar </a>
 				</div>
 				</form>
-			
 		</div>
-
-		
 	</div>
 
-</body>
-<jsp:include page="/pages/components/carrito.jsp" />
+	<script>
+		document.querySelector("form").addEventListener("submit", function(e) {
+		    const newPass = document.getElementById("newPassword").value;
+		    const confirmPass = document.getElementById("confirmPassword").value;
+			const errorDiv = document.getElementById("clientErrorMessage");
 
+			errorDiv.style.display = "none";
+			errorDiv.innerHTML = "";
+
+		    if (newPass !== "" || confirmPass !== "") {
+		        if (newPass !== confirmPass) {
+		            e.preventDefault();
+					errorDiv.innerHTML = "Las nuevas contraseñas no coinciden.";
+					errorDiv.style.display = "block";
+					window.scrollTo(0, 0);
+		        }
+		    }
+		});
+	</script>
+
+<jsp:include page="/pages/components/carrito.jsp" />
+</body>
 </html>

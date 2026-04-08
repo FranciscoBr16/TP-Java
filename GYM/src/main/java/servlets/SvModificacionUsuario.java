@@ -31,7 +31,9 @@ public class SvModificacionUsuario extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
-		String clave = request.getParameter("password");
+		String currentPassword = request.getParameter("currentPassword");
+		String newPassword = request.getParameter("newPassword");
+		String confirmPassword = request.getParameter("confirmPassword");
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String phonenumber = request.getParameter("phonenumber");
@@ -40,7 +42,26 @@ public class SvModificacionUsuario extends HttpServlet {
 		String img = "/GYM/img/perfil/" + request.getParameter("imagenesPerfil");
 		String dni = ((Usuario)request.getSession().getAttribute("user")).getDni();
 
-		Usuario user = new Usuario(dni, name, surname, clave, email, phonenumber, fecha, img);
+		
+		Usuario userSession = (Usuario) request.getSession().getAttribute("user");
+
+		if (!userSession.getPassword().equals(currentPassword)) {
+		    response.sendRedirect("/GYM/pages/modificarPerfil.jsp?error=wrongPassword");
+		    return;
+		}
+
+		String claveFinal = userSession.getPassword();
+
+		if (newPassword != null && !newPassword.isEmpty()) {
+		    
+		    if (!newPassword.equals(confirmPassword)) {
+		    	response.sendRedirect("/GYM/pages/modificarPerfil.jsp?error=passwordMismatch");
+		        return;
+		    }
+		    
+		    claveFinal = newPassword;
+		}
+		Usuario user = new Usuario(dni, name, surname, claveFinal, email, phonenumber, fecha, img);
 
 		DbUsuario manejador = new DbUsuario();
 
