@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Log In</title>
+<title>Modificar Producto</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,10 +38,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 
-<% Usuario user = (Usuario) session.getAttribute("user");
- Producto producto = (Producto) request.getAttribute("producto");
- 
+<% 
+    Usuario user = (Usuario) session.getAttribute("user");
+    Producto producto = (Producto) request.getAttribute("producto");
+    
+    // IMPORTANTE: Guardamos el ID en sesión para que el Servlet de imagen lo encuentre
+    session.setAttribute("idproducto", producto.getIdProducto());
+    
+    if (user == null || !user.isAdmin()) {
+        response.sendRedirect("/GYM/pages/logIn.jsp");
+        return; 
+    }
 %>
+
+
+   
 
 </head>
 
@@ -61,6 +72,16 @@
 		</div>
 		<hr>
 		
+            <div class="campoCentrado mb-4 text-center">
+                <img class="imgMuestra mb-3" src="<%=producto.getImagen()%>" 
+                     style="max-width: 200px; border-radius: 10px; border: 2px solid #d95126;">
+                <div class="d-block">
+                    <a href="/GYM/pages/modificarImagenProducto.jsp">
+                        <button class="boton4">Cambiar Imágen</button>
+                    </a>
+                </div>
+            </div>
+            <hr>
 					
 					
 			<form action="/GYM/SvModificarPrecioProducto" method= "POST" class="formulario-campos" >
@@ -77,6 +98,9 @@
 				</div>
 			<button class="botonPrecio" type="submit"> Modificar Precio</button>
 			</form>
+            
+            <hr>
+
 			<form action="/GYM/SvModificacionProducto" method="POST" class="formulario-campos">
 				<div class="campo">
 					<label for="idproducto">Id producto:</label> 

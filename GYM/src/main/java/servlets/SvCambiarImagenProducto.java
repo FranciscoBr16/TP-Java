@@ -7,30 +7,29 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import db.DbEmpleado;
-import entities.Empleado;
+import db.DbProducto;
+import entities.Producto;
 
-@WebServlet("/SvCambiarImagenEmpleado")
+@WebServlet("/SvCambiarImagenProducto")
 @MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 10,
-    maxFileSize = 1024 * 1024 * 50,
-    maxRequestSize = 1024 * 1024 * 100
+    fileSizeThreshold = 1024 * 1024 * 10,  // 10 MB
+    maxFileSize = 1024 * 1024 * 50,        // 50 MB
+    maxRequestSize = 1024 * 1024 * 100     // 100 MB
 )
-public class SvCambiarImagenEmpleado extends HttpServlet {
+public class SvCambiarImagenProducto extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     
+    private static final String UPLOAD_DIR = "img/productos";
 
-    private static final String UPLOAD_DIR = "img/empleados";
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-        Integer id = (Integer) request.getSession().getAttribute("idempleado");
+        Integer id = (Integer) request.getSession().getAttribute("idproducto");
 
         if (id == null) {
-            response.sendRedirect("/GYM/SvEmpleados");
+            response.sendRedirect("/GYM/SvProductos");
             return;
         }
 
@@ -39,9 +38,8 @@ public class SvCambiarImagenEmpleado extends HttpServlet {
 
         if (fileName != null && !fileName.isEmpty()) {
             String extension = getFileExtension(fileName);
-            String newFileName = "emp_" + id + extension;
+            String newFileName = "prod_" + id + extension;
 
-            // --- RUTA DINÁMICA (PORTABLE) ---
             String applicationPath = request.getServletContext().getRealPath("");
             String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
 
@@ -50,36 +48,23 @@ public class SvCambiarImagenEmpleado extends HttpServlet {
                 uploadDir.mkdirs();
             }
 
-
-            File[] files = uploadDir.listFiles();
-            if (files != null) {
-                for (File f : files) {
-                    if (f.getName().startsWith("emp_" + id + ".")) {
-                        f.delete();
-                    }
-                }
-            }
-
-
             String fullPath = uploadFilePath + File.separator + newFileName;
             filePart.write(fullPath);
 
+            Producto p = new Producto();
+            p.setIdProducto(id);
+            p.setImagen("/GYM/" + UPLOAD_DIR + "/" + newFileName);
 
-            Empleado e = new Empleado(id);
-
-            e.setImagen("/GYM/" + UPLOAD_DIR + "/" + newFileName);
-
-            DbEmpleado manejador = new DbEmpleado();
-            int r = manejador.actualizarImg(e);
+            DbProducto manejador = new DbProducto();
+            int r = manejador.actualizarImg(p);
 
             if (r > 0) {
-                response.sendRedirect("/GYM/SvEmpleados");
+                response.sendRedirect("/GYM/SvProductos");
             } else {
                 response.sendRedirect("/GYM/index.jsp");
             }
         } else {
-
-            response.sendRedirect("/GYM/SvEmpleados");
+            response.sendRedirect("/GYM/SvProductos");
         }
     }
 

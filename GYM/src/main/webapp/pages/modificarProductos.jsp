@@ -36,6 +36,8 @@
 <link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
 <% Usuario user = (Usuario) session.getAttribute("user");
 ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("productos");
+String query = request.getParameter("txtBuscar") != null ? request.getParameter("txtBuscar") : "";
+String orden = request.getParameter("ordenPrecio") != null ? request.getParameter("ordenPrecio") : "";
 %>
 </head>
 
@@ -50,6 +52,28 @@ ArrayList<Producto> productos = (ArrayList<Producto>)request.getAttribute("produ
 
 
     <div class="contenedor">
+    
+    <div class="seccion-filtros">
+            <form action="/GYM/SvModificarProductos" method="GET" class="form-filtro">
+                <div class="input-filtro">
+                    <label><i class="bi bi-search"></i> Buscar Producto:</label>
+                    <input type="text" name="txtBuscar" value="<%= query %>" placeholder="Nombre del producto...">
+                </div>
+                
+                <div class="input-filtro" style="flex-grow: 0.5;">
+                    <label><i class="bi bi-sort-down"></i> Precio:</label>
+                    <select name="ordenPrecio">
+                        <option value="" <%= orden.equals("") ? "selected" : "" %>>Relevancia</option>
+                        <option value="asc" <%= orden.equals("asc") ? "selected" : "" %>>Menor precio</option>
+                        <option value="desc" <%= orden.equals("desc") ? "selected" : "" %>>Mayor precio</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="boton2" style="margin:0; width: 120px;">Filtrar</button>
+                <a href="/GYM/SvModificarProductos" class="boton-linea" style="margin:0; text-align:center; width: 120px;">Limpiar</a>
+            </form>
+        </div>
+    
         
         
         <div class="caja">

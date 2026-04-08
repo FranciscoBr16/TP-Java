@@ -348,40 +348,57 @@ public class DbProducto extends DbHandler {
 		}
 	}
 
-	public ArrayList<Producto> getAllProductos() {
-		ArrayList<Producto> productos = new ArrayList<>();
-		String sql = "SELECT p.id_producto, p.stock, p.nombre, p.imagen, pr.precio "
-				+ "FROM producto p "
-				+ "JOIN precio pr ON pr.id_producto = p.id_producto "
-				+ "WHERE pr.fecha_desde = ("
-				+ "   SELECT MAX(p2.fecha_desde) "
-				+ "   FROM precio p2 "
-				+ "   WHERE p2.id_producto = p.id_producto "
-				+ "     AND p2.fecha_desde <= CURRENT_DATE"
-				+ ")";
+	public ArrayList<Producto> getAllProductos(String nombre, String ordenPrecio) {
+	    ArrayList<Producto> productos = new ArrayList<>();
+	    
+	    StringBuilder sql = new StringBuilder(
+	        "SELECT p.id_producto, p.stock, p.nombre, p.imagen, pr.precio " +
+	        "FROM producto p " +
+	        "JOIN precio pr ON pr.id_producto = p.id_producto " +
+	        "WHERE pr.fecha_desde = (" +
+	        "   SELECT MAX(p2.fecha_desde) FROM precio p2 " +
+	        "   WHERE p2.id_producto = p.id_producto " +
+	        "     AND p2.fecha_desde <= CURRENT_DATE" +
+	        ")"
+	    );
 
-		try (Connection conn = this.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				ResultSet rs = pstmt.executeQuery()) {
+	    // Filtro por nombre
+	    if (nombre != null && !nombre.trim().isEmpty()) {
+	        sql.append(" AND p.nombre LIKE ?");
+	    }
 
-			while (rs.next()) {
-				Producto pro = new Producto();
-				pro.setIdProducto(rs.getInt("id_producto"));
-				pro.setStock(rs.getInt("stock"));
-				pro.setNombre(rs.getString("nombre"));
-				pro.setImagen(rs.getString("imagen"));
+	    // Orden por precio
+	    if ("asc".equals(ordenPrecio)) {
+	        sql.append(" ORDER BY pr.precio ASC");
+	    } else if ("desc".equals(ordenPrecio)) {
+	        sql.append(" ORDER BY pr.precio DESC");
+	    }
 
-				Precio pre = new Precio(rs.getDouble("precio"));
-				pro.setPrecio(pre);
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql.toString())) {
 
-				productos.add(pro);
-			}
+	        // Asignar el parámetro del LIKE si corresponde
+	        if (nombre != null && !nombre.trim().isEmpty()) {
+	            pstmt.setString(1, "%" + nombre.trim() + "%");
+	        }
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            while (rs.next()) {
+	                Producto pro = new Producto();
+	                pro.setIdProducto(rs.getInt("id_producto"));
+	                pro.setStock(rs.getInt("stock"));
+	                pro.setNombre(rs.getString("nombre"));
+	                pro.setImagen(rs.getString("imagen"));
+	                pro.setPrecio(new Precio(rs.getDouble("precio")));
+	                productos.add(pro);
+	            }
+	        }
 
-		return productos;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return productos;
 	}
 
 	public int actualizarIndumentaria(Indumentaria i) {
