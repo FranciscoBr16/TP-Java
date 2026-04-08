@@ -105,15 +105,13 @@
                         </a>
                     </li>
 
-                    <% if (user != null) { %>
-                        <%-- Reservas solo si está logueado --%>
-                        <li class="nav-item">
-						    <a class="nav-link text-light <%= ("reservas".equals(activePage) || "salon".equals(activePage)) ? "active" : "" %>" id="links"
-						       href="/GYM/pages/reservas.jsp">
-						        Reservas
-						    </a>
-						</li>
-                    <% } %>
+                    <%-- Reservas ahora es visible para todos (registrados y no registrados) --%>
+                    <li class="nav-item">
+					    <a class="nav-link text-light <%= ("reservas".equals(activePage) || "salon".equals(activePage)) ? "active" : "" %>" id="links"
+					       href="/GYM/pages/reservas.jsp">
+					        Reservas
+					    </a>
+					</li>
 
                     <li class="nav-item">
                         <a class="nav-link text-light <%= "nosotros".equals(activePage) ? "active" : "" %>" id="links"
