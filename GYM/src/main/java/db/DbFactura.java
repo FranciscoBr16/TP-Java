@@ -194,6 +194,25 @@ public class DbFactura extends DbHandler{
 	        return 0;
 	    }
 	}
+	
+	public boolean tienePendientes(String dni) {
+	    String sql = "SELECT COUNT(*) FROM factura WHERE dni = ? AND estado = 'Pendiente de pago'";
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setString(1, dni);
+	        try (ResultSet rs = pstmt.executeQuery()) {
+	            if (rs.next()) {
+	                return rs.getInt(1) > 0;
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return false;
+	}
 
 	public boolean crearDetalleFactura(Detalle_Factura df) {
 	    PreparedStatement pstmt = null;

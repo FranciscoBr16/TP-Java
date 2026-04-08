@@ -23,6 +23,10 @@ public class LogicaFactura {
         if (abono == null) {
             throw new Exception("El abono seleccionado no existe");
         }
+        
+        if (dbFactura.tienePendientes(user.getDni())) {
+            throw new Exception("Tenés facturas pendientes de pago. Saldá tu deuda antes de realizar una nueva compra.");
+        }
 
         // 2 Validación de contrato activo si es mensual
         if (abono.es_mensual()) {
