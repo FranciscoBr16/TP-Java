@@ -18,6 +18,7 @@ import entities.Factura;
 import entities.ItemCarrito;
 import entities.Producto;
 import entities.Usuario;
+import logic.LogicaFactura;
 
 @WebServlet("/SvConfirmarCompra")
 public class SvConfirmarCompra extends HttpServlet {
@@ -59,77 +60,28 @@ public class SvConfirmarCompra extends HttpServlet {
        POST → Confirmar compra
        ========================= */
     @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
-        ArrayList<ItemCarrito> carrito =
-                (ArrayList<ItemCarrito>) session.getAttribute("carrito");
+        ArrayList<ItemCarrito> carrito = (ArrayList<ItemCarrito>) session.getAttribute("carrito");
 
         if (user == null || carrito == null || carrito.isEmpty()) {
             response.sendRedirect("/GYM/SvProductos");
             return;
         }
 
-        DbFactura dbFactura = new DbFactura();
-        DbProducto dbProducto = new DbProducto();
-
         try {
-            /* ===== VALIDAR STOCK ===== */
-            for (ItemCarrito item : carrito) {
-                int stockActual = dbProducto.getProducto(item).getStock();
-                if (item.getCantidad() > stockActual) {
-                    request.setAttribute("error",
-                        "No hay stock suficiente del producto: " + item.getNombre());
-                    request.getRequestDispatcher("/pages/finalCompra.jsp")
-                           .forward(request, response);
-                    return;
-                }
-            }
+            LogicaFactura logica = new LogicaFactura();
+            logica.comprarProductos(carrito, user);
 
-            /* ===== CREAR FACTURA ===== */
-            Factura factura = new Factura();
-            factura.setFecha(LocalDate.now());
-            factura.setTipo("C");
-            factura.setCUIT("6942069");
-            factura.setDNI(user.getDni());
-            factura.setEstado("Pendiente de pago");
-
-            double total = 0;
-            for (ItemCarrito item : carrito) {
-                total += item.getCantidad() * item.getPrecio();
-            }
-            factura.setTotal(total);
-
-            int nroFactura = dbFactura.nuevaFactura(factura);
-
-
-
-            /* ===== CREAR DETALLES + DESCONTAR STOCK ===== */
-            for (ItemCarrito item : carrito) {
-
-            	Detalle_Factura df = new Detalle_Factura(nroFactura,item.getCantidad(),item.getIdProducto(),item.getCantidad() * item.getPrecio());
-                dbFactura.crearDetalleFactura(df);
-
-                Producto p = new Producto();
-                p.setIdProducto(item.getIdProducto());
-
-                dbProducto.actualizarStock(p, item.getCantidad());
-            }
-
-            /* ===== LIMPIAR CARRITO ===== */
             session.removeAttribute("carrito");
-
-            /* ===== REDIRIGIR A MIS FACTURAS ===== */
             response.sendRedirect("/GYM/SvMisFacturas");
 
         } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("error",
-                "Ocurrió un error al confirmar la compra. Intente nuevamente.");
-            request.getRequestDispatcher("/pages/finalCompra.jsp")
-                   .forward(request, response);
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("/pages/finalCompra.jsp").forward(request, response);
         }
     }
 }

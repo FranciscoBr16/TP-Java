@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import entities.Abono;
 import entities.Detalle_Factura;
 import entities.Factura;
+import entities.ItemCarrito;
 import entities.Producto;
 import entities.Usuario;
 
@@ -712,6 +713,62 @@ public class DbFactura extends DbHandler{
 
 	    } finally {
 
+	        if (conn != null) {
+	            conn.setAutoCommit(true);
+	            conn.close();
+	        }
+	    }
+	}
+	
+	public void comprarProductos(Factura factura, ArrayList<ItemCarrito> carrito) throws Exception {
+	    Connection conn = null;
+	    try {
+	        conn = this.getConnection();
+	        conn.setAutoCommit(false);
+
+	        // 1 — Insertar factura
+	        PreparedStatement psFactura = conn.prepareStatement(
+	            "INSERT INTO factura (fecha, tipo, cuit, dni, total, estado) VALUES (?,?,?,?,?,?)",
+	            Statement.RETURN_GENERATED_KEYS
+	        );
+	        psFactura.setDate(1, java.sql.Date.valueOf(factura.getFecha()));
+	        psFactura.setString(2, factura.getTipo());
+	        psFactura.setString(3, factura.getCUIT());
+	        psFactura.setString(4, factura.getDNI());
+	        psFactura.setDouble(5, factura.getTotal());
+	        psFactura.setString(6, factura.getEstado());
+	        psFactura.executeUpdate();
+
+	        ResultSet rs = psFactura.getGeneratedKeys();
+	        if (!rs.next()) throw new Exception("No se pudo generar la factura");
+	        int nroFactura = rs.getInt(1);
+
+	        // 2 — Insertar detalles y descontar stock 
+	        PreparedStatement psDetalle = conn.prepareStatement(
+	            "INSERT INTO `detalle-factura` (nro_factura, id_producto, cantidad, sub_total) VALUES (?,?,?,?)"
+	        );
+	        PreparedStatement psStock = conn.prepareStatement(
+	            "UPDATE producto SET stock = stock - ? WHERE id_producto = ?"
+	        );
+
+	        for (ItemCarrito item : carrito) {
+	            psDetalle.setInt(1, nroFactura);
+	            psDetalle.setInt(2, item.getIdProducto());
+	            psDetalle.setInt(3, item.getCantidad());
+	            psDetalle.setDouble(4, item.getCantidad() * item.getPrecio());
+	            psDetalle.executeUpdate();
+
+	            psStock.setInt(1, item.getCantidad());
+	            psStock.setInt(2, item.getIdProducto());
+	            psStock.executeUpdate();
+	        }
+
+	        conn.commit();
+
+	    } catch (Exception e) {
+	        if (conn != null) conn.rollback();
+	        throw e;
+	    } finally {
 	        if (conn != null) {
 	            conn.setAutoCommit(true);
 	            conn.close();

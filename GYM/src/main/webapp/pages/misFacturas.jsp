@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="/GYM/style/estilosMisFacturas.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+<link rel="shortcut icon" href="/GYM/img/logo.ico" type="image/x-icon" />
+
 
 <%
     Usuario user = (Usuario) session.getAttribute("user");
