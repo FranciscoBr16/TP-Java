@@ -161,6 +161,39 @@ public class DbFactura extends DbHandler{
 		}
 		return facturas;
 	}
+	
+	public int cancelarFactura(Factura f) {
+	    String sql = "UPDATE factura SET estado = 'Rechazada' " +
+	                 "WHERE nro_factura = ? AND dni = ? AND estado = 'Pendiente de pago'";
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        pstmt.setInt(1, f.getNroFactura());
+	        pstmt.setString(2, f.getDNI());
+	        return pstmt.executeUpdate(); 
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
+	}
+	
+	public int cancelarFacturasVencidas() {
+	    String sql = "UPDATE factura SET estado = 'Rechazada' " +
+	                 "WHERE estado = 'Pendiente de pago' " +
+	                 "AND DATEDIFF(CURRENT_DATE, fecha) > 4";
+
+	    try (Connection conn = this.getConnection();
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+	        return pstmt.executeUpdate(); //
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
+	}
 
 	public boolean crearDetalleFactura(Detalle_Factura df) {
 	    PreparedStatement pstmt = null;
@@ -589,5 +622,81 @@ public class DbFactura extends DbHandler{
 	        e.printStackTrace();
 	    }
 	    return facturas;
+	}
+
+	public void comprarAbono(Abono a, Factura f) throws Exception {
+
+	    Connection conn = null;
+
+	    try {
+
+	        conn = this.getConnection();
+	        conn.setAutoCommit(false);
+
+	        // 1 obtener precio del abono
+	        PreparedStatement psAbono = conn.prepareStatement(
+	            "SELECT precio FROM abono WHERE id_abono = ?"
+	        );
+	        psAbono.setInt(1, a.getIdAbono());
+
+	        ResultSet rs = psAbono.executeQuery();
+
+	        if (!rs.next()) {
+	            throw new Exception("El abono no existe");
+	        }
+
+	        double precio = rs.getDouble("precio");
+
+	        // 2 crear factura
+	        PreparedStatement psFactura = conn.prepareStatement(
+	            "INSERT INTO factura (fecha,tipo,cuit, dni, total,estado) VALUES (?, ?, ? , ? , ? ,?)",
+	            Statement.RETURN_GENERATED_KEYS
+	        );
+
+	        psFactura.setDate(1, new java.sql.Date(System.currentTimeMillis()));
+	        psFactura.setString(2, f.getTipo());
+	        psFactura.setString(3, f.getCUIT());
+	        psFactura.setString(4, f.getDNI());
+	        psFactura.setDouble(5, precio);
+	        psFactura.setString(6, f.getEstado());
+
+	        psFactura.executeUpdate();
+
+	        ResultSet rsFactura = psFactura.getGeneratedKeys();
+
+	        int nroFactura = 0;
+
+	        if (rsFactura.next()) {
+	            nroFactura = rsFactura.getInt(1);
+	        }
+
+	        // 3 crear detalle factura
+	        PreparedStatement psDetalle = conn.prepareStatement(
+	            "INSERT INTO `detalle-factura-abono` (nro_factura, id_abono, precio) VALUES (?, ?, ?)"
+	        );
+
+	        psDetalle.setInt(1, nroFactura);
+	        psDetalle.setInt(2, a.getIdAbono());
+	        psDetalle.setDouble(3, precio);
+
+	        psDetalle.executeUpdate();
+
+	        conn.commit();
+
+	    } catch (Exception e) {
+
+	        if (conn != null) {
+	            conn.rollback();
+	        }
+
+	        throw e;
+
+	    } finally {
+
+	        if (conn != null) {
+	            conn.setAutoCommit(true);
+	            conn.close();
+	        }
+	    }
 	}
 }

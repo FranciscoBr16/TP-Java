@@ -51,7 +51,6 @@
                         </a>
                     </li>
 
-                    <%-- TODO: crear SvReservasAdmin (listado de reservas por día, musculación + actividades) --%>
                     <li class="nav-item">
                         <a class="nav-link text-light <%= "reservas-admin".equals(activePage) ? "active" : "" %>" id="links"
                            href="/GYM/SvReservasAdmin">
@@ -84,6 +83,13 @@
                         <a class="nav-link text-light <%= "nosotros".equals(activePage) ? "active" : "" %>" id="links"
                            href="/GYM/SvEmpleados">
                             Empleados
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-light <%= "facturas".equals(activePage) ? "active" : "" %>" id="links"
+                           href="/GYM/SvMisFacturas">
+                            Facturas
                         </a>
                     </li>
                     

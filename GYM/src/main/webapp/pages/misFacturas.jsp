@@ -39,7 +39,7 @@
 
 <header>
     <%
-        request.setAttribute("activePage", "none");
+        request.setAttribute("activePage","facturas");
     %>
     <jsp:include page="/pages/components/navbar.jsp" />
 </header>
@@ -180,20 +180,32 @@
                     </td>
 
                     <td style="text-align: center;">
-                        <% if (esAdmin && f.getEstado() != null && f.getEstado().equalsIgnoreCase("Pendiente de pago")) { %>
-                            <form action="SvConfirmarPago" method="post" style="display:inline;">
-                                <input type="hidden" name="action" value="confirmarPago">
-                                <input type="hidden" name="nroFactura" value="<%= f.getNroFactura() %>">
-                                <button type="submit" 
-                                        class="btn-confirmar-pago"
-                                        onclick="return confirm('¿Confirmar el pago de la factura #<%= f.getNroFactura() %>?')">
-                                    <i class="bi bi-check-lg"></i> Confirmar Pago
-                                </button>
-                            </form>
-                        <% } else { %>
-                            <span style="color: #999;">—</span>
-                        <% } %>
-                    </td>
+					    <% if (esAdmin && f.getEstado() != null && f.getEstado().equalsIgnoreCase("Pendiente de pago")) { %>
+					        <%-- Botón confirmar pago (ya existía) --%>
+					        <form action="SvConfirmarPago" method="post" style="display:inline;">
+					            <input type="hidden" name="action" value="confirmarPago">
+					            <input type="hidden" name="nroFactura" value="<%= f.getNroFactura() %>">
+					            <button type="submit" class="btn-confirmar-pago"
+					                    onclick="return confirm('¿Confirmar el pago de la factura #<%= f.getNroFactura() %>?')">
+					                <i class="bi bi-check-lg"></i> Confirmar Pago
+					            </button>
+					        </form>
+					
+					    <% } else if (!esAdmin && f.getEstado() != null && f.getEstado().equalsIgnoreCase("Pendiente de pago")) { %>
+					        <%-- Botón cancelar para usuarios --%>
+					        <form action="SvCancelarFactura" method="post" style="display:inline;">
+					            <input type="hidden" name="nroFactura" value="<%= f.getNroFactura() %>">
+					            <button type="submit" class="boton3"
+					                    style="background-color:#c0392b; border-color:#c0392b;"
+					                    onclick="return confirm('¿Cancelar la factura #<%= f.getNroFactura() %>? Esta acción no se puede deshacer.')">
+					                <i class="bi bi-x-lg"></i> Cancelar
+					            </button>
+					        </form>
+					
+					    <% } else { %>
+					        <span style="color: #999;">—</span>
+					    <% } %>
+					</td>
                 </tr>
 
                 <tr class="collapse fila-detalles" id="detalles-<%= f.getNroFactura() %>">

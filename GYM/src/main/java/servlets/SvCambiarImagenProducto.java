@@ -2,10 +2,14 @@ package servlets;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import db.DbProducto;
 import entities.Producto;
@@ -19,7 +23,7 @@ import entities.Producto;
 public class SvCambiarImagenProducto extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    
+
     private static final String UPLOAD_DIR = "img/productos";
 
     @Override
@@ -70,7 +74,9 @@ public class SvCambiarImagenProducto extends HttpServlet {
 
     private String getFileExtension(String name) {
         int lastIndex = name.lastIndexOf(".");
-        if (lastIndex == -1) return "";
+        if (lastIndex == -1) {
+			return "";
+		}
         return name.substring(lastIndex);
     }
 }

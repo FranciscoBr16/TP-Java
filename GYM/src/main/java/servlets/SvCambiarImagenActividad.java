@@ -6,7 +6,10 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import db.DbActividades;
 import entities.Clase;
@@ -20,11 +23,12 @@ import entities.Clase;
 public class SvCambiarImagenActividad extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    
+
     // Definimos la carpeta relativa dentro de webapp
     private static final String UPLOAD_DIR = "img/inputs";
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         Integer id = (Integer) request.getSession().getAttribute("idclase");
@@ -87,7 +91,9 @@ public class SvCambiarImagenActividad extends HttpServlet {
 
     private String getFileExtension(String name) {
         int lastIndex = name.lastIndexOf(".");
-        if (lastIndex == -1) return "";
+        if (lastIndex == -1) {
+			return "";
+		}
         return name.substring(lastIndex);
     }
 }

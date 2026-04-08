@@ -14,8 +14,8 @@ public class Usuario {
 	private ArrayList<Contrato> contratos= new ArrayList<>();
 	private ArrayList<Inscripcion> inscripciones= new ArrayList<>();
 
-	
-	
+
+
 
 	public ArrayList<Inscripcion> getInscripciones() {
 		return inscripciones;
@@ -109,7 +109,7 @@ public class Usuario {
 	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
-	
+
 	public boolean isEstado() {
 		return estado;
 	}
@@ -129,7 +129,7 @@ public class Usuario {
 		this.admin = false;
 		this.imagen = img;
 	}
-	
+
     public Usuario(String telefono, String dni, String password, String email, String nombre, String apellido,
 			boolean admin, LocalDate fechaNac, boolean estado) {
 		super();

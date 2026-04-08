@@ -350,7 +350,7 @@ public class DbProducto extends DbHandler {
 
 	public ArrayList<Producto> getAllProductos(String nombre, String ordenPrecio) {
 	    ArrayList<Producto> productos = new ArrayList<>();
-	    
+
 	    StringBuilder sql = new StringBuilder(
 	        "SELECT p.id_producto, p.stock, p.nombre, p.imagen, pr.precio " +
 	        "FROM producto p " +

@@ -42,7 +42,7 @@ public class SvModificacionUsuario extends HttpServlet {
 		String img = "/GYM/img/perfil/" + request.getParameter("imagenesPerfil");
 		String dni = ((Usuario)request.getSession().getAttribute("user")).getDni();
 
-		
+
 		Usuario userSession = (Usuario) request.getSession().getAttribute("user");
 
 		if (!userSession.getPassword().equals(currentPassword)) {
@@ -53,12 +53,12 @@ public class SvModificacionUsuario extends HttpServlet {
 		String claveFinal = userSession.getPassword();
 
 		if (newPassword != null && !newPassword.isEmpty()) {
-		    
+
 		    if (!newPassword.equals(confirmPassword)) {
 		    	response.sendRedirect("/GYM/pages/modificarPerfil.jsp?error=passwordMismatch");
 		        return;
 		    }
-		    
+
 		    claveFinal = newPassword;
 		}
 		Usuario user = new Usuario(dni, name, surname, claveFinal, email, phonenumber, fecha, img);

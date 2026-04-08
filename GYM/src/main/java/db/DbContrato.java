@@ -218,9 +218,8 @@ public class DbContrato extends DbHandler {
 	    }
 	}
 
-	// ===============================================================
-	// NUEVO MÉTODO: SUMAR CLASES A UN CONTRATO QUE YA ESTÁ ACTIVO
-	// ===============================================================
+
+
 	public boolean sumarClasesAlContrato(String dniUsuario, int idAbono) {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmtAbono = null;

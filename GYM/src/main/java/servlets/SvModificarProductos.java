@@ -24,9 +24,9 @@ public class SvModificarProductos extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
+
     	Usuario usuario = (Usuario) request.getSession().getAttribute("user");
         if (usuario == null || !usuario.isAdmin()) {
             response.sendRedirect("/GYM/index.jsp");

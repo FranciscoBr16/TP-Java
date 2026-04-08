@@ -217,15 +217,15 @@ public class DbUsuario extends DbHandler {
 	        }
 	    }
 	}
-	
+
 	public ArrayList<Usuario> getUsuariosConContrato(String filtraNombre, String filtraDni) {
 	    PreparedStatement pstmt = null;
 	    ResultSet rs = null;
 	    ArrayList<Usuario> lista = new ArrayList<>();
-	 
+
 	    try {
 	        Connection conn = this.getConnection();
-	 
+
 	        StringBuilder sql = new StringBuilder(
 	            "SELECT u.dni, u.nombre, u.apellido, u.correo, u.telefono, u.admin, u.imagen, c.id_abono, c.fecha_desde, c.fecha_hasta, c.clases_disponibles, a.nombreAbono " +
 	            "FROM usuario u " +
@@ -233,7 +233,7 @@ public class DbUsuario extends DbHandler {
 	            "LEFT JOIN abono a ON c.id_abono = a.id_abono " +
 	            "WHERE u.estado = 1 "
 	        );
-	 
+
 	        if (filtraNombre != null && !filtraNombre.trim().isEmpty()) {
 	            sql.append("AND (u.nombre LIKE ? OR u.apellido LIKE ?) ");
 	        }
@@ -241,9 +241,9 @@ public class DbUsuario extends DbHandler {
 	            sql.append("AND u.dni = ? ");
 	        }
 	        sql.append("ORDER BY u.apellido, u.nombre");
-	 
+
 	        pstmt = conn.prepareStatement(sql.toString());
-	 
+
 	        int idx = 1;
 	        if (filtraNombre != null && !filtraNombre.trim().isEmpty()) {
 	            String like = "%" + filtraNombre.trim() + "%";
@@ -253,9 +253,9 @@ public class DbUsuario extends DbHandler {
 	        if (filtraDni != null && !filtraDni.trim().isEmpty()) {
 	            pstmt.setString(idx++, filtraDni.trim());
 	        }
-	 
+
 	        rs = pstmt.executeQuery();
-	 
+
 	        while (rs.next()) {
 	            Usuario u = new Usuario(
 	                rs.getString("dni"),
@@ -264,47 +264,55 @@ public class DbUsuario extends DbHandler {
 	                "",                          // no exponemos la clave
 	                rs.getString("correo"),
 	                rs.getString("telefono"),
-	                null,                       
+	                null,
 	                rs.getString("imagen")
 	            );
 	            u.setAdmin(rs.getBoolean("admin"));
-	 
+
 	            int idAbono = rs.getInt("id_abono");
-	            if (!rs.wasNull()) {             
+	            if (!rs.wasNull()) {
 	                Abono abono = new Abono();
 	                abono.setIdAbono(idAbono);
 	                abono.setNombreAbono(rs.getString("nombreAbono"));
-	 
+
 	                Contrato contrato = new Contrato();
 	                contrato.setAbono(abono);
 	                contrato.setReservasRestantes(rs.getInt("clases_disponibles"));
-	 
+
 	                Date fd = rs.getDate("fecha_desde");
 	                Date fh = rs.getDate("fecha_hasta");
-	                if (fd != null) contrato.setFechaDesde(fd.toLocalDate());
-	                if (fh != null) contrato.setFechaHasta(fh.toLocalDate());
-	 
+	                if (fd != null) {
+						contrato.setFechaDesde(fd.toLocalDate());
+					}
+	                if (fh != null) {
+						contrato.setFechaHasta(fh.toLocalDate());
+					}
+
 	                u.getContratos().add(contrato);
 	            }
-	 
+
 	            lista.add(u);
 	        }
-	 
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (rs    != null) rs.close();
-	            if (pstmt != null) pstmt.close();
+	            if (rs    != null) {
+					rs.close();
+				}
+	            if (pstmt != null) {
+					pstmt.close();
+				}
 	            this.cerrarConnection();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
-	 
+
 	    return lista;
 	}
-	
+
 	public Usuario getUsuarioByDni(String dni){
 
 	    PreparedStatement pstmt=null;
@@ -344,7 +352,7 @@ public class DbUsuario extends DbHandler {
 
 	    return null;
 	}
-	
+
 	public int actualizarUsuarioAdmin(Usuario user) {
 
 	    PreparedStatement pstmt = null;
@@ -375,7 +383,9 @@ public class DbUsuario extends DbHandler {
 
 	    } finally {
 	        try {
-	            if (pstmt != null) pstmt.close();
+	            if (pstmt != null) {
+					pstmt.close();
+				}
 	            this.cerrarConnection();
 	        } catch (SQLException e) {
 	            e.printStackTrace();

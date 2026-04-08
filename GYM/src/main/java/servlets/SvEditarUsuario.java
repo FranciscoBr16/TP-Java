@@ -5,7 +5,10 @@ import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import db.DbUsuario;
 import entities.Usuario;
@@ -15,9 +18,10 @@ public class SvEditarUsuario extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	
+
         HttpSession session = request.getSession(false);
         Usuario userLogueado = (session != null) ? (Usuario) session.getAttribute("user") : null;
 
@@ -29,7 +33,7 @@ public class SvEditarUsuario extends HttpServlet {
         String dni = request.getParameter("dni");
 
         DbUsuario db = new DbUsuario();
-        Usuario u = db.getUsuarioByDni(dni); 
+        Usuario u = db.getUsuarioByDni(dni);
 
         request.setAttribute("usuario", u);
 
@@ -37,7 +41,8 @@ public class SvEditarUsuario extends HttpServlet {
                .forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String dni = request.getParameter("dni");

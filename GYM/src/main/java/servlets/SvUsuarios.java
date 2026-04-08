@@ -31,8 +31,8 @@ public class SvUsuarios extends HttpServlet {
             return;
         }
 
-        String filtraNombre = request.getParameter("nombre"); 
-        String filtraDni    = request.getParameter("dni");    
+        String filtraNombre = request.getParameter("nombre");
+        String filtraDni    = request.getParameter("dni");
 
         DbUsuario dbUsuario = new DbUsuario();
         ArrayList<Usuario> listaUsuarios = dbUsuario.getUsuariosConContrato(filtraNombre, filtraDni);
