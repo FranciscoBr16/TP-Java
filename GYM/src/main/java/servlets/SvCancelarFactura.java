@@ -22,7 +22,6 @@ public class SvCancelarFactura extends HttpServlet {
             throws ServletException, IOException {
     	
     	DbFactura db = new DbFactura();
-        db.cancelarFacturasVencidas();
         Usuario user = (Usuario) request.getSession().getAttribute("user");
         if (user == null) {
             response.sendRedirect("/GYM/index.jsp");

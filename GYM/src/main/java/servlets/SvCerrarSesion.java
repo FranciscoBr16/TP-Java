@@ -15,13 +15,13 @@ public class SvCerrarSesion extends HttpServlet {
 
     public SvCerrarSesion() {
         super();
-
     }
 
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().setAttribute("user",null);
+		request.getSession().removeAttribute("carrito");
 		response.sendRedirect("/GYM/index.jsp");
 
 	}

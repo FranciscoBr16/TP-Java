@@ -25,6 +25,8 @@ public class SvMisFacturas extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	DbFactura db = new DbFactura();
+        db.cancelarFacturasVencidas();
         Usuario usuario = (Usuario) request.getSession().getAttribute("user");
 
         if (usuario == null) {

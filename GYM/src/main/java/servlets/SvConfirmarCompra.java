@@ -24,9 +24,7 @@ import logic.LogicaFactura;
 public class SvConfirmarCompra extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    /* =========================
-       GET → Mostrar confirmación
-       ========================= */
+    
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,9 +54,7 @@ public class SvConfirmarCompra extends HttpServlet {
                .forward(request, response);
     }
 
-    /* =========================
-       POST → Confirmar compra
-       ========================= */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
