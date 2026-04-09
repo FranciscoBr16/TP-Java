@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.42
+-- Server version	8.0.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -390,7 +390,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,'/GYM/img/perfil/imgperfil1.jpg','2000-10-10',1),('11111111','maria','perez','maria123','maria@example.com','123456123',0,0,'/GYM/img/perfil/imgperfil2.jpg','2007-02-09',1),('12345678','admin','admin','admin123','abz@gmail.com','123456789',0,1,'/GYM/img/perfil/imgperfil1.jpg','2000-12-11',1),('22222222','Mateo','Gimenez','mateo123','mg@example.com','123456321',0,0,'/GYM/img/perfil/imgperfil1.jpg','2002-03-02',1),('40312859','Francisco','Bruno','francisco','fransbebobruno@gmail.com','3464440838',0,0,'/GYM/img/perfil/imgperfil5.jpg','1998-10-16',1),('42424242','Santi','Auat','santi','soyaua@gmail.com','123456788',0,0,'/GYM/img/perfil/imgperfil2.jpg','2000-12-11',1);
+INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,'/GYM/img/perfil/imgperfil1.jpg','2000-10-10',1),('11111111','maria','perez','maria123','maria@example.com','123456123',0,0,'/GYM/img/perfil/imgperfil2.jpg','2007-02-09',1),('12345678','admin','admin','admin123','abz@gmail.com','123456789',0,1,'/GYM/img/perfil/imgperfil1.jpg','2000-12-11',1),('22222222','Mateo','Gimenez','mateo123','mg@example.com','123456321',0,0,'/GYM/img/perfil/imgperfil1.jpg','2002-03-02',1),('40312859','Francisco','Bruno','francisco','fransbebobruno@gmail.com','3464440838',0,0,'/GYM/img/perfil/imgperfil5.jpg','1998-10-16',1),('42424242','Santi','Auat','santi','soyaua@gmail.com','123456788',0,0,'/GYM/img/perfil/imgperfil2.jpg','2000-12-11',1),('42704278','Sanji','Vinsmoke','jero123','alvarezjero00@gmail.com','3413524459',0,1,'/GYM/img/perfil/imgperfil5.jpg','2000-10-10',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -403,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-09 20:26:23
+-- Dump completed on 2026-04-09 20:58:45
