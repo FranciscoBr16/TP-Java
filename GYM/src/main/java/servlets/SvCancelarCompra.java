@@ -23,8 +23,8 @@ public class SvCancelarCompra extends HttpServlet {
             session.removeAttribute("carrito");
 
 
-            session.removeAttribute("totalCarrito");
-            session.removeAttribute("facturaEnProceso");
+            session.removeAttribute("total");
+            //session.removeAttribute("facturaEnProceso");
         }
 
 

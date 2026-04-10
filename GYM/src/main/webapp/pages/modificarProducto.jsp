@@ -42,7 +42,7 @@
     Usuario user = (Usuario) session.getAttribute("user");
     Producto producto = (Producto) request.getAttribute("producto");
     
-    // IMPORTANTE: Guardamos el ID en sesión para que el Servlet de imagen lo encuentre
+    
     session.setAttribute("idproducto", producto.getIdProducto());
     
     if (user == null || !user.isAdmin()) {

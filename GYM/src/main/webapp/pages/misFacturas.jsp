@@ -57,7 +57,7 @@
 
     <div class="factura-header">
         <i class="bi <%= esAdmin ? "bi-receipt-cutoff" : "bi-receipt" %>"></i>
-        <h2><%= esAdmin ? "Todas las Facturas (Administrador)" : "Mis Facturas" %></h2>
+        <h2 style = "color:white;"><%= esAdmin ? "Todas las Facturas (Administrador)" : "Mis Facturas" %></h2>
     </div>
 
     <form method="get" action="SvMisFacturas" class="filtros-factura">
@@ -183,7 +183,6 @@
 
                     <td style="text-align: center;">
 					    <% if (esAdmin && f.getEstado() != null && f.getEstado().equalsIgnoreCase("Pendiente de pago")) { %>
-					        <%-- Botón confirmar pago (ya existía) --%>
 					        <form action="SvConfirmarPago" method="post" style="display:inline;">
 					            <input type="hidden" name="action" value="confirmarPago">
 					            <input type="hidden" name="nroFactura" value="<%= f.getNroFactura() %>">
