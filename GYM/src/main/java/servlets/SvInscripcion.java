@@ -59,6 +59,13 @@ public class SvInscripcion extends HttpServlet {
 	        response.sendRedirect(origen);
 	        return;
 	    }
+	    
+	    if (dbact.estaInscripto(usuario, clase)) {
+	        session.setAttribute("mensaje", "Ya estás inscripto en esta clase para esta semana.");
+	        session.setAttribute("tipoMensaje", "warning");
+	        response.sendRedirect(origen);
+	        return;
+	    }
 
 	    if (dbact.agregarInscripcion(usuario, clase)) {
 
@@ -70,7 +77,7 @@ public class SvInscripcion extends HttpServlet {
 	        response.sendRedirect(origen);
 
 	    } else {
-	    	// Si falla al insertar (ej: ya estabas anotado a esa clase)
+	    	// Si falla al insertar 
 	        session.setAttribute("mensaje", "No se pudo reservar. ¿Ya estabas inscripto en esta clase?");
 	        session.setAttribute("tipoMensaje", "danger");
 	        response.sendRedirect(origen);

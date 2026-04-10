@@ -484,6 +484,51 @@ public class DbActividades extends DbHandler {
 				}
 
 	}
+	
+	public boolean estaInscripto(Usuario usuario, Clase clase) {
+	    PreparedStatement pstmt = null;
+	    Connection conn = null;
+	    ResultSet rs = null;
+	    LogicaActividad la = new LogicaActividad();
+
+	    try {
+	        conn = this.getConnection();
+
+	        PreparedStatement psDia = conn.prepareStatement(
+	            "SELECT dia FROM clase WHERE id_clase = ?");
+	        psDia.setInt(1, clase.getIdClase());
+	        ResultSet rsDia = psDia.executeQuery();
+
+	        if (!rsDia.next()) return false;
+
+	        LocalDate fecha = la.fechaInscripcion(rsDia.getString("dia"));
+	        Date f1 = java.sql.Date.valueOf(fecha.plusDays(-7));
+	        Date f2 = java.sql.Date.valueOf(fecha);
+
+	        pstmt = conn.prepareStatement(
+	            "SELECT COUNT(*) FROM inscripcion " +
+	            "WHERE dni = ? AND id_clase = ? AND fecha BETWEEN ? AND ?");
+	        pstmt.setString(1, usuario.getDni());
+	        pstmt.setInt(2, clase.getIdClase());
+	        pstmt.setDate(3, f1);
+	        pstmt.setDate(4, f2);
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) return rs.getInt(1) > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) rs.close();
+	            if (pstmt != null) pstmt.close();
+	            this.cerrarConnection();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return false;
+	}
 
 	public boolean agregarInscripcion(Usuario usuario, Clase clase) {
 		Inscripcion ins = new Inscripcion();
