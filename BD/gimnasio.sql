@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `gimnasio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `gimnasio`;
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: localhost    Database: gimnasio
 -- ------------------------------------------------------
--- Server version	8.0.42
+-- Server version	8.0.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -77,7 +77,7 @@ CREATE TABLE `clase` (
 
 LOCK TABLES `clase` WRITE;
 /*!40000 ALTER TABLE `clase` DISABLE KEYS */;
-INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',18,'17:00',1,'/GYM/img/inputs/act1.png','Martes','actividad',1),(2,'Zumba','La clase de Zumba es una experiencia energética que fusiona movimientos de baile con ritmos contagiosos, proporcionando un entrenamiento cardiovascular divertido y lleno de ritmo.',25,'19:00',2,'/GYM/img/zumba.png','Miercoles','actividad',1),(3,'Boxeo','Una clase de boxeo implica un entrenamiento intenso que combina golpes en sacos y entrenamiento cardiovascular, proporcionando una forma efectiva de mejorar la fuerza, la resistencia y la coordinación, además de liberar estrés.',15,'18:00',4,'/GYM/img/boxeo.png','Jueves','actividad',1),(101,'Musculacion',NULL,35,'13:00',NULL,NULL,'Lunes','musculacion',1),(102,'Musculacion',NULL,35,'14:00',NULL,NULL,'Lunes','musculacion',1),(103,'Musculacion',NULL,35,'15:00',NULL,NULL,'Lunes','musculacion',1),(104,'Musculacion',NULL,35,'16:00',NULL,NULL,'Lunes','musculacion',1),(105,'Musculacion',NULL,35,'17:00',NULL,NULL,'Lunes','musculacion',1),(106,'Musculacion',NULL,35,'18:00',NULL,NULL,'Lunes','musculacion',1),(107,'Musculacion',NULL,35,'19:00',NULL,NULL,'Lunes','musculacion',1),(108,'Musculacion',NULL,35,'13:00',NULL,NULL,'Martes','musculacion',1),(109,'Musculacion',NULL,35,'14:00',NULL,NULL,'Martes','musculacion',1),(110,'Musculacion',NULL,35,'15:00',NULL,NULL,'Martes','musculacion',1),(111,'Musculacion',NULL,35,'16:00',NULL,NULL,'Martes','musculacion',1),(112,'Musculacion',NULL,35,'17:00',NULL,NULL,'Martes','musculacion',1),(113,'Musculacion',NULL,35,'18:00',NULL,NULL,'Martes','musculacion',1),(114,'Musculacion',NULL,35,'19:00',NULL,NULL,'Martes','musculacion',1),(115,'Musculacion',NULL,35,'13:00',NULL,NULL,'Miercoles','musculacion',1),(116,'Musculacion',NULL,35,'14:00',NULL,NULL,'Miercoles','musculacion',1),(117,'Musculacion',NULL,35,'15:00',NULL,NULL,'Miercoles','musculacion',1),(118,'Musculacion',NULL,35,'16:00',NULL,NULL,'Miercoles','musculacion',1),(119,'Musculacion',NULL,35,'17:00',NULL,NULL,'Miercoles','musculacion',1),(120,'Musculacion',NULL,35,'18:00',NULL,NULL,'Miercoles','musculacion',1),(121,'Musculacion',NULL,35,'19:00',NULL,NULL,'Miercoles','musculacion',1),(122,'Musculacion','',35,'13:00',NULL,NULL,'Jueves','musculacion',1),(123,'Musculacion',NULL,35,'14:00',NULL,NULL,'Jueves','musculacion',1),(124,'Musculacion',NULL,35,'15:00',NULL,NULL,'Jueves','musculacion',1),(125,'Musculacion',NULL,35,'16:00',NULL,NULL,'Jueves','musculacion',1),(126,'Musculacion',NULL,35,'17:00',NULL,NULL,'Jueves','musculacion',1),(127,'Musculacion',NULL,35,'18:00',NULL,NULL,'Jueves','musculacion',1),(128,'Musculacion',NULL,35,'19:00',NULL,NULL,'Jueves','musculacion',1),(130,'Musculacion',NULL,35,'13:00',NULL,NULL,'Viernes','musculacion',1),(131,'Musculacion',NULL,35,'14:00',NULL,NULL,'Viernes','musculacion',1),(132,'Musculacion',NULL,35,'15:00',NULL,NULL,'Viernes','musculacion',1),(133,'Musculacion',NULL,35,'16:00',NULL,NULL,'Viernes','musculacion',1),(134,'Musculacion',NULL,35,'17:00',NULL,NULL,'Viernes','musculacion',1),(135,'Musculacion',NULL,35,'18:00',NULL,NULL,'Viernes','musculacion',1),(136,'Musculacion',NULL,35,'19:00',NULL,NULL,'Viernes','musculacion',1),(138,'Entrenamiento Funcional','Clase enfocada en movimientos naturales del cuerpo como empujar, tirar, saltar y rotar. Se trabaja fuerza, resistencia, coordinación y estabilidad utilizando el propio peso corporal y elementos funcionales.',12,'17:00',1,'/GYM/img/funcional.jpg','Lunes','actividad',1),(139,'Spinning (Ciclismo Indoor)','Actividad cardiovascular de alta intensidad realizada sobre bicicletas fijas, guiada por un instructor y acompañada de música.',12,'16:00',3,'/GYM/img/indoor.jpg','Martes','actividad',1);
+INSERT INTO `clase` VALUES (1,'Yoga','Clase de Yoga que combina posturas físicas, técnicas de respiración y meditación, buscando mejorar la flexibilidad, fuerza y equilibrio, así como promover la relajación y la conexión mente-cuerpo',18,'17:00',1,'/GYM/img/inputs/act1.png','Martes','actividad',1),(2,'Zumba','La clase de Zumba es una experiencia energética que fusiona movimientos de baile con ritmos contagiosos, proporcionando un entrenamiento cardiovascular divertido y lleno de ritmo.',25,'19:00',2,'/GYM/img/zumba.png','Miercoles','actividad',1),(3,'Boxeo','Una clase de boxeo implica un entrenamiento intenso que combina golpes en sacos y entrenamiento cardiovascular, proporcionando una forma efectiva de mejorar la fuerza, la resistencia y la coordinación, además de liberar estrés.',15,'18:00',4,'/GYM/img/boxeo.png','Jueves','actividad',1),(101,'Musculacion',NULL,35,'13:00',NULL,NULL,'Lunes','musculacion',1),(102,'Musculacion',NULL,35,'14:00',NULL,NULL,'Lunes','musculacion',1),(103,'Musculacion',NULL,35,'15:00',NULL,NULL,'Lunes','musculacion',1),(104,'Musculacion',NULL,35,'16:00',NULL,NULL,'Lunes','musculacion',1),(105,'Musculacion',NULL,35,'17:00',NULL,NULL,'Lunes','musculacion',1),(106,'Musculacion',NULL,35,'18:00',NULL,NULL,'Lunes','musculacion',1),(107,'Musculacion',NULL,35,'19:00',NULL,NULL,'Lunes','musculacion',1),(108,'Musculacion',NULL,35,'13:00',NULL,NULL,'Martes','musculacion',1),(109,'Musculacion',NULL,35,'14:00',NULL,NULL,'Martes','musculacion',1),(110,'Musculacion',NULL,35,'15:00',NULL,NULL,'Martes','musculacion',1),(111,'Musculacion',NULL,35,'16:00',NULL,NULL,'Martes','musculacion',1),(112,'Musculacion',NULL,35,'17:00',NULL,NULL,'Martes','musculacion',1),(113,'Musculacion',NULL,35,'18:00',NULL,NULL,'Martes','musculacion',1),(114,'Musculacion',NULL,35,'19:00',NULL,NULL,'Martes','musculacion',1),(115,'Musculacion',NULL,35,'13:00',NULL,NULL,'Miercoles','musculacion',1),(116,'Musculacion',NULL,35,'14:00',NULL,NULL,'Miercoles','musculacion',1),(117,'Musculacion',NULL,35,'15:00',NULL,NULL,'Miercoles','musculacion',1),(118,'Musculacion',NULL,35,'16:00',NULL,NULL,'Miercoles','musculacion',1),(119,'Musculacion',NULL,35,'17:00',NULL,NULL,'Miercoles','musculacion',1),(120,'Musculacion',NULL,35,'18:00',NULL,NULL,'Miercoles','musculacion',1),(121,'Musculacion',NULL,35,'19:00',NULL,NULL,'Miercoles','musculacion',1),(122,'Musculacion',NULL,35,'13:00',NULL,NULL,'Jueves','musculacion',1),(123,'Musculacion',NULL,35,'14:00',NULL,NULL,'Jueves','musculacion',1),(124,'Musculacion',NULL,35,'15:00',NULL,NULL,'Jueves','musculacion',1),(125,'Musculacion',NULL,35,'16:00',NULL,NULL,'Jueves','musculacion',1),(126,'Musculacion',NULL,35,'17:00',NULL,NULL,'Jueves','musculacion',1),(127,'Musculacion',NULL,35,'18:00',NULL,NULL,'Jueves','musculacion',1),(128,'Musculacion',NULL,35,'19:00',NULL,NULL,'Jueves','musculacion',1),(130,'Musculacion',NULL,35,'13:00',NULL,NULL,'Viernes','musculacion',1),(131,'Musculacion',NULL,35,'14:00',NULL,NULL,'Viernes','musculacion',1),(132,'Musculacion',NULL,35,'15:00',NULL,NULL,'Viernes','musculacion',1),(133,'Musculacion',NULL,35,'16:00',NULL,NULL,'Viernes','musculacion',1),(134,'Musculacion',NULL,35,'17:00',NULL,NULL,'Viernes','musculacion',1),(135,'Musculacion',NULL,35,'18:00',NULL,NULL,'Viernes','musculacion',1),(136,'Musculacion',NULL,35,'19:00',NULL,NULL,'Viernes','musculacion',1),(138,'Entrenamiento Funcional','Clase enfocada en movimientos naturales del cuerpo como empujar, tirar, saltar y rotar. Se trabaja fuerza, resistencia, coordinación y estabilidad utilizando el propio peso corporal y elementos funcionales.',12,'17:00',1,'/GYM/img/funcional.jpg','Lunes','actividad',1),(139,'Spinning (Ciclismo Indoor)','Actividad cardiovascular de alta intensidad realizada sobre bicicletas fijas, guiada por un instructor y acompañada de música.',12,'16:00',3,'/GYM/img/indoor.jpg','Martes','actividad',1);
 /*!40000 ALTER TABLE `clase` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `contrato` (
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
-INSERT INTO `contrato` VALUES ('00000001',3,'2023-12-01','2023-12-31',27),('42424242',1,'2023-11-01','2023-11-30',6),('42424242',1,'2026-02-13','2026-03-15',8);
+INSERT INTO `contrato` VALUES ('00000001',3,'2023-12-01','2023-12-31',27),('11111111',3,'2026-04-09','2026-05-09',28),('42424242',1,'2023-11-01','2023-11-30',6),('42424242',1,'2026-02-13','2026-03-15',8),('42424242',1,'2026-04-08','2026-05-08',20);
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `detalle-factura` (
 
 LOCK TABLES `detalle-factura` WRITE;
 /*!40000 ALTER TABLE `detalle-factura` DISABLE KEYS */;
-INSERT INTO `detalle-factura` VALUES (7,2,1,10000),(7,3,1,8000),(9,2,1,60000);
+INSERT INTO `detalle-factura` VALUES (7,2,1,10000),(7,3,1,8000),(9,2,1,60000),(23,1,1,2000),(23,7,1,1400),(25,1,1,2000),(25,7,1,1400),(26,9,1,32000);
 /*!40000 ALTER TABLE `detalle-factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +163,7 @@ CREATE TABLE `detalle-factura-abono` (
 
 LOCK TABLES `detalle-factura-abono` WRITE;
 /*!40000 ALTER TABLE `detalle-factura-abono` DISABLE KEYS */;
-INSERT INTO `detalle-factura-abono` VALUES (12,1,15000),(15,1,15000);
+INSERT INTO `detalle-factura-abono` VALUES (12,1,15000),(15,1,15000),(19,1,15000),(20,2,20000),(21,1,15000),(22,3,30000),(24,4,5000);
 /*!40000 ALTER TABLE `detalle-factura-abono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,7 +193,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,'Benjamín','Fares','benjabaldursgate@gmail.com','2023-08-23','Profesor','/GYM/img/empleados/emp_1.jpg',1),(2,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista','/GYM/img/empleados/FB233.jpg',1),(3,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor','/GYM/img/empleados/emp_3.png',1),(4,'Jerónimo','Álvarez','jeroaguiladorada@gmail.com','2023-08-23','Maestro','/GYM/img/empleados/emp_4.png',1);
+INSERT INTO `empleado` VALUES (1,'Benjamín','Fares','benjabaldursgate@gmail.com','2023-08-23','Profesor','/GYM/img/empleados/emp_1.jpg',1),(2,'Francisco','Bruno','fransbebobruno@gmail.com','2023-08-23','Recepcionista','/GYM/img/empleados/FB233.jpg',1),(3,'Santiago','Auat','santiauat@hotmail.com','2023-08-23','Instructor','/GYM/img/empleados/emp_3.png',1),(4,'Jerónimo','Álvarez','jeroaguiladorada@gmail.com','2023-08-23','Maestro','/GYM/img/empleados/jerourahara.png',1);
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +215,7 @@ CREATE TABLE `factura` (
   PRIMARY KEY (`nro_factura`),
   KEY `fk_usuario2_idx` (`dni`),
   CONSTRAINT `fk_usuario3` FOREIGN KEY (`dni`) REFERENCES `usuario` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -224,7 +224,7 @@ CREATE TABLE `factura` (
 
 LOCK TABLES `factura` WRITE;
 /*!40000 ALTER TABLE `factura` DISABLE KEYS */;
-INSERT INTO `factura` VALUES (9,'2026-02-11','C','6942069','42424242',60000,'Pagada'),(12,'2026-02-11','S','6942069','42424242',15000,'Pagada'),(15,'2026-02-13','S','6942069','42424242',15000,'Pagada');
+INSERT INTO `factura` VALUES (9,'2026-02-11','C','6942069','42424242',60000,'Pagada'),(12,'2026-02-11','S','6942069','42424242',15000,'Pagada'),(15,'2026-02-13','S','6942069','42424242',15000,'Pagada'),(19,'2026-04-08','S','6942069','42424242',15000,'Pagada'),(20,'2026-04-08','S','6942069','42424242',20000,'Pagada'),(21,'2026-04-08','S','6942069','40312859',15000,'Rechazada'),(22,'2026-04-09','S','6942069','11111111',30000,'Pagada'),(23,'2026-04-09','C','6942069','11111111',3400,'Rechazada'),(24,'2026-04-09','S','6942069','11111111',5000,'Pagada'),(25,'2026-04-09','C','6942069','11111111',3400,'Pendiente de pago'),(26,'2026-04-09','C','6942069','22222222',32000,'Pendiente de pago');
 /*!40000 ALTER TABLE `factura` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,7 +249,7 @@ CREATE TABLE `indumentaria` (
 
 LOCK TABLES `indumentaria` WRITE;
 /*!40000 ALTER TABLE `indumentaria` DISABLE KEYS */;
-INSERT INTO `indumentaria` VALUES (2,'XL'),(3,NULL),(4,'39'),(5,'L'),(8,'M'),(9,'12 oz');
+INSERT INTO `indumentaria` VALUES (2,'XL'),(3,NULL),(4,'39'),(5,'L'),(8,'M'),(9,'12 oz'),(10,'');
 /*!40000 ALTER TABLE `indumentaria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +277,7 @@ CREATE TABLE `inscripcion` (
 
 LOCK TABLES `inscripcion` WRITE;
 /*!40000 ALTER TABLE `inscripcion` DISABLE KEYS */;
-INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('00000001',1,'2023-12-15'),('00000001',2,'2023-10-18'),('00000001',2,'2023-12-15'),('00000001',3,'2023-12-15'),('42424242',101,'2026-02-13'),('42424242',138,'2026-02-13');
+INSERT INTO `inscripcion` VALUES ('00000001',1,'2023-10-18'),('00000001',1,'2023-12-15'),('00000001',2,'2023-10-18'),('00000001',2,'2023-12-15'),('00000001',3,'2023-12-15'),('42424242',101,'2026-02-13'),('11111111',106,'2026-04-09'),('11111111',114,'2026-04-09'),('11111111',136,'2026-04-09'),('11111111',138,'2026-04-09'),('42424242',138,'2026-02-13');
 /*!40000 ALTER TABLE `inscripcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,7 +303,7 @@ CREATE TABLE `precio` (
 
 LOCK TABLES `precio` WRITE;
 /*!40000 ALTER TABLE `precio` DISABLE KEYS */;
-INSERT INTO `precio` VALUES (1,'2023-08-08',700),(1,'2026-01-08',2000),(2,'2023-09-09',8000),(2,'2023-12-01',9000),(2,'2023-12-08',9550),(2,'2023-12-12',10000),(2,'2026-02-11',60000),(3,'2023-12-06',8000),(4,'2023-12-06',18000),(4,'2026-02-11',80000),(5,'2023-12-07',700),(5,'2026-01-07',3900),(7,'2026-01-01',1400),(8,'2026-01-01',18000),(8,'2026-02-16',24000),(9,'2026-01-01',32000);
+INSERT INTO `precio` VALUES (1,'2023-08-08',700),(1,'2026-01-08',2000),(2,'2023-09-09',8000),(2,'2023-12-01',9000),(2,'2023-12-08',9550),(2,'2023-12-12',10000),(2,'2026-02-11',60000),(3,'2023-12-06',8000),(4,'2023-12-06',18000),(4,'2026-02-11',80000),(5,'2023-12-07',700),(5,'2026-01-07',3900),(7,'2026-01-01',1400),(8,'2026-01-01',18000),(8,'2026-02-16',24000),(9,'2026-01-01',32000),(10,'2026-04-09',50000);
 /*!40000 ALTER TABLE `precio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +321,7 @@ CREATE TABLE `producto` (
   `imagen` varchar(255) DEFAULT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +330,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,28,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,18,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,0,'Cake','/GYM/img/productos/ind_3.jpg','Prote'),(4,2,'zapatilas deportivas Jaguar','/GYM/img/productos/ind_4.png','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/ind_6.jpg','Medias de Boxeo'),(7,24,'Agua purificada ideal para la hidratación antes, durante y después de la actividad física.','/GYM/img/productos/agua.jpg','Agua Smart Water'),(8,1,'Short cómodo y liviano que permite libertad de movimiento durante la actividad física.','/GYM/img/productos/short.jpg','Pantalón corto deportivo'),(9,4,'Guantes acolchados diseñados para entrenamientos de boxeo y deportes de contacto.','/GYM/img/productos/guantes.jpg','Guantes de boxeo');
+INSERT INTO `producto` VALUES (1,26,'bebida isotónica diseñada para rehidratar y reponer electrolitos, ofreciendo una mezcla refrescante que ayuda en la recuperación después de la actividad física.','/GYM/img/productos/powerade-500ml.jpg','Powerade x500 ml'),(2,18,'camiseta deportiva, apta para sublimación de alta calidad','/GYM/img/productos/camiseta-deportiva.png','Camiseta Deportiva'),(3,0,'Cake','/GYM/img/productos/ind_3.jpg','Prote'),(4,2,'zapatilas deportivas Jaguar','/GYM/img/productos/ind_4.png','Zapatillas'),(5,0,'Medias para practicar boxeo','/GYM/img/productos/ind_6.jpg','Medias de Boxeo'),(7,22,'Agua purificada ideal para la hidratación antes, durante y después de la actividad física.','/GYM/img/productos/agua.jpg','Agua Smart Water'),(8,1,'Short cómodo y liviano que permite libertad de movimiento durante la actividad física.','/GYM/img/productos/short.jpg','Pantalón corto deportivo'),(9,3,'Guantes acolchados diseñados para entrenamientos de boxeo y deportes de contacto.','/GYM/img/productos/guantes.jpg','Guantes de boxeo'),(10,6,'Mancuernas de 10 kilos','/GYM/img/productos/mancuernas.jpeg','Mancuernas 10 kg');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,7 +380,6 @@ CREATE TABLE `usuario` (
   `fechaNacimiento` date DEFAULT NULL,
   `estado` tinyint DEFAULT '1',
   PRIMARY KEY (`dni`),
-  UNIQUE KEY `telefono_UNIQUE` (`telefono`),
   UNIQUE KEY `correo_UNIQUE` (`correo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -391,7 +390,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,'/GYM/img/perfil/imgperfil1.jpg','2000-10-10',1),('12345678','admin','admin','admin123','abz@gmail.com','123456789',0,1,'/GYM/img/perfil/imgperfil1.jpg','2000-12-11',1),('42424242','Santi','Auat','santi','soyaua@gmail.com','3464440838',0,0,'/GYM/img/perfil/imgperfil2.jpg','2000-12-11',1);
+INSERT INTO `usuario` VALUES ('00000001','Usuario','Deprueba','contrasenia','prueba@gmail.com','34343434',1,0,'/GYM/img/perfil/imgperfil1.jpg','2000-10-10',1),('11111111','maria','perez','maria123','maria@example.com','123456123',0,0,'/GYM/img/perfil/imgperfil2.jpg','2007-02-09',1),('12345678','admin','admin','admin123','abz@gmail.com','123456789',0,1,'/GYM/img/perfil/imgperfil1.jpg','2000-12-11',1),('22222222','Mateo','Gimenez','mateo123','mg@example.com','123456321',0,0,'/GYM/img/perfil/imgperfil1.jpg','2002-03-02',1),('40312859','Francisco','Bruno','francisco','fransbebobruno@gmail.com','3464440838',0,0,'/GYM/img/perfil/imgperfil5.jpg','1998-10-16',1),('42424242','Santi','Auat','santi','soyaua@gmail.com','123456788',0,0,'/GYM/img/perfil/imgperfil2.jpg','2000-12-11',1),('42704278','Sanji','Vinsmoke','jero123','alvarezjero00@gmail.com','3413524459',0,1,'/GYM/img/perfil/imgperfil5.jpg','2000-10-10',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -404,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-06 18:18:43
+-- Dump completed on 2026-04-09 20:58:45
